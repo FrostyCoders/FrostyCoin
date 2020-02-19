@@ -1,0 +1,145 @@
+:root
+{
+    --color-theme: #3c96d6;
+}
+body
+{
+    background-image: url(../img/background.png);
+    padding: 0;
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+}
+a
+{
+    text-decoration: none;
+    color: black;
+    transition: 0.3s;
+}
+a:hover
+{
+    color: var(--color-theme);
+}
+.window
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 460px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 3px 3px 10px gray;
+    padding: 10px;
+}
+.frame
+{
+    position: relative;
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+p
+{
+    text-align: center;
+}
+.logo
+{
+    text-align: center;
+    padding: 20px;
+    padding-bottom: 0;
+}
+.logo img
+{
+    width: 60px;
+}
+label
+{
+    width: 200px;
+    padding: 0px;
+    text-align: left;
+    font-size: 12px;
+    margin: 0px;
+    padding: 5px;
+}
+.input_desc
+{
+    width: 200px;
+    margin: auto;
+    margin-bottom: 0;
+    padding: 0;
+    font-size: 12px;
+    text-align: left;
+}
+.input_desc img
+{
+    height: 12px;
+    float: right;
+    margin: auto;
+    transform: scale(1.3);
+}
+input
+{
+    width: 200px;
+    height: 25px;
+    border: 1px solid #112D40;
+    margin: 5px;
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 12px;
+}
+input[type=submit]
+{
+    cursor: pointer;
+    width: 180px;
+    height: 25px;
+    font-size: 12px;
+    transition: 0.2s;
+    background-color: white;
+}
+input[type=submit]:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}
+button
+{
+    width: 180px;
+    height: 25px;
+    border: 1px solid #112D40;
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 12px;
+    cursor: pointer;
+    height: 30px;
+    font-size: 12px;
+    transition: 0.2s;
+    background-color: white;
+}
+button:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}
+.error_message
+{
+    width: 200px;
+    font-size: 12px;
+    color: red;
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+}
+.copy
+{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    font-size: 12px;
+}

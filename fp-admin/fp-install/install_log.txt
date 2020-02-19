@@ -1,0 +1,5 @@
+31/01/2020 08:58:15 pm : Installation process begins : COMMUNICATE
+31/01/2020 08:59:01 pm : Installation process begins : COMMUNICATE
+31/01/2020 08:59:01 pm : Create table fp-admins complete : COMMUNICATE
+31/01/2020 08:59:01 pm : Create new admin as panel primary admin successful : COMUNICATE
+31/01/2020 08:59:01 pm : Installation complete with 0 errors : COMMUNICATE

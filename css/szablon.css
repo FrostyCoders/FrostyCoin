@@ -1,0 +1,111 @@
+.sz-header-tlo
+{
+    height: 30vh;
+}
+
+.sz-header-h1
+{
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    font-size: 500%;
+    letter-spacing: 1rem;
+    color: var(--main-color);
+    text-shadow: 5px 5px 10px var(--main-dark-color);
+}
+.sz-main-container
+{
+    min-height: 100rem;
+    width: 80%;
+    background-color: rgb(255, 255, 255, 0.5);
+    margin: 0 10% 10% 10%;
+    padding: 1rem 0 1rem 0;
+    border-radius: 1rem;
+    
+}
+.droga
+{
+    margin-left:10%;
+    margin-bottom: 2rem;
+    color: var(--main-color);
+    font-size: 2rem;
+}
+.sz-lista
+{
+    
+}
+.sz-produkt
+{
+    height: 35rem;
+    width: 90%;
+    margin: 5%;
+    background-color: var(--main-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 0 3pt var(--main-dark-color);
+    transition-duration: 0.35s;
+    box-shadow: 1.5rem 1.8rem 4.7rem 0.8rem rgba(0,0,0,0.7);
+}
+.sz-produkt:hover
+{
+    box-shadow: 0 0 0 4pt var(--main-dark-color);
+
+        
+}
+.sz-produkt-image
+{
+    float: left;
+    margin:5%;
+    width: 20%
+}
+.sz-produkt-content
+{
+    position: relative;
+    float: left;
+    width: 70%;
+    height: 100%;
+}
+.sz-produkt-name
+{
+     position: absolute;
+    top: 2rem;
+    left: 1rem;
+}
+.sz-produkt-cena
+{
+     position: absolute;
+    top: 2rem;
+    left: 31rem;
+}
+.sz-produkt-opis
+{
+     position: absolute;
+    top: 7rem;
+    left: 1rem;
+}
+.sz-produkt-stars
+{
+    position: absolute;
+    bottom: 2rem;
+    right: 50rem;
+}
+.sz-produkt-dokoszyka
+{
+    position: absolute;
+    bottom: 2rem;
+    right: 5rem;
+    background-color: var(--main-color);
+    border-radius: 1rem;
+    border: 0;
+    box-shadow: 0 0 0 3pt var(--main-dark-color);
+    padding: 1rem;
+    transition-duration: 0.35s;
+}
+.sz-produkt-dokoszyka:active
+{
+    background-color:  var(--extra-color);
+}
+
+
+

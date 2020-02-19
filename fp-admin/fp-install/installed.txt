@@ -1,0 +1,2 @@
+Plik weryfikacyjny, usunięcie może powowdować błedy panelu.
+Verification file, removal may cause panel errors.

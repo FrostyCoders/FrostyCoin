@@ -1,0 +1,106 @@
+.footer-beam
+{
+    width: 100%;
+    min-height: 10rem;
+    margin: 0;
+    position: relative;
+    background: linear-gradient(45deg, #f4f4f4 0%, #f4f4f4 50%, #3993ff 100%);
+    border-top-right-radius: 20rem;
+    border-top-left-radius: 1rem;
+    color: white;
+    transition-duration: 0.1s;
+}
+.newsletter
+{
+    position: absolute;
+    width: 40rem;
+    right: 25rem;
+    top: 0.5rem;
+    height: 9rem;
+    color: var(--main-dark-color);
+    transition-duration: 0.1s;
+
+}
+.newsletter form
+{
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+.news-text
+{
+    margin: 0;
+    margin-left: 5rem;
+    padding-left: 1rem;
+    width: 20rem;
+    height: 3rem;
+    background-color: var(--main-dark-color);
+    color: var(--main-color);
+    border: none;
+    border-top-left-radius: 5rem;
+    border-bottom-left-radius: 5rem;
+}
+
+.news-text:focus
+{
+    outline: none;
+}
+
+.news-text::placeholder
+{
+    color: lightgrey;
+}
+
+.news-button
+{
+    border: none;
+    height: 3.2rem;
+    width: 8rem;
+    background-color: var(--extra-color);
+    color: white;
+    border-radius: 5rem;
+    margin-left: -2rem;
+    transition-duration: 0.35s;
+}
+.news-button:hover
+{
+    background-color: #0070CC;
+}
+
+.news-button:active
+{
+    outline: none;
+}
+
+.up-arrow
+{
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    right: 5rem;
+    top: 3.5rem;
+    filter: invert(1);
+    transition-duration: 0.1s;
+}
+.up-arrow:hover
+{
+    opacity: 0.8;
+    filter: invert(0);
+}
+.copyright
+{
+    position: absolute;
+    width: 25rem;
+    color: var(--main-dark-color);
+    line-height: 3rem;
+    top: 1.5rem;
+    left: 3rem;
+    font-size: 2rem;
+    transition-duration: 0.35s;
+}
+
+.allrights
+{
+    font-size: 1.5rem;
+    color: grey;
+}

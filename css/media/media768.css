@@ -1,0 +1,53 @@
+@media only screen and (max-width: 768px) 
+{
+    .header-h1
+    {
+        font-size: 300% !important;
+    }
+    
+    .header-p
+    {
+        font-size: 140% !important;
+    }
+    
+    .header-button
+    {
+        top: 90% !important;
+        font-size: 150% !important;
+    }
+    
+    .footer-beam
+    {
+        border-top-right-radius: 10rem;
+        min-height: 21rem;
+    }
+    
+    .newsletter
+    {
+        top: 10rem;
+        right: 0;
+        left: 10%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .copyright
+    {
+        font-size: 100%;
+    }
+    
+    .allrights
+    {
+        font-size: 70%;
+    }
+    
+    
+    
+    .log-main-container
+    {
+        position: relative;
+        min-height: 40rem;
+        width: 50rem;
+    }
+
+}
