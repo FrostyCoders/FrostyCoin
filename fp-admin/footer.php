@@ -38,7 +38,7 @@
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="#"><div class="menu-element">Podstrony</div></a>
-            <a href="#"><div class="menu-element">Zamówienia</div></a>
+            <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
             <a href="#"><div class="menu-element">Użytkownicy</div></a>
             <p class="copy">Copyright &copy;<br>Frosty Coders - 2020<br>wersja 0.1.0</p>
         </div>

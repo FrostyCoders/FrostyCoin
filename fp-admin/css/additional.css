@@ -613,3 +613,20 @@ input[type="checkbox"]:checked ~ .check:before
     font-size: 12px;
     text-align: center;
 }
+/* ORDERS.PHP */
+.list_container
+{
+    width: 100%;
+    padding-top: 50px;
+}
+.list_desc div
+{
+    float: left;
+    width: 20%;
+    text-align: center;
+    font-size: 14px;
+}
+.list_desc .value, .list_desc .empty
+{
+    width: 10%;
+}
