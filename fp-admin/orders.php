@@ -92,7 +92,7 @@
                     <button class="accept_filters" style="margin-top: 60px;">Zastosuj filtry</button>
                 </div>
                 <div class="list_container">
-                    <div class="list_desc" style="margin-bottom: 30px;">
+                    <div class="list_desc weight" style="margin-bottom: 30px;">
                         <div class="id">Identyfikator</div>
                         <div class="user">Użytkownik</div>
                         <div class="date">Data zamówienia</div>
