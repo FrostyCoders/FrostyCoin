@@ -16,7 +16,7 @@
     <meta name="author" content="Frosty Coders">
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/additional.css">
+    <link rel="stylesheet" href="css/other.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <script src="js/jquery.js"></script>
 </head>
@@ -54,23 +54,23 @@
                     <div><b>Data</b> <br>14.02.2020 - 15.03.2020</div>
                     
                 </div>
-                <div class="content_bracket">
+                <div class="list_bracket">
                     <div class="sett_title">Aktywacja</div>
                     <div class="sett_input_switch"><label class="switch"><input type="checkbox" checked><span class="check"></span></label></div>
                 </div>
-                <div class="content_bracket">
+                <div class="list_bracket">
                     <div class="sett_title">Tutuł komunikatu</div>
                     <div class="sett_input"><input type="text" name="statement_title" placeholder="Wprowadź tytuł"></div>
                 </div>
-                <div class="content_bracket">
+                <div class="list_bracket">
                     <div class="sett_title">Treść komunikatu</div>
                     <div class="sett_input"><input type="text" name="statement_content" placeholder="Wprowadź treść" style="width: 400px;"></div>
                 </div>
-                <div class="content_bracket">
+                <div class="list_bracket">
                     <div class="sett_title">Data i czas od kiedy komunikat jest aktywny</div>
                     <div class="sett_input"><input type="datetime-local" name="statement_content"></div>
                 </div>
-                <div class="content_bracket">
+                <div class="list_bracket">
                     <div class="sett_title">Data i czas do kiedy komunikat jest aktywny</div>
                     <div class="sett_input"><input type="datetime-local" name="statement_content"></div>
                 </div>

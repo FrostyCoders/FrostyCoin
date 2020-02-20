@@ -16,7 +16,7 @@
     <meta name="author" content="Frosty Coders">
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/additional.css">
+    <link rel="stylesheet" href="css/other.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <script src="js/jquery.js"></script>
 </head>
@@ -46,8 +46,8 @@
             <div id="content-frame" class="content-frame">
                 <div class="content-title">
                     Kategorie produktów
-                    <div class="header_buttons">
-                        <button id="add_category_button" class="header_button">Dodaj kategorię</button>
+                    <div class="title_buttons">
+                        <button id="add_category_button" class="ordinary_button">Dodaj kategorię</button>
                     </div>
                 </div>
                 <div id="cat_container">
@@ -72,7 +72,7 @@
                         </div>
                     </div-->
                 </div>
-                <div id="add_category" class="category_bracket" style="display: none;">
+                <div id="add_category" class="list_bracket" style="display: none;">
                         <div id="category_edit1" class="category_edit">
                             <div class="edit_inputs">
                                 Nazwa: <input type="text">

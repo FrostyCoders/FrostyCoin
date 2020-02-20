@@ -16,7 +16,7 @@
     <meta name="author" content="Frosty Coders">
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/additional.css">
+    <link rel="stylesheet" href="css/other.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <script src="js/jquery.js"></script>
 </head>
@@ -92,7 +92,7 @@
                     <button class="accept_filters" style="margin-top: 60px;">Zastosuj filtry</button>
                 </div>
                 <div class="list_container">
-                    <div class="list_desc" style="margin-bottom: 30px;">
+                    <div class="list_bracket list_index" style="margin-bottom: 30px;">
                         <div class="id">Identyfikator</div>
                         <div class="user">Użytkownik</div>
                         <div class="date">Data zamówienia</div>
@@ -101,7 +101,7 @@
                         <div class="empty"></div>
                     </div>
                     <div class="list">
-                        <div class="category_bracket list_desc">
+                        <div class="list_bracket list_desc">
                             <div class="id">200219123456</div>
                             <div class="user">example87</div>
                             <div class="date">19-02-2020</div>
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="category_bracket list_desc">
+                        <div class="list_bracket list_desc">
                             <div class="id">200217654321</div>
                             <div class="user">example57</div>
                             <div class="date">17-02-2020</div>

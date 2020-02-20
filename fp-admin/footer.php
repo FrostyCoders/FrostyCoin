@@ -16,7 +16,7 @@
     <meta name="author" content="Frosty Coders">
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/additional.css">
+    <link rel="stylesheet" href="css/other.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <script src="js/jquery.js"></script>
 </head>
@@ -47,7 +47,7 @@
                 <div class="content-title">
                     Zawartość stopki
                 </div>
-                <div class="content_bracket">
+                <div class="list_bracket">
                     <div class="sett_title">Prawa autorskie</div>
                     <div class="sett_input"><input type="text" name="copy" placeholder="Wprowadź prawa" value="Copyright © - FP 2020"></div>
                 </div>

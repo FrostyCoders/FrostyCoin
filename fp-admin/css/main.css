@@ -1,6 +1,8 @@
 :root
 {
     --color-theme: #3c96d6;
+    --green-custom: #32CD32;
+    --red-custom: #ff1100;
 }
 a
 {
@@ -12,7 +14,7 @@ body
     background-image: url(../img/background.png);
     padding: 0;
     margin: 0;
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Raleway', sans-serif; 
 }
 button
 {

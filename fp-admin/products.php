@@ -16,7 +16,7 @@
     <meta name="author" content="Frosty Coders">
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/additional.css">
+    <link rel="stylesheet" href="css/other.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <script src="js/jquery.js"></script>
 </head>
@@ -46,8 +46,8 @@
             <div id="content-frame" class="content-frame">
                 <div class="content-title">
                     Produkty
-                    <div class="header_buttons">
-                        <button id="add_product_button" class="header_button">Dodaj produkt</button>
+                    <div class="title_buttons">
+                        <button id="add_product_button" class="ordinary_button">Dodaj produkt</button>
                     </div>
                 </div>
                 <div class="product_filters">
