@@ -630,3 +630,7 @@ input[type="checkbox"]:checked ~ .check:before
 {
     width: 10%;
 }
+.weight
+{
+    font-weight: 600;
+}
