@@ -69,5 +69,6 @@
             </div>
         </div>
         <div class="copy">Copyright &copy - Frosty Coders 2020</div>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
