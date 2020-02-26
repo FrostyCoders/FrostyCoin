@@ -1,15 +1,23 @@
-/* MENU EDITOR */
+:root
+{
+    --color-theme: #3c96d6;
+    --green-custom: #32CD32;
+    --red-custom: #ff1100;
+}
+/* COMMON */
+/* title on top of every page */
 .content-title
 {
     position: relative;
 }
-.header_buttons
+.title_buttons
 {
     position: absolute;
     right: 0;
     top: 0px;
 }
-.header_button
+/* panel buttons */
+.ordinary_button, .accept_button, .decline_button
 {
     background: transparent;
     float: right;
@@ -19,12 +27,138 @@
     transition: 0.2s;
     cursor: pointer;
 }
-.header_button:hover
+.ordinary_button:hover
 {
     background-color: var(--color-theme);
     color: white;
     border: 2px solid var(--color-theme);
 }
+.accept_button:hover
+{
+    background-color: var(--green-custom);
+    color: white;
+    border: 2px solid var(--green-custom);
+}
+.decline_button:hover
+{
+    background-color: var(--red-custom);
+    color: white;
+    border: 2px solid var(--red-custom);
+}
+.position_control
+{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 4px;
+    cursor: pointer;
+}
+.control_button
+{
+    background: transparent;
+    float: left;
+    font-size: 11px;
+    padding: 5px;
+    border: 2px solid lightgray;
+    transition: 0.2s;
+    cursor: pointer;
+    margin-left: 3px;
+}
+.control_button:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}
+/* input styles */
+input[type="text"], input[type="number"], input[type="datetime-local"], textarea, select
+{
+    width: 160px;
+    border: 2px solid lightgray;
+    padding: 2px;
+    border-radius: 3px;
+    transition: 0.2s;
+    resize: none;
+}
+input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus
+{
+    border: 2px solid var(--color-theme);
+}
+select
+{
+    width: 165px;
+}
+#file_input
+{
+    display: none;
+}
+#file_input_label
+{
+    cursor: pointer;
+    width: 160px;
+    display: block;
+    border: 2px solid lightgray;
+    margin: auto;
+    padding: 2px;
+    border-radius: 3px;
+    transition: 0.3s;
+    font-size: 12px;
+    text-align: center;
+}
+.list_bracket
+{
+    position: relative;
+    width: auto;
+    height: 20px;
+    padding: 10px;
+    padding-top: 5px;
+    margin-top: 10px;
+    border: 2px solid lightgray;
+    font-size: 14px;
+}
+.list_bracket_control
+{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 4px;
+    cursor: pointer;
+}
+.sett_title
+{
+    float: left;
+    padding: 5px;
+    padding-top: 5px;
+}
+.sett_input
+{
+    float: right;
+    padding-right: 12px;
+}
+/* save changes div */
+.save_changes
+{
+    padding: 20px;
+    text-align: right;
+}
+.save_changes input, input[type="submit"]
+{
+    width: 100px;
+    background: transparent;
+    float: right;
+    font-size: 12px;
+    padding: 5px;
+    border: 2px solid lightgray;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.save_changes input:hover, input[type="submit"]:hover
+{
+    background-color: var(--green-custom);
+    color: white;
+    border: 2px solid var(--green-custom);
+}
+/* MENU EDITOR */
 .add_category
 {
     width: 22px;
@@ -98,153 +232,7 @@
     color: white;
     border: 2px solid var(--color-theme);
 }
-#category_icon
-{
-    display: none;
-}
-#category_icon_label
-{
-    width: 55%;
-    display: block;
-    height: 25px;
-    border: 1px solid #112D40;
-    margin: auto;
-    padding-top: 10px;
-    transition: 0.3s;
-    font-size: 14px;
-}
-.category_bracket
-{
-    position: relative;
-    width: auto;
-    height: 15px;
-    padding: 10px;
-    margin-top: 10px;
-    border: 2px solid lightgray;
-    font-size: 14px;
-}
-.category_collapse
-{
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 18px;
-    margin: 10px;
-    margin-top: 9px;
-    margin-left: 15px;
-    transform: rotate(180deg);
-    cursor: pointer;
-    transition: 0.2s;
-}
-.rotate
-{
-    transform: rotate(270deg);
-}
-.category_name
-{
-    float: left;
-    padding-left: 50px;
-}
-.category_image
-{
-    position: absolute;
-    width: 20px;
-    top: 50%;
-    transform: translateY(-45%);
-    left: 35px;
-}
-.edit_del_controls
-{
-    width: 22px;
-    transition: 0.2s;
-}
-.edit_del_controls:hover
-{
-    transform: scale(1.1);
-}
-.move_controls
-{
-    float: right;
-    position: relative;
-    width: 30px;
-    height: 100%;
-}
-.category_moveup
-{
-    width: 12px !important;
-    position: absolute;
-    transform: rotate(90deg);
-    top: -6px;
-    left: 40%;
-}
-.category_movedown
-{
-    width: 12px !important;
-    position: absolute;
-    transform: rotate(-90deg);
-    bottom: -28px;
-    left: 40%;
-}
-.subcategory_bracket
-{
-    position: relative;
-    width: auto;
-    height: 13px;
-    padding: 10px;
-    padding-left: 40px;
-    margin-top: 8px;
-    border: 1px solid lightgray;
-    font-size: 13px;
-}
-.subcategory_bracket .category_image
-{
-    left: 10px;
-}
-.subcategory_container
-{
-    padding-left: 20px;
-}
-.position_control
-{
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 4px;
-    cursor: pointer;
-}
-.subcategory_bracket .position_control
-{
-    padding: 4px;
-} 
-.control_button
-{
-    background: transparent;
-    float: left;
-    font-size: 11px;
-    padding: 5px;
-    border: 2px solid lightgray;
-    transition: 0.2s;
-    cursor: pointer;
-    margin-left: 3px;
-}
-.subcategory_bracket .control_button
-{
-    border: 1px solid lightgray;
-}  
-.control_button:hover
-{
-    background-color: var(--color-theme);
-    color: white;
-    border: 2px solid var(--color-theme);
-}
-.subcategory_bracket .control_button:hover
-{
-    background-color: var(--color-theme);
-    color: white;
-    border: 1px solid var(--color-theme);
-}
-
-/* STATEMENTS ON WEBSITE */
+/* STATEMENT EDITOR */
 .content-notify
 {
     width: 100%;
@@ -268,26 +256,6 @@
     padding: 10px;
     text-align: center;
 }
-.content_bracket
-{
-    position: relative;
-    width: auto;
-    height: 20px;
-    padding: 10px;
-    margin-top: 10px;
-    border: 2px solid lightgray;
-    font-size: 14px;
-}
-.sett_title
-{
-    float: left;
-    padding: 2px;
-}
-.sett_input
-{
-    float: right;
-    padding-right: 12px;
-}
 .sett_input_switch
 {
     float: right;
@@ -301,6 +269,7 @@
     height: 20px;
     padding: 2px;
 }
+/* checkbox_switch */
 .switch
 {
     float: left;
@@ -347,81 +316,18 @@ input[type="checkbox"]:checked ~ .check:before
 {
     transform: translateX(-20px);
 }
-.save_changes
-{
-    padding: 20px;
-    text-align: right;
-}
-.save_changes input
-{
-    cursor: pointer;
-    width: 100px;
-    height: 30px;
-    font-size: 12px;
-    transition: 0.2s;
-    background-color: white;
-    border: 2px solid var(--color-theme);
-}
-.save_changes input:hover
-{
-    background-color: var(--green-custom);
-    color: white;
-    border: 2px solid var(--green-custom);
-}
-/* FOOTER EDITOR */
-
-
-
-
-/* COMMON */
-.accept_button:hover
-{
-    background-color: var(--green-custom);
-    border: 2px solid var(--green-custom);
-}
-/* CATEGORIES */
-.edit_inputs
-{
-    position: absolute;
-    left: 0;
-    top: 0;
-    padding: 6px;
-    font-size: 12px;
-}
-.edit_inputs input
-{
-    width: 200px;
-    border: 2px solid lightgray;
-    padding: 2px;
-    border-radius: 3px;
-    transition: 0.2s;
-}
-.edit_inputs select
-{
-    border: 2px solid lightgray;
-    padding: 2px;
-    border-radius: 3px;
-    transition: 0.2s;
-}
-.edit_inputs input:focus, .edit_inputs select:focus
-{
-    border: 2px solid var(--color-theme);
-}
+/* PRODUCT CATEGORIES */
 .status_diod
 {
     border-radius: 50%;
     background-color: var(--color-theme);
     width: 15px;
     height: 15px;
+    margin: 5px;
     float: left;
     box-shadow: 0px 0px 10px var(--color-theme);
 }
-.category_name2
-{
-    float: left;
-    margin-left: 10px;
-}
-
+/* products filters */
 /* PRODUCTS */
 .product_filters
 {
@@ -466,6 +372,7 @@ input[type="checkbox"]:checked ~ .check:before
     color: white;
     border: 2px solid var(--color-theme);
 }
+/* products brackets */
 .product_bracket
 {   float: left;
     border: 2px solid lightgray;
@@ -524,10 +431,11 @@ input[type="checkbox"]:checked ~ .check:before
 }
 .product_button_delete:hover
 {
-    background-color: red;
+    background-color: var(--red-custom);
     color: white;
-    border: 2px solid red;   
+    border: 2px solid var(--red-custom);
 }
+/* Popup for add data or sth else */
 .add_form_popup
 {
     display: none;
@@ -614,18 +522,20 @@ input[type="checkbox"]:checked ~ .check:before
     width: 100%;
     padding-top: 50px;
 }
-.list_desc div
+.list_bracket div
 {
     float: left;
     width: 20%;
     text-align: center;
     font-size: 14px;
+    padding: 5px;
 }
-.list_desc .value, .list_desc .empty
+.list_bracket .value, .list_desc .empty
 {
     width: 10%;
 }
-.weight
+.list_index
 {
     font-weight: 600;
+    margin-bottom: 10px !important;
 }

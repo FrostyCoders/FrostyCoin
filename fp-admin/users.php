@@ -16,7 +16,7 @@
     <meta name="author" content="Frosty Coders">
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/additional.css">
+    <link rel="stylesheet" href="css/other.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <script src="js/jquery.js"></script>
 </head>
@@ -29,7 +29,24 @@
         </div>
     </header>
     <main class="row">
-        <div class="menu col-2">
+        <div class="collapse_button_show">
+            <img src="img/menu_icon.png" alt="MENU" onclick="openNav();"> 
+        </div>
+        <div id="main-small_screen" class="menu">
+            <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
+            <a href="#"><div class="menu-element">Strona Główna</div></a>
+            <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
+            <a href="footer.php"><div class="menu-element">Stopka</div></a>
+            <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
+            <a href="products.php"><div class="menu-element">Produkty</div></a>
+            <a href="#"><div class="menu-element">Podstrony</div></a>
+            <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
+            <a href="users.php"><div class="menu-element active">Użytkownicy</div></a>
+            <img class="hide_menu" src="img/arrow.png" alt="Close" onclick="closeNav();">
+            <p class="copy">Copyright &copy;<br>Frosty Coders - 2020<br>wersja 0.1.0</p>
+        </div>
+        <div id="main-big_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="#"><div class="menu-element">Strona Główna</div></a>
@@ -90,7 +107,7 @@
                     <button class="accept_filters" style="margin-top: 60px;">Zastosuj filtry</button>
                 </div>
                 <div class="list_container">
-                    <div class="list_desc weight" style="margin-bottom: 30px;">
+                    <div class="list_bracket list_index" style="margin-bottom: 30px;">
                         <div class="id">Identyfikator</div>
                         <div class="user">Nazwa</div>
                         <div class="date">Data utworzenia</div>
@@ -99,7 +116,7 @@
                         <div class="empty"></div>
                     </div>
                     <div class="list">
-                        <div class="category_bracket list_desc">
+                        <div class="list_bracket">
                             <div class="id">200219123456</div>
                             <div class="user">example87</div>
                             <div class="date">19-02-2020</div>
@@ -111,7 +128,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="category_bracket list_desc">
+                        <div class="list_bracket">
                             <div class="id">200217654321</div>
                             <div class="user">example57</div>
                             <div class="date">17-02-2020</div>
@@ -128,5 +145,6 @@
             </div>
         </div>
     </main>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
