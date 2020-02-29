@@ -15,7 +15,7 @@
     <title>Frosty Panel - Instalacja</title>
     <link rel="shortcut icon" href="../img/icon.png">
     <link rel="stylesheet" href="../css/install_style.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <div class="window">

@@ -1,3 +1,11 @@
+@font-face
+{
+    font-family: raleway;
+    src: url('../../css/fonts/Raleway-Regular.ttf') format('truetype');
+    src: url('../../css/fonts/Raleway-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 :root
 {
     --color-theme: #3c96d6;
@@ -14,11 +22,11 @@ body
     background-image: url(../img/background.png);
     padding: 0;
     margin: 0;
-    font-family: 'Raleway', sans-serif; 
+    font-family: raleway, sans-serif; 
 }
 button
 {
-    font-family: 'Raleway', sans-serif !important;
+    font-family: raleway, sans-serif !important;
 }
 .banner
 {
