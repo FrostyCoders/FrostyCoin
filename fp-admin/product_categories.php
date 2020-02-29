@@ -16,7 +16,7 @@
     <meta name="author" content="Frosty Coders">
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/other.css">
+    <link rel="stylesheet" href="css/categories.css">
     <script src="js/jquery.js"></script>
 </head>
 <body>
@@ -67,49 +67,50 @@
                     </div>
                 </div>
                 <div id="cat_container">
-                    <!--div class="category_bracket">
-                        <div id="category_show1" class="category_show" style="">
-                            <div class="status_diod"></div>
-                            <div class="category_name2">Komputery i sprzęt</div>
-                            <div class="position_control">
-                                <button id="edit_button" class="control_button">Edytuj</button>
-                                <button class="control_button">Usuń</button>
-                            </div>
-                        </div>
-                        <div id="category_edit1" class="category_edit" style="display: none;">
-                            <div class="edit_inputs">
-                                Nazwa: <input type="text">
-                                Status: <select><option>Aktywny</option><option>Nieaktywny</option></select>
-                            </div>
-                            <div class="position_control">
-                                <button class="control_button accept_button">Zatwierdź</button>
-                                <button id="back_button" class="control_button">Anuluj</button>
-                            </div>
-                        </div>
-                    </div-->
-                </div>
-                <div id="add_category" class="list_bracket" style="display: none;">
-                        <div id="category_edit1" class="category_edit">
-                            <div class="edit_inputs">
-                                Nazwa: <input type="text">
-                                Status: <select><option>Aktywny</option><option>Nieaktywny</option></select>
-                            </div>
-                            <div class="position_control">
-                                <button class="control_button accept_button">Zatwierdź</button>
-                                <button id="close_add_category" class="control_button">Anuluj</button>
-                            </div>
+                    <div class="category_bracket">
+                        <div class="category_status off" title="Niektywna"></div>
+                        <div class="category_name">Kategoria</div>
+                        <div class="category_info">Liczba produktów: 234</div>
+                        <div class="category_settings">
+                            <button>Edytuj</button>
+                            <button>Usuń</button>
                         </div>
                     </div>
-                <div class="save_changes">
-                    <input type="submit" value="Zapisz">
+                    <div class="category_bracket">
+                        <div class="category_status on" title="Aktywna"></div>
+                        <div class="category_name">Kategoria2</div>
+                        <div class="category_info">Liczba produktów: 24</div>
+                        <div class="category_settings">
+                            <button>Edytuj</button>
+                            <button>Usuń</button>
+                        </div>
+                    </div>
+                    <div id="add_category_bracket" class="category_bracket">
+                        <div class="category_name" style="padding-left: 8px">Status: <select name="" id=""><option value="">Aktywna</option><option value=""></option>Niektywna</select></div>
+                        <div class="category_name" style="padding-left: 8px">Nazwa: <input type="text"></div>
+                        <div class="category_settings">
+                            <button>Zatwierdź</button>
+                            <button id="cancel_add">Anuluj</button>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </div>
-        <script src="js/category.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#add_category_bracket").hide();
+                $("#add_category_button").click(function(){
+                    $("#add_category_bracket").fadeIn();
+                });
+                $("#cancel_add").click(function(){
+                    $("#add_category_bracket").fadeOut();
+                });
+            });
+        </script>
         <?php
         echo '<script>$(document).ready(function(){$("#edit_button0").click(function(){ $("#category_show0").hide(); $("#category_edit0").fadeIn(); }); $("#back_button0").click(function(){ $("#category_show0").fadeIn(); $("#category_edit0").hide(); });});</script>';
         ?>
     </main>
-    <script src="js/scripts.js"></script>
 </body>
 </html>
