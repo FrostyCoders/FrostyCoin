@@ -17,6 +17,7 @@
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/other.css">
+    <link rel="stylesheet" href="css/media.css">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <script src="js/jquery.js"></script>
 </head>
@@ -109,6 +110,34 @@
                 </div>
                 <div class="product_container">
                     <div class="product_bracket">
+                        <img src="img/gaming_laptop.png" alt="">
+                        <div class="product_desc">
+                            <h5>MSI G150</h5>
+                            <p class="desc">
+                                Kategoria: Laptopy<br>
+                                Liczba: 34 <br>
+                                Data dodania: 12-01-2020 <br>
+                                <p class="price">Cena: 3100 PLN</p>
+                                <button class="product_button">Edytuj</button>
+                                <button class="product_button_delete">Usuń</button>
+                            </p>
+                        </div>
+                    </div>
+                <div class="product_bracket">
+                        <img src="img/gaming_laptop.png" alt="">
+                        <div class="product_desc">
+                            <h5>MSI G150</h5>
+                            <p class="desc">
+                                Kategoria: Laptopy<br>
+                                Liczba: 34 <br>
+                                Data dodania: 12-01-2020 <br>
+                                <p class="price">Cena: 3100 PLN</p>
+                                <button class="product_button">Edytuj</button>
+                                <button class="product_button_delete">Usuń</button>
+                            </p>
+                        </div>
+                    </div>
+            <div class="product_bracket">
                         <img src="img/gaming_laptop.png" alt="">
                         <div class="product_desc">
                             <h5>MSI G150</h5>

@@ -378,12 +378,21 @@ input[type="checkbox"]:checked ~ .check:before
     border: 2px solid var(--color-theme);
 }
 /* products brackets */
+.product_container
+{
+    width: 100%;
+    padding-top: 20px;
+    clear: both;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 .product_bracket
 {   float: left;
     border: 2px solid lightgray;
     height: 280px;
     margin: 10px;
-    width: 18%;
+    width: 20%;
     text-align: center;
     position: relative;
 }
@@ -449,7 +458,7 @@ input[type="checkbox"]:checked ~ .check:before
     top: 80px;
     transform: translateX(-50%);
     width: 50%;
-    height: 75%;
+    min-height: 75%;
     z-index: 100;
     background-color: white;
     border: 3px solid transparent;
