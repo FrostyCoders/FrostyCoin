@@ -112,5 +112,6 @@
         echo '<script>$(document).ready(function(){$("#edit_button0").click(function(){ $("#category_show0").hide(); $("#category_edit0").fadeIn(); }); $("#back_button0").click(function(){ $("#category_show0").fadeIn(); $("#category_edit0").hide(); });});</script>';
         ?>
     </main>
+    <script src="js/scripts.js"></script>
 </body>
 </html>

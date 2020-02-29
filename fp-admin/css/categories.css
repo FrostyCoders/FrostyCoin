@@ -121,3 +121,23 @@ input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:f
 {
     border: 2px solid var(--color-theme);
 }
+@media only screen and (max-width: 600px)
+{
+    .category_settings button
+    {
+        display: block;
+        margin-bottom: 1px;
+    }
+    .category_name
+    {
+        display: block;
+        padding-left: 50px;
+    }
+    .category_info
+    {
+        display: block;
+        width: 100%;
+        padding: 5px;
+        padding-left: 50px;
+    }
+}
