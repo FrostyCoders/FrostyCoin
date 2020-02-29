@@ -14,7 +14,7 @@
     
     <!-- STYLE I CZCIONKI -->
     <link rel="stylesheet" type="text/css" href="css/animate.css" />
-    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <link rel="stylesheet" type="text/css" href="css/orders.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
@@ -64,27 +64,43 @@
     <!-- ZAWARTOŚĆ -->
     <main>
        <div class="droga">tutaj jesteś</div><!--traceroute-->
-        <div class="log-main-container">
-            <div class="log-login-container">
-                <h2>Zaloguj się:</h2>
-                <form method="post" action="#">
-                    <input type="text" placeholder="E-mail" /><br/>
-                    <input type="password" placeholder="Hasło" /><br/>
-                    <input type="submit" class="login-button" value="Zaloguj" />
-                </form>
+        <div class="order-main-container">
+         <div class="order-container">
+             <h2>Twoje zamówienia:</h2>
+              <table>
+                <thead>
+                     <tr>
+                      <th>Numer zamówienia</th>
+                      <th>Data złożenia</th>
+                      <th>Status</th>
+                      <th>Dostawa</th>
+                      <th>Wartość</th>
+                      <th>Szczegóły</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                    <tr>
+                      <td>984201930210</td>
+                      <td>29.02.2020</td>
+                      <td>Zakończone</td>
+                      <td>Odbiór osobisty</td>
+                      <td>3 499,01 zł</td>
+                      <td>Miejsce na ikone</td>
+                    </tr>
+                    <tr>
+                      <td>2134153211231</td>
+                      <td>29.02.2020</td>
+                      <td>Zakończone</td>
+                      <td>Odbiór osobisty</td>
+                      <td>4000.01 zł</td>
+                      <td>Miejsce na ikone</td>
+                    </tr>
+                 </tbody>
+               </table>
+               
             </div>
-            <div class="log-register-container">
-                <h2>Zarejestruj się:</h2>
-                <form method="post" action="#">
-                    <input type="text" placeholder="Imię" /><br/>
-                    <input type="text" placeholder="Nazwisko" /><br/>
-                    <input type="text" placeholder="E-mail" /><br/>
-                    <input type="password" placeholder="Hasło" /><br/>
-                    <input type="password" placeholder="Powtórz hasło" /><br/>
-                    <input type="submit" class="login-button" value="Zarejestruj" />
-                </form>
-            </div>
-        </div>
+         </div>
+      
     </main>
     
     <!-- STOPKA -->
