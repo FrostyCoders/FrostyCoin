@@ -34,22 +34,26 @@
    
    
 }
-table{
-   margin-left: 8rem;
-   margin-right: 8rem;
-   border-collapse: collapse;
+.table-box
+{
+   position: absolute;
+   left: 2.5%;
    
    
 }
-
-th, td
+.table-elements-x, .table-elements-y
 {
+   margin-bottom: 1.5rem;
+}
+.table-element-x, .table-element-y
+{
+   float: left;
+   width: 24rem;
    text-align: center;
-   width: 50rem;
-   height: 3rem;
 }
-th
+.table-element-x
 {
+   font-weight: bold;
    border-bottom: 1px solid black;
 }
 .droga
@@ -64,4 +68,60 @@ h2
 {
     color: var(--main-dark-color);
     margin-left: 3rem;
+}
+.clear{
+   clear: both;
+}
+@media (max-width: 1865px)
+{
+   .table-box
+   {
+      left: 5%;
+   }
+   .table-element-x, .table-element-y
+   {   
+      width: 22rem;
+   }
+   
+}
+@media (max-width: 1755px)
+{
+   
+   .table-box
+   {
+      left: 7%;
+   }
+   .table-element-x, .table-element-y
+   {   
+      width: 20rem;
+   }
+   
+}
+@media (max-width: 1633px)
+{
+
+   .table-box
+   {
+      left: 9%;
+   }
+   .table-element-x, .table-element-y
+   {   
+      width: 18rem;
+   }
+   
+}
+@media (max-width: 1515px)
+{
+   body {
+      color: red;
+   }
+   .table-box
+   {
+      left: 10%;
+   }
+   .table-element-x, .table-element-y
+   {   
+      width: 16rem;
+   }
+   
 }
