@@ -20,12 +20,14 @@
 .ordinary_button, .accept_button, .decline_button
 {
     background: transparent;
-    float: right;
+    float: left;
     font-size: 12px;
     padding: 5px;
+    margin-left: 2.5px;
     border: 2px solid lightgray;
     transition: 0.2s;
     cursor: pointer;
+    height: 28px;
 }
 .ordinary_button:hover
 {
@@ -49,7 +51,9 @@
 {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
     padding: 4px;
     cursor: pointer;
 }
@@ -73,12 +77,21 @@
 /* input styles */
 input[type="text"], input[type="number"], input[type="datetime-local"], textarea, select
 {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
     width: 160px;
     border: 2px solid lightgray;
     padding: 2px;
     border-radius: 3px;
     transition: 0.2s;
     resize: none;
+    float: left;
+    text-align: right;
+   
+    
+    
 }
 input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus
 {
@@ -109,10 +122,8 @@ select
 {
     position: relative;
     width: auto;
-    height: 20px;
-    padding: 10px;
-    padding-top: 5px;
-    margin-top: 10px;
+    min-height:2rem;
+    margin-top: 1rem;
     border: 2px solid lightgray;
     font-size: 14px;
 }
@@ -121,19 +132,27 @@ select
     position: absolute;
     right: 0;
     top: 0;
-    padding: 4px;
+    padding: 0.5rem;
     cursor: pointer;
 }
 .sett_title
 {
+    
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    left: 1rem;
     float: left;
-    padding: 5px;
-    padding-top: 5px;
+    display: block;
+    width: 100%;
+    
 }
+
+
 .sett_input
 {
-    float: right;
-    padding-right: 12px;
+    display: block;
+    width: 100%;
 }
 /* save changes div */
 .save_changes
@@ -258,8 +277,9 @@ select
 }
 .sett_input_switch
 {
-    float: right;
-    padding: 10px;
+    position: absolute;
+    right: 1rem;
+    top: 25%;
 }
 .content_bracket input
 {
@@ -272,7 +292,7 @@ select
 /* checkbox_switch */
 .switch
 {
-    float: left;
+    
     transform: translateY(-50%);
 }
 input[type="checkbox"]
@@ -319,11 +339,11 @@ input[type="checkbox"]:checked ~ .check:before
 /* PRODUCT CATEGORIES */
 .status_diod
 {
-    border-radius: 50%;
+    border-radius: 100%;
     background-color: var(--color-theme);
-    width: 15px;
-    height: 15px;
-    margin: 5px;
+    height: 10px !important;
+    width: 10px !important;
+    margin-right: 5px;
     float: left;
     box-shadow: 0px 0px 10px var(--color-theme);
 }
@@ -524,11 +544,8 @@ input[type="checkbox"]:checked ~ .check:before
 }
 .list_bracket div
 {
-    float: left;
-    width: 20%;
-    text-align: center;
-    font-size: 14px;
-    padding: 5px;
+   
+
 }
 .list_bracket .value, .list_desc .empty
 {
