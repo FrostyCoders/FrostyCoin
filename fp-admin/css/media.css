@@ -19,6 +19,16 @@
         margin: 0;
         margin-bottom: 10px;
     }
+    
+    .list_bracket
+    {
+        height: 50px;
+    }
+    
+    .list_bracket .position_control
+    {
+        top: 75%;
+    }
 }
 
 @media only screen and (max-width: 1000px) 
@@ -26,6 +36,23 @@
     .add_form_popup
     {
         width: 65%;
+    }
+    
+    .list_bracket div
+    {
+        float: left;
+        width: 45%;
+    }
+    
+    .list_bracket .value
+    {
+        float: left;
+        width: 45%;
+    }
+    
+    .list_bracket
+    {
+        height: 75px;
     }
 }
 

@@ -53,7 +53,6 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-
     padding: 4px;
     cursor: pointer;
 }
@@ -533,6 +532,8 @@ input[type="checkbox"]:checked ~ .check:before
 /* ORDERS.PHP */
 .list_container
 {
+    clear: both;
+    min-height: 100px;
     width: 100%;
     padding-top: 50px;
 }
@@ -548,6 +549,13 @@ input[type="checkbox"]:checked ~ .check:before
 {
     width: 10%;
 }
+
+.list_bracket
+{
+    height: auto;
+    clear: both;
+}
+
 .list_index
 {
     font-weight: 600;
