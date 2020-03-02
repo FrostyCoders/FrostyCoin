@@ -556,6 +556,14 @@ input[type="checkbox"]:checked ~ .check:before
     clear: both;
 }
 
+.list_bracket_desc
+{
+    display: block;
+    font-variant: small-caps;
+    font-size: 11px;
+    font-weight: bold;
+}
+
 .list_index
 {
     font-weight: 600;

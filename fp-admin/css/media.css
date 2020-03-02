@@ -6,6 +6,19 @@
     }
 }
 
+@media only screen and (max-width: 1400px)
+{
+    .list_bracket
+    {
+        height: 50px;
+    }
+    
+    .list_bracket .position_control
+    {
+        top: 75%;
+    }
+}
+
 @media only screen and (max-width: 1200px) 
 {
     .filter_bracket
@@ -19,23 +32,13 @@
         margin: 0;
         margin-bottom: 10px;
     }
-    
-    .list_bracket
-    {
-        height: 50px;
-    }
-    
-    .list_bracket .position_control
-    {
-        top: 75%;
-    }
 }
 
-@media only screen and (max-width: 1000px) 
+@media only screen and (max-width: 1200px)
 {
-    .add_form_popup
+    .list_bracket
     {
-        width: 65%;
+        height: 115px;
     }
     
     .list_bracket div
@@ -50,9 +53,17 @@
         width: 45%;
     }
     
-    .list_bracket
+    .list_bracket .position_control
     {
-        height: 75px;
+        top: 86%;
+    }
+}
+
+@media only screen and (max-width: 1000px) 
+{
+    .add_form_popup
+    {
+        width: 65%;
     }
 }
 
