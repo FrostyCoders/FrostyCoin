@@ -1,0 +1,143 @@
+.content-title
+{
+    position: relative;
+}
+.title_buttons
+{
+    position: absolute;
+    right: 0;
+    top: 0px;
+}
+.ordinary_button, .accept_button, .decline_button
+{
+    background: transparent;
+    float: right;
+    font-size: 12px;
+    padding: 5px;
+    border: 2px solid lightgray;
+    transition: 0.2s;
+    cursor: pointer;
+}
+.ordinary_button:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}
+.accept_button:hover
+{
+    background-color: var(--green-custom);
+    color: white;
+    border: 2px solid var(--green-custom);
+}
+.decline_button:hover
+{
+    background-color: var(--red-custom);
+    color: white;
+    border: 2px solid var(--red-custom);
+}
+.category_bracket
+{
+    width: 100%-6px;
+    border: 2px solid lightgray;
+    margin-top: 10px;
+    position: relative;
+}
+/* Status animation */
+.on
+{
+    animation: green_diod;
+}
+.off
+{
+    animation: red_diod;
+}
+.category_status
+{
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: gray;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+@keyframes green_diod {
+    from {background-color: gray;}
+    to {background-color: green; box-shadow: 0px 0px 10px green;}
+  }
+  @keyframes red_diod {
+    from {background-color: gray;}
+    to {background-color: red; box-shadow: 0px 0px 10px red;}
+  }
+.category_name
+{
+    display: inline-block;
+    padding: 8px;
+    padding-left: 36px;
+    font-size: 14px;
+}
+.category_info
+{
+    display: inline;
+    font-size: 12px;
+}
+.category_settings
+{
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.category_settings button
+{
+    cursor: pointer;
+    min-width: 60px;
+    height: 25px;
+    font-size: 12px;
+    transition: 0.2s;
+    background-color: white;
+    border: 2px solid lightgray;
+}
+.category_settings button:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}
+input[type="text"], input[type="number"], input[type="datetime-local"], textarea, select
+{
+    width: 160px;
+    border: 2px solid lightgray;
+    padding: 2px;
+    border-radius: 3px;
+    transition: 0.2s;
+    resize: none;
+}
+input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus
+{
+    border: 2px solid var(--color-theme);
+}
+@media only screen and (max-width: 600px)
+{
+    .category_settings button
+    {
+        display: block;
+        margin-bottom: 1px;
+    }
+    .category_name
+    {
+        display: block;
+        padding-left: 50px;
+    }
+    .category_info
+    {
+        display: block;
+        width: 100%;
+        padding: 5px;
+        padding-left: 50px;
+    }
+}
