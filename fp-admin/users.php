@@ -17,6 +17,7 @@
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/other.css">
+    <link rel="stylesheet" href="css/media.css">
     <script src="js/jquery.js"></script>
 </head>
 <body>

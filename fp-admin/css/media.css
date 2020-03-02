@@ -1,0 +1,104 @@
+@media only screen and (max-width: 1400px) 
+{
+    .filter_bracket
+    {
+        width: 33.3%;
+    }
+}
+
+@media only screen and (max-width: 1200px) 
+{
+    .filter_bracket
+    {
+        width: 50%;
+    }
+    
+    .product_bracket
+    {
+        width: 30%;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    
+    .list_bracket
+    {
+        height: 50px;
+    }
+    
+    .list_bracket .position_control
+    {
+        top: 75%;
+    }
+}
+
+@media only screen and (max-width: 1000px) 
+{
+    .add_form_popup
+    {
+        width: 65%;
+    }
+    
+    .list_bracket div
+    {
+        float: left;
+        width: 45%;
+    }
+    
+    .list_bracket .value
+    {
+        float: left;
+        width: 45%;
+    }
+    
+    .list_bracket
+    {
+        height: 75px;
+    }
+}
+
+@media only screen and (max-width: 900px) 
+{
+    .product_bracket
+    {
+        width: 37.5%;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 750px) 
+{
+    .filter_bracket
+    {
+        width: 100%;
+    }
+    
+    .product_bracket
+    {
+        width: 45%;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    
+    .add_form_popup
+    {
+        left: 55%;
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 600px) 
+{
+    .product_bracket
+    {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    
+    .add_form_popup
+    {
+        left: 50%;
+        width: 95%;
+    }
+}

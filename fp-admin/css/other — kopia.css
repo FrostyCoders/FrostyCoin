@@ -20,14 +20,12 @@
 .ordinary_button, .accept_button, .decline_button
 {
     background: transparent;
-    float: left;
+    float: right;
     font-size: 12px;
     padding: 5px;
-    margin-left: 2.5px;
     border: 2px solid lightgray;
     transition: 0.2s;
     cursor: pointer;
-    height: 28px;
 }
 .ordinary_button:hover
 {
@@ -51,8 +49,7 @@
 {
     position: absolute;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
     padding: 4px;
     cursor: pointer;
 }
@@ -112,8 +109,9 @@ select
 {
     position: relative;
     width: auto;
-    min-height: 30px;
+    min-height: 20px;
     padding: 10px;
+    padding-top: 5px;
     margin-top: 10px;
     border: 2px solid lightgray;
     font-size: 14px;
@@ -275,8 +273,6 @@ select
 .switch
 {
     float: left;
-    position: absolute;
-    top: 50%;
     transform: translateY(-50%);
 }
 input[type="checkbox"]
@@ -323,11 +319,11 @@ input[type="checkbox"]:checked ~ .check:before
 /* PRODUCT CATEGORIES */
 .status_diod
 {
-    border-radius: 100%;
+    border-radius: 50%;
     background-color: var(--color-theme);
-    height: 10px !important;
-    width: 10px !important;
-    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+    margin: 5px;
     float: left;
     box-shadow: 0px 0px 10px var(--color-theme);
 }
@@ -377,21 +373,12 @@ input[type="checkbox"]:checked ~ .check:before
     border: 2px solid var(--color-theme);
 }
 /* products brackets */
-.product_container
-{
-    width: 100%;
-    padding-top: 20px;
-    clear: both;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
 .product_bracket
 {   float: left;
     border: 2px solid lightgray;
     height: 280px;
     margin: 10px;
-    width: 20%;
+    width: 18%;
     text-align: center;
     position: relative;
 }
@@ -457,7 +444,7 @@ input[type="checkbox"]:checked ~ .check:before
     top: 80px;
     transform: translateX(-50%);
     width: 50%;
-    min-height: 75%;
+    height: 75%;
     z-index: 100;
     background-color: white;
     border: 3px solid transparent;
@@ -532,8 +519,6 @@ input[type="checkbox"]:checked ~ .check:before
 /* ORDERS.PHP */
 .list_container
 {
-    clear: both;
-    min-height: 100px;
     width: 100%;
     padding-top: 50px;
 }
@@ -549,13 +534,6 @@ input[type="checkbox"]:checked ~ .check:before
 {
     width: 10%;
 }
-
-.list_bracket
-{
-    height: auto;
-    clear: both;
-}
-
 .list_index
 {
     font-weight: 600;
