@@ -134,8 +134,17 @@ select
 }
 .sett_input
 {
-    float: right;
+    float: right !important;
     padding-right: 12px;
+}
+
+.sett_input > input[type=text]
+{
+    float: right;
+    border: 0;
+    border-bottom: 1.5px solid var(--color-theme);
+    border-radius: 0;
+    background: none;
 }
 /* save changes div */
 .save_changes
