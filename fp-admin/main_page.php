@@ -30,28 +30,24 @@
             <img src="img/menu_icon.png" alt="MENU" onclick="openNav();"> 
         </div>
         <div id="main-small_screen" class="menu">
-            <a href="#"><div class="menu-element active">Przegląd</div></a>
-            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
+            <a href="main_page.php"><div class="menu-element active">Przegląd</div></a>
             <a href="#"><div class="menu-element">Strona Główna</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
-            <a href="#"><div class="menu-element">Podstrony</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
             <a href="users.php"><div class="menu-element">Użytkownicy</div></a>
             <img class="hide_menu" src="img/arrow.png" alt="Close" onclick="closeNav();">
             <p class="copy">Copyright &copy;<br>Frosty Coders - 2020<br>wersja 0.1.0</p>
         </div>
         <div id="main-big_screen" class="menu">
-            <a href="#"><div class="menu-element active">Przegląd</div></a>
-            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
+            <a href="main_page.php"><div class="menu-element active">Przegląd</div></a>
             <a href="#"><div class="menu-element">Strona Główna</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
-            <a href="#"><div class="menu-element">Podstrony</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
             <a href="users.php"><div class="menu-element">Użytkownicy</div></a>
             <p class="copy">Copyright &copy;<br>Frosty Coders - 2020<br>wersja 0.1.0</p>
