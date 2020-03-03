@@ -25,7 +25,7 @@
         <div class="banner col-12">
             <img class="banner-logo" src="img/logo.png" alt="logo"><label class="banner-system-name">Frosty Panel</label>
             <a href="logout.php" class="banner-logout" title="Wyloguj się"><img src="img/logout.png" alt="logout"></a>
-            <a href="#" class="banner-user" title="Ustawienia"><img src="img/user.png" alt="user"><label class="banner-username"><?php echo @$_SESSION['admin_login']?></label></a>
+            <a href="settings.php" class="banner-user" title="Ustawienia"><img src="img/user.png" alt="user"><label class="banner-username"><?php echo @$_SESSION['admin_login']?></label></a>
         </div>
     </header>
     <main class="row">
@@ -34,25 +34,27 @@
         </div>
         <div id="main-small_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
-            <a href="#"><div class="menu-element">Strona Główna</div></a>
+            <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
             <a href="users.php"><div class="menu-element active">Użytkownicy</div></a>
+            <a href="settings.php"><div class="menu-element">Ustawienia</div></a>
             <img class="hide_menu" src="img/arrow.png" alt="Close" onclick="closeNav();">
             <p class="copy">Copyright &copy;<br>Frosty Coders - 2020<br>wersja 0.1.0</p>
         </div>
         <div id="main-big_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
-            <a href="#"><div class="menu-element">Strona Główna</div></a>
+            <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
             <a href="users.php"><div class="menu-element active">Użytkownicy</div></a>
+            <a href="settings.php"><div class="menu-element">Ustawienia</div></a>
             <p class="copy">Copyright &copy;<br>Frosty Coders - 2020<br>wersja 0.1.0</p>
         </div>
         <div id="content" class="content">
