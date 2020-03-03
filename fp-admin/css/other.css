@@ -146,6 +146,16 @@ select
     border-radius: 0;
     background: none;
 }
+
+.sett_input > input[type=datetime-local]
+{
+    float: right;
+    border: 0;
+    border-bottom: 1.5px solid var(--color-theme);
+    border-radius: 0;
+    background: none;
+}
+
 /* save changes div */
 .save_changes
 {
@@ -269,7 +279,7 @@ select
 }
 .sett_input_switch
 {
-    float: right;
+    float: right !important;
     padding: 10px;
 }
 .content_bracket input
