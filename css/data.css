@@ -1,0 +1,190 @@
+.log-header-tlo
+{
+    height: 30vh;
+}
+
+.log-header-h1
+{
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    font-size: 450%;
+    letter-spacing: 1rem;
+    color: var(--main-color);
+    text-shadow: 5px 5px 10px var(--main-dark-color);
+}
+
+.data-main-container
+{
+    position: relative;
+    min-height: 41rem;
+    width: 80%;
+    background-color: rgb(255, 255, 255, 0.5);
+    margin: 0 10% 10% 10%;
+    padding: 1rem 0 1rem 0;
+    border-radius: 1rem;
+}
+.data-container
+{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-flow: wrap;
+}
+.data-log-container
+{
+   width: 40%;
+   height: auto;
+   margin: 2rem;
+   box-sizing: border-box;
+   text-align: center;
+   font-size: 2rem;
+   
+   
+}
+.droga
+{
+    margin-left:10%;
+    margin-bottom: 2rem;
+    color: var(--main-color);
+    font-size: 2rem;
+}
+
+h2
+{
+    color: var(--main-dark-color);
+    margin-left: 3rem;
+}
+
+input[type=text]
+{
+    outline: none;
+    background-color: rgba(0,0,0,0.55);
+    border: 2px solid var(--main-dark-color);
+    width: 30rem;
+    height: 3rem;
+    padding-left: 1rem;
+    margin-left: 5rem;
+    color: var(--extra-color);
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    transition-duration: 0.35s;
+    
+}
+
+input[type=text]:hover
+{
+    border-color: var(--extra-color);
+    color: var(--extra-color);
+}
+
+input[type=password]
+{
+    outline: none;
+    background-color: rgba(0,0,0,0.55);
+    border: 2px solid var(--main-dark-color);
+    width: 30rem;
+    height: 3rem;
+    padding-left: 1rem;
+    margin-left: 5rem;
+    color: var(--extra-color);
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    transition-duration: 0.35s;
+}
+
+input[type=password]:hover
+{
+    border-color: var(--extra-color);
+    color: var(--extra-color);
+}
+
+input::placeholder
+{
+    color: var(--main-color);
+}
+input[type=submit]
+{
+   float: right;
+}
+
+.login-button
+{
+    outline: none;
+    border: 2px solid var(--main-color);
+    width: 10rem;
+    height: 4rem;
+    margin-left: 15rem;
+    color: var(--main-color);
+    margin-bottom: 2rem;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 0.5rem;
+    transition-duration: 0.35s;
+}
+
+.login-button:hover
+{
+    background-color: rgba(0, 0, 0, 1);
+    border-color: var(--main-dark-color);
+    color: var(--extra-color);
+}
+label
+{
+   display: flex;
+   justify-content: flex-end;
+}
+/* responsive */
+@media screen and (max-width:1660px)
+{
+   .data-log-container{
+     width: 46%;
+   }
+}
+@media screen and (max-width:1450px)
+{
+   .data-log-container{
+     width: 50%;
+   }
+   .data-container{
+      justify-content: center;
+      align-items: center;
+   }
+}
+@media screen and (max-width:1350px)
+{
+   .data-log-container{
+     width: 60%;
+   }
+}
+@media screen and (max-width:1110px)
+{
+   .data-log-container{
+     width: 70%;
+   }
+}
+@media screen and (max-width:952px)
+{
+   .data-log-container{
+     width: 80%;
+   }
+}
+@media screen and (max-width:828px)
+{
+   .data-log-container{
+     width: 90%;
+     margin-left: -2.5rem;
+   }
+   label{
+     display: block;
+   }
+   input[type=submit]{
+      float:none;
+      margin-left: 5rem;
+   }
+
+}
