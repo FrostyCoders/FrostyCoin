@@ -75,6 +75,11 @@
         margin: 0;
         margin-bottom: 10px;
     }
+    
+    .content-notify
+    {
+        margin-top: 100px;
+    }
 }
 
 @media only screen and (max-width: 750px) 
