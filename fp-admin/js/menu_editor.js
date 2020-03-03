@@ -9,7 +9,7 @@ function Category(category_id, position, name, image_path)
     this.display_on_site = function()
     {
         var div = document.getElementById("cat_container");
-        div.innerHTML += '<div id="category' + this.category_id + '" class="category_bracket"><img id="category_collapse' + this.category_id + '" class="category_collapse" src="img/arrow.png" alt="" title="Rozwiń/Zwiń"> <img class="category_image" src="' + this.image_path + '" alt=""> <div class="category_name">' + this.name + '</div> <div class="position_control"> <button class="control_button" onclick="show_sub_adding_form(' + this.category_id + ');">Dodaj podkategorię</button> <button class="control_button">Edytuj</button> <button class="control_button" onclick="category[' + this.category_id + '].delete_position();">Usuń</button> <button class="control_button">W górę</button> <button class="control_button">W dół</button> </div> </div> <div id="sub_cat_container' + this.category_id + '" class="subcategory_container"></div>';
+        div.innerHTML += '<div id="category' + this.category_id + '" class="category_bracket"><img id="category_collapse' + this.category_id + '" class="category_collapse" src="img/arrow.png" alt="" title="Rozwiń/Zwiń"> <img class="category_image" src="' + this.image_path + '" alt="" width="30px" height="30px"> <div class="category_name">' + this.name + '</div> <div class="position_control"> <button class="control_button" onclick="show_sub_adding_form(' + this.category_id + ');">Dodaj podkategorię</button> <button class="control_button">Edytuj</button> <button class="control_button" onclick="category[' + this.category_id + '].delete_position();">Usuń</button> <button class="control_button">W górę</button> <button class="control_button">W dół</button> </div> </div> <div id="sub_cat_container' + this.category_id + '" class="subcategory_container"></div>';
     }
 
     this.delete_position = function()
@@ -30,7 +30,7 @@ function Subcategory(subcategory_id, category_id, position, name, image_path)
     this.display_on_site = function()
     {
         var div = document.getElementById("sub_cat_container" + this.category_id);
-        div.innerHTML += '<div id="subcategory' + this.subcategory_id + '" class="subcategory_bracket"><img class="category_image" src="' + this.image_path + '" alt=""> ' + this.name + ' <div class="position_control"> <button class="control_button">Edytuj</button> <button class="control_button" onclick="subcategory[' + this.subcategory_id + '].delete_position();">Usuń</button> <button class="control_button">W górę</button> <button class="control_button">W dół</button> </div> </div>';
+        div.innerHTML += '<div id="subcategory' + this.subcategory_id + '" class="subcategory_bracket"><img class="category_image" src="' + this.image_path + '" alt="" width="30px" height="30x"> ' + this.name + ' <div class="position_control"> <button class="control_button">Edytuj</button> <button class="control_button" onclick="subcategory[' + this.subcategory_id + '].delete_position();">Usuń</button> <button class="control_button">W górę</button> <button class="control_button">W dół</button> </div> </div>';
     }
 
     this.delete_position = function()
