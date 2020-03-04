@@ -1,3 +1,57 @@
+<?php
+
+   if (isset($_POST['email']))
+   {
+      //Walidacja udana
+      $valid = true;
+      
+      //Imię
+      $name = $_POST['imie'];
+      
+      if ((strlen($name)<3) || (strlen($name)>20))
+      {
+         $valid = false;
+         $_SESSION['e_name']="Nieprawidłowe imię!";
+      }
+      //Nazwisko
+      $surname = $_POST['nazwisko'];
+      
+      if ((strlen($surname)<3) || (strlen($surname)>20))
+      {
+         $valid = false;
+         $_SESSION['e_surname']="Nieprawidłowe nazwisko!";
+      }
+
+      //email
+      
+      $email = $_POST['email'];
+      $emailS = filter_var($email, FILTER_SANITIZE_EMAIL);
+     
+      if ((filter_var($emailS, FILTER_VALIDATE_EMAIL)==false) || ($emailS!=$email))
+      {
+         $valid = false;
+         $_SESSION['e_email']="Podaj poprawny adres e-mail!";
+      }
+      
+      
+      if($valid==true)
+      {
+         echo "Udana walidacja!"; exit();
+         
+      }
+      
+      
+   }
+
+
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,6 +70,7 @@
     <link rel="stylesheet" type="text/css" href="css/animate.css" />
     <link rel="stylesheet" type="text/css" href="css/login.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <!-- PASEK NAWIGACYJNY -->
@@ -231,12 +286,36 @@
             <div class="log-register-container">
                 <h2>Zarejestruj się:</h2>
                 <form method="post" action="#">
-                    <input type="text" placeholder="Imię" /><br/>
-                    <input type="text" placeholder="Nazwisko" /><br/>
-                    <input type="text" placeholder="E-mail" /><br/>
+                    <input type="text" placeholder="Imię" name="imie" /><br/>
+                    <?php
+                        if (isset($_SESSION['e_name']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_name'].'</div>';
+                           unset($_SESSION['e_name']);
+                        }
+                    ?>
+                    <input type="text" placeholder="Nazwisko" name="nazwisko" /><br/>
+                     <?php
+                         
+                        if (isset($_SESSION['e_surname']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_surname'].'</div>';
+                           unset($_SESSION['e_surname']);
+                        }
+                    ?>
+                    <input type="text" placeholder="E-mail" name="email" /><br/>
+                       <?php
+      
+                        if (isset($_SESSION['e_email']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+                           unset($_SESSION['e_email']);
+                        }
+                    ?>
                     <input type="password" placeholder="Hasło" /><br/>
                     <input type="password" placeholder="Powtórz hasło" /><br/>
-                    <label><span>Akceptuje regulamin</span><input type="checkbox" name="regulamin"><br/></label>
+                    <label class="regulamin"><input type="checkbox" name="regulamin"><span>Akceptuje regulamin</span></label> <br /><br />
+                    <div class="g-recaptcha" data-sitekey="6Lfnut4UAAAAAIcoTBhng6gW6ZE5mbWjGY5GKt6-"></div> <br />
                     <input type="submit" class="login-button" value="Zarejestruj" />
                 </form>
             </div>
