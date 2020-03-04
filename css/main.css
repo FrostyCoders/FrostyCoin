@@ -300,5 +300,6 @@ img
 .main-container
 {
     width: 96%;
+    min-height: 1rem;
     text-align: center;
 }

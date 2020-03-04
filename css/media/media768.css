@@ -84,4 +84,44 @@
     {
         margin-right: 1rem;
     }
+    
+    .main-promo
+    {
+        float: none;
+        width: 90%;
+        height: 50rem;
+    }
+    
+    .forlittlepromo
+    {
+       width: 90%;
+       height: 35rem; 
+       margin: 0;
+       margin-top: 2rem;
+    }
+    
+    .little-promo:first-child
+    {
+        margin-top: 2rem;
+    }
+    
+    .little-promo:first-child
+    {
+        margin-top: 2rem;
+    }
+    
+    .promo-description
+    {
+        font-size: 100%;
+    }
+    
+    .promo-price
+    {
+        font-size: 200%;
+    }
+    
+    .promotion
+    {
+        height: 120rem;
+    }
 }
