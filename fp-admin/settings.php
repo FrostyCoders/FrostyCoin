@@ -65,7 +65,7 @@
                 <div class="bracket">
                     <div class="bracket_title">Cośtam1</div>
                     <div class="bracket_option">
-                        <input type="text">
+                        <label class="switch"><input type="checkbox" checked><span class="check"></span></label>
                     </div>
                 </div>
                 <div class="save_changes">

@@ -22,6 +22,11 @@
     padding: 6px;
     padding-bottom: 6px;
     text-align: right;
+    position: relative;
+}
+.bracket_option label
+{
+    right: 10px;
 }
 @media only screen and (max-width: 576px)
 {
@@ -34,9 +39,10 @@
         display: block;
         box-sizing: border-box;
         width: 100%;
-        text-align: center;
-        padding: 6px;
-        padding-top: 8px;
+        text-align: left;
+        padding: 2px;
+        padding-top: 12px;
+        padding-left: 50px;
     }
     .bracket_option
     {
@@ -54,5 +60,11 @@
     {
         float: initial;
         clear: both;
+    }
+    .bracket_option label
+    {
+        top: -80%;
+        right: 20px;
+        margin: 0;
     }
 }
