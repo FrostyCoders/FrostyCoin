@@ -1,41 +1,36 @@
 .promotion
 {
-    width: 80%;
-    height: 60rem;
+    width: 85%;
+    min-height: 60rem;
     padding: 2.5%;
     padding-top: 10rem;
     padding-bottom: 3%;
     background-color: rgba(0, 0, 0, 0.0);
     margin: 10%;
     border-radius: 1rem;
-
-    
 }
 .forlittlepromo
 {
    float: left;
-   width: 25%;
-   height: 60rem;
-       
+   width: 40%;
+   height: 60rem; 
+   display: block;
 }
 .little-promo 
 {
    width: 100%;
+   margin-right: 5%;
    height: 28rem;
    background-color: white;  
    border-radius: 1rem;
    position: relative;
    box-shadow: 1.5rem 1.8rem 4.7rem 0.8rem rgba(0,0,0,0.7);
    transition-duration: 0.35s;
-    
-   
 }
 .little-promo:hover
 {
     box-shadow: 0 0 0 4pt black;
-    transition-duration: 0.35s;
-
-        
+    transition-duration: 0.35s;   
 }
 .promo-beam
 {
@@ -51,6 +46,7 @@
   text-align: center;
   font-weight: bold;
   font-size: 2rem;
+  z-index: 9;
 }
 .promo-photo
 {
@@ -70,26 +66,34 @@
     border-top: solid 0.3rem black;
     font-size: 1.3vw; 
 }
+.promo-small-desc
+{
+    margin-left: 1rem;
+}
+
 .promo-price
 {
     width: 70%;
     height: 20%;
     float: left;
     font-size: 3rem;
-    text-align: center;
+    text-align: right;
     border-top: solid 0.3rem black;
     white-space: nowrap;
     font-size: 2vw;  
 }
+.promo-small-price
+{
+    margin-right: 1rem;
+}
 
 .main-promo
 {
-    width: 35%;
-    height: 60rem;
+    width: 45%;
+    height: 62.5rem;
     position: relative;
     float: left;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-right: 3.5%;
     background-color: rgb(255, 255, 255, 0.25);
     border-radius: 1rem;
     border: solid 0.6rem black;
@@ -100,9 +104,7 @@
 {
     box-shadow: 0 0 0 0pt black;
     transition-duration: 0.35s;
-    border: solid 0.6rem black;
-
-        
+    border: solid 0.6rem black; 
 }
 
 .main-beam

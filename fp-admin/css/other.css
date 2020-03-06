@@ -146,13 +146,32 @@ select
     width: 100%;
     
 }
-
-
 .sett_input
 {
     display: block;
     width: 100%;
+    float: right !important;
+    padding-right: 12px;
 }
+
+.sett_input > input[type=text]
+{
+    float: right;
+    border: 0;
+    border-bottom: 1.5px solid var(--color-theme);
+    border-radius: 0;
+    background: none;
+}
+
+.sett_input > input[type=datetime-local]
+{
+    float: right;
+    border: 0;
+    border-bottom: 1.5px solid var(--color-theme);
+    border-radius: 0;
+    background: none;
+}
+
 /* save changes div */
 .save_changes
 {
@@ -279,6 +298,8 @@ select
     position: absolute;
     right: 1rem;
     top: 25%;
+    float: right !important;
+    padding: 10px;
 }
 .content_bracket input
 {
@@ -554,11 +575,6 @@ input[type="checkbox"]:checked ~ .check:before
     width: 100%;
     padding-top: 50px;
 }
-.list_bracket div
-{
-   
-
-}
 .list_bracket .value, .list_desc .empty
 {
     width: 10%;
@@ -568,6 +584,14 @@ input[type="checkbox"]:checked ~ .check:before
 {
     height: auto;
     clear: both;
+}
+
+.list_bracket_desc
+{
+    display: block;
+    font-variant: small-caps;
+    font-size: 11px;
+    font-weight: bold;
 }
 
 .list_index

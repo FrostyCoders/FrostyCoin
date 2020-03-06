@@ -7,6 +7,13 @@
         width: 40rem;
     }
     
+    .sz-header-h1
+    {
+        top: 15%;
+        font-size: 300%;
+        width: 40rem;
+    }
+    
     .footer-beam
     {
         min-height: 11rem;
@@ -40,4 +47,42 @@
         padding: 0;
     }
     
+    .sz-produkt-image
+    {
+        height: 100%;
+    }
+    
+    .promo-photo
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+    
+    .forlittlepromo
+    {
+       width: 40%;
+
+    }
+    .little-promo 
+    {
+        width: 100%;
+    }
+    
+    .main-promo
+    {
+        width: 50%;
+        margin-right: 5%;
+        height: 60rem;
+    }
+    
+    .promo-description
+    {
+        font-size: 100%;
+    }
+    
+    .promo-price
+    {
+        font-size: 125%;
+    }
 }

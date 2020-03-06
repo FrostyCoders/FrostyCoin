@@ -105,21 +105,13 @@
                     <button class="accept_filters" style="margin-top: 60px;">Zastosuj filtry</button>
                 </div>
                 <div class="list_container">
-                    <div class="list_bracket list_index" style="margin-bottom: 30px;">
-                        <div class="id">Identyfikator</div>
-                        <div class="user">Nazwa</div>
-                        <div class="date">Data utworzenia</div>
-                        <div class="status">Rola</div>
-                        <div class="value">Ilość wydarzeń</div>
-                        <div class="empty"></div>
-                    </div>
                     <div class="list">
                         <div class="list_bracket">
-                            <div class="id">200219123456</div>
-                            <div class="user">example87</div>
-                            <div class="date">19-02-2020</div>
-                            <div class="status">Administrator</div>
-                            <div class="value">12</div>
+                            <div class="id"><span class="list_bracket_desc">Identyfikator</span>200219123456</div>
+                            <div class="user"><span class="list_bracket_desc">Nazwa</span>example87</div>
+                            <div class="date"><span class="list_bracket_desc">Data utworzenia</span>19-02-2020</div>
+                            <div class="status"><span class="list_bracket_desc">Rola</span>Administrator</div>
+                            <div class="value"><span class="list_bracket_desc">Ilość wydarzeń</span>12</div>
                             <div class="empty">
                                 <div class="position_control" style="width: auto;">
                                     <button class="control_button">Podgląd</button>
@@ -127,11 +119,11 @@
                             </div>
                         </div>
                         <div class="list_bracket">
-                            <div class="id">200217654321</div>
-                            <div class="user">example57</div>
-                            <div class="date">17-02-2020</div>
-                            <div class="status">Klient</div>
-                            <div class="value">2</div>
+                            <div class="id"><span class="list_bracket_desc">Identyfikator</span>200217654321</div>
+                            <div class="user"><span class="list_bracket_desc">Nazwa</span>example57</div>
+                            <div class="date"><span class="list_bracket_desc">Data utworzenia</span>17-02-2020</div>
+                            <div class="status"><span class="list_bracket_desc">Rola</span>Klient</div>
+                            <div class="value"><span class="list_bracket_desc">Ilość wydarzeń</span>2</div>
                             <div class="empty">
                                 <div class="position_control" style="width: auto;">
                                     <button class="control_button">Podgląd</button>

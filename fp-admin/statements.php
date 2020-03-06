@@ -78,14 +78,14 @@
                 </div>
                 <div class="list_bracket">
                     <div class="sett_title">Treść komunikatu</div>
-                    <div class="sett_input"><input type="text" name="statement_content" placeholder="Wprowadź treść" style="width: 400px;"></div>
+                    <div class="sett_input"><input type="text" name="statement_content" placeholder="Wprowadź treść" style="width: 250px;"></div>
                 </div>
                 <div class="list_bracket">
-                    <div class="sett_title">Data i czas od kiedy komunikat jest aktywny</div>
+                    <div class="sett_title">Data i czas od kiedy:</div>
                     <div class="sett_input"><input type="datetime-local" name="statement_content"></div>
                 </div>
                 <div class="list_bracket">
-                    <div class="sett_title">Data i czas do kiedy komunikat jest aktywny</div>
+                    <div class="sett_title">Data i czas do kiedy:</div>
                     <div class="sett_input"><input type="datetime-local" name="statement_content"></div>
                 </div>
                 <div class="save_changes">
