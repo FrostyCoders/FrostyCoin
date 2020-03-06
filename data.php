@@ -1,3 +1,12 @@
+<?php
+ session_start();
+
+ if (!isset($_SESSION['logged']))
+    {
+       header('Location: login.php');
+       exit();
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +63,7 @@
                     <p>Kup cosik, bo braki mamy</p><!-- XDD zapisz co chcesz -->
                 </div>
                 <div class="header-icon"><img class="header-iconsize" src="img/icons/basket-icon.svg"></div>
-                <div class="header-icon-login"><img class="header-iconsize" src="img/icons/login-icon.svg"></div>
+                <div class="header-icon-login"><a href="logout.php" ><img class="header-iconsize" src="img/icons/login-icon.svg"></a></div>
             </div>
             <h1 class="log-header-h1">Frosty Coin</h1>
             
@@ -63,7 +72,7 @@
     
     <!-- ZAWARTOŚĆ -->
     <main>
-       <div class="droga">tutaj jesteś</div><!--traceroute-->
+       <div class="droga"><?php echo "<span>Zalogowano jako: ".$_SESSION['user_name']."!"; ?></div><!--traceroute-->
         <div class="data-main-container">
           <h2>Zmień swoje dane:</h2>
             <div class="data-container">

@@ -20,7 +20,7 @@
 .log-main-container
 {
     position: relative;
-    min-height: 52rem;
+    min-height:64rem;
     width: 80%;
     background-color: rgb(255, 255, 255, 0.5);
     margin: 0 10% 10% 10%;
@@ -145,5 +145,14 @@ input::placeholder
    margin-left: 5rem;
    margin-top: -1rem;
    margin-bottom: 1rem;
+   
+}
+.success
+{
+   color: darkblue;
+   margin-left: -1rem;
+   margin-top: -1rem;
+   margin-bottom: 1rem;
+   font-size: 2rem;
    
 }
