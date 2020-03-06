@@ -17,9 +17,7 @@
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/other.css">
-    <style>
-        
-    </style>
+    <link rel="stylesheet" href="css/home_page.css">
     <script src="js/jquery.js"></script>
 </head>
 <body>
@@ -63,6 +61,54 @@
             <div class="content-frame">
                 <div class="content-title">
                     Promocje na stronie głównej
+                </div>
+                <div class="bracket">
+                    <div class="bracket_title">Główna promocja</div>
+                    <div class="bracket_option">
+                        <select name="" id="">
+                            <option value="">Brak</option>
+                            <option value="">Produkt1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bracket">
+                    <div class="bracket_title">Dodatkowa promocja nr 1</div>
+                    <div class="bracket_option">
+                        <select name="" id="">
+                            <option value="">Brak</option>
+                            <option value="">Produkt1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bracket">
+                    <div class="bracket_title">Dodatkowa promocja nr 2</div>
+                    <div class="bracket_option">
+                        <select name="" id="">
+                            <option value="">Brak</option>
+                            <option value="">Produkt1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bracket">
+                    <div class="bracket_title">Dodatkowa promocja nr 3</div>
+                    <div class="bracket_option">
+                        <select name="" id="">
+                            <option value="">Brak</option>
+                            <option value="">Produkt1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bracket">
+                    <div class="bracket_title">Dodatkowa promocja nr 4</div>
+                    <div class="bracket_option">
+                        <select name="" id="">
+                            <option value="">Brak</option>
+                            <option value="">Produkt1</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="save_changes">
+                    <input type="submit" value="Zapisz">
                 </div>
             </div>
         </div>

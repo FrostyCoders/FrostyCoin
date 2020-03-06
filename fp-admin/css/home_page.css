@@ -1,0 +1,70 @@
+.bracket
+{
+    border: 2px solid lightgray;
+    width: 100%-2px;
+    height: auto;
+    margin-top: 10px;
+    display: flex;
+}
+.bracket_title
+{
+    display: block;
+    box-sizing: border-box;
+    width: 50%;
+    padding: 6px;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 14px;
+}
+.bracket_option
+{
+    width: 50%;
+    padding: 6px;
+    padding-bottom: 6px;
+    text-align: right;
+    position: relative;
+}
+.bracket_option label
+{
+    right: 10px;
+}
+@media only screen and (max-width: 576px)
+{
+    .bracket
+    {
+        display: block;
+    }
+    .bracket_title
+    {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        text-align: left;
+        padding: 2px;
+        padding-top: 12px;
+        padding-left: 50px;
+    }
+    .bracket_option
+    {
+        width: 100%;
+        padding: 6px;
+        padding-bottom: 6px;
+        text-align: center;
+    }
+    .save_changes
+    {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .save_changes input
+    {
+        float: initial;
+        clear: both;
+    }
+    .bracket_option label
+    {
+        top: -80%;
+        right: 20px;
+        margin: 0;
+    }
+}

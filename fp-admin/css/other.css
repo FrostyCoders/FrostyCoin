@@ -74,7 +74,7 @@
     border: 2px solid var(--color-theme);
 }
 /* input styles */
-input[type="text"], input[type="number"], input[type="datetime-local"], textarea, select
+input[type="text"], input[type="number"], input[type="datetime-local"], textarea, select, input[type="password"]
 {
     position: absolute;
     right: 1rem;
@@ -92,7 +92,7 @@ input[type="text"], input[type="number"], input[type="datetime-local"], textarea
     
     
 }
-input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus
+input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus, input[type="password"]:focus
 {
     border: 2px solid var(--color-theme);
 }
@@ -175,14 +175,14 @@ select
 /* save changes div */
 .save_changes
 {
-    padding: 20px;
+    padding: 10px;
+    padding-bottom: 0;
     text-align: right;
 }
 .save_changes input, input[type="submit"]
 {
     width: 100px;
     background: transparent;
-    float: right;
     font-size: 12px;
     padding: 5px;
     border: 2px solid lightgray;

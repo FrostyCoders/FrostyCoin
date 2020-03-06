@@ -17,6 +17,7 @@
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/other.css">
+    <link rel="stylesheet" href="css/home_page.css">
     <script src="js/jquery.js"></script>
 </head>
 <body>
@@ -59,7 +60,40 @@
         <div id="content" class="content">
             <div class="content-frame">
                 <div class="content-title">
-                    Ustawienia konta
+                    Konfiguracja
+                </div>
+                <div class="bracket">
+                    <div class="bracket_title">Cośtam1</div>
+                    <div class="bracket_option">
+                        <label class="switch"><input type="checkbox" checked><span class="check"></span></label>
+                    </div>
+                </div>
+                <div class="save_changes">
+                    <input type="submit" value="Zapisz">
+                </div>
+                <div class="content-title">
+                    Zmiana hasła
+                </div>
+                <div class="bracket">
+                    <div class="bracket_title">Obecne hasło</div>
+                    <div class="bracket_option">
+                        <input type="password">
+                    </div>
+                </div>
+                <div class="bracket">
+                    <div class="bracket_title">Nowe hasło</div>
+                    <div class="bracket_option">
+                        <input type="password">
+                    </div>
+                </div>
+                <div class="bracket">
+                    <div class="bracket_title">Powtórz nowe hasło</div>
+                    <div class="bracket_option">
+                        <input type="password">
+                    </div>
+                </div>
+                <div class="save_changes">
+                    <input type="submit" value="Zmień">
                 </div>
             </div>
         </div>
