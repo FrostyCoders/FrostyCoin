@@ -54,7 +54,7 @@
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
             <a href="users.php"><div class="menu-element">Użytkownicy</div></a>
             <a href="settings.php"><div class="menu-element">Ustawienia</div></a>
-            <p class="copy">Copyright &copy;<br>Frosty Coders - 2020<br>wersja 0.1.0</p>
+            <p class="copy"><?php include('footer.txt'); ?><br>wersja 0.1.0</p>
         </div>
         <div id="content" class="content">
             <div class="content-frame">
@@ -63,10 +63,11 @@
                 </div>
                 <div class="list_bracket">
                     <div class="sett_title">Prawa autorskie</div>
-                    <div class="sett_input"><input type="text" name="copy" placeholder="Wprowadź prawa" value="Copyright © - FP 2020"></div>
+                    <div class="sett_input"><form name="form" method="post">
+                    <input  type="text" id="foter" name="foter" placeholder="Wprowadź prawa" value="<?php include('footer.txt'); ?>"></div>
                 </div>
                 <div class="save_changes">
-                    <input type="submit" value="Zapisz">
+                    <input type="submit" id="submit" value="Zapisz">
                 </div>
             </div>
         </div>
@@ -74,3 +75,13 @@
     <script src="js/scripts.js"></script>
 </body>
 </html>
+
+
+<?php
+$file = 'footer.txt';
+$data = file_get_contents( $file );
+$newText = $_POST['foter'];
+$o = fopen( $file, "w+" );
+$save = fwrite( $o, $newText );
+fclose( $o );
+?>

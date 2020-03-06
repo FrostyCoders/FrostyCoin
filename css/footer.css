@@ -19,6 +19,7 @@
     height: 9rem;
     color: var(--main-dark-color);
     transition-duration: 0.1s;
+ 
 
 }
 .newsletter form
@@ -97,10 +98,17 @@
     left: 3rem;
     font-size: 2rem;
     transition-duration: 0.35s;
+    overflow: hidden;
 }
 
 .allrights
 {
     font-size: 1.5rem;
     color: grey;
+    transform: translateY(-2rem);
+}
+.data
+{
+    height: 4rem;
+    overflow: hidden;
 }
