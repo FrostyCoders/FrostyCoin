@@ -68,6 +68,24 @@
                         <input type="text">
                     </div>
                     <div class="filter_bracket">
+                        Użytkowników na stronie <br>
+                        <select name="" id="">
+                            <option value="">20</option>
+                            <option value="">50</option>
+                            <option value="">100</option>
+                            <option value="">Wszyscy</option>
+                        </select>
+                    </div>
+                    <div class="filter_bracket">
+                        Rola <br>
+                        <select name="" id="">
+                            <option value="">Administrator</option>
+                            <option value="">Pracownik sklepu</option>
+                            <option value="">Dostawca</option>
+                            <option value="">Klient</option>
+                        </select>
+                    </div>
+                    <div class="filter_bracket">
                         Sortuj według <br>
                         <select name="" id="">
                             <option>Nazwa</option>
@@ -78,29 +96,11 @@
                             <option value="">Malejąco</option>
                         </select>
                     </div>
-                    <div class="filter_bracket">
-                        Użytkowników na stronie <br>
-                        <select name="" id="">
-                            <option value="">20</option>
-                            <option value="">50</option>
-                            <option value="">100</option>
-                            <option value="">Wszyscy</option>
-                        </select>
-                    </div>
-                    <div class="filter_bracket">
+                    <div class="filter_bracket  filter_bracket_date">
                         Data rejestracji od<br>
                         <input type="date"><br>
                         Do<br>
                         <input type="date">
-                    </div>
-                    <div class="filter_bracket">
-                        Rola <br>
-                        <select name="" id="">
-                            <option value="">Administrator</option>
-                            <option value="">Pracownik sklepu</option>
-                            <option value="">Dostawca</option>
-                            <option value="">Klient</option>
-                        </select>
                     </div>
                     <button class="accept_filters" style="margin-top: 60px;">Zastosuj filtry</button>
                 </div>

@@ -68,6 +68,24 @@
                         <input type="text">
                     </div>
                     <div class="filter_bracket">
+                        Zamówień na stronie <br>
+                        <select name="" id="">
+                            <option value="">20</option>
+                            <option value="">50</option>
+                            <option value="">100</option>
+                            <option value="">Wszystkie</option>
+                        </select>
+                    </div>
+                    <div class="filter_bracket">
+                        Status <br>
+                        <select name="" id="">
+                            <option value="">Złożono</option>
+                            <option value="">Przygotowano</option>
+                            <option value="">Wysłano</option>
+                            <option value="">Zakończono</option>
+                        </select>
+                    </div>
+                    <div class="filter_bracket">
                         Sortuj według <br>
                         <select name="" id="">
                             <option>Nazwa</option>
@@ -80,29 +98,11 @@
                         </select>
                         
                     </div>
-                    <div class="filter_bracket">
-                        Zamówień na stronie <br>
-                        <select name="" id="">
-                            <option value="">20</option>
-                            <option value="">50</option>
-                            <option value="">100</option>
-                            <option value="">Wszystkie</option>
-                        </select>
-                    </div>
-                    <div class="filter_bracket">
+                    <div class="filter_bracket filter_bracket_date">
                         Data od<br>
                         <input type="date"><br>
                         Do<br>
                         <input type="date">
-                    </div>
-                    <div class="filter_bracket">
-                        Status <br>
-                        <select name="" id="">
-                            <option value="">Złożono</option>
-                            <option value="">Przygotowano</option>
-                            <option value="">Wysłano</option>
-                            <option value="">Zakończono</option>
-                        </select>
                     </div>
                     <button class="accept_filters" style="margin-top: 60px;">Zastosuj filtry</button>
                 </div>

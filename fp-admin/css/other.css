@@ -16,6 +16,7 @@
     right: 0;
     top: 0px;
 }
+
 /* panel buttons */
 .ordinary_button, .accept_button, .decline_button
 {
@@ -380,17 +381,25 @@ input[type="checkbox"]:checked ~ .check:before
 {
     float: left;
     width: 20%;
+    height: auto;
     font-size: 12px;
     padding-top: 10px;
     text-align: center;
 }
 .filter_bracket select, .filter_bracket input
 {
+    position: static;
     border: 2px solid lightgray;
     padding: 2px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border-radius: 3px;
     transition: 0.2s;
-    width: 80%;
+    max-width: 100%;
+    text-align: left;
+    top: 0;
+    transform: translateY(0%);
+    float: none;
 }
 .filter_bracket select:focus, .filter_bracket input:focus
 {
@@ -574,7 +583,7 @@ input[type="checkbox"]:checked ~ .check:before
     clear: both;
     min-height: 100px;
     width: 100%;
-    padding-top: 50px;
+    padding-top: 10px;
 }
 .list_bracket .value, .list_desc .empty
 {
@@ -583,8 +592,21 @@ input[type="checkbox"]:checked ~ .check:before
 
 .list_bracket
 {
-    height: auto;
+    height: 50px;
     clear: both;
+}
+
+.list_bracket div
+{
+    float: left;
+    padding-top: 5px;
+    width: 20%;
+    text-align: center;
+}
+
+.list_bracket .position_control
+{
+    top: 64%;
 }
 
 .list_bracket_desc
