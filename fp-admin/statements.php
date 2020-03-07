@@ -61,13 +61,49 @@
                 <div class="content-title">
                     Komunikaty strony
                 </div>
-                <div class="content-notify">
-                    <h4>Komunikat na stronie aktywny</h4>
-                    <div><b>Status</b> <br>Zaplanowane</div>
-                    <div><b>Godzina</b> <br>Cały czas</div>
-                    <div><b>Data</b> <br>14.02.2020 - 15.03.2020</div>
-                    
-                </div>
+                
+                    <?php
+                        require_once "connect.php"; 
+                        $sql = "SELECT * FROM statements";
+                        $result = $conn->query($sql);
+                        $show = $result -> fetch();
+                        $title = $show['statement_title'];
+                        $status = $show['statement_status'];
+                        $from = $show['statement_from'];
+                        $fromsec = strtotime($from);
+                        $to = $show['statement_to'];
+                        $date = new DateTime();
+                        $currentdate = $date->getTimestamp();
+                
+                        if($status == 1 && $fromsec > $currentdate)
+                        {
+                            echo '<div class="content-notify" style="background-color: darkblue;">';
+                            echo '<h4>Komunikat na stronie zaplanowany</h4>';
+                            echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
+                            echo '<div><b>Status</b> <br>Zaplanowane</div>';
+                            echo '<div><b>Data i godzina</b> <br>'.$from.' - '.$to.'</div>';
+                            echo '</div>';
+                        }
+                        else if($status == 1 && $fromsec <= $currentdate)
+                        {
+                            echo '<div class="content-notify">';
+                            echo '<h4>Komunikat na stronie aktywny</h4>';
+                            echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
+                            echo '<div><b>Status</b> <br>Aktywny</div>';
+                            echo '<div><b>Data i godzina</b> <br>'.$from.' - '.$to.'</div>';
+                            echo '</div>';
+                        }
+                        else
+                        {
+                            echo '<div class="content-notify" style="background-color: grey;">';
+                            echo '<h4>Komunikat na stronie nieaktywny</h4>';
+                            echo '<div><b>Tytuł</b> <br>Brak</div>';
+                            echo '<div><b>Status</b> <br>Nieaktywny</div>';
+                            echo '<div><b>Data i godzina</b> <br>Brak</div>';
+                            echo '</div>';
+                        }
+                    ?>                    
+                
                 <div class="list_bracket">
                     <div class="sett_title">Aktywacja</div>
                     <div class="sett_input_switch"><label class="switch"><input type="checkbox" checked><span class="check"></span></label></div>

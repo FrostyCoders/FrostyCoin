@@ -168,6 +168,7 @@ select
 {
     float: right;
     border: 0;
+    width: auto;
     border-bottom: 1.5px solid var(--color-theme);
     border-radius: 0;
     background: none;
@@ -298,7 +299,7 @@ select
 {
     position: absolute;
     right: 1rem;
-    top: 25%;
+    top: 1.25rem;
     float: right !important;
     padding: 10px;
 }
