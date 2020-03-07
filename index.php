@@ -236,9 +236,10 @@
 
             if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
             {
-                echo '<div class="statement-banner">';
+                echo '<div id="statement-banner" class="statement-banner">';
                 echo '<h4>'.$title.'</h4>';
                 echo '<p>'.$desc.'</p>';
+                echo '<div id="statement-close" class="statement-close" title="Zamknij">x</div>';
             }
 
             else
@@ -298,6 +299,7 @@
     <script src="js/nav_addition.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/footer.js"></script>
+    <script src="js/statement_close.js"></script>
     
 </body>
 </html>
