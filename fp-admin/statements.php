@@ -64,7 +64,7 @@
                 
                     <?php
                         require_once "connect.php"; 
-                        $sql = "SELECT * FROM statements";
+                        $sql = "SELECT * FROM statements ORDER BY statement_id DESC LIMIT 1;";
                         $result = $conn->query($sql);
                         $show = $result -> fetch();
                         $title = $show['statement_title'];
@@ -72,6 +72,7 @@
                         $from = $show['statement_from'];
                         $fromsec = strtotime($from);
                         $to = $show['statement_to'];
+                        $tosec = strtotime($to);
                         $date = new DateTime();
                         $currentdate = $date->getTimestamp();
                 
@@ -81,16 +82,16 @@
                             echo '<h4>Komunikat na stronie zaplanowany</h4>';
                             echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
                             echo '<div><b>Status</b> <br>Zaplanowane</div>';
-                            echo '<div><b>Data i godzina</b> <br>'.$from.' - '.$to.'</div>';
+                            echo '<div><b>Data i godzina</b> <br>'.date('d.m.Y G:i', strtotime($from)).' - '.date('d.m.Y G:i', strtotime($to)).'</div>';
                             echo '</div>';
                         }
-                        else if($status == 1 && $fromsec <= $currentdate)
+                        else if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
                         {
                             echo '<div class="content-notify">';
                             echo '<h4>Komunikat na stronie aktywny</h4>';
                             echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
                             echo '<div><b>Status</b> <br>Aktywny</div>';
-                            echo '<div><b>Data i godzina</b> <br>'.$from.' - '.$to.'</div>';
+                            echo '<div><b>Data i godzina</b> <br>'.date('d.m.Y G:i', strtotime($from)).' - '.date('d.m.Y G:i', strtotime($to)).'</div>';
                             echo '</div>';
                         }
                         else
@@ -102,8 +103,10 @@
                             echo '<div><b>Data i godzina</b> <br>Brak</div>';
                             echo '</div>';
                         }
-                    ?>                    
                 
+                        $conn = null;
+                    ?>                    
+                <form action="statements_save.php" method="post">
                 <div class="list_bracket">
                     <div class="sett_title">Aktywacja</div>
                     <div class="sett_input_switch"><label class="switch"><input type="checkbox" checked><span class="check"></span></label></div>
@@ -117,16 +120,17 @@
                     <div class="sett_input"><input type="text" name="statement_content" placeholder="Wprowadź treść" style="width: 250px;"></div>
                 </div>
                 <div class="list_bracket">
-                    <div class="sett_title">Data i czas od kiedy:</div>
+                    <div class="sett_title">Data i czas od kiedy</div>
                     <div class="sett_input"><input type="datetime-local" name="statement_content"></div>
                 </div>
                 <div class="list_bracket">
-                    <div class="sett_title">Data i czas do kiedy:</div>
+                    <div class="sett_title">Data i czas do kiedy</div>
                     <div class="sett_input"><input type="datetime-local" name="statement_content"></div>
                 </div>
                 <div class="save_changes">
                     <input type="submit" value="Zapisz">
                 </div>
+                </form>
             </div>
         </div>
     </main>

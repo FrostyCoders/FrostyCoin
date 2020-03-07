@@ -25,7 +25,7 @@
     <!-- PASEK NAWIGACYJNY -->
     <nav>
         <div class="nav-pasek">
-            <div class="nav-logo"><a href="index.html"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
+            <div class="nav-logo"><a href="index.php"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
             <div class="nav-zawartosc nav-js">
                 <div class="nav-zakladka">
                     Komputery PC
@@ -219,6 +219,35 @@
             <p class="header-p">U nas kupisz wszystko co potrzebne, aby wejść z przytupem w przyszłość!</p>
             <button class="header-button"><a href="#promotion">Sprawdź!</a></button>
         </div>
+        <?php
+            require_once "fp-admin/connect.php"; 
+            $sql = "SELECT * FROM statements ORDER BY statement_id DESC LIMIT 1;";
+            $result = $conn->query($sql);
+            $show = $result -> fetch();
+            $title = $show['statement_title'];
+            $desc = $show['statement_desc'];
+            $status = $show['statement_status'];
+            $from = $show['statement_from'];
+            $fromsec = strtotime($from);
+            $to = $show['statement_to'];
+            $tosec = strtotime($to);
+            $date = new DateTime();
+            $currentdate = $date->getTimestamp();
+
+            if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+            {
+                echo '<div class="statement-banner">';
+                echo '<h4>'.$title.'</h4>';
+                echo '<p>'.$desc.'</p>';
+            }
+
+            else
+            {
+                $conn = null;
+            } 
+
+            $conn = null;
+        ?>
     </header>
     
     <!-- ZAWARTOŚĆ -->
