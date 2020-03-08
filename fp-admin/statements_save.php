@@ -9,18 +9,24 @@
 
     error_reporting(0);
 
-    $mod = $_POST['mod'];
-    $activation = $_POST['activation'];
-    $title = $_POST['statement_title'];
-    $desc = $_POST['statement_desc'];
-    $datefrom = $_POST['statement_from'];
-    $dateto = $_POST['statement_to'];
-    $user = $_SESSION['admin_id'];
-    
     require_once "connect.php"; 
 
     $setnames = "SET NAMES utf8";
     $conn->query($setnames);
+
+    $mod = $_POST['mod'];
+    $activation = $_POST['activation'];
+
+    $title = $_POST['statement_title'];
+    $title = htmlentities($title, ENT_QUOTES, "UTF-8");
+
+    $desc = $_POST['statement_desc'];
+    $desc = htmlentities($desc, ENT_QUOTES, "UTF-8");
+
+    $datefrom = $_POST['statement_from'];
+    $dateto = $_POST['statement_to'];
+    $user = $_SESSION['admin_id'];
+    
 // MOD
 
 if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['statement_from'] && $_POST['statement_to'])) 
