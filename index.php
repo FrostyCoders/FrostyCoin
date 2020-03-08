@@ -221,7 +221,10 @@
         </div>
         <?php
             require_once "fp-admin/connect.php"; 
-            $sql = "SELECT * FROM statements ORDER BY statement_id DESC LIMIT 1;";
+            $setnames = "SET NAMES utf8";
+            $conn->query($setnames);
+        
+            $sql = "SELECT * FROM `statements` ORDER BY `statement_id` DESC LIMIT 1;";
             $result = $conn->query($sql);
             $show = $result -> fetch();
             $title = $show['statement_title'];
@@ -248,6 +251,7 @@
             } 
 
             $conn = null;
+            unset($conn);
         ?>
     </header>
     
