@@ -89,7 +89,8 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
         header("Location: statements.php");
         exit();
     }
-
+    
+    setcookie("statement-close", "", -1, '/');
     $conn = null;
     unset($conn);
     header("Location: statements.php");

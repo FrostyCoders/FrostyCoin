@@ -237,19 +237,27 @@
             $date = new DateTime();
             $currentdate = $date->getTimestamp();
 
-            if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+            if(!isset($_COOKIE['statement-close']))
             {
-                echo '<div id="statement-banner" class="statement-banner">';
-                echo '<h4>'.$title.'</h4>';
-                echo '<p>'.$desc.'</p>';
-                echo '<div id="statement-close" class="statement-close" title="Zamknij">x</div>';
-            }
+                if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+                {
+                    echo '<div id="statement-banner" class="statement-banner">';
+                    echo '<h4>'.$title.'</h4>';
+                    echo '<p>'.$desc.'</p>';
+                    echo '<div id="statement-close" class="statement-close" title="Zamknij">x</div>';
+                }
 
+                else
+                {
+                    $conn = null;
+                } 
+            }
+        
             else
             {
                 $conn = null;
-            } 
-
+                unset($conn);
+            }
             $conn = null;
             unset($conn);
         ?>
