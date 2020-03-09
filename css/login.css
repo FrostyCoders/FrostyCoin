@@ -20,7 +20,7 @@
 .log-main-container
 {
     position: relative;
-    min-height: 41rem;
+    min-height:64rem;
     width: 80%;
     background-color: rgb(255, 255, 255, 0.5);
     margin: 0 10% 10% 10%;
@@ -106,7 +106,14 @@ input[type=password]:hover
     border-color: var(--extra-color);
     color: var(--extra-color);
 }
-
+.regulamin
+{
+ margin-left: 5rem;
+}
+.g-recaptcha
+{
+ margin-left: 5rem;
+}
 input::placeholder
 {
     color: var(--main-color);
@@ -131,4 +138,21 @@ input::placeholder
     background-color: rgba(0, 0, 0, 1);
     border-color: var(--main-dark-color);
     color: var(--extra-color);
+}
+.error
+{
+   color: red;
+   margin-left: 5rem;
+   margin-top: -1rem;
+   margin-bottom: 1rem;
+   
+}
+.success
+{
+   color: darkblue;
+   margin-left: -1rem;
+   margin-top: -1rem;
+   margin-bottom: 1rem;
+   font-size: 2rem;
+   
 }
