@@ -89,7 +89,7 @@
                         <div class="category_name" style="padding-left: 8px">Nazwa: <input type="text" name="cat_name"></div>
                         <div class="category_settings">
                             <input type="submit" value="Zatwierdź"/>
-                            <button id="cancel_add">Anuluj</button>
+                            <button type="button" id="cancel_add">Anuluj</button>
                         </div>
                         </form>
                     </div>
