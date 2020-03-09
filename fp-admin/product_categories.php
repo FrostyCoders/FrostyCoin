@@ -84,12 +84,14 @@
                         </div>
                     </div>
                     <div id="add_category_bracket" class="category_bracket">
-                        <div class="category_name" style="padding-left: 8px">Status: <select name="" id=""><option value="">Aktywna</option><option value=""></option>Niektywna</select></div>
-                        <div class="category_name" style="padding-left: 8px">Nazwa: <input type="text"></div>
+                        <form action="php_scripts/add_category.php" method="post">
+                        <div class="category_name" style="padding-left: 8px">Status: <select name="cat_status"><option value="active">Aktywna</option><option value="inactive">Niektywna<</option></select></div>
+                        <div class="category_name" style="padding-left: 8px">Nazwa: <input type="text" name="cat_name"></div>
                         <div class="category_settings">
-                            <button>Zatwierdź</button>
+                            <input type="submit" value="Zatwierdź"/>
                             <button id="cancel_add">Anuluj</button>
                         </div>
+                        </form>
                     </div>
                 </div>
                 
@@ -106,10 +108,18 @@
                 });
             });
         </script>
-        <?php
-        echo '<script>$(document).ready(function(){$("#edit_button0").click(function(){$("#category_show0").hide(); $("#category_edit0").fadeIn(); }); $("#back_button0").click(function(){ $("#category_show0").fadeIn(); $("#category_edit0").hide(); });});</script>';
-        ?>
     </main>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <script src="js/scripts.js"></script>
 </body>
 </html>

@@ -92,7 +92,7 @@
     top: 50%;
     transform: translateY(-50%);
 }
-.category_settings button
+.category_settings button, input[type="submit"]
 {
     cursor: pointer;
     min-width: 60px;
@@ -102,7 +102,7 @@
     background-color: white;
     border: 2px solid lightgray;
 }
-.category_settings button:hover
+.category_settings button:hover, input[type="submit"]:hover
 {
     background-color: var(--color-theme);
     color: white;
@@ -120,6 +120,23 @@ input[type="text"], input[type="number"], input[type="datetime-local"], textarea
 input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus
 {
     border: 2px solid var(--color-theme);
+}
+.result
+{
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    padding: 10px;
+    z-index: 1000;
+    background-color: white;
+    font-size: 14px;
+    border: 2px solid var(--color-theme);
+    padding-left: 20px;
+    padding-right: 20px;
+    opacity: 0.1;
 }
 @media only screen and (max-width: 600px)
 {
