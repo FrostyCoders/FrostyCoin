@@ -7,7 +7,7 @@
         exit();
     }
 
-    error_reporting(0);
+    //error_reporting(0);
 
     require_once "connect.php"; 
 
@@ -35,12 +35,16 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
     {
         if($activation != NULL)
         {
+            $inactive = "UPDATE `statements` SET `statement_status`=0";
+            $inactive = $conn->query($inactive);
             $update = "UPDATE `statements` SET `statement_title`= :title, `statement_desc`= :desc, `statement_status`=1, `statement_from`= :datefrom, `statement_to`= :dateto, `statement_creation_time`=NULL, `statement_creator`= :user ORDER BY `statement_id` DESC LIMIT 1;";
             $upd = $conn->prepare($update, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
             $upd->execute(array(':title' => $title, ':desc' => $desc, ':datefrom' => $datefrom, ':dateto' => $dateto, ':user' => $user));
         }
         else if($activation == NULL)
         {
+            $inactive = "UPDATE `statements` SET `statement_status`=0";
+            $inactive = $conn->query($inactive);
             $update = "UPDATE `statements` SET `statement_title`='$title', `statement_desc`='$desc', `statement_status`=0, `statement_from`='$datefrom', `statement_to`='$dateto', `statement_creation_time`=NULL, `statement_creator`='$user' ORDER BY `statement_id` DESC LIMIT 1;";
             $upd = $conn->prepare($update, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
             $upd->execute(array(':title' => $title, ':desc' => $desc, ':datefrom' => $datefrom, ':dateto' => $dateto, ':user' => $user));
@@ -52,7 +56,7 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
             header("Location: statements.php");
             exit();
         }
-        header("Location: statements.php");
+        //header("Location: statements.php");
     }
 
 // INSERT
@@ -60,6 +64,8 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
     {
         if($activation != NULL)
         {
+            $inactive = "UPDATE `statements` SET `statement_status`=0";
+            $inactive = $conn->query($inactive);
             $insert = "INSERT INTO `statements` (`statement_id`, `statement_title`, `statement_desc`, `statement_status`, `statement_from`, `statement_to`, `statement_creation_time`, `statement_creator`)
             VALUES (NULL, :title, :desc, '1', :datefrom, :dateto, NULL, :user);";
             $ins = $conn->prepare($insert, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -67,6 +73,8 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
         }
         else if($activation == NULL)
         {
+            $inactive = "UPDATE `statements` SET `statement_status`=0";
+            $inactive = $conn->query($inactive);
             $insert = "INSERT INTO `statements` (`statement_id`, `statement_title`, `statement_desc`, `statement_status`, `statement_from`, `statement_to`, `statement_creation_time`, `statement_creator`)
             VALUES (NULL, '$title', '$desc', '0', '$datefrom', '$dateto', NULL, '$user');";
             $ins = $conn->prepare($insert, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -79,7 +87,7 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
             header("Location: statements.php");
             exit();
         }
-        header("Location: statements.php");
+        //header("Location: statements.php");
     }
 
     else
@@ -93,7 +101,7 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
     setcookie("statement-close", "", -1, '/');
     $conn = null;
     unset($conn);
-    header("Location: statements.php");
+    //header("Location: statements.php");
     exit();
 }
 
