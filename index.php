@@ -1,8 +1,9 @@
 <?php
+error_reporting(0);
 if (!isset($_COOKIE['stmt_cookie']))
-            {
-                setcookie('stmt_cookie', 1, time() + (24*3600), "/");
-            }
+    {
+        setcookie('stmt_cookie', 1, time() + (24*3600), "/");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -247,9 +248,10 @@ if (!isset($_COOKIE['stmt_cookie']))
             {
                 if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
                 {
-                    echo '<div id="statement-banner" class="statement-banner">';
-                    echo '<h4>'.$title.'</h4>';
-                    echo '<p>'.$desc.'</p>';
+                    echo '<div id="statement-banner" class="statement-banner"><div class="stmt-content">';
+                    echo '<div class="stmt-icon"><img class="stmt-iconsize" src="img/icons/alert-circle-outline.svg"></div>';
+                    echo '<div class="stmt-text"><h4>'.$title.'</h4>';
+                    echo '<p>'.$desc.'</p></div></div>';
                     echo '<div id="statement-close" class="statement-close" title="Zamknij">x</div>';
                 }
 

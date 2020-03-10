@@ -7,7 +7,7 @@
         exit();
     }
 
-    //error_reporting(0);
+    error_reporting(0);
 
     require_once "connect.php"; 
 
@@ -56,7 +56,7 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
             header("Location: statements.php");
             exit();
         }
-        //header("Location: statements.php");
+        header("Location: statements.php");
     }
 
 // INSERT
@@ -87,7 +87,7 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
             header("Location: statements.php");
             exit();
         }
-        //header("Location: statements.php");
+        header("Location: statements.php");
     }
 
     else
@@ -100,7 +100,7 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
     
     $conn = null;
     unset($conn);
-    //header("Location: statements.php");
+    header("Location: statements.php");
     exit();
 }
 
