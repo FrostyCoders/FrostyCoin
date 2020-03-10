@@ -1,3 +1,9 @@
+<?php
+if (!isset($_COOKIE['stmt_cookie']))
+            {
+                setcookie('stmt_cookie', 1, time() + (24*3600), "/");
+            }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -237,7 +243,7 @@
             $date = new DateTime();
             $currentdate = $date->getTimestamp();
 
-            if(!isset($_COOKIE['statement-close']))
+            if($_COOKIE['stmt_cookie'] == 1)
             {
                 if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
                 {
