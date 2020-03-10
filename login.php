@@ -165,7 +165,7 @@
     <!-- PASEK NAWIGACYJNY -->
     <nav>
         <div class="nav-pasek">
-            <div class="nav-logo"><a href="index.html"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
+            <div class="nav-logo"><a href="index.php"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
             <div class="nav-zawartosc nav-js">
                 <div class="nav-zakladka">
                     Komputery PC

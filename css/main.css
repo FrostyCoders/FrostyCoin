@@ -150,6 +150,91 @@ body
     
 }
 /* HEADER */
+.statement-banner
+{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    min-height: 1rem;
+    background-color: var(--main-dark-color);
+    color: white;
+    z-index: 99;
+    border-top-right-radius: 3rem;
+    border-top-left-radius: 1rem;
+    transition-duration: 0.35s;
+}
+
+.stmt-content
+{
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.stmt-icon
+{
+    float: left;
+    min-height: 1rem;
+    width: 5rem;
+    margin-top: 1rem;
+    margin-right: 2rem;
+}
+
+.stmt-iconsize
+{
+    width: 5rem;
+    height: 5rem;
+    filter: invert(1);
+}
+
+.stmt-text
+{
+    float: left;
+    margin-top: 1rem;
+    min-width: 1rem;
+    min-height: 1rem;
+}
+
+.statement-banner h4
+{
+    width: 100%;
+    margin: 0;
+    margin-top: 0.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--extra-color);
+    font-size: 2rem;
+}
+
+.statement-banner p
+{
+    width: 100%;
+    margin: 0;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--main-color);
+}
+
+.statement-close
+{
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    font-weight: bold;
+    text-align: center;
+    font-variant: small-caps; 
+    cursor: pointer;
+    font-size: 120%;
+    transition-duration: 0.15s;
+}
+
+.statement-close:hover
+{
+    color: var(--extra-color);
+}
+
 .header-tlo
 {
     height: 80vh;
