@@ -140,6 +140,7 @@ select
     
     position: absolute;
     top:50%;
+    text-align: left !important;
     transform: translateY(-50%);
     left: 1rem;
     float: left;
@@ -159,18 +160,28 @@ select
 {
     float: right;
     border: 0;
-    border-bottom: 1.5px solid var(--color-theme);
-    border-radius: 0;
+    border: 2px solid lightgray;
+    padding: 2px;
+    border-radius: 3px;
     background: none;
+    outline: none;
+}
+
+.sett_input > input[type=text]::placeholder
+{
+    color: black;
 }
 
 .sett_input > input[type=datetime-local]
 {
     float: right;
     border: 0;
-    border-bottom: 1.5px solid var(--color-theme);
-    border-radius: 0;
+    width: auto;
+    border: 2px solid lightgray;
+    padding: 2px;
+    border-radius: 3px;
     background: none;
+    outline: none;
 }
 
 /* save changes div */
@@ -298,7 +309,7 @@ select
 {
     position: absolute;
     right: 1rem;
-    top: 25%;
+    top: 1.25rem;
     float: right !important;
     padding: 10px;
 }

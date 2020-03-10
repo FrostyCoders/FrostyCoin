@@ -1,3 +1,142 @@
+<?php
+
+   session_start();
+
+   if ((isset($_SESSION['logged'])) && ($_SESSION['logged']==true))
+    {
+       header('Location: data.php');
+       exit();
+    }
+
+
+   if (isset($_POST['email']))
+   {
+      //Walidacja udana
+      $valid = true;
+      
+      //Imię
+      $name = $_POST['imie'];
+      
+      if ((strlen($name)<3) || (strlen($name)>20))
+      {
+         $valid = false;
+         $_SESSION['e_name']="Nieprawidłowe imię!";
+      }
+      //Nazwisko
+      $surname = $_POST['nazwisko'];
+      
+      if ((strlen($surname)<3) || (strlen($surname)>20))
+      {
+         $valid = false;
+         $_SESSION['e_surname']="Nieprawidłowe nazwisko!";
+      }
+
+      //email
+      
+      $email = $_POST['email'];
+      $emailS = filter_var($email, FILTER_SANITIZE_EMAIL);
+     
+      if ((filter_var($emailS, FILTER_VALIDATE_EMAIL)==false) || ($emailS!=$email))
+      {
+         $valid = false;
+         $_SESSION['e_email']="Podaj poprawny adres e-mail!";
+      }
+      
+      //hasła
+      
+     $pass1 = $_POST['haslo1'];
+     $pass2 = $_POST['haslo2'];
+      
+      if ((strlen($pass1)<8) || (strlen($pass1)>20))
+      {
+         $valid = false;
+         $_SESSION['e_pass']="Hasło musi posiadać przynajmniej 8 znaków!";
+      }
+      
+      if ($pass1!=$pass2)
+      {
+         $valid = false;
+         $_SESSION['e_pass1']="Hasła nie zgadzają się";
+      }
+      
+      $pass_hash = password_hash($pass1, PASSWORD_DEFAULT);
+      
+      
+      
+      //checkbox
+      
+      if (!isset($_POST['regulamin']))
+	{
+         $valid = false;
+         $_SESSION['e_reg']="Potwierdź akceptacje regulaminu!";
+	}
+      //recaptcha
+      $key = "6Lfnut4UAAAAADqUDe8saUJHSHoQCY_0Vtzp0Kks";
+      
+      $check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$key.'&response='.$_POST['g-recaptcha-response']);
+      
+      $reply = json_decode($check);
+      
+      if ($reply->success==false)
+      {
+         $valid = false;
+         $_SESSION['e_captch']="Potwierdź że nie jesteś botem!";  
+      }
+      
+      require_once "connect.php";
+      mysqli_report(MYSQLI_REPORT_STRICT);
+      
+      try
+      {
+      $conn = new mysqli($host, $db_user, $db_password, $db_name); 
+         if ($conn->connect_errno!=0)
+         {
+            throw new Exception(mysqli_connect_errno());
+         }
+         else
+         {
+            //Czy email istnieje juz w bazie?
+            $result = $conn->query("SELECT user_id FROM shop_users WHERE user_email='$email'");
+            if (!$result) throw new Exception($conn->error);
+            
+            $mails = $result->num_rows;
+            if($mails>0)
+            {
+               $valid = false;
+               $_SESSION['e_email']="Istnieje już konto przypisane do tego adresu email!";
+            }
+            if($valid==true)
+            {
+               if($conn->query("INSERT INTO shop_users (user_id, user_password, user_email, user_name, user_surname) VALUES (NULL, '$pass_hash', '$email', '$name', '$surname')"))
+               {
+                $_SESSION['success1']="Udało Ci się zarejestrować! Możesz się zalogować!";
+               }
+               else
+               {
+                throw new Exception(mysqli_connect_errno()); 
+               }
+
+            }
+            $conn->close();
+         }
+      }
+      catch(Exception $e)
+      {
+         echo '<span style="color: red;"> Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</span>';
+         echo '<br /> Informacja developerska: '.$e;
+      }
+  
+   }
+
+
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,12 +159,13 @@
     <link rel="stylesheet" type="text/css" href="css/animate.css" />
     <link rel="stylesheet" type="text/css" href="css/login.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <!-- PASEK NAWIGACYJNY -->
     <nav>
         <div class="nav-pasek">
-            <div class="nav-logo"><a href="index.html"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
+            <div class="nav-logo"><a href="index.php"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
             <div class="nav-zawartosc nav-js">
                 <div class="nav-zakladka">
                     Komputery PC
@@ -226,21 +366,88 @@
         <div class="log-main-container">
             <div class="log-login-container">
                 <h2>Zaloguj się:</h2>
-                <form method="post" action="#">
-                    <input type="text" placeholder="E-mail" /><br/>
-                    <input type="password" placeholder="Hasło" /><br/>
+                <form method="post" action="logging.php">
+                    <input type="text" placeholder="E-mail" name="email_log" /><br/>
+                    <input type="password" placeholder="Hasło" name="password_log" /><br/>
+                    <?php if(isset($_SESSION['error'])) echo $_SESSION['error']; ?> <br/>
                     <input type="submit" class="login-button" value="Zaloguj" />
+                   
                 </form>
             </div>
             <div class="log-register-container">
                 <h2>Zarejestruj się:</h2>
                 <form method="post" action="#">
-                    <input type="text" placeholder="Imię" /><br/>
-                    <input type="text" placeholder="Nazwisko" /><br/>
-                    <input type="text" placeholder="E-mail" /><br/>
-                    <input type="password" placeholder="Hasło" /><br/>
-                    <input type="password" placeholder="Powtórz hasło" /><br/>
+                    <input type="text" placeholder="Imię" name="imie" /><br/>
+                    <?php
+                        if (isset($_SESSION['e_name']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_name'].'</div>';
+                           unset($_SESSION['e_name']);
+                        }
+                    ?>
+                    <input type="text" placeholder="Nazwisko" name="nazwisko" /><br/>
+                     <?php
+                         
+                        if (isset($_SESSION['e_surname']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_surname'].'</div>';
+                           unset($_SESSION['e_surname']);
+                        }
+                    ?>
+                    <input type="text" placeholder="E-mail" name="email" /><br/>
+                       <?php
+      
+                        if (isset($_SESSION['e_email']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+                           unset($_SESSION['e_email']);
+                        }
+                    ?>
+                    <input type="password" placeholder="Hasło" name="haslo1"/><br/>
+                    <?php
+      
+                        if (isset($_SESSION['e_pass']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_pass'].'</div>';
+                           unset($_SESSION['e_pass']);
+                        }
+                    ?>
+                    <input type="password" placeholder="Powtórz hasło" name="haslo2"/><br/>
+                     <?php
+      
+                        if (isset($_SESSION['e_pass1']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_pass1'].'</div>';
+                           unset($_SESSION['e_pass1']);
+                        }
+                    ?>
+                    <label class="regulamin"><input type="checkbox" name="regulamin"><span>Akceptuje regulamin</span></label> <br /><br />
+                    <?php
+      
+                        if (isset($_SESSION['e_reg']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_reg'].'</div>';
+                           unset($_SESSION['e_reg']);
+                        }
+                    ?>
+                    <div class="g-recaptcha" data-sitekey="6Lfnut4UAAAAAIcoTBhng6gW6ZE5mbWjGY5GKt6-"></div> <br />
+                    <?php
+      
+                        if (isset($_SESSION['e_captch']))
+                        {
+                           echo '<div class="error">'.$_SESSION['e_captch'].'</div>';
+                           unset($_SESSION['e_captch']);
+                        }
+                    ?>
                     <input type="submit" class="login-button" value="Zarejestruj" />
+                    <?php
+      
+                        if (isset($_SESSION['success1']))
+                        {
+                           echo '<div class="success">'.$_SESSION['success1'].'</div>';
+                           unset($_SESSION['success1']);
+                        }
+                    ?>
                 </form>
             </div>
         </div>
@@ -267,3 +474,4 @@
     <script src="js/scripts.js"></script>
 </body>
 </html>
+

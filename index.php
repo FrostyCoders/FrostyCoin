@@ -1,3 +1,10 @@
+<?php
+error_reporting(0);
+if (!isset($_COOKIE['stmt_cookie']))
+    {
+        setcookie('stmt_cookie', 1, time() + (24*3600), "/");
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +32,7 @@
     <!-- PASEK NAWIGACYJNY -->
     <nav>
         <div class="nav-pasek">
-            <div class="nav-logo"><a href="index.html"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
+            <div class="nav-logo"><a href="index.php"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
             <div class="nav-zawartosc nav-js">
                 <div class="nav-zakladka">
                     Komputery PC
@@ -219,6 +226,49 @@
             <p class="header-p">U nas kupisz wszystko co potrzebne, aby wejść z przytupem w przyszłość!</p>
             <button class="header-button"><a href="#promotion">Sprawdź!</a></button>
         </div>
+        <?php
+            require_once "fp-admin/connect.php"; 
+            $setnames = "SET NAMES utf8";
+            $conn->query($setnames);
+        
+            $sql = "SELECT * FROM `statements` ORDER BY `statement_id` DESC LIMIT 1;";
+            $result = $conn->query($sql);
+            $show = $result -> fetch();
+            $title = $show['statement_title'];
+            $desc = $show['statement_desc'];
+            $status = $show['statement_status'];
+            $from = $show['statement_from'];
+            $fromsec = strtotime($from);
+            $to = $show['statement_to'];
+            $tosec = strtotime($to);
+            $date = new DateTime();
+            $currentdate = $date->getTimestamp();
+
+            if($_COOKIE['stmt_cookie'] == 1)
+            {
+                if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+                {
+                    echo '<div id="statement-banner" class="statement-banner"><div class="stmt-content">';
+                    echo '<div class="stmt-icon"><img class="stmt-iconsize" src="img/icons/alert-circle-outline.svg"></div>';
+                    echo '<div class="stmt-text"><h4>'.$title.'</h4>';
+                    echo '<p>'.$desc.'</p></div></div>';
+                    echo '<div id="statement-close" class="statement-close" title="Zamknij">x</div>';
+                }
+
+                else
+                {
+                    $conn = null;
+                } 
+            }
+        
+            else
+            {
+                $conn = null;
+                unset($conn);
+            }
+            $conn = null;
+            unset($conn);
+        ?>
     </header>
     
     <!-- ZAWARTOŚĆ -->
@@ -269,6 +319,7 @@
     <script src="js/nav_addition.js"></script>
     <script src="js/scripts.js"></script>
     <script src="js/footer.js"></script>
+    <script src="js/statement_close.js"></script>
     
 </body>
 </html>
