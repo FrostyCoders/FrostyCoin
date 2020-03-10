@@ -190,7 +190,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Opis produktu</td><td><textarea name="" id="" cols="30" rows="5"></textarea></td>
+                        <td>Opis produktu</td><td><input type="text"></td>
                     </tr>
                     <tr>
                         <td>Status produktu</td>

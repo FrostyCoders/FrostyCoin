@@ -558,14 +558,24 @@ input[type="checkbox"]:checked ~ .check:before
 {
     padding: 5px;
 }
-.popup_frame input[type="text"], .popup_frame select, .popup_frame textarea, .popup_frame input[type="number"], .popup_frame input[type="datetime-local"]
+.popup_frame input[type="text"], .popup_frame select, .popup_frame input[type="number"], .popup_frame input[type="datetime-local"]
 {
     width: 160px;
     border: 2px solid lightgray;
     padding: 2px;
+    margin-top: 1rem;
     border-radius: 3px;
     transition: 0.2s;
     resize: none;
+    position: static;
+    right: 0;
+    top: 0;
+    transform: translateY(0%,0%);
+    text-align: right;
+}
+.popup_frame select
+{
+    width: 168px;
 }
 .popup_frame input[type="text"]:focus, .popup_frame select:focus, .popup_frame textarea:focus, .popup_frame input[type="number"]:focus, .popup_frame input[type="datetime-local"]:focus
 {
