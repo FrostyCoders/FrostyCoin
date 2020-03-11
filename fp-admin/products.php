@@ -28,25 +28,30 @@
             unset($_SESSION['product_discount']);
             unset($_SESSION['product_status']);
         }
-///// DO OGARNIĘCIA TEN SWITCH
-        $sql_categories_query = "SELECT `category_id`, `category_name` FROM `product_categories` WHERE `category_status` = 1;";
-        $sql_categories_query = $conn->query($sql_categories_query);
-        $j = 0;
-        while($categories_query = $sql_categories_query -> fetch())
+        if($product_categories>0)
         {
-            switch($product_categories)
-        {    
-            case $categories_query['category_id']:
+            $sql_categories_query = "SELECT `category_id`, `category_name` FROM `product_categories` WHERE `category_id` =".$product_categories.";";
+            $sql_categories_query = $conn->query($sql_categories_query);
+            while($categories_query = $sql_categories_query -> fetch())
             {
                 $sql2 = " WHERE `category_name`=".$categories_query['category_name'];
-                $_SESSION['product_categories'] = $j+1;
-                break;
+                $_SESSION['product_categories'] = $categories_query['category_id'];
             }
         }
+        else
+        {
+            $sql2 = " WHERE `category_name`=%";
+            $_SESSION['product_categories'] = 0;
         }
         
         switch($product_sort)
         {
+            case "def":
+            {
+                $sql3 = "";
+                $_SESSION['product_sort'] = 0;
+                break;
+            }
             case 1:
             {
                 $sql3 = " ORDER BY `products`.`product_name`";
@@ -70,31 +75,37 @@
         {
             case 1:
             {
-                $sql4 = " LIMIT 20";
+                $sql4 = " LIMIT 20;";
                 $_SESSION['product_quantity'] = 1;
                 break;
             }
             case 2:
             {
-                $sql4 = " LIMIT 50";
+                $sql4 = " LIMIT 50;";
                 $_SESSION['product_quantity'] = 2;
                 break;
             }
             case 3:
             {
-                $sql4 = " LIMIT 100";
+                $sql4 = " LIMIT 100;";
                 $_SESSION['product_quantity'] = 3;
                 break;
             }
             case 4:
             {
-                $sql4 = "";
+                $sql4 = ";";
                 $_SESSION['product_quantity'] = 4;
                 break;
             }
         }
         switch($product_discount)
         {
+            case "def":
+            {
+                $sql5 = "";
+                $_SESSION['product_discount'] = 0;
+                break;
+            }
             case 1:
             {
                 $sql5 = " AND `products`.`product_sale`=1";
@@ -112,16 +123,22 @@
         
         switch($product_status)
         {
+            case "def":
+            {
+                $sql6 = "";
+                $_SESSION['product_status'] = 0;
+                break;
+            }
             case 1:
             {
                 $sql6 = " AND `products`.`product_status`=1";
-                $_SESSION['product_discount'] = 1;
+                $_SESSION['product_status'] = 1;
                 break;
             }
             case 2:
             {
                 $sql6 = " AND `products`.`product_status`=0";
-                $_SESSION['product_discount'] = 2;
+                $_SESSION['product_status'] = 2;
                 break;
             }
             
@@ -130,12 +147,12 @@
     }
     else
     {
-        $sql_select = "SELECT `products`.* FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `products`.`category_id`=1 AND `products`.`product_sale`=1 AND `products`.`product_status`=1 ORDER BY `products`.`product_name` LIMIT 20";
-        $_SESSION['product_categories'] = 1;
-        $_SESSION['product_sort'] = 1;
+        $sql_select = "SELECT `products`.* FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` LIMIT 20;";
+        $_SESSION['product_categories'] = 0;
+        $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
-        $_SESSION['product_discount'] = 1;
-        $_SESSION['product_status'] = 1;
+        $_SESSION['product_discount'] = 0;
+        $_SESSION['product_status'] = 0;
     }
 ?>
 <!DOCTYPE html>
@@ -201,8 +218,9 @@
 <!-- START -->
             <form action="products.php?filter=1" method="post">
                     <div class="filter_bracket">
-                        Kategoria aktywna <br>
+                        Kategoria <br>
                         <select name="categories" id="">
+                            <option value="def">Wybierz</option>
                         <?php
                             require_once "fp-config.php";
                             try
@@ -236,6 +254,7 @@
                     <div class="filter_bracket">
                         Sortuj według <br>
                         <select name="sort" id="">
+                            <option value="def">Wybierz</option>
                             <option value="1">Nazwa</option>
                             <option value="2">Cena</option>
                             <option value="3">Data wprowadzenia</option>
@@ -253,6 +272,7 @@
                     <div class="filter_bracket">
                         Przecena <br>
                         <select name="discount" id="">
+                            <option value="def">Wybierz</option>
                             <option value="1">Tak</option>
                             <option value="2">Nie</option>
                         </select>
@@ -260,6 +280,7 @@
                     <div class="filter_bracket">
                         Status <br>
                         <select name="status" id="">
+                            <option value="def">Wybierz</option>
                             <option value="1">Aktywny</option>
                             <option value="2">Nieaktywny</option>
                         </select>
