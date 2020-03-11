@@ -74,30 +74,46 @@
                 <div class="content-title">
                     Zmiana hasła
                 </div>
+                 <form action="php_scripts/changepassword.php" method="POST">
                 <div class="bracket">
                     <div class="bracket_title">Obecne hasło</div>
                     <div class="bracket_option">
-                        <input type="password">
+                        <input type="password" name="o_password">
                     </div>
                 </div>
                 <div class="bracket">
                     <div class="bracket_title">Nowe hasło</div>
                     <div class="bracket_option">
-                        <input type="password">
+                        <input type="password" name="n_password">
                     </div>
                 </div>
                 <div class="bracket">
                     <div class="bracket_title">Powtórz nowe hasło</div>
                     <div class="bracket_option">
-                        <input type="password">
+                        <input type="password" name="r_password">
                     </div>
                 </div>
                 <div class="save_changes">
                     <input type="submit" value="Zmień">
                 </div>
+                </form>
             </div>
         </div>
     </main>
+     <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <script src="js/scripts.js"></script>
+   
 </body>
 </html>
+
+

@@ -85,7 +85,7 @@
                     </div>
                     <div id="add_category_bracket" class="category_bracket">
                         <form action="php_scripts/add_category.php" method="post">
-                        <div class="category_name" style="padding-left: 8px">Status: <select name="cat_status"><option value="active">Aktywna</option><option value="inactive">Niektywna<</option></select></div>
+                        <div class="category_name" style="padding-left: 8px">Status: <select name="cat_status"><option value="active">Aktywna</option><option value="inactive">Niektywna</option></select></div>
                         <div class="category_name" style="padding-left: 8px">Nazwa: <input type="text" name="cat_name"></div>
                         <div class="category_settings">
                             <input type="submit" value="Zatwierdź"/>
