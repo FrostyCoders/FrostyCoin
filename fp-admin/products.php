@@ -5,6 +5,138 @@
         header("Location: index.php");
         exit();
     }
+
+    require_once "connect.php";
+
+    $setnames = "SET NAMES utf8";
+    $conn->query($setnames);
+
+    if(isset($_GET['filter']))
+    {
+        $product_categories = $_POST['categories'];
+        $product_sort = $_POST['sort'];
+        $product_quantity = $_POST['quantity'];
+        $product_discount = $_POST['discount'];
+        $product_status = $_POST['status'];
+        $sql1 = "SELECT `products`.* FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id`";
+        //  WHERE `products`.`product_status`=1;
+        if(isset($_SESSION['product_categories']))
+        {
+            unset($_SESSION['product_categories']);
+            unset($_SESSION['product_sort']);
+            unset($_SESSION['product_quantity']);
+            unset($_SESSION['product_discount']);
+            unset($_SESSION['product_status']);
+        }
+///// DO OGARNIĘCIA TEN SWITCH
+        $sql_categories_query = "SELECT `category_id`, `category_name` FROM `product_categories` WHERE `category_status` = 1;";
+        $sql_categories_query = $conn->query($sql_categories_query);
+        $j = 0;
+        while($categories_query = $sql_categories_query -> fetch())
+        {
+            switch($product_categories)
+        {    
+            case $categories_query['category_id']:
+            {
+                $sql2 = " WHERE `category_name`=".$categories_query['category_name'];
+                $_SESSION['product_categories'] = $j+1;
+                break;
+            }
+        }
+        }
+        
+        switch($product_sort)
+        {
+            case 1:
+            {
+                $sql3 = " ORDER BY `products`.`product_name`";
+                $_SESSION['product_sort'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql3 = " ORDER BY `products`.`product_price`";
+                $_SESSION['product_sort'] = 2;
+                break;
+            }
+            case 3:
+            {
+                $sql3 = " ORDER BY `products`.`product_from`";
+                $_SESSION['product_sort'] = 3;
+                break;
+            }
+        }
+        switch($product_quantity)
+        {
+            case 1:
+            {
+                $sql4 = " LIMIT 20";
+                $_SESSION['product_quantity'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql4 = " LIMIT 50";
+                $_SESSION['product_quantity'] = 2;
+                break;
+            }
+            case 3:
+            {
+                $sql4 = " LIMIT 100";
+                $_SESSION['product_quantity'] = 3;
+                break;
+            }
+            case 4:
+            {
+                $sql4 = "";
+                $_SESSION['product_quantity'] = 4;
+                break;
+            }
+        }
+        switch($product_discount)
+        {
+            case 1:
+            {
+                $sql5 = " AND `products`.`product_sale`=1";
+                $_SESSION['product_discount'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql5 = " AND `products`.`product_sale`=0";
+                $_SESSION['product_discount'] = 2;
+                break;
+            }
+            
+        }
+        
+        switch($product_status)
+        {
+            case 1:
+            {
+                $sql6 = " AND `products`.`product_status`=1";
+                $_SESSION['product_discount'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql6 = " AND `products`.`product_status`=0";
+                $_SESSION['product_discount'] = 2;
+                break;
+            }
+            
+        }
+        $sql_select = $sql1 . $sql2 . $sql5 . $sql6 . $sql3 . $sql4;
+    }
+    else
+    {
+        $sql_select = "SELECT `products`.* FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `products`.`category_id`=1 AND `products`.`product_sale`=1 AND `products`.`product_status`=1 ORDER BY `products`.`product_name` LIMIT 20";
+        $_SESSION['product_categories'] = 1;
+        $_SESSION['product_sort'] = 1;
+        $_SESSION['product_quantity'] = 1;
+        $_SESSION['product_discount'] = 1;
+        $_SESSION['product_status'] = 1;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -66,44 +198,75 @@
                     </div>
                 </div>
                 <div class="product_filters">
+<!-- START -->
+            <form action="products.php?filter=1" method="post">
                     <div class="filter_bracket">
-                        Kategoria <br>
-                        <select name="" id="">
+                        Kategoria aktywna <br>
+                        <select name="categories" id="">
+                        <?php
+                            require_once "fp-config.php";
+                            try
+                            {
+                            $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            }
+                            catch(PDOException $e)
+                            {
+                            $_SESSION["login_warning"] = "Krytyczny błąd! Spróbuj ponownie później.";
+                            header("Location: index.php");
+                            exit();
+                            } 
 
+                            $setnames = "SET NAMES utf8";
+                            $conn->query($setnames);
+
+                            $sql = "SELECT * FROM `product_categories` WHERE `category_status` = 1;";
+                            $result = $conn->query($sql);
+                
+                            while($row = $result -> fetch())
+                            {
+                                echo "<option value=".$row['category_id'].">".$row['category_name']."</option>";
+                            }
+
+                            $conn = null;
+                            unset($conn);
+                        ?>
                         </select>
                     </div>
                     <div class="filter_bracket">
                         Sortuj według <br>
-                        <select name="" id="">
-                            <option>Nazwa</option>
-                            <option value="">Cena</option>
-                            <option value="">Data wprowadzenia</option>
+                        <select name="sort" id="">
+                            <option value="1">Nazwa</option>
+                            <option value="2">Cena</option>
+                            <option value="3">Data wprowadzenia</option>
                         </select>
                     </div>
                     <div class="filter_bracket">
                         Produktów na stronie <br>
-                        <select name="" id="">
-                            <option value="">20</option>
-                            <option value="">50</option>
-                            <option value="">100</option>
-                            <option value="">Wszystkie</option>
+                        <select name="quantity" id="">
+                            <option value="1">20</option>
+                            <option value="2">50</option>
+                            <option value="3">100</option>
+                            <option value="4">Wszystkie</option>
                         </select>
                     </div>
                     <div class="filter_bracket">
                         Przecena <br>
-                        <select name="" id="">
-                            <option value="">Tak</option>
-                            <option value="">Nie</option>
+                        <select name="discount" id="">
+                            <option value="1">Tak</option>
+                            <option value="2">Nie</option>
                         </select>
                     </div>
                     <div class="filter_bracket">
                         Status <br>
-                        <select name="" id="">
-                            <option value="">Aktywny</option>
-                            <option value="">Nieaktywny</option>
+                        <select name="status" id="">
+                            <option value="1">Aktywny</option>
+                            <option value="2">Nieaktywny</option>
                         </select>
                     </div>
-                    <button class="accept_filters">Zastosuj filtry</button>
+                    <input type="submit" class="accept_filters" value="Zastosuj filtry">
+            </form>
+<!-- END -->
                 </div>
                 <div class="product_container">
                     <div class="product_bracket">
