@@ -18,7 +18,7 @@
         $product_quantity = $_POST['quantity'];
         $product_discount = $_POST['discount'];
         $product_status = $_POST['status'];
-        $sql1 = "SELECT `products`.* FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id`";
+        $sql1 = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id`";
         //  WHERE `products`.`product_status`=1;
         if(isset($_SESSION['product_categories']))
         {
@@ -40,18 +40,12 @@
         }
         else
         {
-            $sql2 = " WHERE `category_name`=%";
+            $sql2 = " WHERE `category_name` LIKE '%%'";
             $_SESSION['product_categories'] = 0;
         }
         
         switch($product_sort)
         {
-            case "def":
-            {
-                $sql3 = "";
-                $_SESSION['product_sort'] = 0;
-                break;
-            }
             case 1:
             {
                 $sql3 = " ORDER BY `products`.`product_name`";
@@ -60,14 +54,20 @@
             }
             case 2:
             {
-                $sql3 = " ORDER BY `products`.`product_price`";
+                $sql3 = " ORDER BY `products`.`product_amount`";
                 $_SESSION['product_sort'] = 2;
                 break;
             }
             case 3:
             {
-                $sql3 = " ORDER BY `products`.`product_from`";
+                $sql3 = " ORDER BY `products`.`product_price`";
                 $_SESSION['product_sort'] = 3;
+                break;
+            }
+            case 4:
+            {
+                $sql3 = " ORDER BY `products`.`product_from`";
+                $_SESSION['product_sort'] = 4;
                 break;
             }
         }
@@ -123,31 +123,25 @@
         
         switch($product_status)
         {
-            case "def":
-            {
-                $sql6 = "";
-                $_SESSION['product_status'] = 0;
-                break;
-            }
             case 1:
             {
-                $sql6 = " AND `products`.`product_status`=1";
+                $sql6 = " ASC";
                 $_SESSION['product_status'] = 1;
                 break;
             }
             case 2:
             {
-                $sql6 = " AND `products`.`product_status`=0";
+                $sql6 = " DESC";
                 $_SESSION['product_status'] = 2;
                 break;
             }
             
         }
-        $sql_select = $sql1 . $sql2 . $sql5 . $sql6 . $sql3 . $sql4;
+        $sql_select = $sql1 . $sql2 . $sql5 . $sql3 . $sql6 . $sql4;
     }
     else
     {
-        $sql_select = "SELECT `products`.* FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` LIMIT 20;";
+        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` ORDER BY `products`.`product_name` ASC LIMIT 20;";
         $_SESSION['product_categories'] = 0;
         $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
@@ -245,19 +239,16 @@
                             {
                                 echo "<option value=".$row['category_id'].">".$row['category_name']."</option>";
                             }
-
-                            $conn = null;
-                            unset($conn);
                         ?>
                         </select>
                     </div>
                     <div class="filter_bracket">
                         Sortuj według <br>
                         <select name="sort" id="">
-                            <option value="def">Wybierz</option>
                             <option value="1">Nazwa</option>
-                            <option value="2">Cena</option>
-                            <option value="3">Data wprowadzenia</option>
+                            <option value="2">Ilość</option>
+                            <option value="3">Cena podstawowa</option>
+                            <option value="4">Data wprowadzenia</option>
                         </select>
                     </div>
                     <div class="filter_bracket">
@@ -278,11 +269,10 @@
                         </select>
                     </div>
                     <div class="filter_bracket">
-                        Status <br>
+                        Wyświetl <br>
                         <select name="status" id="">
-                            <option value="def">Wybierz</option>
-                            <option value="1">Aktywny</option>
-                            <option value="2">Nieaktywny</option>
+                            <option value="1">Rosnąco</option>
+                            <option value="2">Malejąco</option>
                         </select>
                     </div>
                     <input type="submit" class="accept_filters" value="Zastosuj filtry">
@@ -290,62 +280,32 @@
 <!-- END -->
                 </div>
                 <div class="product_container">
-                    <div class="product_bracket">
-                        <img src="img/gaming_laptop.png" alt="">
-                        <div class="product_desc">
-                            <h5>MSI G150</h5>
-                            <p class="desc">
-                                Kategoria: Laptopy<br>
-                                Liczba: 34 <br>
-                                Data dodania: 12-01-2020 <br>
-                                <p class="price">Cena: 3100 PLN</p>
-                                <button class="product_button">Edytuj</button>
-                                <button class="product_button_delete">Usuń</button>
-                            </p>
-                        </div>
-                    </div>
-                <div class="product_bracket">
-                        <img src="img/gaming_laptop.png" alt="">
-                        <div class="product_desc">
-                            <h5>MSI G150</h5>
-                            <p class="desc">
-                                Kategoria: Laptopy<br>
-                                Liczba: 34 <br>
-                                Data dodania: 12-01-2020 <br>
-                                <p class="price">Cena: 3100 PLN</p>
-                                <button class="product_button">Edytuj</button>
-                                <button class="product_button_delete">Usuń</button>
-                            </p>
-                        </div>
-                    </div>
-            <div class="product_bracket">
-                        <img src="img/gaming_laptop.png" alt="">
-                        <div class="product_desc">
-                            <h5>MSI G150</h5>
-                            <p class="desc">
-                                Kategoria: Laptopy<br>
-                                Liczba: 34 <br>
-                                Data dodania: 12-01-2020 <br>
-                                <p class="price">Cena: 3100 PLN</p>
-                                <button class="product_button">Edytuj</button>
-                                <button class="product_button_delete">Usuń</button>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="product_bracket">
-                        <img src="img/avant.png" alt="">
-                        <div class="product_desc">
-                            <h5>AVANT P870</h5>
-                            <p class="desc">
-                                Kategoria: Laptopy<br>
-                                Liczba: 56 <br>
-                                Data dodania: 13-01-2020 <br>
-                                <p class="price" style="color: red;">Promocja: 2999 PLN</p>
-                                <button class="product_button">Edytuj</button>
-                                <button class="product_button_delete">Usuń</button>
-                            </p>
-                        </div>
-                    </div>
+                    <?php
+                        $sql_select_submit = $conn->query($sql_select);
+                        while($res = $sql_select_submit -> fetch())
+                        {
+                            echo "<div class='product_bracket'>";
+                            echo "<img src=".$res['product_image_path']." alt='' onerror="."this.src='../img/package.png';".">";
+                            echo "<div class='product_desc'>";
+                            echo "<h5>".$res['product_name']."</h5>";
+                            echo "<div class='desc'>";
+                            echo "Kategoria: ".$res['category_name']."<br>";
+                            echo "Liczba: ".$res['product_amount']."<br>";
+                            echo "Data: ".date('d.m.Y', strtotime($res['product_from']))."<br>";
+                            if ($res['product_sale']==1)
+                            {
+                                echo "<p class='price' style='color: tomato;'>Cena: ".$res['product_sale_price']." PLN</p>";
+                            }
+                            else
+                            {
+                                echo "<p class='price'>Cena: ".$res['product_price']." PLN</p>";
+                            }
+                            echo "<button class='product_button' style='margin-right: 0.2rem;'>Edytuj</button>";
+                            echo "<button class='product_button_delete'>Usuń</button>";
+                            echo "</div></div></div>";
+                            
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -441,3 +401,8 @@
     <script src="js/scripts.js"></script>
 </body>
 </html>
+<?php
+    $conn = null;
+    unset($conn);
+    exit();
+?>
