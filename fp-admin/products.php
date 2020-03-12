@@ -18,29 +18,23 @@
         $product_quantity = $_POST['quantity'];
         $product_discount = $_POST['discount'];
         $product_status = $_POST['status'];
-        $sql1 = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id`";
-        //  WHERE `products`.`product_status`=1;
-        if(isset($_SESSION['product_categories']))
-        {
-            unset($_SESSION['product_categories']);
-            unset($_SESSION['product_sort']);
-            unset($_SESSION['product_quantity']);
-            unset($_SESSION['product_discount']);
-            unset($_SESSION['product_status']);
-        }
+        $product_wyswietl = $_POST['wyswietl'];
+        $sql1 = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `category_status`=1";
+        
         if($product_categories>0)
         {
-            $sql_categories_query = "SELECT `category_id`, `category_name` FROM `product_categories` WHERE `category_id` =".$product_categories.";";
-            $sql_categories_query = $conn->query($sql_categories_query);
-            while($categories_query = $sql_categories_query -> fetch())
+            $sql_categories_query = "SELECT `category_id`, `category_name` FROM `product_categories` WHERE `category_id`=".$product_categories.";";
+            $sql_categories_queryy = $conn->query($sql_categories_query);
+            while($categories_query = $sql_categories_queryy -> fetch())
             {
-                $sql2 = " WHERE `category_name`=".$categories_query['category_name'];
+                $yesc = $categories_query['category_name'];
+                $sql2 = " AND `product_categories`.`category_name`='$yesc'";
                 $_SESSION['product_categories'] = $categories_query['category_id'];
             }
         }
         else
         {
-            $sql2 = " WHERE `category_name` LIKE '%%'";
+            $sql2 = "";
             $_SESSION['product_categories'] = 0;
         }
         
@@ -60,6 +54,7 @@
             }
             case 3:
             {
+                
                 $sql3 = " ORDER BY `products`.`product_price`";
                 $_SESSION['product_sort'] = 3;
                 break;
@@ -141,7 +136,7 @@
     }
     else
     {
-        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` ORDER BY `products`.`product_name` ASC LIMIT 20;";
+        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `category_status`=1 ORDER BY `products`.`product_name` ASC LIMIT 20;";
         $_SESSION['product_categories'] = 0;
         $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
@@ -208,10 +203,10 @@
                         <button id="add_product_button" class="ordinary_button">Dodaj produkt</button>
                     </div>
                 </div>
-                <div class="product_filters">
+                <div class="filter_product_bracket">
 <!-- START -->
             <form action="products.php?filter=1" method="post">
-                    <div class="filter_bracket">
+                    <div class="filter_product_bracket">
                         Kategoria <br>
                         <select name="categories" id="">
                             <option value="def">Wybierz</option>
@@ -242,7 +237,7 @@
                         ?>
                         </select>
                     </div>
-                    <div class="filter_bracket">
+                    <div class="filter_product_bracket">
                         Sortuj według <br>
                         <select name="sort" id="">
                             <option value="1">Nazwa</option>
@@ -251,7 +246,7 @@
                             <option value="4">Data wprowadzenia</option>
                         </select>
                     </div>
-                    <div class="filter_bracket">
+                    <div class="filter_product_bracket">
                         Produktów na stronie <br>
                         <select name="quantity" id="">
                             <option value="1">20</option>
@@ -260,7 +255,7 @@
                             <option value="4">Wszystkie</option>
                         </select>
                     </div>
-                    <div class="filter_bracket">
+                    <div class="filter_product_bracket">
                         Przecena <br>
                         <select name="discount" id="">
                             <option value="def">Wybierz</option>
@@ -268,9 +263,17 @@
                             <option value="2">Nie</option>
                         </select>
                     </div>
-                    <div class="filter_bracket">
-                        Wyświetl <br>
+                    <div class="filter_product_bracket">
+                        Status <br>
                         <select name="status" id="">
+                            <option value="1">Aktywne</option>
+                            <option value="2">Nieaktywne</option>
+                            <option value="2">Usunięte</option>
+                        </select>
+                    </div>
+                <div class="filter_product_bracket">
+                        Wyświetl <br>
+                        <select name="wyswietl" id="">
                             <option value="1">Rosnąco</option>
                             <option value="2">Malejąco</option>
                         </select>

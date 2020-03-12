@@ -416,6 +416,34 @@ input[type="checkbox"]:checked ~ .check:before
 {
     border: 2px solid var(--color-theme);
 }
+.filter_product_bracket
+{
+    float: left;
+    width: 16.6%;
+    height: auto;
+    font-size: 12px;
+    padding-top: 10px;
+    text-align: center;
+}
+.filter_product_bracket select, .filter_product_bracket input
+{
+    position: static;
+    border: 2px solid lightgray;
+    padding: 2px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    transition: 0.2s;
+    max-width: 100%;
+    text-align: left;
+    top: 0;
+    transform: translateY(0%);
+    float: none;
+}
+.filter_product_bracket select:focus, .filter_product_bracket input:focus
+{
+    border: 2px solid var(--color-theme);
+}
 .accept_filters
 {
     float: right;
