@@ -19,7 +19,7 @@
         $product_discount = $_POST['discount'];
         $product_status = $_POST['status'];
         $product_wyswietl = $_POST['wyswietl'];
-        $sql1 = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `category_status`=1";
+        $sql1 = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id`";
         
         if($product_categories>0)
         {
@@ -28,13 +28,13 @@
             while($categories_query = $sql_categories_queryy -> fetch())
             {
                 $yesc = $categories_query['category_name'];
-                $sql2 = " AND `product_categories`.`category_name`='$yesc'";
+                $sql2 = " WHERE `product_categories`.`category_name`='$yesc'";
                 $_SESSION['product_categories'] = $categories_query['category_id'];
             }
         }
         else
         {
-            $sql2 = "";
+            $sql2 = " WHERE `product_categories`.`category_id`>0";
             $_SESSION['product_categories'] = 0;
         }
         
@@ -95,53 +95,69 @@
         }
         switch($product_discount)
         {
-            case "def":
-            {
-                $sql5 = "";
-                $_SESSION['product_discount'] = 0;
-                break;
-            }
             case 1:
             {
-                $sql5 = " AND `products`.`product_sale`=1";
+                $sql5 = " AND `products`.`product_sale`=0";
                 $_SESSION['product_discount'] = 1;
                 break;
             }
             case 2:
             {
-                $sql5 = " AND `products`.`product_sale`=0";
+                $sql5 = " AND `products`.`product_sale`=1";
                 $_SESSION['product_discount'] = 2;
                 break;
             }
             
         }
         
-        switch($product_status)
+        switch($product_wyswietl)
         {
             case 1:
             {
                 $sql6 = " ASC";
-                $_SESSION['product_status'] = 1;
+                $_SESSION['product_wyswietl'] = 1;
                 break;
             }
             case 2:
             {
                 $sql6 = " DESC";
-                $_SESSION['product_status'] = 2;
+                $_SESSION['product_wyswietl'] = 2;
+                break;
+            } 
+        }
+        
+        switch($product_status)
+        {
+            case 1:
+            {
+                $sql7 = " AND `products`.`product_status`>1";
+                $_SESSION['product_status'] = 1;
                 break;
             }
-            
+            case 2:
+            {
+                $sql7 = " AND `products`.`product_status`=1";
+                $_SESSION['product_status'] = 2;
+                break;
+            } 
+            case 3:
+            {
+                $sql7 = "  AND `products`.`product_status`=0";
+                $_SESSION['product_status'] = 3;
+                break;
+            } 
         }
-        $sql_select = $sql1 . $sql2 . $sql5 . $sql3 . $sql6 . $sql4;
+        $sql_select = $sql1 . $sql2 . $sql5 . $sql7 . $sql3 . $sql6 . $sql4;
     }
     else
     {
-        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `category_status`=1 ORDER BY `products`.`product_name` ASC LIMIT 20;";
+        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `product_status`>1 ORDER BY `products`.`product_name` ASC LIMIT 20;";
         $_SESSION['product_categories'] = 0;
         $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
         $_SESSION['product_discount'] = 0;
-        $_SESSION['product_status'] = 0;
+        $_SESSION['product_wyswietl'] = 1;
+        $_SESSION['product_status'] = 1;
     }
 ?>
 <!DOCTYPE html>
@@ -203,13 +219,12 @@
                         <button id="add_product_button" class="ordinary_button">Dodaj produkt</button>
                     </div>
                 </div>
-                <div class="filter_product_bracket">
-<!-- START -->
+                <div class="product_filters">
             <form action="products.php?filter=1" method="post">
                     <div class="filter_product_bracket">
                         Kategoria <br>
                         <select name="categories" id="">
-                            <option value="def">Wybierz</option>
+                            <option value="def" <?php if ($_SESSION['product_categories'] == 0) echo 'selected' ; ?>>Wybierz</option>
                         <?php
                             require_once "fp-config.php";
                             try
@@ -232,7 +247,14 @@
                 
                             while($row = $result -> fetch())
                             {
-                                echo "<option value=".$row['category_id'].">".$row['category_name']."</option>";
+                                if ($_SESSION['product_categories'] == $row['category_id'])
+                                {
+                                    echo "<option value=".$row['category_id']." selected>".$row['category_name']."</option>";
+                                }
+                                else
+                                {
+                                    echo "<option value=".$row['category_id'].">".$row['category_name']."</option>";
+                                }
                             }
                         ?>
                         </select>
@@ -240,47 +262,45 @@
                     <div class="filter_product_bracket">
                         Sortuj według <br>
                         <select name="sort" id="">
-                            <option value="1">Nazwa</option>
-                            <option value="2">Ilość</option>
-                            <option value="3">Cena podstawowa</option>
-                            <option value="4">Data wprowadzenia</option>
+                            <option value="1" <?php if ($_SESSION['product_sort'] == 1) echo 'selected' ; ?>>Nazwa</option>
+                            <option value="2" <?php if ($_SESSION['product_sort'] == 2) echo 'selected' ; ?>>Ilość</option>
+                            <option value="3" <?php if ($_SESSION['product_sort'] == 3) echo 'selected' ; ?>>Cena podstawowa</option>
+                            <option value="4" <?php if ($_SESSION['product_sort'] == 4) echo 'selected' ; ?>>Data wprowadzenia</option>
                         </select>
                     </div>
                     <div class="filter_product_bracket">
                         Produktów na stronie <br>
                         <select name="quantity" id="">
-                            <option value="1">20</option>
-                            <option value="2">50</option>
-                            <option value="3">100</option>
-                            <option value="4">Wszystkie</option>
+                            <option value="1" <?php if ($_SESSION['product_quantity'] == 1) echo 'selected' ; ?>>20</option>
+                            <option value="2" <?php if ($_SESSION['product_quantity'] == 2) echo 'selected' ; ?>>50</option>
+                            <option value="3" <?php if ($_SESSION['product_quantity'] == 3) echo 'selected' ; ?>>100</option>
+                            <option value="4" <?php if ($_SESSION['product_quantity'] == 4) echo 'selected' ; ?>>Wszystkie</option>
                         </select>
                     </div>
                     <div class="filter_product_bracket">
                         Przecena <br>
                         <select name="discount" id="">
-                            <option value="def">Wybierz</option>
-                            <option value="1">Tak</option>
-                            <option value="2">Nie</option>
+                            <option value="1" <?php if ($_SESSION['product_discount'] == 1) echo 'selected' ; ?>>Nie</option>
+                            <option value="2" <?php if ($_SESSION['product_discount'] == 2) echo 'selected' ; ?>>Tak</option>
                         </select>
                     </div>
                     <div class="filter_product_bracket">
                         Status <br>
                         <select name="status" id="">
-                            <option value="1">Aktywne</option>
-                            <option value="2">Nieaktywne</option>
-                            <option value="2">Usunięte</option>
+                            <option value="1" <?php if ($_SESSION['product_status'] == 1) echo 'selected' ; ?>>Aktywne</option>
+                            <option value="2" <?php if ($_SESSION['product_status'] == 2) echo 'selected' ; ?>>Nieaktywne</option>
+                            <option value="3" <?php if ($_SESSION['product_status'] == 3) echo 'selected' ; ?>>Usunięte</option>
                         </select>
                     </div>
                 <div class="filter_product_bracket">
                         Wyświetl <br>
                         <select name="wyswietl" id="">
-                            <option value="1">Rosnąco</option>
-                            <option value="2">Malejąco</option>
+                            <option value="1" <?php if ($_SESSION['product_wyswietl'] == 1) echo 'selected' ; ?>>Rosnąco</option>
+                            <option value="2" <?php if ($_SESSION['product_wyswietl'] == 2) echo 'selected' ; ?>>Malejąco</option>
                         </select>
                     </div>
                     <input type="submit" class="accept_filters" value="Zastosuj filtry">
             </form>
-<!-- END -->
                 </div>
                 <div class="product_container">
                     <?php
