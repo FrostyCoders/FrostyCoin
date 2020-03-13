@@ -89,9 +89,6 @@ input[type="text"], input[type="number"], input[type="datetime-local"], textarea
     resize: none;
     float: left;
     text-align: right;
-   
-    
-    
 }
 input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus, input[type="password"]:focus
 {
