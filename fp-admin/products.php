@@ -18,7 +18,7 @@
         $product_quantity = $_POST['quantity'];
         $product_discount = $_POST['discount'];
         $product_status = $_POST['status'];
-        $product_wyswietl = $_POST['wyswietl'];
+        $product_display = $_POST['display'];
         $sql1 = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id`";
         
         if($product_categories>0)
@@ -110,18 +110,18 @@
             
         }
         
-        switch($product_wyswietl)
+        switch($product_display)
         {
             case 1:
             {
                 $sql6 = " ASC";
-                $_SESSION['product_wyswietl'] = 1;
+                $_SESSION['product_display'] = 1;
                 break;
             }
             case 2:
             {
                 $sql6 = " DESC";
-                $_SESSION['product_wyswietl'] = 2;
+                $_SESSION['product_display'] = 2;
                 break;
             } 
         }
@@ -156,7 +156,7 @@
         $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
         $_SESSION['product_discount'] = 0;
-        $_SESSION['product_wyswietl'] = 1;
+        $_SESSION['product_display'] = 1;
         $_SESSION['product_status'] = 1;
     }
 ?>
@@ -294,9 +294,9 @@
                     </div>
                 <div class="filter_product_bracket">
                         Wyświetl <br>
-                        <select name="wyswietl" id="">
-                            <option value="1" <?php if ($_SESSION['product_wyswietl'] == 1) echo 'selected' ; ?>>Rosnąco</option>
-                            <option value="2" <?php if ($_SESSION['product_wyswietl'] == 2) echo 'selected' ; ?>>Malejąco</option>
+                        <select name="display" id="">
+                            <option value="1" <?php if ($_SESSION['product_display'] == 1) echo 'selected' ; ?>>Rosnąco</option>
+                            <option value="2" <?php if ($_SESSION['product_display'] == 2) echo 'selected' ; ?>>Malejąco</option>
                         </select>
                     </div>
                     <input type="submit" class="accept_filters" value="Zastosuj filtry">
