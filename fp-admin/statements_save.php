@@ -15,19 +15,26 @@
     $conn->query($setnames);
 
     $mod = $_POST['mod'];
+    $mod = htmlentities($mod, ENT_QUOTES, "UTF-8");
     $activation = $_POST['activation'];
+    $activation = htmlentities($activation, ENT_QUOTES, "UTF-8");
 
     $title = $_POST['statement_title'];
-    
+    $title = htmlentities($title, ENT_QUOTES, "UTF-8");
 
     $desc = $_POST['statement_desc'];
     $desc = htmlentities($desc, ENT_QUOTES, "UTF-8");
 
     $datefrom = $_POST['statement_from'];
+    $datefrom = htmlentities($datefrom, ENT_QUOTES, "UTF-8");
     $datefromsec = strtotime($datefrom);
+
     $dateto = $_POST['statement_to'];
+    $dateto = htmlentities($dateto, ENT_QUOTES, "UTF-8");
     $datetosec = strtotime($dateto);
+
     $user = $_SESSION['admin_id'];
+    $user = htmlentities($user, ENT_QUOTES, "UTF-8");
     
 // MOD
 
