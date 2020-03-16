@@ -130,20 +130,26 @@
         {
             case 1:
             {
-                $sql7 = " AND `products`.`product_status`>1";
+                $sql7 = " AND `products`.`product_status`>=0";
                 $_SESSION['product_status'] = 1;
                 break;
             }
             case 2:
             {
-                $sql7 = " AND `products`.`product_status`=1";
+                $sql7 = " AND `products`.`product_status`>1";
                 $_SESSION['product_status'] = 2;
                 break;
-            } 
+            }
             case 3:
             {
-                $sql7 = "  AND `products`.`product_status`=0";
+                $sql7 = " AND `products`.`product_status`=1";
                 $_SESSION['product_status'] = 3;
+                break;
+            } 
+            case 4:
+            {
+                $sql7 = "  AND `products`.`product_status`=0";
+                $_SESSION['product_status'] = 4;
                 break;
             } 
         }
@@ -151,7 +157,7 @@
     }
     else
     {
-        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `product_status`>0 ORDER BY `products`.`product_name` ASC LIMIT 20;";
+        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `product_status`>=0 ORDER BY `products`.`product_name` ASC LIMIT 20;";
         $_SESSION['product_categories'] = 0;
         $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
@@ -287,9 +293,10 @@
                     <div class="filter_product_bracket">
                         Status <br>
                         <select name="status" id="">
-                            <option value="1" <?php if ($_SESSION['product_status'] == 1) echo 'selected' ; ?>>Aktywne</option>
-                            <option value="2" <?php if ($_SESSION['product_status'] == 2) echo 'selected' ; ?>>Nieaktywne</option>
-                            <option value="3" <?php if ($_SESSION['product_status'] == 3) echo 'selected' ; ?>>Usunięte</option>
+                            <option value="1" <?php if ($_SESSION['product_status'] == 1) echo 'selected' ; ?>>Wybierz</option>
+                            <option value="2" <?php if ($_SESSION['product_status'] == 2) echo 'selected' ; ?>>Aktywne</option>
+                            <option value="3" <?php if ($_SESSION['product_status'] == 3) echo 'selected' ; ?>>Nieaktywne</option>
+                            <option value="4" <?php if ($_SESSION['product_status'] == 4) echo 'selected' ; ?>>Usunięte</option>
                         </select>
                     </div>
                 <div class="filter_product_bracket">
@@ -307,25 +314,38 @@
                         $sql_select_submit = $conn->query($sql_select);
                         while($res = $sql_select_submit -> fetch())
                         {
-                            echo "<div class='product_bracket'>";
+                            echo '<div class="product_bracket">';
                             echo '<img style="opacity: 0.5;" src="img-db/' . $res['product_image_path'] . '" alt="">';
-                            echo "<div class='product_desc'>";
-                            echo "<h5>".$res['product_name']."</h5>";
-                            echo "<div class='desc'>";
-                            echo "Kategoria: ".$res['category_name']."<br>";
-                            echo "Liczba: ".$res['product_amount']."<br>";
-                            echo "Data: ".date('d.m.Y', strtotime($res['product_from']))."<br>";
+                            echo '<div class="product_desc">';
+                            echo '<h5>'.$res['product_name'].'</h5>';
+                            echo '<div class="desc">';
+                            if($res['product_status']==0) 
+                            {
+                                $sta='<span style="color: #ff1100;">Usunięte</span>';
+                            } 
+                            else if($res['product_status']==1) 
+                            {
+                                $sta='Nieaktywne';
+                            } 
+                            else 
+                            {
+                                $sta='<span style="color: #3c96d6; font-weight: bold;">Aktywne</span>';
+                            }
+                            echo 'Status: '.$sta.'<br>';
+                            echo 'Kategoria: '.$res['category_name'].'<br>';
+                            echo 'Liczba: '.$res['product_amount'].'<br>';
+                            echo 'Data: '.date('d.m.Y', strtotime($res['product_from'])).'<br>';
                             if ($res['product_sale']==1)
                             {
-                                echo "<p class='price' style='color: tomato;'>Cena: ".$res['product_sale_price']." PLN</p>";
+                                echo '<p class="price" style="color: tomato;">Cena: '.$res['product_sale_price'].' PLN</p>';
                             }
                             else
                             {
-                                echo "<p class='price'>Cena: ".$res['product_price']." PLN</p>";
+                                echo '<p class="price">Cena: '.$res['product_price'].' PLN</p>';
                             }
-                            echo "<a href='edit_product.php?pid=" . $res['product_id'] . "'><button class='product_button' style='margin-right: 0.2rem;'>Edytuj</button></a>";
+                            echo '<a href="edit_product.php?pid=' . $res['product_id'] . '"><button class="product_button" style="margin-right: 0.2rem;">Edytuj</button></a>';
                             echo '<a href="php_scripts/delete_product.php?pid=' . $res['product_id'] . '"><button class="product_button_delete">Usuń</button></a>';
-                            echo "</div></div></div>";
+                            echo '</div></div></div>';
                             
                         }
                     ?>
@@ -394,7 +414,7 @@
                             <td>Zdjęcie produktu</td><td><label id="file_input_label" for="file_input">Wybierz plik</label><input id="file_input" type="file" name="product_image"></td>
                         </tr>
                         <tr>
-                            <td><br>* pole musi zostać wypełnione<br>**jeśli została zaznaczona promocja należy wpisać cene</td>
+                            <td><br>* pole musi zostać wypełnione<br>** jeśli została zaznaczona promocja należy wpisać cenę</td>
                         </tr>
                         <script>
                             $(document).ready(function(){
