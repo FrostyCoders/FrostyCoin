@@ -5,7 +5,7 @@
         header("Location: index.php");
         exit();
     }
-
+    error_reporting(0);
     require_once "connect.php";
 
     $setnames = "SET NAMES utf8";
@@ -13,10 +13,6 @@
 
     if(isset($_GET['filter']))
     {
-        $order_search = $_POST['order_search'];
-        $order_search = htmlentities($order_search, ENT_QUOTES, "UTF-8");
-        $order_search2 = $_POST['order_search2'];
-        $order_search2 = htmlentities($order_search2, ENT_QUOTES, "UTF-8");
         $order_status = $_POST['order_status'];
         $order_status = htmlentities($order_status, ENT_QUOTES, "UTF-8");
         $order_quantity = $_POST['order_quantity'];
@@ -33,54 +29,29 @@
         $ordertosec = strtotime($order_to);
         $sql1 = "SELECT `shop_orders`.*, `order_status`.`status_name`, `shop_users`.`user_login` FROM `shop_orders` INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` INNER JOIN `shop_users` ON `shop_orders`.`user_id`=`shop_users`.`user_id`";
         
-        switch($order_search)
-        {
-            case 1:
-            {
-                $sql2 = " WHERE `shop_orders`.`order_id`>0";
-                $_SESSION['order_search'] = 1;
-                $_SESSION['order_search2'] = $order_search2;
-                break;
-            }
-            case 2:
-            {
-                $sql2 = " WHERE `shop_orders`.`order_id`= :search";
-                $_SESSION['order_search'] = 2;
-                $_SESSION['order_search2'] = $order_search2;
-                break;
-            }
-            case 3:
-            {
-                $sql2 = " WHERE `shop_users`.`user_login` = :search";
-                $_SESSION['order_search'] = 3;
-                $_SESSION['order_search2'] = $order_search2;
-                break;
-            }
-        }
-        
         switch($order_quantity)
         {
             case 1:
             {
-                $sql3 = " LIMIT 20;";
+                $sql2 = " LIMIT 20;";
                 $_SESSION['order_quantity'] = 1;
                 break;
             }
             case 2:
             {
-                $sql3 = " LIMIT 50;";
+                $sql2 = " LIMIT 50;";
                 $_SESSION['order_quantity'] = 2;
                 break;
             }
             case 3:
             {
-                $sql3 = " LIMIT 100;";
+                $sql2 = " LIMIT 100;";
                 $_SESSION['order_quantity'] = 3;
                 break;
             }
             case 4:
             {
-                $sql3 = ";";
+                $sql2 = ";";
                 $_SESSION['order_quantity'] = 4;
                 break;
             }
@@ -90,31 +61,31 @@
         {
             case 1:
             {
-                $sql4 = "";
+                $sql3 = " WHERE `shop_orders`.`order_status`>0";
                 $_SESSION['order_status'] = 1;
                 break;
             }
             case 2:
             {
-                $sql4 = " AND `shop_orders`.`user_id`=1";
+                $sql3 = " WHERE `shop_orders`.`order_status`=1";
                 $_SESSION['order_status'] = 2;
                 break;
             }
             case 3:
             {
-                $sql4 = " AND `shop_orders`.`user_id`=2";
+                $sql3 = " WHERE `shop_orders`.`order_status`=2";
                 $_SESSION['order_status'] = 3;
                 break;
             } 
             case 4:
             {
-                $sql4 = "  AND `shop_orders`.`user_id`=3";
+                $sql3 = "  WHERE `shop_orders`.`order_status`=3";
                 $_SESSION['order_status'] = 4;
                 break;
             } 
             case 5:
             {
-                $sql4 = "  AND `shop_orders`.`user_id`=4";
+                $sql3 = "  WHERE `shop_orders`.`order_status`=4";
                 $_SESSION['order_status'] = 5;
                 break;
             } 
@@ -124,20 +95,32 @@
         {
             case 1:
             {
-                $sql5 = " ORDER BY `shop_users`.`user_login`";
+                $sql4 = " ORDER BY `shop_orders`.`order_id`";
                 $_SESSION['order_sort'] = 1;
                 break;
             }
             case 2:
             {
-                $sql5 = " ORDER BY `shop_orders.`order_value`";
+                $sql4 = " ORDER BY `shop_users`.`user_login`";
                 $_SESSION['order_sort'] = 2;
                 break;
             }
             case 3:
             {
-                $sql5 = " ORDER BY `shop_orders.`order_date`";
+                $sql4 = " ORDER BY `shop_orders`.`order_value`";
                 $_SESSION['order_sort'] = 3;
+                break;
+            }
+            case 4:
+            {
+                $sql4 = " ORDER BY `shop_orders`.`order_date`";
+                $_SESSION['order_sort'] = 4;
+                break;
+            }
+            case 5:
+            {
+                $sql4 = " ORDER BY `shop_orders`.`order_status`";
+                $_SESSION['order_sort'] = 5;
                 break;
             }
             
@@ -147,40 +130,39 @@
         {
             case 1:
             {
-                $sql6 = " ASC";
+                $sql5 = " ASC";
                 $_SESSION['order_display'] = 1;
                 break;
             }
             case 2:
             {
-                $sql6 = " DESC";
+                $sql5 = " DESC";
                 $_SESSION['order_display'] = 2;
                 break;
             } 
         }
         
-        if($ordertosec>=$orderfromsec)
+        if($ordertosec>$orderfromsec)
         {
-            $sql7 = " AND `shop_orders.`order_date` BEETWEEN :order_from AND :order_to";
+            $sql6 = " AND `shop_orders`.`order_date` BETWEEN :order_from AND :order_to";
             $_SESSION['order_from'] = $order_from;
             $_SESSION['order_to'] = $order_to;
         }
         else
         {
-            $sql7 = "";
+            $order_from = 0;
+            $order_to = 1;
+            $sql6 = " OR :order_from=:order_to";
             $_SESSION['order_from'] = 0;
             $_SESSION['order_to'] = 0;
         }
         
         
-        $sql_select = $sql1 . $sql2 . $sql4 . $sql7 . $sql5 . $sql6 . $sql3;
-        echo $sql_select;
+        $sql_select = $sql1 . $sql3 . $sql6 . $sql4 . $sql5 . $sql2;
     }
     else
     {
-        $sql_select = "SELECT `shop_orders`.*, `order_status`.`status_name`, `shop_users`.`user_login` FROM `shop_orders` INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` INNER JOIN `shop_users` ON `shop_orders`.`user_id`=`shop_users`.`user_id` ORDER BY `shop_users`.`user_login` LIMIT 20;";
-        $_SESSION['order_search'] = 1;
-        $_SESSION['order_search2'] = 0;
+        $sql_select = "SELECT `shop_orders`.*, `order_status`.`status_name`, `shop_users`.`user_login` FROM `shop_orders` INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` INNER JOIN `shop_users` ON `shop_orders`.`user_id`=`shop_users`.`user_id` ORDER BY `shop_orders`.`order_id` LIMIT 20;";
         $_SESSION['order_quantity'] = 1;
         $_SESSION['order_status'] = 1;
         $_SESSION['order_sort'] = 1;
@@ -248,13 +230,14 @@
                 <div class="product_filters">
                 <form action="orders.php?filter=1" method="post">
                     <div class="filter_bracket">
-                        Szukaj <br>
-                        <select name="order_search">
-                            <option value="1" <?php if ($_SESSION['order_search'] == 1) echo 'selected' ; ?>>Wybierz</option>
-                            <option value="2" <?php if ($_SESSION['order_search'] == 2) echo 'selected' ; ?>>Identyfikator</option>
-                            <option value="3" <?php if ($_SESSION['order_search'] == 3) echo 'selected' ; ?>>Imię</option>
-                        </select><br>
-                        <input name="order_search2" type="text" placeholder="Szukaj..." value="<?php if ($_SESSION['order_search2'] != 0) echo $_SESSION['order_search2'] ; ?>">
+                        Sortuj według <br>
+                        <select name="order_sort" id="">
+                            <option value="1" <?php if ($_SESSION['order_sort'] == 1) echo 'selected' ; ?>>Identyfikatora</option>
+                            <option value="2" <?php if ($_SESSION['order_sort'] == 2) echo 'selected' ; ?>>Loginu</option>
+                            <option value="4" <?php if ($_SESSION['order_sort'] == 4) echo 'selected' ; ?>>Daty zamówienia</option>
+                            <option value="5" <?php if ($_SESSION['order_sort'] == 5) echo 'selected' ; ?>>Statusu</option>
+                            <option value="3" <?php if ($_SESSION['order_sort'] == 3) echo 'selected' ; ?>>Ceny</option>
+                        </select>
                     </div>
                     <div class="filter_bracket">
                         Zamówień na stronie <br>
@@ -276,12 +259,7 @@
                         </select>
                     </div>
                     <div class="filter_bracket">
-                        Sortuj według <br>
-                        <select name="order_sort" id="">
-                            <option value="1" <?php if ($_SESSION['order_sort'] == 1) echo 'selected' ; ?>>Nazwa</option>
-                            <option value="2" <?php if ($_SESSION['order_sort'] == 2) echo 'selected' ; ?>>Cena</option>
-                            <option value="3" <?php if ($_SESSION['order_sort'] == 3) echo 'selected' ; ?>>Data wprowadzenia</option>
-                        </select><br><br>
+                        Wyświetl <br>
                         <select name="order_display" id="">
                             <option value="1" <?php if ($_SESSION['order_display'] == 1) echo 'selected' ; ?>>Rosnąco</option>
                             <option value="2" <?php if ($_SESSION['order_display'] == 2) echo 'selected' ; ?>>Malejąco</option>
@@ -299,30 +277,33 @@
                 </div>
                 <div class="list_container">
                     <div class="list">
-                        <div class="list_bracket list_desc">
-                            <div class="id"><span class="list_bracket_desc">Identyfikator</span>200219123456</div>
-                            <div class="user"><span class="list_bracket_desc">Imię i nazwisko</span>example87</div>
-                            <div class="date"><span class="list_bracket_desc">Data zamówienia</span>19-02-2020</div>
-                            <div class="status"><span class="list_bracket_desc">Status</span>Wysłane</div>
-                            <div class="value"><span class="list_bracket_desc">Wartość</span>1200.00 PLN</div>
-                            <div class="empty">
-                                <div class="position_control" style="width: auto;">
-                                    <button class="control_button">Podgląd</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list_bracket list_desc">
-                            <div class="id"><span class="list_bracket_desc">Identyfikator</span>200217654321</div>
-                            <div class="user"><span class="list_bracket_desc">Użytkownik</span>example57</div>
-                            <div class="date"><span class="list_bracket_desc">Data zamówienia</span>17-02-2020</div>
-                            <div class="status"><span class="list_bracket_desc">Status</span>Zakończono</div>
-                            <div class="value"><span class="list_bracket_desc">Wartość</span>870.00 PLN</div>
-                            <div class="empty">
-                                <div class="position_control" style="width: auto;">
-                                    <button class="control_button">Podgląd</button>
-                                </div>
-                            </div>
-                        </div>
+                        <?php
+                            if (!isset($order_from))
+                            {
+                                $order_from = 0;
+                            }
+                            if (!isset($order_to))
+                            {
+                                $order_to = 0;
+                            }
+                                
+                            $sql_all = $conn->prepare($sql_select, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                            $sql_alll = $sql_all->execute(array(':order_from' => $order_from, ':order_to' => $order_to));
+                        
+                            while($res = $sql_all -> fetch())
+                            {
+                                echo '<div class="list_bracket list_desc">';
+                                echo '<div class="id"><span class="list_bracket_desc">Identyfikator</span>'.$res['order_id'].'</div>';
+                                echo '<div class="user"><span class="list_bracket_desc">Login</span>'.$res['user_login'].'</div>';
+                                echo '<div class="date"><span class="list_bracket_desc">Data zamówienia</span>'.date('d-m-Y', strtotime($res['order_date'])).'</div>';
+                                echo '<div class="status"><span class="list_bracket_desc">Status</span>'.$res['status_name'].'</div>';
+                                echo '<div class="value"><span class="list_bracket_desc">Wartość</span>'.$res['order_value'].' PLN</div>';
+                                echo '<div class="empty">';
+                                echo '<div class="position_control" style="width: auto;">';
+                                echo '<button class="control_button">Podgląd</button>';
+                                echo '</div></div></div>';
+                            }  
+                        ?>
                     </div>
                 </div>
             </div>
@@ -331,3 +312,8 @@
     <script src="js/scripts.js"></script>
 </body>
 </html>
+<?php
+    $conn = null;
+    unset($conn);
+    exit();
+?>

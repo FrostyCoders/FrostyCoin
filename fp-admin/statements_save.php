@@ -40,7 +40,7 @@
 
 if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['statement_from'] && $_POST['statement_to'])) 
 {
-    if($mod != NULL && $datetosec>=$datefromsec)
+    if($mod != NULL && $datetosec>$datefromsec)
     {
         if($activation != NULL)
         {
@@ -69,7 +69,7 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
     }
 
 // INSERT
-    else if($mod == NULL && $datetosec>=$datefromsec)
+    else if($mod == NULL && $datetosec>$datefromsec)
     {
         if($activation != NULL)
         {
