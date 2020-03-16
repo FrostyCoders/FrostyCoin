@@ -1,12 +1,16 @@
 <?php
     session_start();
+    require_once "connect.php";
+    require_once "php_scripts/summary.php" ;
+
     if(!isset($_SESSION['fp-online']))
     {
         header("Location: index.php");
         exit();
     }
-?>
 
+?>
+ 
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -17,6 +21,19 @@
     <meta name="author" content="Frosty Coders">
     <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+     .chart{
+         width: 100px;
+         height: 100px;
+         background: conic-gradient(
+         var(--color-theme) 0deg 
+             <?php echo $chart; ?>deg, gray <?php echo $chart; ?>deg 360deg
+         );
+         border-radius: 50%;
+         margin: auto
+     }
+</style>
 </head>
 <body>
     <header class="row">
@@ -61,9 +78,9 @@
                 <div class="content-main">
                     <div class="stats1">
                         <p>ILOŚCI:</p>
-                        <p>Liczba kategorii: <b><?php echo  $_SESSION['sum_cat']; ?></b></p>
-                        <p>Liczba aktywnych zamówień: <b><?php echo $_SESSION['sum_order'];?></b></p>
-                        <p>Liczba produktów: <b><?php echo $_SESSION['sum_pro'];  ?></b></p>
+                        <p>Liczba kategorii: <b><?php echo $sum_cat; ?></b></p>
+                        <p>Liczba aktywnych zamówień: <b><?php echo $sum_order;?></b></p>
+                        <p>Liczba produktów: <b><?php echo $sum_pro;  ?></b></p>
                     </div>
                     <div class="stats2">
                         <p>OSTATNIO DODANE: </p>
@@ -72,26 +89,27 @@
                                 <th>ID</th><th>Nazwa</th><th style="width: 30%;">Cena</th>
                             </tr>
                             <tr>
-                                <td><?php echo  $_SESSION['pro_one_1']; ?></td>
-                                <td><?php echo  $_SESSION['pro_one_2']; ?></td>
-                                <td><?php echo  $_SESSION['pro_one_3']; ?> PLN</td>
+                                <td><?php echo  $pro_one_1; ?></td>
+                                <td><?php echo  $pro_one_2; ?></td>
+                                <td><?php echo  $pro_one_3; ?> PLN</td>
                             </tr>
                             <tr>
-                                <td><?php echo  $_SESSION['pro_two_1']; ?></td>
-                                <td><?php echo  $_SESSION['pro_two_2']; ?></td>
-                                <td><?php echo  $_SESSION['pro_two_3']; ?> PLN</td>                    
+                                <td><?php echo  $pro_two_1; ?></td>
+                                <td><?php echo  $pro_two_2; ?></td>
+                                <td><?php echo  $pro_two_3; ?> PLN</td>                    
                             </tr>
                             <tr>
-                                <td><?php echo  $_SESSION['pro_three_1']; ?></td>
-                                <td><?php echo  $_SESSION['pro_three_2']; ?></td>
-                                <td><?php echo  $_SESSION['pro_three_3']; ?> PLN</td>   
+                                <td><?php echo  $pro_three_1; ?></td>
+                                <td><?php echo  $pro_three_2; ?></td>
+                                <td><?php echo  $pro_three_3; ?> PLN</td>   
                             </tr>
                         </table>
             
                     </div>
                     <div class="stats3">
-                        <p>WKYKORZYSTANIE ZASOBÓW: 33% (33GB/100GB)</p>
-                        <div class="chart"></div>
+                        <p>WKYKORZYSTANIE ZASOBÓW: <?php echo $disc_precent."%" ?> (<?php echo $disc_used."GB /  ". $disc_space."GB" ?>)</p>
+                        <div class="chart" >
+                        </div>
                     </div>
                     <div class="content-title">Powiadomienia</div>
                     <div class="comunicate">
