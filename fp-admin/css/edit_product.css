@@ -1,0 +1,69 @@
+.content-main
+{
+    padding-top: 25px;
+}
+.bracket
+{
+    border: 1px solid lightgray;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    margin-bottom: 25px;
+    position: relative;
+    float: left;
+}
+.bracket label
+{
+    position: absolute;
+    top: -20px;
+}
+.bracket_desc
+{
+    font-size: 12px;
+}
+.bracket_control
+{
+    position: absolute;
+    right: 0;
+    top: 60%;
+    transform: translateY(-50%);
+    padding: 10px;
+}
+.photo_preview
+{
+    height: 100px;
+    margin: 10px;
+}
+#file_input
+{
+    display: none;
+}
+#file_input_label
+{
+    cursor: pointer;
+    width: 140px;
+    display: block;
+    border: 2px solid lightgray;
+    margin: auto;
+    padding: 3px;
+    transition: 0.3s;
+    font-size: 12px;
+    text-align: center;
+}
+button, input[type="submit"]
+{
+    cursor: pointer;
+    min-width: 150px;
+    height: 25px;
+    font-size: 12px;
+    transition: 0.2s;
+    background-color: white;
+    border: 2px solid lightgray;
+    margin-bottom: 5px;
+}
+button:hover, input[type="submit"]:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}
