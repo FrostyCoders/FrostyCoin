@@ -6,6 +6,7 @@
         exit();
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -60,9 +61,9 @@
                 <div class="content-main">
                     <div class="stats1">
                         <p>ILOŚCI:</p>
-                        <p>Liczba kategorii: <b>6</b></p>
-                        <p>Liczba aktywnych zamówień: <b>40</b></p>
-                        <p>Liczba produktów: <b>254</b></p>
+                        <p>Liczba kategorii: <b><?php echo  $_SESSION['sum_cat']; ?></b></p>
+                        <p>Liczba aktywnych zamówień: <b><?php echo $_SESSION['sum_order'];?></b></p>
+                        <p>Liczba produktów: <b><?php echo $_SESSION['sum_pro'];  ?></b></p>
                     </div>
                     <div class="stats2">
                         <p>OSTATNIO DODANE: </p>
@@ -71,13 +72,19 @@
                                 <th>ID</th><th>Nazwa</th><th style="width: 30%;">Cena</th>
                             </tr>
                             <tr>
-                                <td>254</td><td>Nvidia Geforce RTX 2080</td><td>2900.00 PLN</td>
+                                <td><?php echo  $_SESSION['pro_one_1']; ?></td>
+                                <td><?php echo  $_SESSION['pro_one_2']; ?></td>
+                                <td><?php echo  $_SESSION['pro_one_3']; ?> PLN</td>
                             </tr>
                             <tr>
-                                <td>252</td><td>Intel Core i5-9440K</td><td>995.00 PLN</td>                      
+                                <td><?php echo  $_SESSION['pro_two_1']; ?></td>
+                                <td><?php echo  $_SESSION['pro_two_2']; ?></td>
+                                <td><?php echo  $_SESSION['pro_two_3']; ?> PLN</td>                    
                             </tr>
                             <tr>
-                                <td>253</td><td>Intel Core i7-6700K</td><td>600.00 PLN</td>
+                                <td><?php echo  $_SESSION['pro_three_1']; ?></td>
+                                <td><?php echo  $_SESSION['pro_three_2']; ?></td>
+                                <td><?php echo  $_SESSION['pro_three_3']; ?> PLN</td>   
                             </tr>
                         </table>
             

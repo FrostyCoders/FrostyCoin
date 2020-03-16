@@ -671,3 +671,20 @@ input[type="checkbox"]:checked ~ .check:before
     font-weight: 600;
     margin-bottom: 10px !important;
 }
+.result 
+{
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    padding: 10px;
+    z-index: 1000;
+    background-color: white;
+    font-size: 14px;
+    border: 2px solid var(--color-theme);
+    padding-left: 20px;
+    padding-right: 20px;
+    opacity: 0.1;
+}
