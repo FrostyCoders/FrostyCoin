@@ -5,7 +5,7 @@
         header("Location: index.php");
         exit();
     }
-
+    error_reporting(0);
     require_once "connect.php";
 
     $setnames = "SET NAMES utf8";
@@ -151,7 +151,7 @@
     }
     else
     {
-        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `product_status`>1 ORDER BY `products`.`product_name` ASC LIMIT 20;";
+        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `product_status`>0 ORDER BY `products`.`product_name` ASC LIMIT 20;";
         $_SESSION['product_categories'] = 0;
         $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
@@ -308,7 +308,7 @@
                         while($res = $sql_select_submit -> fetch())
                         {
                             echo "<div class='product_bracket'>";
-                            echo "<img src=".$res['product_image_path']." alt='' onerror="."this.src='../img/package.png';".">";
+                            echo '<img style="opacity: 0.5;" src="img-db/' . $res['product_image_path'] . '" alt="">';
                             echo "<div class='product_desc'>";
                             echo "<h5>".$res['product_name']."</h5>";
                             echo "<div class='desc'>";
@@ -323,8 +323,8 @@
                             {
                                 echo "<p class='price'>Cena: ".$res['product_price']." PLN</p>";
                             }
-                            echo "<button class='product_button' style='margin-right: 0.2rem;'>Edytuj</button>";
-                            echo "<button class='product_button_delete'>Usuń</button>";
+                            echo "<a href='edit_product.php?pid=" . $res['product_id'] . "'><button class='product_button' style='margin-right: 0.2rem;'>Edytuj</button></a>";
+                            echo '<a href="php_scripts/delete_product.php?pid=' . $res['product_id'] . '"><button class="product_button_delete">Usuń</button></a>';
                             echo "</div></div></div>";
                             
                         }
@@ -342,71 +342,74 @@
                 Dodaj produkt
             </div>
             <div class="popup_inputs">
-                <table>
-                    <tr>
-                        <td>Nazwa produktu</td><td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>Kategoria produktu</td>
-                        <td>
-                            <select name="" id="">
-                                <option value="">Kategoria 1</option>
-                                <option value="">Kategoria 2</option>
-                                <option value="">Kategoria 3</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Opis produktu</td><td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>Status produktu</td>
-                        <td>
-                            <select name="" id="">
-                                <option value="">Aktywny</option>
-                                <option value="">Nieaktywny</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Cena w PLN</td><td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <td>Promocja i cena</td>
-                        <td>
-                            <select name="" id="">
-                                <option value="">Aktywna</option>
-                                <option value="" selected>Nieaktywna</option>
-                            </select>
-                        </td>
-                        <td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <td>Data promocji</td>
-                        <td>
-                            Od:<br> <input type="datetime-local">
-                        </td>
-                        <td>Do:<br> <input type="datetime-local"></td>
-                    </tr>
-                    <tr>
-                        <td>Ilość na magazynie</td><td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <td>Zdjęcie produktu</td><td><label id="file_input_label" for="file_input">Wybierz plik</label><input id="file_input" type="file"></td>
-                    </tr>
-                    <script>
-                        $(document).ready(function(){
-                            $("#file_input").on("change", function(){
-                                $("#file_input_label").text("Plik gotowy!");
-                                $("#file_input_label").css({"background-color" : "var(--color-theme)"}).css({"border" : "2px solid var(--color-theme)"});
+                <form action="php_scripts/add_product.php" method="post" enctype="multipart/form-data">
+                    <table>
+                        <tr>
+                            <td>Nazwa produktu*</td><td><input class="marked" type="text" name="product_name"></td>
+                        </tr>
+                        <tr>
+                            <td>Kategoria produktu</td>
+                            <td>
+                                <select name="category_id">
+                                    <?php require_once "php_scripts/select_categories.php";?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Opis produktu*</td><td><input type="text" name="product_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>Status produktu</td>
+                            <td>
+                                <select name="product_status">
+                                    <option value="2">Aktywny</option>
+                                    <option value="1">Nieaktywny</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cena w PLN*</td><td><input class="marked" type="number" name="product_price"></td>
+                        </tr>
+                        <tr>
+                            <td>Promocja i cena**</td>
+                            <td>
+                                <select name="product_sale">
+                                    <option value="1">Aktywna</option>
+                                    <option value="0" selected>Nieaktywna</option>
+                                </select>
+                            </td>
+                            <td><input class="marked2" type="number" name="product_sale_price"></td>
+                        </tr>
+                        <tr>
+                            <td>Data promocji</td>
+                            <td>
+                                Od:<br> <input type="datetime-local" name="product_sale_from">
+                            </td>
+                            <td>Do:<br> <input type="datetime-local" name="product_sale_to"></td>
+                        </tr>
+                        <tr>
+                            <td>Ilość na magazynie</td><td><input type="number" name="product_amount"></td>
+                        </tr>
+                        <tr>
+                            <td>Zdjęcie produktu</td><td><label id="file_input_label" for="file_input">Wybierz plik</label><input id="file_input" type="file" name="product_image"></td>
+                        </tr>
+                        <tr>
+                            <td><br>* pole musi zostać wypełnione<br>**jeśli została zaznaczona promocja należy wpisać cene</td>
+                        </tr>
+                        <script>
+                            $(document).ready(function(){
+                                $("#file_input").on("change", function(){
+                                    $("#file_input_label").text("Plik gotowy!");
+                                    $("#file_input_label").css({"background-color" : "var(--color-theme)"}).css({"border" : "2px solid var(--color-theme)"});
+                                });
                             });
-                        });
-                    </script>
-                </table>
+                        </script>
+                    </table>
             </div>
             <div class="save_changes">
                 <input type="submit" value="Dodaj">
             </div>
+            </form>
         </div>
     </div>
     <script>
@@ -421,6 +424,21 @@
             });   
         });
     </script>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            if($_SESSION['result'] == "Uzupełnij wymagane pola!")
+            {
+                echo '<script>$("#add_product_form").show();</script>';
+            }
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <script src="js/scripts.js"></script>
 </body>
 </html>

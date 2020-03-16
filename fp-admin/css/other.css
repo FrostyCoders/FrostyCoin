@@ -549,6 +549,7 @@ input[type="checkbox"]:checked ~ .check:before
     border: 3px solid transparent;
     border-image: linear-gradient(var(--color-theme) 0%, lightgray 50%, var(--color-theme) 100%);
     border-image-slice: 1;
+    margin-bottom: 50px;
 }
 .popup_frame
 {
@@ -669,4 +670,22 @@ input[type="checkbox"]:checked ~ .check:before
 {
     font-weight: 600;
     margin-bottom: 10px !important;
+}
+/** Result on websites */
+.result
+{
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    padding: 10px;
+    z-index: 1000;
+    background-color: white;
+    font-size: 14px;
+    border: 2px solid var(--color-theme);
+    padding-left: 20px;
+    padding-right: 20px;
+    opacity: 0.1;
 }
