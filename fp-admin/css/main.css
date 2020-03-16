@@ -185,16 +185,7 @@ main
     font-size: 14px;
     padding-bottom: 20px;
 }
-.chart
-{
-    width: 100px;
-    height: 100px;
-    background: conic-gradient(
-        var(--color-theme) 0deg 120deg, gray 120deg 240deg
-    );
-    border-radius: 50%;
-    margin: auto;
-}
+
 .last-added
 {
     width: 100%;
