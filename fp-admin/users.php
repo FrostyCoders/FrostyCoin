@@ -210,6 +210,9 @@
             <div id="content-frame" class="content-frame">
                 <div class="content-title">
                     Użytkownicy
+                    <div class="title_buttons">
+                        <button id="add_product_button" class="ordinary_button">Dodaj admina</button>
+                    </div>
                 </div>
                 <div class="product_filters">
                    <form action="users.php?filter=1" method="post">
@@ -320,6 +323,55 @@
             </div>
         </div>
     </main>
+        <div id="add_product_form" class="add_form_popup_admin">
+        <div class="popup_frame">
+            <div class="close_window">
+                <img id="close_popup" src="img/remove.png" alt="Zamknij" title="Anuluj">
+            </div>
+            <div class="content-title">
+                Dodaj administratora
+            </div>
+            <div class="popup_inputs">
+                <table>
+                    <tr>
+                        <td>Login administratora</td><td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>Adres email</td><td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>Hasło (min 8 znaków)</td><td><input type="password"></td>
+                    </tr>
+                    <tr>
+                        <td>Powtórz hasło</td><td><input type="password"></td>
+                    </tr>
+                    <script>
+                        $(document).ready(function(){
+                            $("#file_input").on("change", function(){
+                                $("#file_input_label").text("Plik gotowy!");
+                                $("#file_input_label").css({"background-color" : "var(--color-theme)"}).css({"border" : "2px solid var(--color-theme)"});
+                            });
+                        });
+                    </script>
+                </table>
+            </div>
+            <div class="save_changes">
+                <input type="submit" value="Dodaj">
+            </div>
+        </div>
+    </div>
+     <script>
+        $(document).ready(function(){
+            $("#add_product_button").click(function(){
+                $('main').css({"pointer-events" : "none"});
+                $("#add_product_form").fadeIn();
+            });
+            $("#close_popup").click(function(){
+                $('main').css({"pointer-events" : "all"});
+                $("#add_product_form").fadeOut();
+            });   
+        });
+    </script>
     <script src="js/scripts.js"></script>
 </body>
 </html>

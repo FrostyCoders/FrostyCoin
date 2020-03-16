@@ -550,6 +550,21 @@ input[type="checkbox"]:checked ~ .check:before
     border-image: linear-gradient(var(--color-theme) 0%, lightgray 50%, var(--color-theme) 100%);
     border-image-slice: 1;
 }
+.add_form_popup_admin
+{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 80px;
+    transform: translateX(-50%);
+    width: 50%;
+    min-height: 40%;
+    z-index: 100;
+    background-color: white;
+    border: 3px solid transparent;
+    border-image: linear-gradient(var(--color-theme) 0%, lightgray 50%, var(--color-theme) 100%);
+    border-image-slice: 1; 
+}
 .popup_frame
 {
     position: relative;
@@ -585,7 +600,7 @@ input[type="checkbox"]:checked ~ .check:before
 {
     padding: 5px;
 }
-.popup_frame input[type="text"], .popup_frame select, .popup_frame input[type="number"], .popup_frame input[type="datetime-local"]
+.popup_frame input[type="text"], .popup_frame select, .popup_frame input[type="number"], .popup_frame input[type="datetime-local"], .popup_frame input[type="password"]
 {
     width: 160px;
     border: 2px solid lightgray;
