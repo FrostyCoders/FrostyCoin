@@ -107,7 +107,7 @@
             
                     </div>
                     <div class="stats3">
-                        <p>WKYKORZYSTANIE ZASOBÓW: <?php echo $disc_precent."%" ?> (<?php echo $disc_used."GB /  ". $disc_space."GB" ?>)</p>
+                        <p>WYKORZYSTANIE ZASOBÓW: <?php echo $disc_precent."%" ?> (<?php echo $disc_used."GB /  ". $disc_space."GB" ?>)</p>
                         <div class="chart" >
                         </div>
                     </div>

@@ -38,8 +38,8 @@
     <header class="row">
         <div class="banner col-12">
             <img class="banner-logo" src="img/logo.png" alt="logo"><label class="banner-system-name">Frosty Panel</label>
-            <a href="#" class="banner-logout" title="Wyloguj się"><img src="img/logout.png" alt="logout"></a>
-            <a href="#" class="banner-user" title="Ustawienia"><img src="img/user.png" alt="user"><label class="banner-username">Admin</label></a>
+            <a href="logout.php" class="banner-logout" title="Wyloguj się"><img src="img/logout.png" alt="logout"></a>
+            <a href="settings.php" class="banner-user" title="Ustawienia"><img src="img/user.png" alt="user"><label class="banner-username"><?php echo @$_SESSION['admin_login']?></label></a>
         </div>
     </header>
     <main class="row">
@@ -96,41 +96,69 @@
                         </script>
                         </div>
                     </div>
-                    <form action="php_scripts/update_product.php" method="php">
+                    <form action="php_scripts/update_product.php?pid=<?php echo $result['product_id']; ?>" method="post">
                     <div id="bracket2" class="bracket">
-                        <label class="bracket_desc">Nazwa</label>
-                        <input type="text" value="<?php echo $result['product_name'];?>">
+                        <label class="bracket_desc">Nazwa, status i kategoria</label>
+                        <input type="text" name="product_name" value="<?php echo $result['product_name'];?>">
+                        <select name="product_status" id="product_status_select">
+                            <option value="2" <?php if($result['product_status'] > 1){echo "selected";}?>>Aktywny</option>
+                            <option value="1" <?php if($result['product_status'] == 1){echo "selected";}?>>Nieaktywny</option>
+                        </select>
+                        <select name="category_id" id="product_category_select">
+                            <?php
+                                $stmt2 = $conn->prepare("SELECT * FROM product_categories WHERE category_status = 1 ORDER BY category_name");
+                                try
+                                {
+                                    $stmt2->execute();
+                                    while($cat = $stmt2->fetch())
+                                    {
+                                        if($cat['category_id'] == $result['category_id'])
+                                        {
+                                            echo '<option value="' . $cat['category_id'] . '" selected>' . $cat['category_name'] . '</option>';
+                                        }
+                                        else
+                                        {
+                                            echo '<option value="' . $cat['category_id'] . '">' . $cat['category_name'] . '</option>';
+                                        }
+                                    }
+                                }
+                                catch(Exception $e)
+                                {
+                                    echo '<option value="1">Wystąpił problem z wyświetleniem kategorii!</option>';
+                                }
+                            ?>
+                        </select>
                     </div>
                     <div id="bracket3" class="bracket">
                         <label class="bracket_desc">Opis</label>
-                        <textarea name=""><?php echo $result['product_desc'];?></textarea>
+                        <textarea name="product_desc"><?php echo $result['product_desc'];?></textarea>
                     </div>
                     <div id="bracket4" class="bracket">
                         <label class="bracket_desc">Cena</label>
-                        <input type="number" value="<?php echo $result['product_price'];?>">
+                        <input type="number" name="product_price" value="<?php echo $result['product_price'];?>">
                     </div>
                     <div id="bracket5" class="bracket">
                         <label class="bracket_desc">Status promocji</label>
-                        <select name="" id="">
-                            <option value="" <?php if($result['product_status'] > 1){echo "selected";}?>>Aktywny</option>
-                            <option value="" <?php if($result['product_status'] == 1){echo "selected";}?>>Nieaktywny</option>
+                        <select name="product_sale">
+                            <option value="1" <?php if($result['product_sale'] == 1){echo "selected";}?>>Aktywny</option>
+                            <option value="0" <?php if($result['product_sale'] == 0){echo "selected";}?>>Nieaktywny</option>
                         </select>
                     </div>
                     <div id="bracket6" class="bracket">
                         <label class="bracket_desc">Cena promocyjna</label>
-                        <input type="number" value="<?php echo $result['product_sale_price'];?>">
+                        <input type="number" name="product_sale_price" value="<?php echo $result['product_sale_price'];?>">
                     </div>
                     <div id="bracket7" class="bracket">
                         <label class="bracket_desc">Promocja od:</label>
-                        <input type="datetime-local" value="<?php echo $result['product_sale_from'];?>">
+                        <input type="datetime-local" name="product_sale_from" value="<?php echo $result['product_sale_from'];?>">
                     </div>
                     <div id="bracket8" class="bracket">
                         <label class="bracket_desc">Promocja do:</label>
-                        <input type="datetime-local" value="<?php echo $result['product_sale_to'];?>">
+                        <input type="datetime-local" name="product_sale_to" value="<?php echo $result['product_sale_to'];?>">
                     </div>
                     <div id="bracket9" class="bracket">
                         <label class="bracket_desc">Ilość na magazynie</label>
-                        <input type="number" value="<?php echo $result['product_amount'];?>">
+                        <input type="number" name="product_amount" value="<?php echo $result['product_amount'];?>">
                     </div>
                     <div class="save_changes">
                         <input type="submit" value="Zapisz">

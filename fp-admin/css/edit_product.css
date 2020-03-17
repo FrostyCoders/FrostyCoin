@@ -28,20 +28,18 @@
     width: 37%;
     height: 130px;
 }
-.bracket label
+.bracket_desc
 {
     position: absolute;
     top: -20px;
-}
-.bracket_desc
-{
     font-size: 12px;
+    left: 2px;
 }
 .bracket_control
 {
     position: absolute;
     right: 0;
-    top: 60%;
+    top: 50%;
     transform: translateY(-50%);
     padding: 10px;
 }
@@ -60,11 +58,18 @@
     width: 140px;
     display: block;
     border: 2px solid lightgray;
-    margin: auto;
+    margin-bottom: 5px;
     padding: 3px;
     transition: 0.3s;
     font-size: 12px;
     text-align: center;
+    background-color: white;
+}
+#file_input_label:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
 }
 button, input[type="submit"]
 {
@@ -102,9 +107,23 @@ input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:f
 }
 #bracket2 input
 {
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#product_status_select
+{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 170px;
+}
+#product_category_select
+{
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 170px;
 }
 #bracket3 textarea
 {
@@ -133,6 +152,24 @@ input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:f
     {
         text-align: center;
     }
+    #bracket1
+    {
+        text-align: center;
+        cursor: pointer;
+    }
+    .bracket_control
+    {
+        position: absolute;
+        right: 50%;
+        top: 50%;
+        transform: translate(50%, -50%);
+        padding: 10px;
+        display: none;
+    }
+    #bracket1:hover .bracket_control
+    {
+        display: block;
+    }
 }
 @media only screen and (max-width: 1305px)
 {
@@ -141,17 +178,5 @@ input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:f
         clear: both;
         width: 100% !important;
         margin-bottom: 20px;
-    }
-    #file_input_label
-    {
-        width: 100px;
-    }
-    #bracket1 input[type="submit"]
-    {
-        width: 100px !important;
-    }
-    #bracket1 button
-    {
-        width: 100px !important;
     }
 }
