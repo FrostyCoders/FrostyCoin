@@ -21,7 +21,6 @@
 .ordinary_button, .accept_button, .decline_button
 {
     background: transparent;
-    float: left;
     font-size: 12px;
     padding: 5px;
     margin-left: 2.5px;
@@ -88,7 +87,6 @@ input[type="text"], input[type="number"], input[type="datetime-local"], textarea
     transition: 0.2s;
     resize: none;
     float: left;
-    text-align: right;
 }
 input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus, input[type="password"]:focus
 {
@@ -599,7 +597,6 @@ input[type="checkbox"]:checked ~ .check:before
     right: 0;
     top: 0;
     transform: translateY(0%,0%);
-    text-align: right;
 }
 .popup_frame select
 {
