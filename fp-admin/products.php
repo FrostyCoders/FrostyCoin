@@ -14,27 +14,36 @@
     if(isset($_GET['filter']))
     {
         $product_categories = $_POST['categories'];
+        $product_categories = htmlentities($product_categories, ENT_QUOTES, "UTF-8");
         $product_sort = $_POST['sort'];
+        $product_sort = htmlentities($product_sort, ENT_QUOTES, "UTF-8");
         $product_quantity = $_POST['quantity'];
+        $product_quantity = htmlentities($product_quantity, ENT_QUOTES, "UTF-8");
         $product_discount = $_POST['discount'];
+        $product_discount = htmlentities($product_discount, ENT_QUOTES, "UTF-8");
         $product_status = $_POST['status'];
+        $product_status = htmlentities($product_status, ENT_QUOTES, "UTF-8");
         $product_display = $_POST['display'];
+        $product_display = htmlentities($product_display, ENT_QUOTES, "UTF-8");
         $sql1 = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id`";
         
         if($product_categories>0)
-        {
-            $sql_categories_query = "SELECT `category_id`, `category_name` FROM `product_categories` WHERE `category_id`=".$product_categories.";";
-            $sql_categories_queryy = $conn->query($sql_categories_query);
+        {        
+            $sql_categories_query = "SELECT `category_id`, `category_name` FROM `product_categories` WHERE `category_id`=:pr_categories;";
+            $sql_categories_queryy = $conn->prepare($sql_categories_query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+            $sql_categories_queryyy = $sql_categories_queryy->execute(array(':pr_categories' => $product_categories));
+            
             while($categories_query = $sql_categories_queryy -> fetch())
             {
                 $yesc = $categories_query['category_name'];
-                $sql2 = " WHERE `product_categories`.`category_name`='$yesc'";
+                $sql2 = " WHERE `product_categories`.`category_name`=:cat_name";
                 $_SESSION['product_categories'] = $categories_query['category_id'];
             }
         }
         else
         {
-            $sql2 = " WHERE `product_categories`.`category_id`>0";
+            $yesc = 1;
+            $sql2 = " WHERE (`product_categories`.`category_id`>0 OR :cat_name!=:cat_name)";
             $_SESSION['product_categories'] = 0;
         }
         
@@ -130,19 +139,19 @@
         {
             case 1:
             {
-                $sql7 = " AND `products`.`product_status`>1";
+                $sql7 = " AND `products`.`product_status`>0";
                 $_SESSION['product_status'] = 1;
                 break;
             }
             case 2:
             {
-                $sql7 = " AND `products`.`product_status`=1";
+                $sql7 = " AND `products`.`product_status`>1";
                 $_SESSION['product_status'] = 2;
                 break;
-            } 
+            }
             case 3:
             {
-                $sql7 = "  AND `products`.`product_status`=0";
+                $sql7 = " AND `products`.`product_status`=1";
                 $_SESSION['product_status'] = 3;
                 break;
             } 
@@ -151,7 +160,8 @@
     }
     else
     {
-        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `product_status`>0 ORDER BY `products`.`product_name` ASC LIMIT 20;";
+        $yesc = 1;
+        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE (`product_status`>=1 OR :cat_name!=:cat_name) AND `products`.`product_sale`=0 ORDER BY `products`.`product_name` ASC LIMIT 20;";
         $_SESSION['product_categories'] = 0;
         $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
@@ -228,22 +238,6 @@
                         <select name="categories" id="">
                             <option value="def" <?php if ($_SESSION['product_categories'] == 0) echo 'selected' ; ?>>Wybierz</option>
                         <?php
-                            require_once "fp-config.php";
-                            try
-                            {
-                            $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                            }
-                            catch(PDOException $e)
-                            {
-                            $_SESSION["login_warning"] = "Krytyczny błąd! Spróbuj ponownie później.";
-                            header("Location: index.php");
-                            exit();
-                            } 
-
-                            $setnames = "SET NAMES utf8";
-                            $conn->query($setnames);
-
                             $sql = "SELECT * FROM `product_categories` WHERE `category_status` = 1;";
                             $result = $conn->query($sql);
                 
@@ -289,9 +283,9 @@
                     <div class="filter_product_bracket">
                         Status <br>
                         <select name="status" id="">
-                            <option value="1" <?php if ($_SESSION['product_status'] == 1) echo 'selected' ; ?>>Aktywne</option>
-                            <option value="2" <?php if ($_SESSION['product_status'] == 2) echo 'selected' ; ?>>Nieaktywne</option>
-                            <option value="3" <?php if ($_SESSION['product_status'] == 3) echo 'selected' ; ?>>Usunięte</option>
+                            <option value="1" <?php if ($_SESSION['product_status'] == 1) echo 'selected' ; ?>>Wybierz</option>
+                            <option value="2" <?php if ($_SESSION['product_status'] == 2) echo 'selected' ; ?>>Aktywne</option>
+                            <option value="3" <?php if ($_SESSION['product_status'] == 3) echo 'selected' ; ?>>Nieaktywne</option>
                         </select>
                     </div>
                 <div class="filter_product_bracket">
@@ -306,29 +300,55 @@
                 </div>
                 <div class="product_container">
                     <?php
-                        $sql_select_submit = $conn->query($sql_select);
-                        while($res = $sql_select_submit -> fetch())
+                        $sql_select_submit = $conn->prepare($sql_select, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                        $sql_select_submitt = $sql_select_submit->execute(array(':cat_name' => $yesc));
+                    
+                        $count = $sql_select_submit->rowCount();
+                    
+                        if($count<1)
                         {
-                            echo "<div class='product_bracket'>";
+                            echo "Brak produktów!";
+                        }
+                        
+                        else
+                        {
+                            while($res = $sql_select_submit -> fetch())
+                        {
+                            echo '<div class="product_bracket">';
                             echo '<img style="opacity: 0.5;" src="img-db/' . $res['product_image_path'] . '" alt="">';
-                            echo "<div class='product_desc'>";
-                            echo "<h5>".$res['product_name']."</h5>";
-                            echo "<div class='desc'>";
-                            echo "Kategoria: ".$res['category_name']."<br>";
-                            echo "Liczba: ".$res['product_amount']."<br>";
-                            echo "Data: ".date('d.m.Y', strtotime($res['product_from']))."<br>";
+                            echo '<div class="product_desc">';
+                            echo '<h5>'.$res['product_name'].'</h5>';
+                            echo '<div class="desc">';
+                            if($res['product_status']==1) 
+                            {
+                                $sta='<span style="font-weight: bold;">Nieaktywne</span>';
+                                echo 'Status: '.$sta.'<br>';
+                            } 
+                            else if($res['product_status']>1) 
+                            {
+                                $sta='<span style="color: #3c96d6; font-weight: bold;">Aktywne</span>';
+                                echo 'Status: '.$sta.'<br>';
+                            } 
+                            else 
+                            {
+                                $sta='';
+                            }
+                            echo 'Kategoria: '.$res['category_name'].'<br>';
+                            echo 'Liczba: '.$res['product_amount'].'<br>';
+                            echo 'Data: '.date('d.m.Y', strtotime($res['product_from'])).'<br>';
                             if ($res['product_sale']==1)
                             {
-                                echo "<p class='price' style='color: tomato;'>Cena: ".$res['product_sale_price']." PLN</p>";
+                                echo '<p class="price" style="color: tomato;">Cena: '.$res['product_sale_price'].' PLN</p>';
                             }
                             else
                             {
-                                echo "<p class='price'>Cena: ".$res['product_price']." PLN</p>";
+                                echo '<p class="price">Cena: '.$res['product_price'].' PLN</p>';
                             }
-                            echo "<a href='edit_product.php?pid=" . $res['product_id'] . "'><button class='product_button' style='margin-right: 0.2rem;'>Edytuj</button></a>";
+                            echo '<a href="edit_product.php?pid=' . $res['product_id'] . '"><button class="product_button" style="margin-right: 0.2rem;">Edytuj</button></a>';
                             echo '<a href="php_scripts/delete_product.php?pid=' . $res['product_id'] . '"><button class="product_button_delete">Usuń</button></a>';
-                            echo "</div></div></div>";
+                            echo '</div></div></div>';
                             
+                        }
                         }
                     ?>
                 </div>
@@ -396,7 +416,7 @@
                             <td>Zdjęcie produktu</td><td><label id="file_input_label" for="file_input">Wybierz plik</label><input id="file_input" type="file" name="product_image"></td>
                         </tr>
                         <tr>
-                            <td><br>* pole musi zostać wypełnione<br>**jeśli została zaznaczona promocja należy wpisać cene</td>
+                            <td><br>* pole musi zostać wypełnione<br>** jeśli została zaznaczona promocja należy wpisać cenę</td>
                         </tr>
                         <script>
                             $(document).ready(function(){
