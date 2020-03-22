@@ -1,11 +1,14 @@
 <?php
     session_start();
+     require_once "php_scripts/foot.php" ;
     if(!isset($_SESSION['fp-online']))
     {
         header("Location: index.php");
         exit();
     }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -54,7 +57,7 @@
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
             <a href="users.php"><div class="menu-element">Użytkownicy</div></a>
             <a href="settings.php"><div class="menu-element">Ustawienia</div></a>
-            <p class="copy"><?php include('footer.txt'); ?><br>wersja 0.1.0</p>
+            <p class="copy"><?php echo $data; ?><br>wersja 0.1.0</p>
         </div>
         <div id="content" class="content">
             <div class="content-frame">
@@ -64,7 +67,7 @@
                 <div class="list_bracket">
                     <div class="sett_title">Prawa autorskie</div>
                     <div class="sett_input"><form name="form" method="post">
-                    <input  type="text" id="foter" name="foter" placeholder="Wprowadź prawa" value="<?php include('footer.txt'); ?>"></div>
+                    <input  type="text" id="foter" name="foter" placeholder="Wprowadź prawa" value="<?php echo $data; ?>"></div>
                 </div>
                 <div class="save_changes">
                     <input type="submit" id="submit" value="Zapisz">
@@ -77,11 +80,5 @@
 </html>
 
 
-<?php
-$file = 'footer.txt';
-$data = file_get_contents( $file );
-$newText = $_POST['foter'];
-$o = fopen( $file, "w+" );
-$save = fwrite( $o, $newText );
-fclose( $o );
-?>
+
+
