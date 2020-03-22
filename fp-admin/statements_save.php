@@ -60,11 +60,13 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
         }
         else
         {
+            $_SESSION['result']="Wystąpił błąd!";
             $conn = null;
             unset($conn);
             header("Location: statements.php");
             exit();
         }
+        $_SESSION['result']="Zmodyfikowano pomyślnie!";
         header("Location: statements.php");
     }
 
@@ -91,16 +93,19 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
         }
         else
         {
+            $_SESSION['result']="Wystąpił błąd!";
             $conn = null;
             unset($conn);
             header("Location: statements.php");
             exit();
         }
+        $_SESSION['result']="Dodano pomyślnie!";
         header("Location: statements.php");
     }
 
     else
     {
+        $_SESSION['result']="Wystąpił błąd!";
         $conn = null;
         unset($conn);
         header("Location: statements.php");
@@ -115,6 +120,7 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
 
 else
 {
+    $_SESSION['result']="Wystąpił błąd!";
     $conn = null;
     unset($conn);
     header("Location: statements.php");
