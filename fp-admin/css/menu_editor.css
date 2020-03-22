@@ -1,0 +1,209 @@
+/* COMMON */
+.content-title
+{
+    position: relative;
+}
+.title_buttons
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.ordinary_button, input[type="submit"]
+{
+    min-width: 60px;
+    background: transparent;
+    font-size: 12px;
+    padding: 5px;
+    margin-left: 2px;
+    border: 2px solid lightgray;
+    transition: 0.2s;
+    cursor: pointer;
+    height: 28px;
+}
+input[type="submit"]
+{
+    min-width: 60px;
+}
+.ordinary_button:hover, input[type="submit"]:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}
+.file_input
+{
+    display: none;
+}
+.file_input_label
+{
+    cursor: pointer;
+    width: 154px;
+    display: block;
+    border: 2px solid lightgray;
+    margin: auto;
+    margin-bottom: 5px;
+    margin-left: 2px;
+    padding: 4px;
+    transition: 0.3s;
+    font-size: 12px;
+    text-align: center;
+}
+.file_input_label:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme); 
+}
+.menu_position
+{
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid lightgray;
+    margin-top: 10px;
+    position: relative;
+    height: 42px;
+}
+.menu_position_control
+{
+    position: absolute;
+    right: 0;
+    margin: 5px;
+    top: 0;
+}
+.collapse_button
+{
+    float: left;
+    margin: 6px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+.collapse_button img
+{
+    transform: rotate(180deg);
+    height: 24px;
+}
+.hide
+{
+    transform: rotate(90deg);
+}
+.position_icon
+{
+    margin: 3px;
+    margin-bottom: 0px;
+    margin-left: 6px;
+    float: left;
+}
+.position_icon img
+{
+    height: 32px;
+}
+.position_name
+{
+    float: left;
+    padding: 9px;
+    padding-left: 12px;
+}
+.subposition_bracket
+{
+    padding-left: 20px;
+}
+/* Edit position */
+.edit_icon
+{
+    position: relative;
+    width: 320px;
+}
+.edit_icon img
+{
+    position: absolute;
+    height: 60px;
+    top: 50%;
+    transform: translateY(50%);
+    left: 40px;
+}
+.edit_icon form
+{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(50%);
+}
+.edit_info
+{
+    position: absolute;
+    left: 400px;
+    top: 0;
+}
+.edit_info table
+{
+    margin: 16px;
+}
+.edit_info .edit_desc
+{
+    font-size: 14px;
+    padding: 2px;
+}
+.edit_info input
+{
+    border: 2px solid lightgray;
+    background-color: white;
+    width: 162px;
+    padding: 2px;
+}
+.edit_info select
+{
+    border: 2px solid lightgray;
+    background-color: white;
+    width: 170px;
+    padding: 2px;
+}
+.edit_control
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 5px;
+}
+/* ADD POSITION */
+.add_position
+{
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid lightgray;
+    margin-top: 10px;
+    position: relative;
+    height: 80px;
+}
+.add_icon, .add_name, .add_reflink
+{
+    padding: 10px;
+    float: left;
+}
+.add_icon p, .add_name p, .add_reflink p
+{
+    padding: 2px;
+    margin: 0;
+    padding-left: 5px;
+    font-size: 12px;
+}
+.add_name input
+{
+    width: 154px;
+    display: block;
+    border: 2px solid lightgray;
+    margin: auto;
+    margin-bottom: 5px;
+    margin-left: 2px;
+    padding: 4px;
+    transition: 0.3s;
+    font-size: 12px;
+}
+.add_reflink select
+{
+    border: 2px solid lightgray;
+    background-color: white;
+    width: 170px;
+    padding: 2px;
+}

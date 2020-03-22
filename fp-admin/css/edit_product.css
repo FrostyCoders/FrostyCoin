@@ -1,0 +1,182 @@
+.content-main
+{
+    padding-top: 25px;
+}
+.bracket
+{
+    border: 1px solid lightgray;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    position: relative;
+    float: left;
+    margin: 5px;
+    margin-bottom: 20px;
+}
+#bracket1
+{
+    width: 30%;
+    height: 130px;
+}
+#bracket2
+{
+    width: 30%;
+    height: 130px;
+}
+#bracket3
+{
+    width: 37%;
+    height: 130px;
+}
+.bracket_desc
+{
+    position: absolute;
+    top: -20px;
+    font-size: 12px;
+    left: 2px;
+}
+.bracket_control
+{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+}
+.photo_preview
+{
+    height: 100px;
+    margin: 10px;
+}
+#file_input
+{
+    display: none;
+}
+#file_input_label
+{
+    cursor: pointer;
+    width: 140px;
+    display: block;
+    border: 2px solid lightgray;
+    margin-bottom: 5px;
+    padding: 3px;
+    transition: 0.3s;
+    font-size: 12px;
+    text-align: center;
+    background-color: white;
+}
+#file_input_label:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}
+button, input[type="submit"]
+{
+    cursor: pointer;
+    min-width: 150px;
+    height: 25px;
+    font-size: 12px;
+    transition: 0.2s;
+    background-color: white;
+    border: 2px solid lightgray;
+    margin-bottom: 5px;
+}
+button:hover, input[type="submit"]:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}
+input[type="text"], input[type="number"], input[type="datetime-local"], textarea, select, input[type="password"]
+{
+    position: absolute;
+    width: 160px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid lightgray;
+    padding: 2px;
+    border-radius: 3px;
+    transition: 0.2s;
+    resize: none;
+}
+input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus, input[type="password"]:focus
+{
+    border: 2px solid var(--color-theme);
+}
+#bracket2 input
+{
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#product_status_select
+{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 170px;
+}
+#product_category_select
+{
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 170px;
+}
+#bracket3 textarea
+{
+    width: 97%;
+    height: 110px;
+    box-sizing: border-box;
+}
+#bracket4, #bracket5, #bracket6, #bracket7
+{
+    width: 24%;
+    height: 40px;
+}
+#bracket8, #bracket9
+{
+    width: 49%;
+    height: 40px;
+}
+.save_changes
+{
+    text-align: right;
+    padding: 10px;
+}
+@media only screen and (max-width: 600px)
+{
+    .save_changes
+    {
+        text-align: center;
+    }
+    #bracket1
+    {
+        text-align: center;
+        cursor: pointer;
+    }
+    .bracket_control
+    {
+        position: absolute;
+        right: 50%;
+        top: 50%;
+        transform: translate(50%, -50%);
+        padding: 10px;
+        display: none;
+    }
+    #bracket1:hover .bracket_control
+    {
+        display: block;
+    }
+}
+@media only screen and (max-width: 1305px)
+{
+    .bracket
+    {
+        clear: both;
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+}

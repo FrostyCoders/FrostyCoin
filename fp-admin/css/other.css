@@ -21,7 +21,6 @@
 .ordinary_button, .accept_button, .decline_button
 {
     background: transparent;
-    float: left;
     font-size: 12px;
     padding: 5px;
     margin-left: 2.5px;
@@ -88,10 +87,6 @@ input[type="text"], input[type="number"], input[type="datetime-local"], textarea
     transition: 0.2s;
     resize: none;
     float: left;
-    text-align: right;
-   
-    
-    
 }
 input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus, input[type="password"]:focus
 {
@@ -416,24 +411,54 @@ input[type="checkbox"]:checked ~ .check:before
 {
     border: 2px solid var(--color-theme);
 }
+.filter_product_bracket
+{
+    float: left;
+    width: 16.6%;
+    height: auto;
+    font-size: 12px;
+    padding-top: 10px;
+    text-align: center;
+}
+.filter_product_bracket select, .filter_product_bracket input
+{
+    position: static;
+    border: 2px solid lightgray;
+    padding: 2px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    transition: 0.2s;
+    max-width: 100%;
+    text-align: left;
+    top: 0;
+    transform: translateY(0%);
+    float: none;
+}
+.filter_product_bracket select:focus, .filter_product_bracket input:focus
+{
+    border: 2px solid var(--color-theme);
+}
 .accept_filters
 {
     float: right;
     cursor: pointer;
-    width: 100px;
+    width: 75px;
     height: 30px;
     font-size: 12px;
     transition: 0.2s;
     background-color: white;
     border: 2px solid var(--color-theme);
+    padding: 10px;
     margin: 10px;
     margin-right: 0;
+    text-align: center;
 }
 .accept_filters:hover
 {
-    background-color: var(--color-theme);
+    background-color: var(--color-theme) !important; 
     color: white;
-    border: 2px solid var(--color-theme);
+    border: 2px solid var(--color-theme)!important;
 }
 /* products brackets */
 .product_container
@@ -522,6 +547,7 @@ input[type="checkbox"]:checked ~ .check:before
     border: 3px solid transparent;
     border-image: linear-gradient(var(--color-theme) 0%, lightgray 50%, var(--color-theme) 100%);
     border-image-slice: 1;
+    margin-bottom: 50px;
 }
 .popup_frame
 {
@@ -558,14 +584,23 @@ input[type="checkbox"]:checked ~ .check:before
 {
     padding: 5px;
 }
-.popup_frame input[type="text"], .popup_frame select, .popup_frame textarea, .popup_frame input[type="number"], .popup_frame input[type="datetime-local"]
+.popup_frame input[type="text"], .popup_frame select, .popup_frame input[type="number"], .popup_frame input[type="datetime-local"]
 {
     width: 160px;
     border: 2px solid lightgray;
     padding: 2px;
+    margin-top: 1rem;
     border-radius: 3px;
     transition: 0.2s;
     resize: none;
+    position: static;
+    right: 0;
+    top: 0;
+    transform: translateY(0%,0%);
+}
+.popup_frame select
+{
+    width: 168px;
 }
 .popup_frame input[type="text"]:focus, .popup_frame select:focus, .popup_frame textarea:focus, .popup_frame input[type="number"]:focus, .popup_frame input[type="datetime-local"]:focus
 {
@@ -633,7 +668,6 @@ input[type="checkbox"]:checked ~ .check:before
     font-weight: 600;
     margin-bottom: 10px !important;
 }
-
 .result 
 {
     position: absolute;

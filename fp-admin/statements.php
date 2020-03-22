@@ -34,6 +34,7 @@
         <div id="main-small_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element active">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -47,6 +48,7 @@
         <div id="main-big_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element active">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -145,3 +147,6 @@
     <script src="js/scripts.js"></script>
 </body>
 </html>
+<?php
+exit();
+?>

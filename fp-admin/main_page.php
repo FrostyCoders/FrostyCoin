@@ -50,6 +50,7 @@
         <div id="main-small_screen" class="menu">
             <a href="main_page.php"><div class="menu-element active">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -63,6 +64,7 @@
         <div id="main-big_screen" class="menu">
             <a href="main_page.php"><div class="menu-element active">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -107,7 +109,7 @@
             
                     </div>
                     <div class="stats3">
-                        <p>WKYKORZYSTANIE ZASOBÓW: <?php echo $disc_precent."%" ?> (<?php echo $disc_used."GB /  ". $disc_space."GB" ?>)</p>
+                        <p>WYKORZYSTANIE ZASOBÓW: <?php echo $disc_precent."%" ?> (<?php echo $disc_used."GB /  ". $disc_space."GB" ?>)</p>
                         <div class="chart" >
                         </div>
                     </div>

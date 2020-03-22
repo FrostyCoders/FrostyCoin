@@ -12,6 +12,18 @@
         width: 60%;
     }
     
+    .filter_product_bracket
+    {
+        min-height: 25px;
+        margin-top: 10px;
+        width: 33.3%;
+    }
+    
+    .filter_product_bracket select, .filter_product_bracket input
+    {
+        width: 60%;
+    }
+    
     .list_bracket
     {
         height: 50px;
@@ -38,6 +50,18 @@
     }
     
     .filter_bracket select, .filter_bracket input
+    {
+        width: 60%;
+    }
+    
+    .filter_product_bracket
+    {
+        min-height: 50px;
+        margin-top: 10px;
+        width: 50%;
+    }
+    
+    .filter_product_bracket select, .filter_product_bracket input
     {
         width: 60%;
     }
@@ -118,6 +142,11 @@
         width: 75%;
     }
     
+    .filter_product_bracket select, .filter_product_bracket input
+    {
+        width: 75%;
+    }
+    
     .add_form_popup
     {
         left: 55%;
@@ -133,6 +162,16 @@
     }
     
     .filter_bracket select, .filter_bracket input
+    {
+        width: 80%;
+    }
+    
+    .filter_product_bracket
+    {
+        width: 100%;
+    }
+    
+    .ffilter_product_bracket select, .filter_product_bracket input
     {
         width: 80%;
     }

@@ -5,7 +5,156 @@
         header("Location: index.php");
         exit();
     }
+    if(isset($_GET['filter']))
+    {
+       
+       $search = $_POST['search'];
+       $search_enter = $_POST['search_enter'];
+       $search_user = $_POST['search_user'];
+       $search_role = $_POST['search_role'];
+       $search_sort_method = $_POST['search_sort_method'];
+       $search_sort = $_POST['search_sort'];
+       $search_from = $_POST['search_from'];
+       $search_to = $_POST['search_to'];
+       
+       
+       if($search_role=="Administrator")
+         {
+            $_SESSION['search_role'] = 1;
+            if($search==2)
+            {
+               $_SESSION['search'] = 2;
+               $sql1 = "SELECT * FROM panel_admins WHERE admin_email = '$search_enter' AND admin_create_time BETWEEN '$search_from' AND '$search_to' ORDER BY"; 
+               if($search_sort_method==1)
+               {
+                  $sql2 = " admin_login";
+                  $_SESSION['search_sort_method'] = 1;
+               }
+               else if ($search_sort_method==2)
+               {
+                  $sql2 = " admin_create_time";
+                   $_SESSION['search_sort_method'] = 2;
+               }
+               if($search_sort==1)
+               {
+                  $sql3 = " ASC;";
+                  $_SESSION['search_sort'] = 1;
+               }
+               else if($search_sort==2)
+               {
+                  $sql3 = " DESC;";
+                  $_SESSION['search_sort'] = 2;
+               }
+            
+            }
+            else if ($search==1)
+            {
+               $_SESSION['search'] = 1;
+               $sql1 = "SELECT * FROM panel_admins WHERE admin_login = '$search_enter' AND admin_create_time BETWEEN '$search_from' AND '$search_to' ORDER BY"; 
+               if($search_sort_method==1)
+               {
+                  $sql2 = " admin_login";
+                   $_SESSION['search_sort_method'] = 1;
+               }
+               else if ($search_sort_method==2)
+               {
+                  $sql2 = " admin_create_time";
+                   $_SESSION['search_sort_method'] = 2;
+               }
+               if($search_sort==1)
+               {
+                  $sql3 = " ASC;";
+                  $_SESSION['search_sort'] = 1;
+               }
+               else if($search_sort==2)
+               {
+                  $sql3 = " DESC;";
+                  $_SESSION['search_sort'] = 2;
+               } 
+           }
+        }
+         else if ($search_role=="Klient")
+         {
+            $_SESSION['search_role'] = 2;
+            if($search==2)
+            {
+               $_SESSION['search'] = 2;
+               $sql1 = "SELECT * FROM shop_users WHERE user_email = '$search_enter' AND user_create_time BETWEEN '$search_from' AND '$search_to' ORDER BY"; 
+               if($search_sort_method==1)
+               {
+                  $sql2 = " user_name";
+                  $_SESSION['search_sort_method'] = 1;
+               }
+               else if ($search_sort_method==2)
+               {
+                  $sql2 = " user_create_time";
+                  $_SESSION['search_sort_method'] = 2;
+               }
+               if($search_sort==1)
+               {
+                  $sql3 = " ASC;";
+                  $_SESSION['search_sort'] = 1;
+               }
+               else if($search_sort==2)
+               {
+                  $sql3 = " DESC;";
+                  $_SESSION['search_sort'] = 2;
+               }
+            }
+            else if ($search==1)
+            {
+               $_SESSION['search'] = 1;
+               $sql1 = "SELECT * FROM shop_users WHERE user_name = '$search_enter' AND user_create_time BETWEEN '$search_from' AND '$search_to' ORDER BY"; 
+               if($search_sort_method==1)
+               {
+                  $sql2 = " user_name";
+                   $_SESSION['search_sort_method'] = 1;
+               }
+               else if ($search_sort_method==2)
+               {
+                  $sql2 = " user_create_time";
+                   $_SESSION['search_sort_method'] = 2;
+               }
+               if($search_sort==1)
+               {
+                  $sql3 = " ASC;";
+                  $_SESSION['search_sort'] = 1;
+               }
+               else if($search_sort==2)
+               {
+                  $sql3 = " DESC;";
+                  $_SESSION['search_sort'] = 2;
+               }
+            }
+   
+         }
+      
+       
+    
+       $sql_select = $sql1 . $sql2 . $sql3;
+       
+       
+      
+       
+      
+    }
+  else
+  {
+     $sql_select = "SELECT * FROM shop_users;";
+     $_SESSION['search'] = 1;
+     $_SESSION['search_role'] = 2;
+     $_SESSION['search_sort'] = 1;
+     $_SESSION['search_sort_method'] = 1;
+     $_POST['search_enter'] = "";
+     $search_role = "";
+     
+  }
+ 
+
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -35,6 +184,7 @@
         <div id="main-small_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -48,6 +198,7 @@
         <div id="main-big_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -63,13 +214,25 @@
                     Użytkownicy
                 </div>
                 <div class="product_filters">
+                   <form action="users.php?filter=1" method="post">
+                   <?php 
+                      require_once "connect.php";
+                      ?>
                     <div class="filter_bracket">
-                        Nazwa <br>
-                        <input type="text">
+                        Szukaj po <br>
+                        <select name="search" id="">
+                            <option value="1" <?php if($_SESSION['search'] == 1) echo 'selected' ; ?>>Imię</option>
+                            <option value="2" <?php if($_SESSION['search'] == 2) echo 'selected' ; ?>>Email</option>
+                            
+                        </select>
+                        <br>
+                        Wpisz <br>
+                        <input type="text" name="search_enter" value="">
+                        
                     </div>
                     <div class="filter_bracket">
                         Użytkowników na stronie <br>
-                        <select name="" id="">
+                        <select name="search_user" id="">
                             <option value="">20</option>
                             <option value="">50</option>
                             <option value="">100</option>
@@ -78,58 +241,82 @@
                     </div>
                     <div class="filter_bracket">
                         Rola <br>
-                        <select name="" id="">
-                            <option value="">Administrator</option>
-                            <option value="">Pracownik sklepu</option>
-                            <option value="">Dostawca</option>
-                            <option value="">Klient</option>
+                        <select name="search_role" id="">
+                            <option value="Administrator" <?php if($_SESSION['search_role'] == 1) echo 'selected' ; ?>>Administrator</option>
+                            <option value="Klient" <?php if($_SESSION['search_role'] == 2) echo 'selected' ; ?>>Klient</option>
                         </select>
                     </div>
                     <div class="filter_bracket">
                         Sortuj według <br>
-                        <select name="" id="">
-                            <option>Nazwa</option>
-                            <option value="">Data utworzenia</option>
+                        <select name="search_sort_method" id="">
+                            <option value="1" <?php if($_SESSION['search_sort'] == 1) echo 'selected' ; ?>>Nazwa</option>
+                            <option value="2" <?php if($_SESSION['search_sort'] == 2) echo 'selected' ; ?>>Data utworzenia</option>
                         </select><br><br>
-                        <select name="" id="">
-                            <option value="">Rosnąco</option>
-                            <option value="">Malejąco</option>
+                        <select name="search_sort" id="">
+                            <option value="1" <?php if($_SESSION['search_sort_method'] == 1) echo 'selected' ; ?>>Rosnąco</option>
+                            <option value="2" <?php if($_SESSION['search_sort_method'] == 2) echo 'selected' ; ?>>Malejąco</option>
                         </select>
                     </div>
                     <div class="filter_bracket  filter_bracket_date">
                         Data rejestracji od<br>
-                        <input type="date"><br>
+                        <input type="date" name="search_from" value="0001-01-01"> <br>
                         Do<br>
-                        <input type="date">
+                         <input type="date" name="search_to" value="9999-09-09">
                     </div>
-                    <button class="accept_filters" style="margin-top: 60px;">Zastosuj filtry</button>
+                      <input type="submit" class="accept_filters" style="margin-top: 60px;" value="Zastosuj filtry">
+                    </form>
                 </div>
                 <div class="list_container">
                     <div class="list">
-                        <div class="list_bracket">
-                            <div class="id"><span class="list_bracket_desc">Identyfikator</span>200219123456</div>
-                            <div class="user"><span class="list_bracket_desc">Nazwa</span>example87</div>
-                            <div class="date"><span class="list_bracket_desc">Data utworzenia</span>19-02-2020</div>
-                            <div class="status"><span class="list_bracket_desc">Rola</span>Administrator</div>
-                            <div class="value"><span class="list_bracket_desc">Ilość wydarzeń</span>12</div>
-                            <div class="empty">
-                                <div class="position_control" style="width: auto;">
-                                    <button class="control_button">Podgląd</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list_bracket">
-                            <div class="id"><span class="list_bracket_desc">Identyfikator</span>200217654321</div>
-                            <div class="user"><span class="list_bracket_desc">Nazwa</span>example57</div>
-                            <div class="date"><span class="list_bracket_desc">Data utworzenia</span>17-02-2020</div>
-                            <div class="status"><span class="list_bracket_desc">Rola</span>Klient</div>
-                            <div class="value"><span class="list_bracket_desc">Ilość wydarzeń</span>2</div>
-                            <div class="empty">
-                                <div class="position_control" style="width: auto;">
-                                    <button class="control_button">Podgląd</button>
-                                </div>
-                            </div>
-                        </div>
+                        <?php 
+                        if ($search_role=="Administrator")
+                        { 
+                         $sql_select_submit = $conn->query($sql_select);
+                         while($res = $sql_select_submit -> fetch())
+                         {
+                           //id
+                           echo "<div class='list_bracket'>"; 
+                           echo "<div class='id'><span class='list_bracket_desc'>Identyfikator</span>";
+                           echo $res['admin_id']."</div>";
+                           //email
+                           echo "<div class='user'><span class='list_bracket_desc'>Email</span>";
+                           echo $res['admin_email']."</div>";
+                            //name
+                           echo "<div class='user'><span class='list_bracket_desc'>Login</span>";
+                           echo $res['admin_login']."</div>";
+                            //data
+                           echo "<div class='date'><span class='list_bracket_desc'>Data Utworzenia</span>";
+                           echo $res['admin_create_time']."</div>";
+                            //button
+                           echo "<div class='empty' <div class='position_control' style='width: auto;'>";
+                           echo "<button class='control_button'>Podgląd</button></div></div>"; 
+                         }
+                       }
+                      else 
+                        {
+                         $sql_select_submit = $conn->query($sql_select);
+                         while($res = $sql_select_submit -> fetch())
+                         {
+                           //id
+                           echo "<div class='list_bracket'>"; 
+                           echo "<div class='id'><span class='list_bracket_desc'>Identyfikator</span>";
+                           echo $res['user_id']."</div>";
+                           //email
+                           echo "<div class='user'><span class='list_bracket_desc'>Email</span>";
+                           echo $res['user_email']."</div>";
+                            //name
+                           echo "<div class='user'><span class='list_bracket_desc'>Imię</span>";
+                           echo $res['user_name']."</div>";
+                            //data
+                           echo "<div class='date'><span class='list_bracket_desc'>Data Utworzenia</span>";
+                           echo $res['user_create_time']."</div>";
+                            //button
+                           echo "<div class='empty' <div class='position_control' style='width: auto;'>";
+                           echo "<button class='control_button'>Podgląd</button></div></div>"; 
+                         }
+                        }
+                               $conn = null;
+                         ?>
                     </div>
                 </div>
             </div>

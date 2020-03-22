@@ -5,6 +5,160 @@
         header("Location: index.php");
         exit();
     }
+    error_reporting(0);
+    require_once "connect.php";
+
+    $setnames = "SET NAMES utf8";
+    $conn->query($setnames);
+
+    if(isset($_GET['filter']))
+    {
+        $product_categories = $_POST['categories'];
+        $product_sort = $_POST['sort'];
+        $product_quantity = $_POST['quantity'];
+        $product_discount = $_POST['discount'];
+        $product_status = $_POST['status'];
+        $product_display = $_POST['display'];
+        $sql1 = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id`";
+        
+        if($product_categories>0)
+        {
+            $sql_categories_query = "SELECT `category_id`, `category_name` FROM `product_categories` WHERE `category_id`=".$product_categories.";";
+            $sql_categories_queryy = $conn->query($sql_categories_query);
+            while($categories_query = $sql_categories_queryy -> fetch())
+            {
+                $yesc = $categories_query['category_name'];
+                $sql2 = " WHERE `product_categories`.`category_name`='$yesc'";
+                $_SESSION['product_categories'] = $categories_query['category_id'];
+            }
+        }
+        else
+        {
+            $sql2 = " WHERE `product_categories`.`category_id`>0";
+            $_SESSION['product_categories'] = 0;
+        }
+        
+        switch($product_sort)
+        {
+            case 1:
+            {
+                $sql3 = " ORDER BY `products`.`product_name`";
+                $_SESSION['product_sort'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql3 = " ORDER BY `products`.`product_amount`";
+                $_SESSION['product_sort'] = 2;
+                break;
+            }
+            case 3:
+            {
+                
+                $sql3 = " ORDER BY `products`.`product_price`";
+                $_SESSION['product_sort'] = 3;
+                break;
+            }
+            case 4:
+            {
+                $sql3 = " ORDER BY `products`.`product_from`";
+                $_SESSION['product_sort'] = 4;
+                break;
+            }
+        }
+        switch($product_quantity)
+        {
+            case 1:
+            {
+                $sql4 = " LIMIT 20;";
+                $_SESSION['product_quantity'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql4 = " LIMIT 50;";
+                $_SESSION['product_quantity'] = 2;
+                break;
+            }
+            case 3:
+            {
+                $sql4 = " LIMIT 100;";
+                $_SESSION['product_quantity'] = 3;
+                break;
+            }
+            case 4:
+            {
+                $sql4 = ";";
+                $_SESSION['product_quantity'] = 4;
+                break;
+            }
+        }
+        switch($product_discount)
+        {
+            case 1:
+            {
+                $sql5 = " AND `products`.`product_sale`=0";
+                $_SESSION['product_discount'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql5 = " AND `products`.`product_sale`=1";
+                $_SESSION['product_discount'] = 2;
+                break;
+            }
+            
+        }
+        
+        switch($product_display)
+        {
+            case 1:
+            {
+                $sql6 = " ASC";
+                $_SESSION['product_display'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql6 = " DESC";
+                $_SESSION['product_display'] = 2;
+                break;
+            } 
+        }
+        
+        switch($product_status)
+        {
+            case 1:
+            {
+                $sql7 = " AND `products`.`product_status`>1";
+                $_SESSION['product_status'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql7 = " AND `products`.`product_status`=1";
+                $_SESSION['product_status'] = 2;
+                break;
+            } 
+            case 3:
+            {
+                $sql7 = "  AND `products`.`product_status`=0";
+                $_SESSION['product_status'] = 3;
+                break;
+            } 
+        }
+        $sql_select = $sql1 . $sql2 . $sql5 . $sql7 . $sql3 . $sql6 . $sql4;
+    }
+    else
+    {
+        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `product_status`>0 ORDER BY `products`.`product_name` ASC LIMIT 20;";
+        $_SESSION['product_categories'] = 0;
+        $_SESSION['product_sort'] = 0;
+        $_SESSION['product_quantity'] = 1;
+        $_SESSION['product_discount'] = 0;
+        $_SESSION['product_display'] = 1;
+        $_SESSION['product_status'] = 1;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -35,6 +189,7 @@
         <div id="main-small_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -48,6 +203,7 @@
         <div id="main-big_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -66,102 +222,115 @@
                     </div>
                 </div>
                 <div class="product_filters">
-                    <div class="filter_bracket">
+            <form action="products.php?filter=1" method="post">
+                    <div class="filter_product_bracket">
                         Kategoria <br>
-                        <select name="" id="">
+                        <select name="categories" id="">
+                            <option value="def" <?php if ($_SESSION['product_categories'] == 0) echo 'selected' ; ?>>Wybierz</option>
+                        <?php
+                            require_once "fp-config.php";
+                            try
+                            {
+                            $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            }
+                            catch(PDOException $e)
+                            {
+                            $_SESSION["login_warning"] = "Krytyczny błąd! Spróbuj ponownie później.";
+                            header("Location: index.php");
+                            exit();
+                            } 
 
+                            $setnames = "SET NAMES utf8";
+                            $conn->query($setnames);
+
+                            $sql = "SELECT * FROM `product_categories` WHERE `category_status` = 1;";
+                            $result = $conn->query($sql);
+                
+                            while($row = $result -> fetch())
+                            {
+                                if ($_SESSION['product_categories'] == $row['category_id'])
+                                {
+                                    echo "<option value=".$row['category_id']." selected>".$row['category_name']."</option>";
+                                }
+                                else
+                                {
+                                    echo "<option value=".$row['category_id'].">".$row['category_name']."</option>";
+                                }
+                            }
+                        ?>
                         </select>
                     </div>
-                    <div class="filter_bracket">
+                    <div class="filter_product_bracket">
                         Sortuj według <br>
-                        <select name="" id="">
-                            <option>Nazwa</option>
-                            <option value="">Cena</option>
-                            <option value="">Data wprowadzenia</option>
+                        <select name="sort" id="">
+                            <option value="1" <?php if ($_SESSION['product_sort'] == 1) echo 'selected' ; ?>>Nazwa</option>
+                            <option value="2" <?php if ($_SESSION['product_sort'] == 2) echo 'selected' ; ?>>Ilość</option>
+                            <option value="3" <?php if ($_SESSION['product_sort'] == 3) echo 'selected' ; ?>>Cena podstawowa</option>
+                            <option value="4" <?php if ($_SESSION['product_sort'] == 4) echo 'selected' ; ?>>Data wprowadzenia</option>
                         </select>
                     </div>
-                    <div class="filter_bracket">
+                    <div class="filter_product_bracket">
                         Produktów na stronie <br>
-                        <select name="" id="">
-                            <option value="">20</option>
-                            <option value="">50</option>
-                            <option value="">100</option>
-                            <option value="">Wszystkie</option>
+                        <select name="quantity" id="">
+                            <option value="1" <?php if ($_SESSION['product_quantity'] == 1) echo 'selected' ; ?>>20</option>
+                            <option value="2" <?php if ($_SESSION['product_quantity'] == 2) echo 'selected' ; ?>>50</option>
+                            <option value="3" <?php if ($_SESSION['product_quantity'] == 3) echo 'selected' ; ?>>100</option>
+                            <option value="4" <?php if ($_SESSION['product_quantity'] == 4) echo 'selected' ; ?>>Wszystkie</option>
                         </select>
                     </div>
-                    <div class="filter_bracket">
+                    <div class="filter_product_bracket">
                         Przecena <br>
-                        <select name="" id="">
-                            <option value="">Tak</option>
-                            <option value="">Nie</option>
+                        <select name="discount" id="">
+                            <option value="1" <?php if ($_SESSION['product_discount'] == 1) echo 'selected' ; ?>>Nie</option>
+                            <option value="2" <?php if ($_SESSION['product_discount'] == 2) echo 'selected' ; ?>>Tak</option>
                         </select>
                     </div>
-                    <div class="filter_bracket">
+                    <div class="filter_product_bracket">
                         Status <br>
-                        <select name="" id="">
-                            <option value="">Aktywny</option>
-                            <option value="">Nieaktywny</option>
+                        <select name="status" id="">
+                            <option value="1" <?php if ($_SESSION['product_status'] == 1) echo 'selected' ; ?>>Aktywne</option>
+                            <option value="2" <?php if ($_SESSION['product_status'] == 2) echo 'selected' ; ?>>Nieaktywne</option>
+                            <option value="3" <?php if ($_SESSION['product_status'] == 3) echo 'selected' ; ?>>Usunięte</option>
                         </select>
                     </div>
-                    <button class="accept_filters">Zastosuj filtry</button>
+                <div class="filter_product_bracket">
+                        Wyświetl <br>
+                        <select name="display" id="">
+                            <option value="1" <?php if ($_SESSION['product_display'] == 1) echo 'selected' ; ?>>Rosnąco</option>
+                            <option value="2" <?php if ($_SESSION['product_display'] == 2) echo 'selected' ; ?>>Malejąco</option>
+                        </select>
+                    </div>
+                    <input type="submit" class="accept_filters" value="Zastosuj filtry">
+            </form>
                 </div>
                 <div class="product_container">
-                    <div class="product_bracket">
-                        <img src="img/gaming_laptop.png" alt="">
-                        <div class="product_desc">
-                            <h5>MSI G150</h5>
-                            <p class="desc">
-                                Kategoria: Laptopy<br>
-                                Liczba: 34 <br>
-                                Data dodania: 12-01-2020 <br>
-                                <p class="price">Cena: 3100 PLN</p>
-                                <button class="product_button">Edytuj</button>
-                                <button class="product_button_delete">Usuń</button>
-                            </p>
-                        </div>
-                    </div>
-                <div class="product_bracket">
-                        <img src="img/gaming_laptop.png" alt="">
-                        <div class="product_desc">
-                            <h5>MSI G150</h5>
-                            <p class="desc">
-                                Kategoria: Laptopy<br>
-                                Liczba: 34 <br>
-                                Data dodania: 12-01-2020 <br>
-                                <p class="price">Cena: 3100 PLN</p>
-                                <button class="product_button">Edytuj</button>
-                                <button class="product_button_delete">Usuń</button>
-                            </p>
-                        </div>
-                    </div>
-            <div class="product_bracket">
-                        <img src="img/gaming_laptop.png" alt="">
-                        <div class="product_desc">
-                            <h5>MSI G150</h5>
-                            <p class="desc">
-                                Kategoria: Laptopy<br>
-                                Liczba: 34 <br>
-                                Data dodania: 12-01-2020 <br>
-                                <p class="price">Cena: 3100 PLN</p>
-                                <button class="product_button">Edytuj</button>
-                                <button class="product_button_delete">Usuń</button>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="product_bracket">
-                        <img src="img/avant.png" alt="">
-                        <div class="product_desc">
-                            <h5>AVANT P870</h5>
-                            <p class="desc">
-                                Kategoria: Laptopy<br>
-                                Liczba: 56 <br>
-                                Data dodania: 13-01-2020 <br>
-                                <p class="price" style="color: red;">Promocja: 2999 PLN</p>
-                                <button class="product_button">Edytuj</button>
-                                <button class="product_button_delete">Usuń</button>
-                            </p>
-                        </div>
-                    </div>
+                    <?php
+                        $sql_select_submit = $conn->query($sql_select);
+                        while($res = $sql_select_submit -> fetch())
+                        {
+                            echo "<div class='product_bracket'>";
+                            echo '<img style="opacity: 0.5;" src="img-db/' . $res['product_image_path'] . '" alt="">';
+                            echo "<div class='product_desc'>";
+                            echo "<h5>".$res['product_name']."</h5>";
+                            echo "<div class='desc'>";
+                            echo "Kategoria: ".$res['category_name']."<br>";
+                            echo "Liczba: ".$res['product_amount']."<br>";
+                            echo "Data: ".date('d.m.Y', strtotime($res['product_from']))."<br>";
+                            if ($res['product_sale']==1)
+                            {
+                                echo "<p class='price' style='color: tomato;'>Cena: ".$res['product_sale_price']." PLN</p>";
+                            }
+                            else
+                            {
+                                echo "<p class='price'>Cena: ".$res['product_price']." PLN</p>";
+                            }
+                            echo "<a href='edit_product.php?pid=" . $res['product_id'] . "'><button class='product_button' style='margin-right: 0.2rem;'>Edytuj</button></a>";
+                            echo '<a href="php_scripts/delete_product.php?pid=' . $res['product_id'] . '"><button class="product_button_delete">Usuń</button></a>';
+                            echo "</div></div></div>";
+                            
+                        }
+                    ?>
                 </div>
             </div>
         </div>
@@ -175,71 +344,74 @@
                 Dodaj produkt
             </div>
             <div class="popup_inputs">
-                <table>
-                    <tr>
-                        <td>Nazwa produktu</td><td><input type="text"></td>
-                    </tr>
-                    <tr>
-                        <td>Kategoria produktu</td>
-                        <td>
-                            <select name="" id="">
-                                <option value="">Kategoria 1</option>
-                                <option value="">Kategoria 2</option>
-                                <option value="">Kategoria 3</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Opis produktu</td><td><textarea name="" id="" cols="30" rows="5"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td>Status produktu</td>
-                        <td>
-                            <select name="" id="">
-                                <option value="">Aktywny</option>
-                                <option value="">Nieaktywny</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Cena w PLN</td><td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <td>Promocja i cena</td>
-                        <td>
-                            <select name="" id="">
-                                <option value="">Aktywna</option>
-                                <option value="" selected>Nieaktywna</option>
-                            </select>
-                        </td>
-                        <td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <td>Data promocji</td>
-                        <td>
-                            Od:<br> <input type="datetime-local">
-                        </td>
-                        <td>Do:<br> <input type="datetime-local"></td>
-                    </tr>
-                    <tr>
-                        <td>Ilość na magazynie</td><td><input type="number"></td>
-                    </tr>
-                    <tr>
-                        <td>Zdjęcie produktu</td><td><label id="file_input_label" for="file_input">Wybierz plik</label><input id="file_input" type="file"></td>
-                    </tr>
-                    <script>
-                        $(document).ready(function(){
-                            $("#file_input").on("change", function(){
-                                $("#file_input_label").text("Plik gotowy!");
-                                $("#file_input_label").css({"background-color" : "var(--color-theme)"}).css({"border" : "2px solid var(--color-theme)"});
+                <form action="php_scripts/add_product.php" method="post" enctype="multipart/form-data">
+                    <table>
+                        <tr>
+                            <td>Nazwa produktu*</td><td><input class="marked" type="text" name="product_name"></td>
+                        </tr>
+                        <tr>
+                            <td>Kategoria produktu</td>
+                            <td>
+                                <select name="category_id">
+                                    <?php require_once "php_scripts/select_categories.php";?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Opis produktu*</td><td><input type="text" name="product_desc"></td>
+                        </tr>
+                        <tr>
+                            <td>Status produktu</td>
+                            <td>
+                                <select name="product_status">
+                                    <option value="2">Aktywny</option>
+                                    <option value="1">Nieaktywny</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cena w PLN*</td><td><input class="marked" type="number" name="product_price"></td>
+                        </tr>
+                        <tr>
+                            <td>Promocja i cena**</td>
+                            <td>
+                                <select name="product_sale">
+                                    <option value="1">Aktywna</option>
+                                    <option value="0" selected>Nieaktywna</option>
+                                </select>
+                            </td>
+                            <td><input class="marked2" type="number" name="product_sale_price"></td>
+                        </tr>
+                        <tr>
+                            <td>Data promocji</td>
+                            <td>
+                                Od:<br> <input type="datetime-local" name="product_sale_from">
+                            </td>
+                            <td>Do:<br> <input type="datetime-local" name="product_sale_to"></td>
+                        </tr>
+                        <tr>
+                            <td>Ilość na magazynie</td><td><input type="number" name="product_amount"></td>
+                        </tr>
+                        <tr>
+                            <td>Zdjęcie produktu</td><td><label id="file_input_label" for="file_input">Wybierz plik</label><input id="file_input" type="file" name="product_image"></td>
+                        </tr>
+                        <tr>
+                            <td><br>* pole musi zostać wypełnione<br>**jeśli została zaznaczona promocja należy wpisać cene</td>
+                        </tr>
+                        <script>
+                            $(document).ready(function(){
+                                $("#file_input").on("change", function(){
+                                    $("#file_input_label").text("Plik gotowy!");
+                                    $("#file_input_label").css({"background-color" : "var(--color-theme)"}).css({"border" : "2px solid var(--color-theme)"});
+                                });
                             });
-                        });
-                    </script>
-                </table>
+                        </script>
+                    </table>
             </div>
             <div class="save_changes">
                 <input type="submit" value="Dodaj">
             </div>
+            </form>
         </div>
     </div>
     <script>
@@ -254,6 +426,26 @@
             });   
         });
     </script>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            if($_SESSION['result'] == "Uzupełnij wymagane pola!")
+            {
+                echo '<script>$("#add_product_form").show();</script>';
+            }
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <script src="js/scripts.js"></script>
 </body>
 </html>
+<?php
+    $conn = null;
+    unset($conn);
+    exit();
+?>

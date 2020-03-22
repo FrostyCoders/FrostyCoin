@@ -34,6 +34,7 @@
         <div id="main-small_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element  active">Kategorie produktów</div></a>
@@ -47,6 +48,7 @@
         <div id="main-big_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element  active">Kategorie produktów</div></a>
@@ -65,24 +67,40 @@
                     </div>
                 </div>
                 <div id="cat_container">
-                    <div class="category_bracket">
-                        <div class="category_status off" title="Niektywna"></div>
-                        <div class="category_name">Kategoria</div>
-                        <div class="category_info">Liczba produktów: 234</div>
-                        <div class="category_settings">
-                            <button>Edytuj</button>
-                            <button>Usuń</button>
-                        </div>
-                    </div>
-                    <div class="category_bracket">
-                        <div class="category_status on" title="Aktywna"></div>
-                        <div class="category_name">Kategoria2</div>
-                        <div class="category_info">Liczba produktów: 24</div>
-                        <div class="category_settings">
-                            <button>Edytuj</button>
-                            <button>Usuń</button>
-                        </div>
-                    </div>
+                    <?php
+                        require_once "connect.php";
+                        $stmt = $conn->query("SELECT * FROM product_categories ORDER BY category_name");
+                        if(($stmt->rowCount()) == 0)
+                        {
+                            echo '<div class="no_cat" style="width: 100%; text-align: center; padding-top: 20px; padding-bottom: 20px; font-size: 14px;">Brak kategorii!</div>';
+                        }
+                        else
+                        {
+                            while($row = $stmt->fetch())
+                            {
+                                if($row["category_status"]==1)
+                                {
+                                    $status = "on";
+                                    $status_title = "Aktywna";
+                                }
+                                else
+                                {
+                                    $status = "off";
+                                    $status_title = "Nieaktywna";
+                                }
+                                $addition = "'" . $row['category_name'] . "'";
+                                echo '<div class="category_bracket">
+                                    <div class="category_status ' . $status . '" title="' . $status_title . '"></div>
+                                    <div class="category_name">' . $row['category_name'] . '</div>
+                                    <div class="category_info">Liczba produktów: 234</div>
+                                    <div class="category_settings">
+                                        <button type="button" onclick="edit_cat(' . $row['category_id'] . ', ' . $addition . ', ' . $row['category_status'] . ');">Edytuj</button>
+                                        <a href="php_scripts/delete_cat.php?cat_id=' . $row['category_id'] . '"><button>Usuń</button></a>
+                                    </div>
+                                </div>';
+                            }
+                        }
+                    ?>
                     <div id="add_category_bracket" class="category_bracket">
                         <form action="php_scripts/add_category.php" method="post">
                         <div class="category_name" style="padding-left: 8px">Status: <select name="cat_status"><option value="active">Aktywna</option><option value="inactive">Niektywna</option></select></div>
@@ -94,21 +112,45 @@
                         </form>
                     </div>
                 </div>
-                
             </div>
         </div>
         <script>
             $(document).ready(function(){
                 $("#add_category_bracket").hide();
                 $("#add_category_button").click(function(){
+                    $(".no_cat").fadeOut().delay(1000).hide();
                     $("#add_category_bracket").fadeIn();
                 });
                 $("#cancel_add").click(function(){
-                    $("#add_category_bracket").fadeOut();
+                    $("#add_category_bracket").fadeOut().delay(1000).show();
+                    $(".no_cat").fadeIn();
                 });
             });
         </script>
     </main>
+    <div class="edit_cat" id="edit_cat">
+        <div class="popup_frame">
+            <div class="close_window">
+                <img id="close_popup" src="img/remove.png" alt="Zamknij" title="Anuluj">
+            </div>
+            <div class="content-title">
+                Dodaj produkt
+            </div>
+            <div class="popup_inputs" id="popup_inputs_edit_cat">
+                <table>
+                    <tr>
+                        <td>Status</td><td><select name="cat_status"><option value="active">Aktywna</option><option value="inactive">Niektywna</option></select></td>
+                    </tr>
+                    <tr>
+                        <td>Nazwa</td><td><input name="cat_name" type="text"></td>
+                    </tr>
+                </table>
+                <div class="buttons">
+                    <input type="submit" value="Zapisz"> 
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
         if(isset($_SESSION['result']))
         {

@@ -1,10 +1,12 @@
 <?php
     session_start();
     require_once "../connect.php";
-    $cat_status = $_POST['cat_status'];
+    $id = $_GET['id'];
     $cat_name = $_POST['cat_name'];
-    $check = $conn->prepare("SELECT * FROM product_categories WHERE category_name=:cat_name");
+    $cat_status = $_POST['cat_status'];
+    $check = $conn->prepare("SELECT * FROM product_categories WHERE category_name=:cat_name AND category_id!=:id");
     $check->bindParam(':cat_name', $cat_name);
+    $check->bindParam(':id', $id);
     $check->execute();
     if(($check->rowCount()) != 0)
     {
@@ -26,18 +28,20 @@
             {
                 $cat_status = false;
             }
-            $sql = "INSERT INTO `product_categories` (`category_id`, `category_name`, `category_status`) VALUES (NULL,:cat_name,:cat_status)";
+            $sql = "UPDATE product_categories SET category_name=:cat_name, category_status=:cat_status WHERE category_id=:cat_id";
             $result = $conn->prepare($sql);
             $result->bindParam(':cat_name', $cat_name);
             $result->bindParam(':cat_status', $cat_status);
+            $result->bindParam(':cat_id', $id);
             try
             {
                 $result->execute();
-                $_SESSION['result'] = "Dodano pomyślnie!";
+                $_SESSION['result'] = "Zmodyfikowano pomyślnie!";
             }
             catch(Exception $e)
             {
                 $_SESSION['result'] = "Wystąpił błąd!";
+                echo $e;
             }
         }
     }

@@ -158,3 +158,92 @@ input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:f
         padding-left: 50px;
     }
 }
+.edit_cat
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid var(--color-theme);
+    width: 400px;
+    height: 200px;
+    z-index: 1000;
+    background-color: white;
+}
+.popup_frame
+{
+    position: relative;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    padding-top: 10px;
+    font-size: 12px;
+}
+.close_window
+{
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transform: scale(0.8);
+    transition: 0.2s;
+    z-index: 100;
+}
+.close_window:hover
+{
+    transform: scale(0.9);  
+}
+.popup_inputs
+{
+    text-align: center;
+}
+.popup_inputs
+{
+    margin-top: 20px;
+}
+.popup_inputs table
+{
+    margin: auto;
+}
+.popup_inputs table td
+{
+    padding: 5px;
+}
+.popup_frame input[type="text"], .popup_frame select
+{
+    width: 160px;
+    border: 2px solid lightgray;
+    padding: 2px;
+    border-radius: 3px;
+    transition: 0.2s;
+    resize: none;
+}
+.popup_frame select
+{
+    width: 168px;
+}
+.popup_frame input[type="text"]:focus, .popup_frame select:focus
+{
+    border: 2px solid var(--color-theme);
+}
+.buttons
+{
+    text-align: center;
+    padding: 10px;
+}
+.buttons button
+{
+    cursor: pointer;
+    min-width: 60px;
+    height: 25px;
+    font-size: 12px;
+    transition: 0.2s;
+    background-color: white;
+    border: 2px solid lightgray;
+}
+.buttons button:hover
+{
+    background-color: var(--color-theme);
+    color: white;
+    border: 2px solid var(--color-theme);
+}

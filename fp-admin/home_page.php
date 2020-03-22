@@ -5,6 +5,32 @@
         header("Location: index.php");
         exit();
     }
+    require_once "connect.php";
+    function show_products($position)
+    {
+        $stmt = $GLOBALS['conn']->prepare("SELECT product_id, product_name, product_on_home FROM products WHERE product_status > 1 ORDER BY product_sale DESC, product_name");
+        try
+        {
+            $stmt->execute();
+            echo '<option value="0">Brak</option>';
+            while($result = $stmt->fetch())
+            {
+                if($result['product_on_home'] == $position)
+                {
+                    echo '<option value="' . $result['product_id'] . '" selected>' . $result['product_name'] . '</option>';
+                }
+                else
+                {
+                    echo '<option value="' . $result['product_id'] . '">' . $result['product_name'] . '</option>';
+                }
+            }
+        }
+        catch(Exception $e)
+        {
+            echo '<option value="0">Wystąpił problem z pobraniem listy produktów!</option>';
+        }
+        unset($conn);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -35,6 +61,7 @@
         <div id="main-small_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element active">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -48,6 +75,7 @@
         <div id="main-big_screen" class="menu">
             <a href="main_page.php"><div class="menu-element">Przegląd</div></a>
             <a href="home_page.php"><div class="menu-element active">Strona Główna</div></a>
+            <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
             <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
@@ -62,57 +90,65 @@
                 <div class="content-title">
                     Promocje na stronie głównej
                 </div>
-                <div class="bracket">
-                    <div class="bracket_title">Główna promocja</div>
-                    <div class="bracket_option">
-                        <select name="" id="">
-                            <option value="">Brak</option>
-                            <option value="">Produkt1</option>
-                        </select>
+                <form action="php_scripts/set_home_products.php" method="post">
+                    <div class="bracket">
+                        <div class="bracket_title">Główna promocja</div>
+                        <div class="bracket_option">
+                            <select name="sale_1">
+                                <?php show_products(1);?>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="bracket">
-                    <div class="bracket_title">Dodatkowa promocja nr 1</div>
-                    <div class="bracket_option">
-                        <select name="" id="">
-                            <option value="">Brak</option>
-                            <option value="">Produkt1</option>
-                        </select>
+                    <div class="bracket">
+                        <div class="bracket_title">Dodatkowa promocja nr 1</div>
+                        <div class="bracket_option">
+                            <select name="sale_2">
+                                <?php show_products(2);?>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="bracket">
-                    <div class="bracket_title">Dodatkowa promocja nr 2</div>
-                    <div class="bracket_option">
-                        <select name="" id="">
-                            <option value="">Brak</option>
-                            <option value="">Produkt1</option>
-                        </select>
+                    <div class="bracket">
+                        <div class="bracket_title">Dodatkowa promocja nr 2</div>
+                        <div class="bracket_option">
+                            <select name="sale_3">
+                                <?php show_products(3);?>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="bracket">
-                    <div class="bracket_title">Dodatkowa promocja nr 3</div>
-                    <div class="bracket_option">
-                        <select name="" id="">
-                            <option value="">Brak</option>
-                            <option value="">Produkt1</option>
-                        </select>
+                    <div class="bracket">
+                        <div class="bracket_title">Dodatkowa promocja nr 3</div>
+                        <div class="bracket_option">
+                            <select name="sale_4">
+                                <?php show_products(4);?>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="bracket">
-                    <div class="bracket_title">Dodatkowa promocja nr 4</div>
-                    <div class="bracket_option">
-                        <select name="" id="">
-                            <option value="">Brak</option>
-                            <option value="">Produkt1</option>
-                        </select>
+                    <div class="bracket">
+                        <div class="bracket_title">Dodatkowa promocja nr 4</div>
+                        <div class="bracket_option">
+                            <select name="sale_5">
+                                <?php show_products(5);?>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="save_changes">
-                    <input type="submit" value="Zapisz">
-                </div>
+                    <div class="save_changes">
+                        <input type="submit" value="Zapisz">
+                    </div>
+                </form>
             </div>
         </div>
     </main>
     <script src="js/scripts.js"></script>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
 </body>
 </html>
