@@ -125,7 +125,7 @@
                         $conn = null;
                         unset($conn);
                     ?>                    
-                <form action="statements_save.php" method="post">
+                <form action="php_scripts/statements/statements_save.php" method="post">
                 <div class="list_bracket" style="background-color: rgba(60, 150, 214, 0.1);">
                     <div class="sett_title">Modyfikować aktualny komunikat?</div>
                     <div class="sett_input_switch"><label class="switch"><input type="checkbox" name="mod"><span class="check"></span></label></div>
