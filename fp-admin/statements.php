@@ -71,43 +71,55 @@
                         $sql = "SELECT * FROM `statements` ORDER BY `statement_id` DESC LIMIT 1;";
                         $result = $conn->query($sql);
                         $show = $result -> fetch();
-                        $title = $show['statement_title'];
-                        $status = $show['statement_status'];
-                        $from = $show['statement_from'];
-                        $fromsec = strtotime($from);
-                        $to = $show['statement_to'];
-                        $tosec = strtotime($to);
-                        $date = new DateTime();
-                        $currentdate = $date->getTimestamp();
                 
-                        if($status == 1 && $fromsec > $currentdate)
+                        if($show==NULL)
                         {
-                            echo '<div class="content-notify" style="background-color: darkblue;">';
-                            echo '<h4>Komunikat na stronie zaplanowany</h4>';
-                            echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
-                            echo '<div><b>Status</b> <br>Zaplanowane</div>';
-                            echo '<div><b>Data i godzina</b> <br>'.date('d.m.Y G:i', strtotime($from)).' - '.date('d.m.Y G:i', strtotime($to)).'</div>';
-                            echo '</div>';
-                        }
-                        else if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
-                        {
-                            echo '<div class="content-notify">';
-                            echo '<h4>Komunikat na stronie aktywny</h4>';
-                            echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
-                            echo '<div><b>Status</b> <br>Aktywny</div>';
-                            echo '<div><b>Data i godzina</b> <br>'.date('d.m.Y G:i', strtotime($from)).' - '.date('d.m.Y G:i', strtotime($to)).'</div>';
+                            echo '<div class="content-notify" style="background-color: black;">';
+                            echo '<h4>Brak komunikatów!</h4>';
+                            echo '<div><b>Tytuł</b> <br>Brak</div>';
+                            echo '<div><b>Status</b> <br>Brak</div>';
+                            echo '<div><b>Data i godzina</b> <br>Brak</div>';
                             echo '</div>';
                         }
                         else
                         {
-                            echo '<div class="content-notify" style="background-color: grey;">';
-                            echo '<h4>Komunikat na stronie nieaktywny</h4>';
-                            echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
-                            echo '<div><b>Status</b> <br>Nieaktywny</div>';
-                            echo '<div><b>Data i godzina</b> <br>'.date('d.m.Y G:i', strtotime($from)).' - '.date('d.m.Y G:i', strtotime($to)).'</div>';
-                            echo '</div>';
+                            $title = $show['statement_title'];
+                            $status = $show['statement_status'];
+                            $from = $show['statement_from'];
+                            $fromsec = strtotime($from);
+                            $to = $show['statement_to'];
+                            $tosec = strtotime($to);
+                            $date = new DateTime();
+                            $currentdate = $date->getTimestamp();
+
+                            if($status == 1 && $fromsec > $currentdate)
+                            {
+                                echo '<div class="content-notify" style="background-color: darkblue;">';
+                                echo '<h4>Komunikat na stronie zaplanowany</h4>';
+                                echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
+                                echo '<div><b>Status</b> <br>Zaplanowane</div>';
+                                echo '<div><b>Data i godzina</b> <br>'.date('d.m.Y G:i', strtotime($from)).' - '.date('d.m.Y G:i', strtotime($to)).'</div>';
+                                echo '</div>';
+                            }
+                            else if($status == 1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+                            {
+                                echo '<div class="content-notify">';
+                                echo '<h4>Komunikat na stronie aktywny</h4>';
+                                echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
+                                echo '<div><b>Status</b> <br>Aktywny</div>';
+                                echo '<div><b>Data i godzina</b> <br>'.date('d.m.Y G:i', strtotime($from)).' - '.date('d.m.Y G:i', strtotime($to)).'</div>';
+                                echo '</div>';
+                            }
+                            else
+                            {
+                                echo '<div class="content-notify" style="background-color: grey;">';
+                                echo '<h4>Komunikat na stronie nieaktywny</h4>';
+                                echo '<div><b>Tytuł</b> <br>'.$title.'</div>';
+                                echo '<div><b>Status</b> <br>Nieaktywny</div>';
+                                echo '<div><b>Data i godzina</b> <br>'.date('d.m.Y G:i', strtotime($from)).' - '.date('d.m.Y G:i', strtotime($to)).'</div>';
+                                echo '</div>';
+                            }
                         }
-                
                         $conn = null;
                         unset($conn);
                     ?>                    
@@ -143,6 +155,17 @@
             </div>
         </div>
     </main>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <script src="js/scripts.js"></script>
 </body>
 </html>

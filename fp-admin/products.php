@@ -161,7 +161,7 @@
     else
     {
         $yesc = 1;
-        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `product_status`>=1 OR :cat_name!=:cat_name ORDER BY `products`.`product_name` ASC LIMIT 20;";
+        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE (`product_status`>=1 OR :cat_name!=:cat_name) AND `products`.`product_sale`=0 ORDER BY `products`.`product_name` ASC LIMIT 20;";
         $_SESSION['product_categories'] = 0;
         $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
@@ -301,7 +301,16 @@
                         $sql_select_submit = $conn->prepare($sql_select, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                         $sql_select_submitt = $sql_select_submit->execute(array(':cat_name' => $yesc));
                     
-                        while($res = $sql_select_submit -> fetch())
+                        $count = $sql_select_submit->rowCount();
+                    
+                        if($count<1)
+                        {
+                            echo "Brak produktów!";
+                        }
+                        
+                        else
+                        {
+                            while($res = $sql_select_submit -> fetch())
                         {
                             echo '<div class="product_bracket">';
                             echo '<img style="opacity: 0.5;" src="img-db/' . $res['product_image_path'] . '" alt="">';
@@ -337,6 +346,7 @@
                             echo '<a href="php_scripts/delete_product.php?pid=' . $res['product_id'] . '"><button class="product_button_delete">Usuń</button></a>';
                             echo '</div></div></div>';
                             
+                        }
                         }
                     ?>
                 </div>
