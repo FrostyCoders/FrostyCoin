@@ -9,6 +9,12 @@
     top: 0;
     right: 0;
 }
+.error_p
+{
+    width: 100%;
+    font-size: 13px;
+    text-align: center;
+}
 .ordinary_button, input[type="submit"]
 {
     min-width: 60px;
@@ -38,7 +44,7 @@ input[type="submit"]
 .file_input_label
 {
     cursor: pointer;
-    width: 154px;
+    width: 150px;
     display: block;
     border: 2px solid lightgray;
     margin: auto;
