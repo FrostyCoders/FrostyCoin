@@ -1,11 +1,8 @@
 <?php
-error_reporting(0);
 if (!isset($_COOKIE['stmt_cookie']))
     {
         setcookie('stmt_cookie', 1, time() + (24*3600), "/");
     }
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,13 +37,13 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Komputery PC
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=1">Zestawy PC</a> 
+                        Zestawy PC
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=2">Monitory</a> 
+                        Monitory
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=3">Akcesoria Komputerowe</a> 
+                        Akcesoria komputerowe
                         </div>
                     </div>
                 </div>
@@ -59,16 +56,16 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Telefony
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=4">Smartfony i Telefony</a> 
+                        Smartfony i telefony
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=5">Smartwatche</a> 
+                        Smartwatche
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=6">Nawigacje</a> 
+                        Nawigacje
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=7">Akcesoria</a> 
+                        Akcesoria
                         </div>
                     </div>
                 </div>
@@ -81,16 +78,16 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Laptopy i tablety
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=8">Laptopy</a> 
+                        Laptopy
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=9">Tablety</a> 
+                        Tablety
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=10">E-booki</a> 
+                        E-booki
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=11">Akcesoria</a> 
+                        Akcesoria
                         </div>
                     </div>
                 </div>
@@ -103,31 +100,31 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Podzespoły
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=12">Dyski SSD I HDD</a> 
+                        Dyski SSD i HDD
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=13">Procesory</a> 
+                        Procesory
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=14">Karty graficzne</a> 
+                        Karty graficzne
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=15">Kości RAM</a> 
+                        Kości RAM
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=16">Płyty główne</a> 
+                        Płyty Główne
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=17">Obudowy</a> 
+                        Obudowy
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=18">Zasilacze</a> 
+                        Zasilacze
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=19">Chłodzenia</a> 
+                        Chłodzenia
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=20">Akcesoria</a> 
+                        Akcesoria
                         </div>
                     </div>
                 </div>
@@ -140,22 +137,22 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Peryferia
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=21">Drukarki</a> 
+                        Drukarki
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=22">Urządzenia sieciowe</a> 
+                        Urządzenia sieciowe
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=23">Myszki</a> 
+                        Myszki
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=24">Klawiatury</a> 
+                        Klawiatury
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=25">Słuchawki</a> 
+                        Słuchawki
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=26">Głośniki</a> 
+                        Głośniki
                         </div>
                     </div>
                 </div>
@@ -168,13 +165,13 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Telewizory i Audio
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=27">TV</a> 
+                        TV
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=28">Projektory</a> 
+                        Projektory
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=29">Audio Domowe</a> 
+                        Audio Domowe
                         </div>
                     </div>
                 </div>
@@ -187,19 +184,19 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Oprogramowanie
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=30">Systemy Operacyjne</a> 
+                        Systemy Operacyjne
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=31">Oprogramowanie antywirusowe</a> 
+                        Oprogramowanie Antywirusowe
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=32">Oprogramowanie biurowe</a> 
+                        Oprogramowanie Biurowe
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=33">Oprogramowanie graficzne</a> 
+                        Oprogramowanie Graficzne
                         </div>
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=34">Systemy sprzedaży</a> 
+                        Systemy Sprzedaży
                         </div>
                     </div>
                 </div>
@@ -259,17 +256,15 @@ if (!isset($_COOKIE['stmt_cookie']))
 
                 else
                 {
-                    $conn = null;
+                    
                 } 
             }
         
             else
             {
-                $conn = null;
-                unset($conn);
+                
             }
-            $conn = null;
-            unset($conn);
+            
         ?>
     </header>
     
@@ -277,26 +272,93 @@ if (!isset($_COOKIE['stmt_cookie']))
     <main>
         <div class="main-container">
             <div id="promotion" class="promotion">
-                <div class="main-promo">
-                    <div class="main-beam">&nbsp;HOT!</div>
-                    <div class="main-photo"><img src="#" onerror="this.src='img/package.png';"></div>
-                    <div class="main-description"><p>Projekt CIEZOBKA</p></div>
-                    <div class="main-price"><span><b style="color: red;">5000zł! </b><sup><s style="color: lightgray;">8000zł</s></sup></span></div>
-                </div>
-                <div class="forlittlepromo">
-                     <div style="margin-bottom: 15%" class="little-promo">
-                        <div class="promo-beam">15%</div>
-                        <div class="promo-photo"><img src="#" onerror="this.src='img/package.png';"></div>
-                        <div class="promo-description"><span class="promo-small-desc">Laptop Asus!</span></div>
-                        <div class="promo-price"><span class="promo-small-price"><b style="color: red;">3000zł! </b><sup><s style="color: lightgray;">3500zł</s></sup></span></div>
-                    </div>
-                     <div style="margin-bottom: 15%" class="little-promo">
-                        <div class="promo-beam">60%</div>
-                        <div class="promo-photo"><img src="#" onerror="this.src='img/package.png';"></div>
-                        <div class="promo-description"><span class="promo-small-desc">Pendrive 32GB!</span></div>
-                        <div class="promo-price"><span class="promo-small-price"><b style="color: red;">30zł! </b><sup><s style="color: lightgray;">50zł</s></sup></span></div>
-                    </div>
-                </div>
+                <?php
+                    $sql1 = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path` FROM `products` WHERE `product_on_home`=1;";
+                    $res1 = $conn->query($sql1);
+                    $sql2 = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path` FROM `products` WHERE `product_on_home`=2;";
+                    $res2 = $conn->query($sql2);
+                    $sql3 = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path` FROM `products` WHERE `product_on_home`=3;";
+                    $res3 = $conn->query($sql3);
+                
+                    while($row = $res1 -> fetch())
+                        {
+                            if($row['product_sale']==0)
+                            {
+                                $hot = "HOT!";
+                                echo '<div class="main-promo">';
+                                echo '<div class="main-beam">&nbsp;'.$hot.'</div>';
+                                echo '<div class="main-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                echo '<div class="main-description"><p>'.$row['product_name'].'</p></div>';
+                                echo '<div class="main-price"><span><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
+                                echo '</div>';
+                            }
+                            else
+                            {
+                                $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
+                                $hot = $hot*100;
+                                echo '<div class="main-promo">';
+                                echo '<div class="main-beam">&nbsp;-'.$hot.'%</div>';
+                                echo '<div class="main-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].' alt=""></div>';
+                                echo '<div class="main-description"><p>'.$row['product_name'].'</p></div>';
+                                echo '<div class="main-price"><span><b style="color: red;">'.$row['product_sale_price'].' PLN!<sup><s style="color: lightgray;">'.$row['product_price'].' PLN</s></sup></b></span></div>';
+                                echo '</div>';
+                            }
+                            
+                        }
+                    echo '<div class="forlittlepromo">';
+                        while($row = $res2 -> fetch())
+                        {
+                            if($row['product_sale']==0)
+                            {
+                                $hot = "HOT!";
+                                echo '<div style="margin-bottom: 15%" class="little-promo">';
+                                echo '<div class="promo-beam">'.$hot.'</div>';
+                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
+                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
+                                echo '</div>';
+                            }
+                            else
+                            {
+                                $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
+                                $hot = $hot*100;
+                                echo '<div style="margin-bottom: 15%" class="little-promo">';
+                                echo '<div class="promo-beam">-'.$hot.'%</div>';
+                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
+                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_sale_price'].'! PLN<sup><s style="color: lightgray;">'.$row['product_price'].' PLN</s></sup></b></span></div>';
+                                echo '</div>';
+                            }
+                        }
+                        while($row = $res3 -> fetch())
+                        {
+                           if($row['product_sale']==0)
+                            {
+                                $hot = "HOT!";
+                                echo '<div style="margin-bottom: 15%" class="little-promo">';
+                                echo '<div class="promo-beam">'.$hot.'</div>';
+                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
+                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
+                                echo '</div>';
+                            }
+                            else
+                            {
+                                $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
+                                $hot = $hot*100;
+                                echo '<div style="margin-bottom: 15%" class="little-promo">';
+                                echo '<div class="promo-beam">-'.$hot.'%</div>';
+                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
+                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_sale_price'].'! PLN<sup><s style="color: lightgray;">'.$row['product_price'].' PLN</s></sup></b></span></div>';
+                                echo '</div>';
+                            }
+                        }
+                        echo '</div>';
+                    
+                    $conn = null;
+                    unset($conn);
+                ?>
             </div>
         </div>
     </main>
@@ -304,7 +366,7 @@ if (!isset($_COOKIE['stmt_cookie']))
     <!-- STOPKA -->
     <footer>
             <div class="footer-beam">
-                <div class="copyright"><span>FROSTY CODERS © 2020</span><br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
+                <div class="copyright" ><span><object class="data" data="fp-admin/footer.txt" type="text/html"></object></span><br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
                 <div class="newsletter">
                   <p><b>Newsletter!</b> Nie przegap nadchodzących promocji!</p>
                    <form>
@@ -325,3 +387,6 @@ if (!isset($_COOKIE['stmt_cookie']))
     
 </body>
 </html>
+<?php
+exit();
+?>

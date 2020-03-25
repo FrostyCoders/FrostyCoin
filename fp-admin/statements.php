@@ -5,7 +5,6 @@
         header("Location: index.php");
         exit();
     }
-    error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -37,6 +36,7 @@
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element active">Komunikaty strony</div></a>
+            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
@@ -50,6 +50,7 @@
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element active">Komunikaty strony</div></a>
+            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
@@ -123,7 +124,7 @@
                         $conn = null;
                         unset($conn);
                     ?>                    
-                <form action="statements_save.php" method="post">
+                <form action="php_scripts/statements/statements_save.php" method="post">
                 <div class="list_bracket" style="background-color: rgba(60, 150, 214, 0.1);">
                     <div class="sett_title">Modyfikować aktualny komunikat?</div>
                     <div class="sett_input_switch"><label class="switch"><input type="checkbox" name="mod"><span class="check"></span></label></div>

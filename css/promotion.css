@@ -34,7 +34,7 @@
 }
 .promo-beam
 {
-  width: 5rem;
+  width: 6rem;
   height: 2.5rem;
   background-color: red;
   position: absolute;
@@ -109,7 +109,7 @@
 
 .main-beam
 {
-  width: 6rem;
+  width: 6.5rem;
   height: 3rem;
   background-color: red;
   position: absolute;

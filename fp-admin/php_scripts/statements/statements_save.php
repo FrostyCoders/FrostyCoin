@@ -3,13 +3,12 @@
     session_start();
     if(!isset($_SESSION['fp-online']))
     {
-        header("Location: index.php");
+        header("Location: ../../index.php");
         exit();
     }
 
-    error_reporting(0);
 
-    require_once "connect.php"; 
+    require_once "../../connect.php"; 
 
     $setnames = "SET NAMES utf8";
     $conn->query($setnames);
@@ -63,11 +62,11 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
             $_SESSION['result']="Wystąpił błąd!";
             $conn = null;
             unset($conn);
-            header("Location: statements.php");
+            header("Location: ../../statements.php");
             exit();
         }
         $_SESSION['result']="Zmodyfikowano pomyślnie!";
-        header("Location: statements.php");
+        header("Location: ../../statements.php");
     }
 
 // INSERT
@@ -96,11 +95,11 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
             $_SESSION['result']="Wystąpił błąd!";
             $conn = null;
             unset($conn);
-            header("Location: statements.php");
+            header("Location: ../../statements.php");
             exit();
         }
         $_SESSION['result']="Dodano pomyślnie!";
-        header("Location: statements.php");
+        header("Location: ../../statements.php");
     }
 
     else
@@ -108,13 +107,13 @@ if(!empty($_POST['statement_title'] && $_POST['statement_desc'] && $_POST['state
         $_SESSION['result']="Wystąpił błąd!";
         $conn = null;
         unset($conn);
-        header("Location: statements.php");
+        header("Location: ../../statements.php");
         exit();
     }
     
     $conn = null;
     unset($conn);
-    header("Location: statements.php");
+    header("Location: ../../statements.php");
     exit();
 }
 
@@ -123,7 +122,7 @@ else
     $_SESSION['result']="Wystąpił błąd!";
     $conn = null;
     unset($conn);
-    header("Location: statements.php");
+    header("Location: ../../statements.php");
     exit();
 }
 ?>
