@@ -1,3 +1,15 @@
+<?php
+
+if (!isset($_COOKIE['stmt_cookie']))
+    {
+        setcookie('stmt_cookie', 1, time() + (24*3600), "/");
+    }
+
+require_once "fp-admin/connect.php";
+$product_id = $_GET['category_id'];
+$sql_categories = "Select * FROM product_categories WHERE category_id = '$product_id';";
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +35,7 @@
 </head>
 <body>
     <!-- PASEK NAWIGACYJNY -->
-    <nav>
+       <nav>
         <div class="nav-pasek">
             <div class="nav-logo"><a href="index.php"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
             <div class="nav-zawartosc nav-js">
@@ -31,13 +43,13 @@
                     Komputery PC
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Zestawy PC
+                        <a href="szablon.php?category_id=1">Zestawy PC</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Monitory
+                        <a href="szablon.php?category_id=2">Monitory</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Akcesoria komputerowe
+                        <a href="szablon.php?category_id=3">Akcesoria Komputerowe</a> 
                         </div>
                     </div>
                 </div>
@@ -50,16 +62,16 @@
                     Telefony
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Smartfony i telefony
+                        <a href="szablon.php?category_id=4">Smartfony i Telefony</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Smartwatche
+                        <a href="szablon.php?category_id=5">Smartwatche</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Nawigacje
+                        <a href="szablon.php?category_id=6">Nawigacje</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Akcesoria
+                        <a href="szablon.php?category_id=7">Akcesoria</a> 
                         </div>
                     </div>
                 </div>
@@ -72,16 +84,16 @@
                     Laptopy i tablety
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Laptopy
+                        <a href="szablon.php?category_id=8">Laptopy</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Tablety
+                        <a href="szablon.php?category_id=9">Tablety</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        E-booki
+                        <a href="szablon.php?category_id=10">E-booki</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Akcesoria
+                        <a href="szablon.php?category_id=11">Akcesoria</a> 
                         </div>
                     </div>
                 </div>
@@ -94,31 +106,31 @@
                     Podzespoły
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Dyski SSD i HDD
+                        <a href="szablon.php?category_id=12">Dyski SSD I HDD</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Procesory
+                        <a href="szablon.php?category_id=13">Procesory</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Karty graficzne
+                        <a href="szablon.php?category_id=14">Karty graficzne</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Kości RAM
+                        <a href="szablon.php?category_id=15">Kości RAM</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Płyty Główne
+                        <a href="szablon.php?category_id=16">Płyty główne</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Obudowy
+                        <a href="szablon.php?category_id=17">Obudowy</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Zasilacze
+                        <a href="szablon.php?category_id=18">Zasilacze</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Chłodzenia
+                        <a href="szablon.php?category_id=19">Chłodzenia</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Akcesoria
+                        <a href="szablon.php?category_id=20">Akcesoria</a> 
                         </div>
                     </div>
                 </div>
@@ -131,22 +143,22 @@
                     Peryferia
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Drukarki
+                        <a href="szablon.php?category_id=21">Drukarki</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Urządzenia sieciowe
+                        <a href="szablon.php?category_id=22">Urządzenia sieciowe</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Myszki
+                        <a href="szablon.php?category_id=23">Myszki</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Klawiatury
+                        <a href="szablon.php?category_id=24">Klawiatury</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Słuchawki
+                        <a href="szablon.php?category_id=25">Słuchawki</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Głośniki
+                        <a href="szablon.php?category_id=26">Głośniki</a> 
                         </div>
                     </div>
                 </div>
@@ -159,13 +171,13 @@
                     Telewizory i Audio
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        TV
+                        <a href="szablon.php?category_id=27">TV</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Projektory
+                        <a href="szablon.php?category_id=28">Projektory</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Audio Domowe
+                        <a href="szablon.php?category_id=29">Audio Domowe</a> 
                         </div>
                     </div>
                 </div>
@@ -178,19 +190,19 @@
                     Oprogramowanie
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Systemy Operacyjne
+                        <a href="szablon.php?category_id=30">Systemy Operacyjne</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Oprogramowanie Antywirusowe
+                        <a href="szablon.php?category_id=31">Oprogramowanie antywirusowe</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Oprogramowanie Biurowe
+                        <a href="szablon.php?category_id=32">Oprogramowanie biurowe</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Oprogramowanie Graficzne
+                        <a href="szablon.php?category_id=33">Oprogramowanie graficzne</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Systemy Sprzedaży
+                        <a href="szablon.php?category_id=34">Systemy sprzedaży</a> 
                         </div>
                     </div>
                 </div>
@@ -200,7 +212,6 @@
             </div>
         </div>
     </nav>
-    
     <!-- NAGŁÓWEK -->
     <header>
         <div class="sz-header-tlo" id="header">
@@ -222,41 +233,39 @@
     
     <!-- ZAWARTOŚĆ -->
     <main>
-       <div class="droga">tutaj jesteś</div><!--traceroute-->
+      <?php 
+      $sql_submit = $conn->query($sql_categories);
+      $res = $sql_submit -> fetch();
+      ?>
+       <div class="droga"><?php echo $res['category_name']; ?></div><!--traceroute-->
         <div class="sz-main-container">
             
             <div class="sz-lista">
-                <div class="sz-produkt">
-                    <div class="sz-produkt-image">
-                        <div class="promo-photo"><img src="#" onerror="this.src='img/package.png';"></div>
-                    </div>
-                    <div class="sz-produkt-content">
-                    <div class="sz-produkt-name">name</div>
-                    <div class="sz-produkt-cena">cena</div>
-                    <div class="sz-produkt-opis">aslfkhsdlkf sdfsfdfsf sdfsfsfsfs sdfsfsdfsdfs sdfsfsfsfsfsfs khsdkafhsedf</div>
-                    <button class="sz-produkt-dokoszyka" onclick="">Do Koszyka</button></div>
-                </div>
-                <div class="sz-produkt">
-                    <div class="sz-produkt-image">
-                        <div class="promo-photo"><img src="#" onerror="this.src='img/package.png';"></div>
-                    </div>
-                    <div class="sz-produkt-content">
-                    <div class="sz-produkt-name">name</div>
-                    <div class="sz-produkt-cena">cena</div>
-                    <div class="sz-produkt-opis">aslfkhsdlkf khsdkafhsedf</div>
-                    <button class="sz-produkt-dokoszyka" onclick="">Do Koszyka</button></div>
-                </div>
-                <div class="sz-produkt">
-                    <div class="sz-produkt-image">
-                        <div class="promo-photo"><img src="#" onerror="this.src='img/package.png';"></div>
-                    </div>
-                    <div class="sz-produkt-content">
-                    <div class="sz-produkt-name">name</div>
-                    <div class="sz-produkt-cena">cena</div>
-                    <div class="sz-produkt-opis">aslfkhsdlkf khsdkafhsedf</div>
-                    <button class="sz-produkt-dokoszyka" onclick="">Do Koszyka</button></div>
-                </div>
-               
+              <?php
+               $sql_products = "SELECT * FROM products WHERE category_id = '$product_id' AND product_status>0;";
+               $sql_products_submit = $conn->query($sql_products);
+               $count = $sql_products_submit->rowCount();
+               if($count == 0)
+               {
+                  echo "<p style='color:red; font-size:3rem; margin-left:2rem;' >Brak produktów podanej kategori!</p>";
+               }
+               else
+               {
+                  while($res1 = $sql_products_submit -> fetch())
+                  {
+                    echo "<div class='sz-produkt'>";
+                    echo "<div class='sz-produkt-image'>";
+                    echo "<div class='promo-photo'><img src='fp-admin/img-db/".$res1['product_image_path']."'onerror='this.src='img/package.png';'></div>";
+                    echo "</div>";
+                    echo "<div class='sz-produkt-content'>";
+                    echo "<div class='sz-produkt-name'>".$res1['product_name']."</div>";
+                    echo "<div class='sz-produkt-cena'>".$res1['product_price']." pln</div>";
+                    echo "<div class='sz-produkt-opis'>".$res1['product_desc']."</div>";
+                    echo "<button class='sz-produkt-dokoszyka' onclick=''>Do Koszyka</button></div>";
+                    echo "</div>";
+                  }
+               }
+               ?>
             </div>
         </div>
     </main>
