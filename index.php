@@ -4,6 +4,8 @@ if (!isset($_COOKIE['stmt_cookie']))
     {
         setcookie('stmt_cookie', 1, time() + (24*3600), "/");
     }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,13 +40,13 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Komputery PC
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Zestawy PC
+                        <a href="szablon.php?category_id=1">Zestawy PC</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Monitory
+                        <a href="szablon.php?category_id=2">Monitory</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Akcesoria komputerowe
+                        <a href="szablon.php?category_id=3">Akcesoria Komputerowe</a> 
                         </div>
                     </div>
                 </div>
@@ -57,16 +59,16 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Telefony
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Smartfony i telefony
+                        <a href="szablon.php?category_id=4">Smartfony i Telefony</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Smartwatche
+                        <a href="szablon.php?category_id=5">Smartwatche</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Nawigacje
+                        <a href="szablon.php?category_id=6">Nawigacje</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Akcesoria
+                        <a href="szablon.php?category_id=7">Akcesoria</a> 
                         </div>
                     </div>
                 </div>
@@ -79,16 +81,16 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Laptopy i tablety
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Laptopy
+                        <a href="szablon.php?category_id=8">Laptopy</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Tablety
+                        <a href="szablon.php?category_id=9">Tablety</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        E-booki
+                        <a href="szablon.php?category_id=10">E-booki</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Akcesoria
+                        <a href="szablon.php?category_id=11">Akcesoria</a> 
                         </div>
                     </div>
                 </div>
@@ -101,31 +103,31 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Podzespoły
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Dyski SSD i HDD
+                        <a href="szablon.php?category_id=12">Dyski SSD I HDD</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Procesory
+                        <a href="szablon.php?category_id=13">Procesory</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Karty graficzne
+                        <a href="szablon.php?category_id=14">Karty graficzne</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Kości RAM
+                        <a href="szablon.php?category_id=15">Kości RAM</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Płyty Główne
+                        <a href="szablon.php?category_id=16">Płyty główne</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Obudowy
+                        <a href="szablon.php?category_id=17">Obudowy</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Zasilacze
+                        <a href="szablon.php?category_id=18">Zasilacze</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Chłodzenia
+                        <a href="szablon.php?category_id=19">Chłodzenia</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Akcesoria
+                        <a href="szablon.php?category_id=20">Akcesoria</a> 
                         </div>
                     </div>
                 </div>
@@ -138,22 +140,22 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Peryferia
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Drukarki
+                        <a href="szablon.php?category_id=21">Drukarki</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Urządzenia sieciowe
+                        <a href="szablon.php?category_id=22">Urządzenia sieciowe</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Myszki
+                        <a href="szablon.php?category_id=23">Myszki</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Klawiatury
+                        <a href="szablon.php?category_id=24">Klawiatury</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Słuchawki
+                        <a href="szablon.php?category_id=25">Słuchawki</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Głośniki
+                        <a href="szablon.php?category_id=26">Głośniki</a> 
                         </div>
                     </div>
                 </div>
@@ -166,13 +168,13 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Telewizory i Audio
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        TV
+                        <a href="szablon.php?category_id=27">TV</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Projektory
+                        <a href="szablon.php?category_id=28">Projektory</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Audio Domowe
+                        <a href="szablon.php?category_id=29">Audio Domowe</a> 
                         </div>
                     </div>
                 </div>
@@ -185,19 +187,19 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Oprogramowanie
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        Systemy Operacyjne
+                        <a href="szablon.php?category_id=30">Systemy Operacyjne</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Oprogramowanie Antywirusowe
+                        <a href="szablon.php?category_id=31">Oprogramowanie antywirusowe</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Oprogramowanie Biurowe
+                        <a href="szablon.php?category_id=32">Oprogramowanie biurowe</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Oprogramowanie Graficzne
+                        <a href="szablon.php?category_id=33">Oprogramowanie graficzne</a> 
                         </div>
                         <div class="nav-podkategoria">
-                        Systemy Sprzedaży
+                        <a href="szablon.php?category_id=34">Systemy sprzedaży</a> 
                         </div>
                     </div>
                 </div>
