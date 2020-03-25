@@ -117,10 +117,10 @@
                 $("#add_category_bracket").hide();
                 $("#add_category_button").click(function(){
                     $(".no_cat").fadeOut().delay(1000).hide();
-                    $("#add_category_bracket").fadeIn();
+                    $("#add_category_bracket").slideDown();
                 });
                 $("#cancel_add").click(function(){
-                    $("#add_category_bracket").fadeOut().delay(1000).show();
+                    $("#add_category_bracket").slideUp().delay(1000).show();
                     $(".no_cat").fadeIn();
                 });
             });

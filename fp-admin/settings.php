@@ -63,9 +63,9 @@
                     Konfiguracja
                 </div>
                 <div class="bracket">
-                    <div class="bracket_title">Cośtam1</div>
+                    <div class="bracket_title">E-mail administratora</div>
                     <div class="bracket_option">
-                        <label class="switch"><input type="checkbox" checked><span class="check"></span></label>
+                        <input type="text" name="email" value="<?php echo $_SESSION['admin_email']; ?>">
                     </div>
                 </div>
                 <div class="save_changes">

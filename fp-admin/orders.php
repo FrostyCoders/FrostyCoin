@@ -5,13 +5,8 @@
         header("Location: index.php");
         exit();
     }
-    error_reporting(0);
     require_once "connect.php";
-
-    $setnames = "SET NAMES utf8";
-    $conn->query($setnames);
-
-    if(isset($_GET['filter']))
+    if(isset($_GET['filter']) && $_GET['filter'] == 1)
     {
         $order_status = $_POST['order_status'];
         $order_status = htmlentities($order_status, ENT_QUOTES, "UTF-8");
@@ -28,7 +23,6 @@
         $order_to = htmlentities($order_to, ENT_QUOTES, "UTF-8");
         $ordertosec = strtotime($order_to);
         $sql1 = "SELECT `shop_orders`.*, `order_status`.`status_name`, `shop_users`.`user_login` FROM `shop_orders` INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` INNER JOIN `shop_users` ON `shop_orders`.`user_id`=`shop_users`.`user_id`";
-        
         switch($order_quantity)
         {
             case 1:
@@ -55,8 +49,13 @@
                 $_SESSION['order_quantity'] = 4;
                 break;
             }
+            default:
+            {
+                $sql2 = " LIMIT 20;";
+                $_SESSION['order_quantity'] = 1;
+                break;
+            }
         }
-        
         switch($order_status)
         {
             case 1:
@@ -88,9 +87,14 @@
                 $sql3 = "  WHERE `shop_orders`.`order_status`=4";
                 $_SESSION['order_status'] = 5;
                 break;
-            } 
+            }
+            default:
+            {
+                $sql3 = " WHERE `shop_orders`.`order_status`>0";
+                $_SESSION['order_status'] = 1;
+                break;
+            }
         }
-        
         switch($order_sort)
         {
             case 1:
@@ -123,9 +127,13 @@
                 $_SESSION['order_sort'] = 5;
                 break;
             }
-            
+            default:
+            {
+                $sql4 = " ORDER BY `shop_orders`.`order_id`";
+                $_SESSION['order_sort'] = 1;
+                break;
+            }
         }
-        
         switch($order_display)
         {
             case 1:
@@ -139,9 +147,14 @@
                 $sql5 = " DESC";
                 $_SESSION['order_display'] = 2;
                 break;
-            } 
+            }
+            default:
+            {
+                $sql5 = " ASC";
+                $_SESSION['order_display'] = 1;
+                break;
+            }
         }
-        
         if($ordertosec>$orderfromsec)
         {
             $sql6 = " AND `shop_orders`.`order_date` BETWEEN :order_from AND :order_to";
@@ -156,8 +169,6 @@
             $_SESSION['order_from'] = 0;
             $_SESSION['order_to'] = 0;
         }
-        
-        
         $sql_select = $sql1 . $sql3 . $sql6 . $sql4 . $sql5 . $sql2;
     }
     else
@@ -278,31 +289,37 @@
                 <div class="list_container">
                     <div class="list">
                         <?php
-                            if (!isset($order_from))
+                            if(!isset($order_from))
                             {
                                 $order_from = 0;
                             }
-                            if (!isset($order_to))
+                            if(!isset($order_to))
                             {
                                 $order_to = 0;
-                            }
-                                
+                            }   
                             $sql_all = $conn->prepare($sql_select, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                            $sql_alll = $sql_all->execute(array(':order_from' => $order_from, ':order_to' => $order_to));
-                        
-                            while($res = $sql_all -> fetch())
+                            $sql_all->execute();
+                            $ocount = $sql_all->rowCount();
+                            if($ocount == 0)
                             {
-                                echo '<div class="list_bracket list_desc">';
-                                echo '<div class="id"><span class="list_bracket_desc">Identyfikator</span>'.$res['order_id'].'</div>';
-                                echo '<div class="user"><span class="list_bracket_desc">Login</span>'.$res['user_login'].'</div>';
-                                echo '<div class="date"><span class="list_bracket_desc">Data zamówienia</span>'.date('d-m-Y', strtotime($res['order_date'])).'</div>';
-                                echo '<div class="status"><span class="list_bracket_desc">Status</span>'.$res['status_name'].'</div>';
-                                echo '<div class="value"><span class="list_bracket_desc">Wartość</span>'.$res['order_value'].' PLN</div>';
-                                echo '<div class="empty">';
-                                echo '<div class="position_control" style="width: auto;">';
-                                echo '<button class="control_button">Podgląd</button>';
-                                echo '</div></div></div>';
-                            }  
+                                echo '<p style="width: 100%; text-align: center; font-size: 14px;">Brak zamówień!!</p>';
+                            }
+                            else
+                            {
+                                while($res = $sql_all -> fetch())
+                                {
+                                    echo '<div class="list_bracket list_desc">';
+                                    echo '<div class="id"><span class="list_bracket_desc">Identyfikator</span>'.$res['order_id'].'</div>';
+                                    echo '<div class="user"><span class="list_bracket_desc">Login</span>'.$res['user_login'].'</div>';
+                                    echo '<div class="date"><span class="list_bracket_desc">Data zamówienia</span>'.date('d-m-Y', strtotime($res['order_date'])).'</div>';
+                                    echo '<div class="status"><span class="list_bracket_desc">Status</span>'.$res['status_name'].'</div>';
+                                    echo '<div class="value"><span class="list_bracket_desc">Wartość</span>'.$res['order_value'].' PLN</div>';
+                                    echo '<div class="empty">';
+                                    echo '<div class="position_control" style="width: auto;">';
+                                    echo '<button class="control_button">Podgląd</button>';
+                                    echo '</div></div></div>';
+                                }  
+                            }
                         ?>
                     </div>
                 </div>
