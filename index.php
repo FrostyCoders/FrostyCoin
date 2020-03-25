@@ -302,7 +302,7 @@ if (!isset($_COOKIE['stmt_cookie']))
     <!-- STOPKA -->
     <footer>
             <div class="footer-beam">
-                <div class="copyright" ><span><object class="data" data="fp-admin/footer.txt" type="text/html"></object></span><br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
+                <div class="copyright"><span>FROSTY CODERS © 2020</span><br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
                 <div class="newsletter">
                   <p><b>Newsletter!</b> Nie przegap nadchodzących promocji!</p>
                    <form>
