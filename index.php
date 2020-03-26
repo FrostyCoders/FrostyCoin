@@ -288,8 +288,9 @@ if (!isset($_COOKIE['stmt_cookie']))
                     $sql_allrec = "SELECT `product_id` FROM `products` LIMIT 3;";
                     $res_allrec = $conn->query($sql_allrec);
                     $cou_allrec = $res_allrec->rowCount();
+                
                 // IF PRODUCTS IS NULL
-                if($cou_allrec<3 && ($cou1==0 && $cou2==0 && $cou3==0))
+                if(($cou_allrec==0 && ($cou1==0 && $cou2==0 && $cou3==0)))
                 {
                     echo '<div class="main-promo">';
                     echo '<div class="main-beam">&nbsp;------</div>';
@@ -312,6 +313,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                     echo '</div>';
                     echo '</div>';
                 }
+                
                 // IF PRODUCTS IS NOT NULL
                 else
                 {
@@ -320,32 +322,46 @@ if (!isset($_COOKIE['stmt_cookie']))
                     {
                         $sql1_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path`,`product_on_home` FROM `products` ORDER BY `product_from` DESC LIMIT 1;";
                         $res1_za = $conn->query($sql1_za);
-                         while($row = $res1_za -> fetch())
-                         {
-                             // IF PRODUCT ON HOME 1 IS NOT SALE
-                            if($row['product_sale']==0)
-                            {
-                                $hot = "HOT!";
-                                echo '<div class="main-promo">';
-                                echo '<div class="main-beam">&nbsp;'.$hot.'</div>';
-                                echo '<div class="main-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                echo '<div class="main-description"><p>'.$row['product_name'].'</p></div>';
-                                echo '<div class="main-price"><span><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
-                                echo '</div>';
-                            }
-                             // IF PRODUCT ON HOME 1 IS SALE
-                            else
-                            {
-                                $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
-                                $hot = $hot*100;
-                                echo '<div class="main-promo">';
-                                echo '<div class="main-beam">&nbsp;-'.$hot.'%</div>';
-                                echo '<div class="main-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].' alt=""></div>';
-                                echo '<div class="main-description"><p>'.$row['product_name'].'</p></div>';
-                                echo '<div class="main-price"><span><b style="color: red;">'.$row['product_sale_price'].' PLN!<sup><s style="color: lightgray;">'.$row['product_price'].' PLN</s></sup></b></span></div>';
-                                echo '</div>';
-                            }
-                         }
+                        $counter1 = $res1_za->rowCount();
+                        if($counter1==0)
+                        {
+                            echo '<div class="main-promo">';
+                            echo '<div class="main-beam">&nbsp;------</div>';
+                            echo '<div class="main-photo"><img src="fp-admin/img-db/default.png" alt=""></div>';
+                            echo '<div class="main-description"><p>Brak produktu</p></div>';
+                            echo '<div class="main-price"><span><b style="color: red;">Brak ceny</b></span></div>';
+                            echo '</div>';
+                        }
+                        else
+                        {
+                            while($row = $res1_za -> fetch())
+                             {
+                                 // IF PRODUCT ON HOME 1 IS NOT SALE
+                                if($row['product_sale']==0)
+                                {
+                                    $hot = "HOT!";
+                                    echo '<div class="main-promo">';
+                                    echo '<div class="main-beam">&nbsp;'.$hot.'</div>';
+                                    echo '<div class="main-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                    echo '<div class="main-description"><p>'.$row['product_name'].'</p></div>';
+                                    echo '<div class="main-price"><span><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
+                                    echo '</div>';
+                                }
+                                 // IF PRODUCT ON HOME 1 IS SALE
+                                else
+                                {
+                                    $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
+                                    $hot = $hot*100;
+                                    echo '<div class="main-promo">';
+                                    echo '<div class="main-beam">&nbsp;-'.$hot.'%</div>';
+                                    echo '<div class="main-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].' alt=""></div>';
+                                    echo '<div class="main-description"><p>'.$row['product_name'].'</p></div>';
+                                    echo '<div class="main-price"><span><b style="color: red;">'.$row['product_sale_price'].' PLN!<sup><s style="color: lightgray;">'.$row['product_price'].' PLN</s></sup></b></span></div>';
+                                    echo '</div>';
+                                }
+                             }
+                        }
+      
                     }
                     // IF PRODUCT ON HOME 1 IS NOT NULL
                     else
@@ -385,32 +401,46 @@ if (!isset($_COOKIE['stmt_cookie']))
                     {
                         $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path`,`product_on_home` FROM `products` ORDER BY `product_from` DESC LIMIT 1, 1;";
                         $res2_za = $conn->query($sql2_za);
-                        while($row = $res2_za -> fetch())
+                        $counter2 = $res2_za->rowCount();
+                        if($counter2==0)
                         {
-                            // IF PRODUCT ON HOME 2 IS NOT SALE
-                            if($row['product_sale']==0)
+                            echo '<div style="margin-bottom: 15%" class="little-promo">';
+                            echo '<div class="promo-beam">---</div>';
+                            echo '<div class="promo-photo"><img src="fp-admin/img-db/default.png" alt=""></div>';
+                            echo '<div class="promo-description"><span class="promo-small-desc">Brak produktu</span></div>';
+                            echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">Brak ceny</b></span></div>';
+                            echo '</div>';
+                        }
+                        else
+                        {
+                            while($row = $res2_za -> fetch())
                             {
-                                $hot = "HOT!";
-                                echo '<div style="margin-bottom: 15%" class="little-promo">';
-                                echo '<div class="promo-beam">'.$hot.'</div>';
-                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
-                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
-                                echo '</div>';
-                            }
-                            // IF PRODUCT ON HOME 2 IS SALE
-                            else
-                            {
-                                $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
-                                $hot = $hot*100;
-                                echo '<div style="margin-bottom: 15%" class="little-promo">';
-                                echo '<div class="promo-beam">-'.$hot.'%</div>';
-                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
-                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_sale_price'].'! PLN<sup><s style="color: lightgray;">'.$row['product_price'].' PLN</s></sup></b></span></div>';
-                                echo '</div>';
+                                // IF PRODUCT ON HOME 2 IS NOT SALE
+                                if($row['product_sale']==0)
+                                {
+                                    $hot = "HOT!";
+                                    echo '<div style="margin-bottom: 15%" class="little-promo">';
+                                    echo '<div class="promo-beam">'.$hot.'</div>';
+                                    echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                    echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
+                                    echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
+                                    echo '</div>';
+                                }
+                                // IF PRODUCT ON HOME 2 IS SALE
+                                else
+                                {
+                                    $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
+                                    $hot = $hot*100;
+                                    echo '<div style="margin-bottom: 15%" class="little-promo">';
+                                    echo '<div class="promo-beam">-'.$hot.'%</div>';
+                                    echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                    echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
+                                    echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_sale_price'].'! PLN<sup><s style="color: lightgray;">'.$row['product_price'].' PLN</s></sup></b></span></div>';
+                                    echo '</div>';
+                                }
                             }
                         }
+                        
                     }
                     // IF PRODUCT ON HOME 2 IS NOT NULL
                     else
@@ -447,32 +477,45 @@ if (!isset($_COOKIE['stmt_cookie']))
                     {
                         $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path`,`product_on_home` FROM `products` ORDER BY `product_from` DESC LIMIT 2, 1;";
                         $res2_za = $conn->query($sql2_za);
-                        while($row = $res2_za -> fetch())
+                        $counter2 = $res2_za->rowCount();
+                        if($counter2==0)
                         {
-                            // IF PRODUCT ON HOME 3 IS NOT SALE
-                            if($row['product_sale']==0)
-                            {
-                                $hot = "HOT!";
-                                echo '<div style="margin-bottom: 15%" class="little-promo">';
-                                echo '<div class="promo-beam">'.$hot.'</div>';
-                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
-                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
-                                echo '</div>';
-                            }
-                            // IF PRODUCT ON HOME 3 IS SALE
-                            else
-                            {
-                                $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
-                                $hot = $hot*100;
-                                echo '<div style="margin-bottom: 15%" class="little-promo">';
-                                echo '<div class="promo-beam">-'.$hot.'%</div>';
-                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
-                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_sale_price'].'! PLN<sup><s style="color: lightgray;">'.$row['product_price'].' PLN</s></sup></b></span></div>';
-                                echo '</div>';
-                            }
+                            echo '<div style="margin-bottom: 15%" class="little-promo">';
+                            echo '<div class="promo-beam">---</div>';
+                            echo '<div class="promo-photo"><img src="fp-admin/img-db/default.png" alt=""></div>';
+                            echo '<div class="promo-description"><span class="promo-small-desc">Brak produktu</span></div>';
+                            echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">Brak ceny</b></span></div>';
+                            echo '</div>';
                         }
+                        else
+                        {
+                            while($row = $res2_za -> fetch())
+                            {
+                                // IF PRODUCT ON HOME 3 IS NOT SALE
+                                if($row['product_sale']==0)
+                                {
+                                    $hot = "HOT!";
+                                    echo '<div style="margin-bottom: 15%" class="little-promo">';
+                                    echo '<div class="promo-beam">'.$hot.'</div>';
+                                    echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                    echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
+                                    echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
+                                    echo '</div>';
+                                }
+                                // IF PRODUCT ON HOME 3 IS SALE
+                                else
+                                {
+                                    $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
+                                    $hot = $hot*100;
+                                    echo '<div style="margin-bottom: 15%" class="little-promo">';
+                                    echo '<div class="promo-beam">-'.$hot.'%</div>';
+                                    echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
+                                    echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
+                                    echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_sale_price'].'! PLN<sup><s style="color: lightgray;">'.$row['product_price'].' PLN</s></sup></b></span></div>';
+                                    echo '</div>';
+                                }
+                            }
+                        } 
                     }
                     // IF PRODUCT ON HOME 3 IS NOT NULL
                     else
