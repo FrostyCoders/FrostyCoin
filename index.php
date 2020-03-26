@@ -274,18 +274,18 @@ if (!isset($_COOKIE['stmt_cookie']))
             <div id="promotion" class="promotion">
                 <?php
                 // SELECT ON HOME
-                    $sql1 = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_on_home`=1;";
+                    $sql1 = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_on_home`=1 AND `product_status`>1;";
                     $res1 = $conn->query($sql1);
-                    $sql2 = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_on_home`=2;";
+                    $sql2 = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_on_home`=2 AND `product_status`>1;";
                     $res2 = $conn->query($sql2);
-                    $sql3 = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_on_home`=3;";
+                    $sql3 = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_on_home`=3 AND `product_status`>1;";
                     $res3 = $conn->query($sql3);
         
                     $cou1 = $res1->rowCount();
                     $cou2 = $res2->rowCount();
                     $cou3 = $res3->rowCount();
                     
-                    $sql_allrec = "SELECT `product_id` FROM `products` LIMIT 3;";
+                    $sql_allrec = "SELECT `product_id` FROM `products` WHERE `product_status`>1 LIMIT 3;";
                     $res_allrec = $conn->query($sql_allrec);
                     $cou_allrec = $res_allrec->rowCount();
                 
@@ -320,9 +320,10 @@ if (!isset($_COOKIE['stmt_cookie']))
                     // IF PRODUCT ON HOME 1 IS NULL
                     if($cou1==0)
                     {
-                        $sql1_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path`,`product_on_home` FROM `products` ORDER BY `product_from` DESC LIMIT 1;";
+                        $sql1_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_status`>1 ORDER BY `product_from` DESC LIMIT 1;";
                         $res1_za = $conn->query($sql1_za);
                         $counter1 = $res1_za->rowCount();
+                        // IF LATEST 1 PRODUCT NOT EXIST
                         if($counter1==0)
                         {
                             echo '<div class="main-promo">';
@@ -332,6 +333,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                             echo '<div class="main-price"><span><b style="color: red;">Brak ceny</b></span></div>';
                             echo '</div>';
                         }
+                        // IF LATEST 1 PRODUCT EXIST
                         else
                         {
                             while($row = $res1_za -> fetch())
@@ -399,9 +401,10 @@ if (!isset($_COOKIE['stmt_cookie']))
                     // IF PRODUCT ON HOME 2 IS NULL
                     if($cou2==0)
                     {
-                        $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path`,`product_on_home` FROM `products` ORDER BY `product_from` DESC LIMIT 1, 1;";
+                        $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_status`>1 ORDER BY `product_from` DESC LIMIT 1, 1;";
                         $res2_za = $conn->query($sql2_za);
                         $counter2 = $res2_za->rowCount();
+                        // IF LATEST 2 PRODUCT NOT EXIST
                         if($counter2==0)
                         {
                             echo '<div style="margin-bottom: 15%" class="little-promo">';
@@ -411,6 +414,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                             echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">Brak ceny</b></span></div>';
                             echo '</div>';
                         }
+                        // IF LATEST 2 PRODUCT EXIST
                         else
                         {
                             while($row = $res2_za -> fetch())
@@ -475,9 +479,10 @@ if (!isset($_COOKIE['stmt_cookie']))
                     // IF PRODUCT ON HOME 3 IS NULL    
                     if($cou3==0)
                     {
-                        $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path`,`product_on_home` FROM `products` ORDER BY `product_from` DESC LIMIT 2, 1;";
+                        $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_status`>1 ORDER BY `product_from` DESC LIMIT 2, 1;";
                         $res2_za = $conn->query($sql2_za);
                         $counter2 = $res2_za->rowCount();
+                        // IF LATEST 3 PRODUCT NOT EXIST
                         if($counter2==0)
                         {
                             echo '<div style="margin-bottom: 15%" class="little-promo">';
@@ -487,6 +492,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                             echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">Brak ceny</b></span></div>';
                             echo '</div>';
                         }
+                        // IF LATEST 3 PRODUCT EXIST
                         else
                         {
                             while($row = $res2_za -> fetch())
