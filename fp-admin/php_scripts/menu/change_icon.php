@@ -54,57 +54,61 @@
     }
     if($OK == true)
     {
-        if($_GET['sub'] == 0)
+        require_once  "../permissions/check.php";
+        if(check_site() == true)
         {
-            $sql_check = "SELECT position_icon_path FROM menu_positions WHERE position_id = :position_id";
-        }
-        else
-        {
-            $sql_check = "SELECT subposition_icon_path FROM menu_subpositions WHERE subposition_id = :position_id";
-        }
-        $stmt_check = $conn->prepare($sql_check);
-        $stmt_check->bindParam(":position_id", $position_id);
-        try
-        {
-            $stmt_check->execute();
-            $result = $stmt_check->fetch();
             if($_GET['sub'] == 0)
             {
-                $old_icon = $result['position_icon_path'];
+                $sql_check = "SELECT position_icon_path FROM menu_positions WHERE position_id = :position_id";
             }
             else
             {
-                $old_icon = $result['subposition_icon_path'];
+                $sql_check = "SELECT subposition_icon_path FROM menu_subpositions WHERE subposition_id = :position_id";
             }
-            
-            if($_GET['sub'] == 0)
-            {
-                $sql = "UPDATE menu_positions SET position_icon_path = :image_name WHERE position_id = :position_id";
-            }
-            else
-            {
-                $sql = "UPDATE menu_subpositions SET subposition_icon_path = :image_name WHERE subposition_id = :position_id";
-            }
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(":image_name", $new_image_name);
-            $stmt->bindParam(":position_id", $position_id);
+            $stmt_check = $conn->prepare($sql_check);
+            $stmt_check->bindParam(":position_id", $position_id);
             try
             {
-                $stmt->execute();
-                $_SESSION['result'] = "Pomyślnie zmieniono ikonę!";
-                if($old_icon != "default.svg")
+                $stmt_check->execute();
+                $result = $stmt_check->fetch();
+                if($_GET['sub'] == 0)
                 {
-                    unlink("../../img-db/menu_icons/".$old_icon);
+                    $old_icon = $result['position_icon_path'];
+                }
+                else
+                {
+                    $old_icon = $result['subposition_icon_path'];
+                }
+                
+                if($_GET['sub'] == 0)
+                {
+                    $sql = "UPDATE menu_positions SET position_icon_path = :image_name WHERE position_id = :position_id";
+                }
+                else
+                {
+                    $sql = "UPDATE menu_subpositions SET subposition_icon_path = :image_name WHERE subposition_id = :position_id";
+                }
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(":image_name", $new_image_name);
+                $stmt->bindParam(":position_id", $position_id);
+                try
+                {
+                    $stmt->execute();
+                    $_SESSION['result'] = "Pomyślnie zmieniono ikonę!";
+                    if($old_icon != "default.svg")
+                    {
+                        unlink("../../img-db/menu_icons/".$old_icon);
+                    }
+                }
+                catch(Exception $e)
+                {
+                    $_SESSION['result'] = "Wystąpił błąd!";
                 }
             }
             catch(Exception $e)
             {
                 $_SESSION['result'] = "Wystąpił błąd!";
             }
-        }
-        catch(Exception $e)
-        {
-            $_SESSION['result'] = "Wystąpił błąd!";
         }
     }
     $conn = null;

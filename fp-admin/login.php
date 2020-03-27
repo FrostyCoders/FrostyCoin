@@ -22,6 +22,11 @@
                 $_SESSION['admin_id'] = $admin_data['admin_id'];
 				$_SESSION['admin_login'] = $admin_data['admin_login'];
 				$_SESSION['admin_email'] = $admin_data['admin_email'];
+				$permission = explode("," ,$admin_data['admin_permissions']);
+				$_SESSION['admin_p_users'] = $permission[0];
+				$_SESSION['admin_p_products'] = $permission[1];
+				$_SESSION['admin_p_site'] = $permission[2]; 
+				$_SESSION['admin_p_orders'] = $permission[3]; 
 				unset($_SESSION['login_error']);
 				unset($conn);
 				header('Location: main_page.php');
