@@ -93,14 +93,14 @@
                                     <div class="category_info">Liczba produktów: 234</div>
                                     <div class="category_settings">
                                         <button type="button" onclick="edit_cat(' . $row['category_id'] . ', ' . $addition . ', ' . $row['category_status'] . ');">Edytuj</button>
-                                        <a href="php_scripts/delete_cat.php?cat_id=' . $row['category_id'] . '"><button>Usuń</button></a>
+                                        <a href="php_scripts/categories/delete_cat.php?cat_id=' . $row['category_id'] . '"><button>Usuń</button></a>
                                     </div>
                                 </div>';
                             }
                         }
                     ?>
                     <div id="add_category_bracket" class="category_bracket">
-                        <form action="php_scripts/add_category.php" method="post">
+                        <form action="php_scripts/categories/add_category.php" method="post">
                         <div class="category_name" style="padding-left: 8px">Status: <select name="cat_status"><option value="active">Aktywna</option><option value="inactive">Niektywna</option></select></div>
                         <div class="category_name" style="padding-left: 8px">Nazwa: <input type="text" name="cat_name"></div>
                         <div class="category_settings">
@@ -117,10 +117,10 @@
                 $("#add_category_bracket").hide();
                 $("#add_category_button").click(function(){
                     $(".no_cat").fadeOut().delay(1000).hide();
-                    $("#add_category_bracket").fadeIn();
+                    $("#add_category_bracket").slideDown();
                 });
                 $("#cancel_add").click(function(){
-                    $("#add_category_bracket").fadeOut().delay(1000).show();
+                    $("#add_category_bracket").slideUp().delay(1000).show();
                     $(".no_cat").fadeIn();
                 });
             });

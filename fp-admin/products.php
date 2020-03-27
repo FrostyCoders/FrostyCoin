@@ -304,7 +304,7 @@
                     
                         if($count<1)
                         {
-                            echo "Brak produktów!";
+                            echo '<p style="font-size: 14px;">Brak produktów!</p>';
                         }
                         
                         else
@@ -342,7 +342,7 @@
                                 echo '<p class="price">Cena: '.$res['product_price'].' PLN</p>';
                             }
                             echo '<a href="edit_product.php?pid=' . $res['product_id'] . '"><button class="product_button" style="margin-right: 0.2rem;">Edytuj</button></a>';
-                            echo '<a href="php_scripts/delete_product.php?pid=' . $res['product_id'] . '"><button class="product_button_delete">Usuń</button></a>';
+                            echo '<a href="php_scripts/products/delete_product.php?pid=' . $res['product_id'] . '"><button class="product_button_delete">Usuń</button></a>';
                             echo '</div></div></div>';
                             
                         }
@@ -361,7 +361,7 @@
                 Dodaj produkt
             </div>
             <div class="popup_inputs">
-                <form action="php_scripts/add_product.php" method="post" enctype="multipart/form-data">
+                <form action="php_scripts/products/add_product.php" method="post" enctype="multipart/form-data">
                     <table>
                         <tr>
                             <td>Nazwa produktu*</td><td><input class="marked" type="text" name="product_name"></td>
@@ -370,7 +370,9 @@
                             <td>Kategoria produktu</td>
                             <td>
                                 <select name="category_id">
-                                    <?php require_once "php_scripts/select_categories.php";?>
+                                    <?php require_once "php_scripts/select_categories.php";
+                                        select_categories();
+                                    ?>
                                 </select>
                             </td>
                         </tr>

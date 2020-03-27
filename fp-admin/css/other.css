@@ -74,7 +74,7 @@
     border: 2px solid var(--color-theme);
 }
 /* input styles */
-input[type="text"], input[type="number"], input[type="datetime-local"], textarea, select, input[type="password"]
+input[type="text"], input[type="number"], input[type="datetime-local"], textarea, select
 {
     position: absolute;
     right: 1rem;
@@ -88,7 +88,7 @@ input[type="text"], input[type="number"], input[type="datetime-local"], textarea
     resize: none;
     float: left;
 }
-input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus, input[type="password"]:focus
+input[type="select"]:focus, input[type="number"]:focus, textarea:focus, select:focus
 {
     border: 2px solid var(--color-theme);
 }
@@ -584,7 +584,7 @@ input[type="checkbox"]:checked ~ .check:before
 {
     padding: 5px;
 }
-.popup_frame input[type="text"], .popup_frame select, .popup_frame input[type="number"], .popup_frame input[type="datetime-local"]
+.popup_frame input[type="text"], .popup_frame select, .popup_frame input[type="number"], .popup_frame input[type="datetime-local"], input[type="password"]
 {
     width: 160px;
     border: 2px solid lightgray;
@@ -602,7 +602,7 @@ input[type="checkbox"]:checked ~ .check:before
 {
     width: 168px;
 }
-.popup_frame input[type="text"]:focus, .popup_frame select:focus, .popup_frame textarea:focus, .popup_frame input[type="number"]:focus, .popup_frame input[type="datetime-local"]:focus
+.popup_frame input[type="text"]:focus, .popup_frame select:focus, .popup_frame textarea:focus, .popup_frame input[type="number"]:focus, .popup_frame input[type="datetime-local"]:focus, input[type="password"]:focus
 {
     border: 2px solid var(--color-theme);
 }

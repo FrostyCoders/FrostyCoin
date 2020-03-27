@@ -5,57 +5,62 @@
         exit();
     }
     session_start();
-    require_once "../connect.php";
-    $products = array($_POST['sale_1'], $_POST['sale_2'], $_POST['sale_3'], $_POST['sale_4'], $_POST['sale_5']);
-    $OK = true;
-    for($i = 0; $i < 5; $i++)
+    require_once  "permissions/check.php";
+    if(check_site() == true)
     {
-        if(!is_numeric($products[$i]))
-        {
-            $OK = false;
-        }
-    }
-    if($OK == false)
-    {
-        $_SESSION['result'] = "Wystąpił błąd!";
-    }
-    else
-    {
+        require_once "../connect.php";
+        $products = array($_POST['sale_1'], $_POST['sale_2'], $_POST['sale_3'], $_POST['sale_4'], $_POST['sale_5']);
+        $OK = true;
         for($i = 0; $i < 5; $i++)
         {
-            for($j = 0; $j < 5; $j++)
+            if(!is_numeric($products[$i]))
             {
-                if($j == $i){continue;}
-                if(($products[$i] == $products[$j]) && ($products[$i] != 0))
-                {
-                    $OK = false;
-                }
+                $OK = false;
             }
         }
         if($OK == false)
         {
-            $_SESSION['result'] = "Produkty nie mogą się powtarzać!";
+            $_SESSION['result'] = "Wystąpił błąd!";
         }
         else
         {
-            $stmt_del = $conn->prepare("UPDATE products SET product_on_home = 0");
-            $stmt = $conn->prepare("UPDATE products SET product_on_home = :position WHERE product_id = :product_id");
-            try
+            for($i = 0; $i < 5; $i++)
             {
-                $stmt_del->execute();
-                for($i = 1; $i < 6; $i++)
+                for($j = 0; $j < 5; $j++)
                 {
-                    $stmt->bindParam(":position", $i);
-                    $stmt->bindParam(":product_id", $products[$i-1]);
-                    $stmt->execute();
-                    $_SESSION['result'] = "Ustawiono pomyślnie!";
+                    if($j == $i){continue;}
+                    if(($products[$i] == $products[$j]) && ($products[$i] != 0))
+                    {
+                        $OK = false;
+                    }
                 }
             }
-            catch(Exception $e)
+            if($OK == false)
             {
-                $_SESSION['result'] = "Wystąpił błąd!";
+                $_SESSION['result'] = "Produkty nie mogą się powtarzać!";
+            }
+            else
+            {
+                $stmt_del = $conn->prepare("UPDATE products SET product_on_home = 0");
+                $stmt = $conn->prepare("UPDATE products SET product_on_home = :position WHERE product_id = :product_id");
+                try
+                {
+                    $stmt_del->execute();
+                    for($i = 1; $i < 6; $i++)
+                    {
+                        $stmt->bindParam(":position", $i);
+                        $stmt->bindParam(":product_id", $products[$i-1]);
+                        $stmt->execute();
+                        $_SESSION['result'] = "Ustawiono pomyślnie!";
+                    }
+                }
+                catch(Exception $e)
+                {
+                    $_SESSION['result'] = "Wystąpił błąd!";
+                }
             }
         }
+        unset($conn);
     }
     header("Location: ../home_page.php");
     exit();
