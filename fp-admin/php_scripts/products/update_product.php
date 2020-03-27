@@ -27,7 +27,17 @@
                 $product_sale = $_POST['product_sale'];
                 $product_sale_price = $_POST['product_sale_price'];
                 $product_sale_from = $_POST['product_sale_from'];
+                $product_sale_from = date("Y-m-d H:i:s", strtotime($product_sale_from));
                 $product_sale_to = $_POST['product_sale_to'];
+                $product_sale_to = date("Y-m-d H:i:s", strtotime($product_sale_to));
+                if($product_sale_from == "-0001-11-30 00:00:00")
+                {
+                    $product_sale_from = $db_data['product_sale_from'];
+                }
+                if($product_sale_to == "-0001-11-30 00:00:00")
+                {
+                    $product_sale_to = $db_data['product_sale_to'];
+                }
                 $product_amount = $_POST['product_amount'];
                 //CHECK
                 if(empty($category_id))
@@ -60,6 +70,8 @@
                 }
                 if($OK == true)
                 {
+                    echo $product_sale_to."</br>";
+                    echo $product_sale_from."</br>";
                     $update = $conn->prepare("UPDATE `products` SET `category_id` = ?,`product_name` = ?,`product_desc` = ?,`product_status` = ?,`product_price` = ?,`product_sale` = ?,`product_sale_price` = ?,`product_sale_from` = ?,`product_sale_to` = ?,`product_amount` = ? WHERE product_id = ?");
                     try
                     {

@@ -12,7 +12,7 @@
             $stmt = $conn->query($sql);
             if($imgname != "default.png")
             {
-                unlink("../img-db/".$imgname);
+                unlink("../../img-db/".$imgname);
             }
             $_SESSION['result'] = "Usunięto i przywrócono domyślne zdjęcie!";
         }
