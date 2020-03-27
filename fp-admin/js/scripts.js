@@ -22,7 +22,7 @@ $("#close_popup").click(function(){
 /** Edit category */
 function edit_cat(id, name, status)
 {
-    var form = '<form action="php_scripts/edit_category.php?id=' + id + '" method="post">';
+    var form = '<form action="php_scripts/categories/edit_category.php?id=' + id + '" method="post">';
     var form2 = '</form>';
     if(status==1)
     {

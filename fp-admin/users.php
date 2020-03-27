@@ -355,7 +355,7 @@
                         <tr>
                             <td>Operacje na użytkownikach</td>
                             <td>
-                                <select name="admin_create">
+                                <select name="admin_p_users">
                                     <option value="1">Tak</option>
                                     <option value="0" selected>Nie</option>
                                 </select>
@@ -364,7 +364,7 @@
                         <tr>
                             <td>Operacje na produktach</td>
                             <td>
-                                <select name="admin_create">
+                                <select name="admin_p_products">
                                     <option value="1">Tak</option>
                                     <option value="0" selected>Nie</option>
                                 </select>
@@ -373,7 +373,7 @@
                         <tr>
                             <td>Operacje do stronie</td>
                             <td>
-                                <select name="admin_create">
+                                <select name="admin_p_site">
                                     <option value="1">Tak</option>
                                     <option value="0" selected>Nie</option>
                                 </select>
@@ -382,7 +382,7 @@
                         <tr>
                             <td>Operacje na zamówieniach</td>
                             <td>
-                                <select name="admin_create">
+                                <select name="admin_p_orders">
                                     <option value="1">Tak</option>
                                     <option value="0" selected>Nie</option>
                                 </select>

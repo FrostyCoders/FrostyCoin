@@ -79,11 +79,11 @@
                         <label class="bracket_desc">Zdjęcie produktu</label>
                         <img class="photo_preview" src="img-db/<?php echo $result['product_image_path'];?>">
                         <div class="bracket_control">
-                            <form action="php_scripts/change_photo.php?pid=<?php echo $result['product_id']?>" method="post" enctype="multipart/form-data">
+                            <form action="php_scripts/products/change_photo.php?pid=<?php echo $result['product_id']?>" method="post" enctype="multipart/form-data">
                                 <label id="file_input_label" for="file_input">Wybierz plik</label><input id="file_input" type="file" name="product_image">
                                 <input type="submit" value="Zmień zdjęcie"><br>
                             </form>
-                            <a href="php_scripts/delete_photo.php?pid=<?php echo $result['product_id'];?>&imgname=<?php echo $result['product_image_path'];?>"><button>Usuń zdjęcie</button></a>
+                            <a href="php_scripts/products/delete_photo.php?pid=<?php echo $result['product_id'];?>&imgname=<?php echo $result['product_image_path'];?>"><button>Usuń zdjęcie</button></a>
                             <script>
                             $(document).ready(function(){
                                 $("#file_input").on("change", function(){
@@ -94,7 +94,7 @@
                         </script>
                         </div>
                     </div>
-                    <form action="php_scripts/update_product.php?pid=<?php echo $result['product_id']; ?>" method="post">
+                    <form action="php_scripts/products/update_product.php?pid=<?php echo $result['product_id']; ?>" method="post">
                     <div id="bracket2" class="bracket">
                         <label class="bracket_desc">Nazwa, status i kategoria</label>
                         <input type="text" name="product_name" value="<?php echo $result['product_name'];?>">
