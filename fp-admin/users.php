@@ -371,7 +371,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Operacje do stronie</td>
+                            <td>Operacje na stronie</td>
                             <td>
                                 <select name="admin_p_site">
                                     <option value="1">Tak</option>
