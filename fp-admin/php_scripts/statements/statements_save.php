@@ -6,7 +6,13 @@
         header("Location: ../../index.php");
         exit();
     }
-
+    
+    require_once  "../permissions/check.php";
+    if(check_site() == false)
+    {
+        header("Location: ../../statements.php");
+        exit();
+    }
 
     require_once "../../connect.php"; 
 
