@@ -340,19 +340,9 @@ if (!isset($_COOKIE['stmt_cookie']))
                              {
                                 $fromsec = strtotime($row['product_sale_from']);
                                 $tosec = strtotime($row['product_sale_to']);
-                                 // IF PRODUCT ON HOME 1 IS NOT SALE
-                                if($row['product_sale']==0)
-                                {
-                                    $hot = "HOT!";
-                                    echo '<div class="main-promo">';
-                                    echo '<div class="main-beam">&nbsp;'.$hot.'</div>';
-                                    echo '<div class="main-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                    echo '<div class="main-description"><p>'.$row['product_name'].'</p></div>';
-                                    echo '<div class="main-price"><span><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
-                                    echo '</div>';
-                                }
-                                 // IF PRODUCT ON HOME 1 IS SALE
-                                else if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+                                
+                                // IF PRODUCT ON HOME 1 IS SALE
+                                if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate && $row['product_amount']>0)
                                 {
                                     $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
                                     $hot = $hot*100;
@@ -375,6 +365,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                                     echo '<div class="main-price"><span><b style="color: red;">Wyprzedane!</b></span></div>';
                                     echo '</div>';
                                 }
+                                // IF PRODUCT ON HOME 1 IS NOT SALE
                                 else
                                 {
                                     $hot = "HOT!";
@@ -396,19 +387,9 @@ if (!isset($_COOKIE['stmt_cookie']))
                         {
                             $fromsec = strtotime($row['product_sale_from']);
                             $tosec = strtotime($row['product_sale_to']);
-                            // IF PRODUCT ON HOME 1 IS NOT SALE
-                            if($row['product_sale']==0)
-                            {
-                                $hot = "HOT!";
-                                echo '<div class="main-promo">';
-                                echo '<div class="main-beam">&nbsp;'.$hot.'</div>';
-                                echo '<div class="main-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                echo '<div class="main-description"><p>'.$row['product_name'].'</p></div>';
-                                echo '<div class="main-price"><span><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
-                                echo '</div>';
-                            }
+                            
                             // IF PRODUCT ON HOME 1 IS SALE
-                            else if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+                            if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate && $row['product_amount']>0)
                             {
                                 $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
                                 $hot = $hot*100;
@@ -431,6 +412,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                                 echo '<div class="main-price"><span><b style="color: lightgray;">Wyprzedane!</b></span></div>';
                                 echo '</div>';
                             }
+                            // IF PRODUCT ON HOME 1 IS NOT SALE
                             else
                             {
                                 $hot = "HOT!";
@@ -469,19 +451,9 @@ if (!isset($_COOKIE['stmt_cookie']))
                             {
                                 $fromsec = strtotime($row['product_sale_from']);
                                 $tosec = strtotime($row['product_sale_to']);
-                                // IF PRODUCT ON HOME 2 IS NOT SALE
-                                if($row['product_sale']==0)
-                                {
-                                    $hot = "HOT!";
-                                    echo '<div style="margin-bottom: 15%" class="little-promo">';
-                                    echo '<div class="promo-beam">'.$hot.'</div>';
-                                    echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                    echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
-                                    echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
-                                    echo '</div>';
-                                }
+                                
                                 // IF PRODUCT ON HOME 2 IS SALE
-                                else if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+                                if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate && $row['product_amount']>0)
                                 {
                                     $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
                                     $hot = $hot*100;
@@ -504,6 +476,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                                     echo '<div class="promo-price"><span class="promo-small-price"><b style="color: lightgray;">Wyprzedane!</b></span></div>';
                                     echo '</div>';
                                 }
+                                // IF PRODUCT ON HOME 2 IS NOT SALE
                                 else
                                 {
                                     $hot = "HOT!";
@@ -525,19 +498,9 @@ if (!isset($_COOKIE['stmt_cookie']))
                         {
                             $fromsec = strtotime($row['product_sale_from']);
                             $tosec = strtotime($row['product_sale_to']);
-                            // IF PRODUCT ON HOME 2 IS NOT SALE
-                            if($row['product_sale']==0)
-                            {
-                                $hot = "HOT!";
-                                echo '<div style="margin-bottom: 15%" class="little-promo">';
-                                echo '<div class="promo-beam">'.$hot.'</div>';
-                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
-                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
-                                echo '</div>';
-                            }
-                            // IF PRODUCT ON HOME 2 IS SALE
-                            else if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+                            
+                           // IF PRODUCT ON HOME 2 IS SALE
+                            if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate && $row['product_amount']>0)
                             {
                                 $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
                                 $hot = $hot*100;
@@ -560,6 +523,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                                 echo '<div class="promo-price"><span class="promo-small-price"><b style="color: lightgray;">Wyprzedane!</b></span></div>';
                                 echo '</div>';
                             }
+                            // IF PRODUCT ON HOME 2 IS NOT SALE
                             else
                             {
                                 $hot = "HOT!";
@@ -595,19 +559,9 @@ if (!isset($_COOKIE['stmt_cookie']))
                             {
                                 $fromsec = strtotime($row['product_sale_from']);
                                 $tosec = strtotime($row['product_sale_to']);
-                                // IF PRODUCT ON HOME 3 IS NOT SALE
-                                if($row['product_sale']==0)
-                                {
-                                    $hot = "HOT!";
-                                    echo '<div style="margin-bottom: 15%" class="little-promo">';
-                                    echo '<div class="promo-beam">'.$hot.'</div>';
-                                    echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                    echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
-                                    echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
-                                    echo '</div>';
-                                }
+                                                                
                                 // IF PRODUCT ON HOME 3 IS SALE
-                                else if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+                                if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate && $row['product_amount']>0)
                                 {
                                     $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
                                     $hot = $hot*100;
@@ -630,6 +584,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                                     echo '<div class="promo-price"><span class="promo-small-price"><b style="color: lightgray;">Wyprzedane!</b></span></div>';
                                     echo '</div>';
                                 }
+                                // IF PRODUCT ON HOME 3 IS NOT SALE
                                 else
                                 {
                                     $hot = "HOT!";
@@ -650,19 +605,9 @@ if (!isset($_COOKIE['stmt_cookie']))
                         {
                             $fromsec = strtotime($row['product_sale_from']);
                             $tosec = strtotime($row['product_sale_to']);
-                            // IF PRODUCT ON HOME 3 IS NOT SALE
-                           if($row['product_sale']==0)
-                            {
-                                $hot = "HOT!";
-                                echo '<div style="margin-bottom: 15%" class="little-promo">';
-                                echo '<div class="promo-beam">'.$hot.'</div>';
-                                echo '<div class="promo-photo"><img src="fp-admin/img-db/'.$row['product_image_path'].'" alt=""></div>';
-                                echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
-                                echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
-                                echo '</div>';
-                            }
+                            
                             // IF PRODUCT ON HOME 3 IS SALE
-                            else if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate)
+                            if($row['product_sale']==1 && $fromsec <= $currentdate && $tosec >= $currentdate && $row['product_amount']>0)
                             {
                                 $hot = 1-round($row['product_sale_price']/$row['product_price'], 2);
                                 $hot = $hot*100;
@@ -685,6 +630,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                                 echo '<div class="promo-price"><span class="promo-small-price"><b style="color: lightgray;">Wyprzedane!</b></span></div>';
                                 echo '</div>';
                             }
+                            // IF PRODUCT ON HOME 3 IS NOT SALE
                             else
                             {
                                 $hot = "HOT!";
