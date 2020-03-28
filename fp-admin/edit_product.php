@@ -147,11 +147,11 @@
                         <input type="number" name="product_sale_price" value="<?php echo $result['product_sale_price'];?>">
                     </div>
                     <div id="bracket7" class="bracket">
-                        <label class="bracket_desc">Promocja od:</label>
+                        <label class="bracket_desc">Promocja od: <?php echo $result['product_sale_from'];?></label>
                         <input type="datetime-local" name="product_sale_from" value="<?php echo $result['product_sale_from'];?>">
                     </div>
                     <div id="bracket8" class="bracket">
-                        <label class="bracket_desc">Promocja do:</label>
+                        <label class="bracket_desc">Promocja do: <?php echo $result['product_sale_to'];?></label>
                         <input type="datetime-local" name="product_sale_to" value="<?php echo $result['product_sale_to'];?>">
                     </div>
                     <div id="bracket9" class="bracket">

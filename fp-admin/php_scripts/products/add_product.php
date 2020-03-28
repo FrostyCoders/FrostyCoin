@@ -58,7 +58,7 @@
                         if($image_size < 2097152)
                         {
                             $new_image_name = uniqid('', true).".".$file_actual_ext;
-                            $new_image_path = '../img-db/'.$new_image_name;
+                            $new_image_path = '../../img-db/'.$new_image_name;
                             if(!move_uploaded_file($image_tmp_name, $new_image_path))
                             {
                                 $_SESSION['result'] = "Wystąpił błąd!";
@@ -98,7 +98,7 @@
             {
                 $_SESSION['result'] = "Wystąpił błąd!";
                 echo "<br>".$e;
-                unlink("../img-db/".$new_image_path);
+                unlink("../../img-db/".$new_image_path);
             }
         }
         $conn = null;
