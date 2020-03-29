@@ -59,13 +59,14 @@
 .control_button
 {
     background: transparent;
-    float: left;
+    float: right;
     font-size: 11px;
     padding: 5px;
     border: 2px solid lightgray;
     transition: 0.2s;
     cursor: pointer;
     margin-left: 3px;
+    margin: 7px;
 }
 .control_button:hover
 {
@@ -627,7 +628,7 @@ input[type="checkbox"]:checked ~ .check:before
 .list_container
 {
     clear: both;
-    min-height: 100px;
+    min-height: 50px;
     width: 100%;
     padding-top: 10px;
 }

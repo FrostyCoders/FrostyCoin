@@ -62,6 +62,7 @@
                 <div class="content-title">
                     Konfiguracja
                 </div>
+                <form action="php_scripts/update_email.php" method="post">
                 <div class="bracket">
                     <div class="bracket_title">E-mail administratora</div>
                     <div class="bracket_option">
@@ -71,6 +72,7 @@
                 <div class="save_changes">
                     <input type="submit" value="Zapisz">
                 </div>
+                </form>
                 <div class="content-title">
                     Zmiana hasła
                 </div>
@@ -112,7 +114,6 @@
         }
     ?>
     <script src="js/scripts.js"></script>
-   
 </body>
 </html>
 

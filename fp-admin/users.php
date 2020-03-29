@@ -277,8 +277,8 @@
                                 echo "<div class='date'><span class='list_bracket_desc'>Data Utworzenia</span>";
                                 echo $res['admin_create_time']."</div>";
                                 //button
-                                echo "<div class='empty' <div class='position_control' style='width: auto;'>";
-                                echo "<button class='control_button'>Podgląd</button></div></div>"; 
+                                echo "<div class='empty' <div class='position_control'>";
+                                echo "<button class='control_button'>Edycja</button></div></div>"; 
                             }
                          }
                        }
@@ -308,8 +308,8 @@
                                 echo "<div class='date'><span class='list_bracket_desc'>Data Utworzenia</span>";
                                 echo $res['user_create_time']."</div>";
                                 //button
-                                echo "<div class='empty' <div class='position_control' style='width: auto;'>";
-                                echo "<button class='control_button'>Podgląd</button></div></div>"; 
+                                echo "<div class='empty' <div class='position_control'>";
+                                echo "<a><button class='control_button'>Edycja</button></a></div></div>";
                             }
                          }
                         }
@@ -371,7 +371,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Operacje do stronie</td>
+                            <td>Operacje na stronie</td>
                             <td>
                                 <select name="admin_p_site">
                                     <option value="1">Tak</option>

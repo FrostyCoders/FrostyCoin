@@ -291,7 +291,7 @@
                                         echo '</div>';
                                         echo '<div class="edit_control">';
                                             echo '<input type="submit" value="Dodaj">';
-                                            echo '<button onclick="cancel_add(' . $row['position_id'] . ')" class="ordinary_button">Anuluj</button>';
+                                            echo '<button onclick="cancel_add(' . $row['position_id'] . ')" class="ordinary_button" type="button">Anuluj</button>';
                                         echo '</div>';
                                     echo '</div>';
                                 echo '</form>';

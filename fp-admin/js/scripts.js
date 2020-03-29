@@ -36,3 +36,19 @@ function edit_cat(id, name, status)
     document.getElementById("popup_inputs_edit_cat").innerHTML = full;
     $("#edit_cat").fadeIn();
 }
+// Orders
+function collapse_order(order)
+{
+    $("#order"+order).animate({height: '200px'});
+    $("#collapse_button"+order).hide();
+    $("#hide_button"+order).show();
+    $("#order_details"+order).show();
+    
+}
+function hide_order(order)
+{
+    $("#order"+order).animate({height: '46px'});
+    $("#hide_button"+order).hide();
+    $("#collapse_button"+order).show();
+    $("#order_details"+order).hide();
+}
