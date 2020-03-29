@@ -32,7 +32,6 @@
             {
                 $stmt->execute();
                 $_SESSION['result'] = "Zmieniono pomyślnie!";
-                
             }
             catch(Exception $e)
             {

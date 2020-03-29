@@ -70,24 +70,41 @@
         if(check_users() == true)
         {
             require_once "../../connect.php";
-            $admin_password = password_hash($admin_password, PASSWORD_DEFAULT);
-            $permisions = array($admin_p_users, $admin_p_products, $admin_p_site, $admin_p_orders);
-            $permisions = implode(",", $permisions);
-            $stmt = $conn->prepare("INSERT INTO `panel_admins`(`admin_id`, `admin_login`, `admin_password`, `admin_email`, `admin_permissions`, `admin_create_time`) VALUES (NULL,:admin_name,:admin_password,:admin_email,:permission,NULL)");
-            $stmt->bindParam(":admin_name", $admin_name);
-            $stmt->bindParam(":admin_password", $admin_password);
-            $stmt->bindParam(":admin_email", $admin_email);
-            $stmt->bindParam(":permission", $permisions);
-            echo "Przeszlo";
+            $check_admin = $conn->prepare("SELECT admin_login FROM panel_admins WHERE admin_login = :a_login || admin_email = :a_email");
+            $check_admin->bindParam(":a_login", $admin_name);
+            $check_admin->bindParam(":a_email", $admin_email);
             try
             {
-                $stmt->execute();
-                $_SESSION['result'] = "Pomyślnie dodano nowego administratora!";
-            }   
+                $check_admin->execute();
+                $rows = $check_admin->rowCount();
+                if($rows == 0)
+                {
+                    $admin_password = password_hash($admin_password, PASSWORD_DEFAULT);
+                    $permisions = array($admin_p_users, $admin_p_products, $admin_p_site, $admin_p_orders);
+                    $permisions = implode(",", $permisions);
+                    $stmt = $conn->prepare("INSERT INTO `panel_admins`(`admin_id`, `admin_login`, `admin_password`, `admin_email`, `admin_permissions`, `admin_create_time`) VALUES (NULL,:admin_name,:admin_password,:admin_email,:permission,NULL)");
+                    $stmt->bindParam(":admin_name", $admin_name);
+                    $stmt->bindParam(":admin_password", $admin_password);
+                    $stmt->bindParam(":admin_email", $admin_email);
+                    $stmt->bindParam(":permission", $permisions);
+                    try
+                    {
+                        $stmt->execute();
+                        $_SESSION['result'] = "Pomyślnie dodano nowego administratora!";
+                    }   
+                    catch(Exception $e)
+                    {
+                        $_SESSION['result'] = "Wystąpił błąd!";
+                    }
+                }
+                else
+                {
+                    $_SESSION['result'] = "Użytkownik o takiej nazwie lub takim e-mail już istnieje!";
+                }
+            }
             catch(Exception $e)
             {
                 $_SESSION['result'] = "Wystąpił błąd!";
-                echo $e;
             }
         }
     }
