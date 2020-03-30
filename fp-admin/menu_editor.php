@@ -116,7 +116,7 @@
                                                 echo '<tr><td class="edit_desc">Nazwa:</td><td><input type="text" name="position_name" value="' . $row['position_name'] . '"></td></tr>';
                                                 echo '<tr><td class="edit_desc">Odnośnik do strony:</td><td>';
                                                     echo '<select name="position_ref">';
-                                                        echo '<option value="0">Brak</option>';
+                                                        echo '<option value="no">Brak</option>';
                                                         $directory = "../";
                                                         foreach (glob("$directory*.{php,html,htm,txt,png,jpeg,pdf}", GLOB_BRACE) as $filename)
                                                         {
@@ -133,7 +133,7 @@
                                                     echo '</select>';
                                                 echo '</td></tr>';
                                                 echo '<tr><td class="edit_desc">Odnośnik do kategorii:</td><td>';
-                                                        echo '<select name="position_ref_cat"><option value="">Brak</option>';
+                                                        echo '<select name="position_ref_cat"><option value="no">Brak</option>';
                                                             try
                                                             {
                                                                 $stmt_cat->execute();
@@ -168,6 +168,7 @@
                                 try
                                 {
                                     $stmt2->bindParam(":pid", $row['position_id']);
+                                    $conn->query("SET NAMES 'utf8'");
                                     $stmt2->execute();
                                     $scount = $stmt2->rowCount();
                                 }
@@ -208,7 +209,7 @@
                                                         echo '<tr><td class="edit_desc">Nazwa:</td><td><input type="text" name="position_name" value="' . $row2['subposition_name'] . '"></td></tr>';
                                                         echo '<tr><td class="edit_desc">Odnośnik do strony:</td><td>';
                                                             echo '<select name="position_ref">';
-                                                                echo '<option value="0">Brak</option>';
+                                                                echo '<option value="no">Brak</option>';
                                                                 $directory = "../";
                                                                 foreach (glob("$directory*.{php,html,htm,txt,png,jpeg,pdf}", GLOB_BRACE) as $filename)
                                                                 {
@@ -225,7 +226,7 @@
                                                             echo '</select>';
                                                         echo '</td></tr>';
                                                         echo '<tr><td class="edit_desc">Odnośnik do kategorii:</td><td>';
-                                                        echo '<select name="position_ref_cat"><option value="0">Brak</option>';
+                                                        echo '<select name="position_ref_cat"><option value="no">Brak</option>';
                                                             try
                                                             {
                                                                 $stmt_cat->execute();
@@ -273,7 +274,7 @@
                                         echo '<div class="add_reflink">';
                                             echo '<p>Odnośnik do strony</p>';
                                             echo '<select name="subposition_ref">';
-                                                echo '<option value="0">Brak</option>';
+                                                echo '<option value="no">Brak</option>';
                                                 $directory = "../";
                                                 foreach (glob("$directory*.{php,html,htm,txt,png,jpeg,pdf}", GLOB_BRACE) as $filename)
                                                 {
@@ -285,7 +286,7 @@
                                         echo '<div class="add_reflink">';
                                             echo '<p>Odnośnik do kategorii</p>';
                                             echo '<select name="subposition_ref_cat">';
-                                                echo '<option value="0">Brak</option>';
+                                                echo '<option value="no">Brak</option>';
                                                 select_categories();
                                             echo '</select>';
                                         echo '</div>';
@@ -312,7 +313,7 @@
                         <div class="add_reflink">
                             <p>Odnośnik do strony</p>
                             <select name="position_ref">
-                                <option value="0">Brak</option>
+                                <option value="no">Brak</option>
                                 <?php
                                     $directory = "../";
                                     foreach (glob("$directory*.{php,html,htm,txt,png,jpeg,pdf}", GLOB_BRACE) as $filename) {
@@ -325,7 +326,7 @@
                         <div class="add_reflink">
                             <p>Odnośnik do kategorii</p>
                             <select name="position_ref_cat">
-                                <option value="0">Brak</option>
+                                <option value="no">Brak</option>
                                 <?php select_categories();?>
                             </select>
                         </div>

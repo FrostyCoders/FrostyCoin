@@ -68,6 +68,7 @@
                     <?php
                         require_once "connect.php";
                         $stmt = $conn->query("SELECT * FROM product_categories ORDER BY category_name");
+                        $conn->query("SET NAMES 'utf8'");
                         if(($stmt->rowCount()) == 0)
                         {
                             echo '<div class="no_cat" style="width: 100%; text-align: center; padding-top: 20px; padding-bottom: 20px; font-size: 14px;">Brak kategorii!</div>';

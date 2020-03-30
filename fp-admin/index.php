@@ -27,7 +27,7 @@
                 <p class="password_label">Hasło</p>
                 <input type="password" name="fp-password" required><br><br>
                 <input type="submit" value="Zaloguj się">
-                <p class="pass_forget"><a href="forgot_password.html">Zapomiałeś hasła?</a></p>
+                <p class="pass_forget">Zapomiałeś hasła? Skontaktuj się z administratorem.</p>
                 <p class="login_error">
                     <?php
                         if(isset($_SESSION['login_error']))
