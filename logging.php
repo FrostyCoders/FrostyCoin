@@ -39,9 +39,20 @@
                    $_SESSION['logged'] = true;
 
 
-                   $_SESSION['id'] = $row['id'];
-                   $_SESSION['user_name'] = $row['user_name'];
+                   $_SESSION['id'] = $row['user_id'];
+                   $_SESSION['user_email'] = $row['user_email'];
+                   $_SESSION['user_pass'] = $row['user_password'];
 
+                   $_SESSION['user_name'] = $row['user_name'];
+                   $_SESSION['user_surname'] = $row['user_surname'];
+                   $_SESSION['user_city'] = $row['user_city'];
+                   $_SESSION['user_street'] = $row['user_street'];
+                   $_SESSION['user_house_no'] = $row['user_house_no'];
+                   $_SESSION['user_birth_day'] = $row['user_birth_day'];
+                   $_SESSION['user_postcode'] = $row['user_postcode'];
+                   $_SESSION['user_phone_number'] = $row['user_phone_number'];
+                   
+                   
                    unset($_SESSION['error']);
 
                    $result->free_result();
