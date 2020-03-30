@@ -152,6 +152,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/other.css">
     <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="css/orders.css">
     <script src="js/jquery.js"></script>
 </head>
 <body>
@@ -251,70 +252,106 @@
                 <div class="list_container">
                     <div class="list">
                         <?php
-                        if($search_role=="Administrator")
-                        { 
-                         $sql_select_submit = $conn->query($sql_select);
-                         $ucount = $sql_select_submit->rowCount();
-                         if($ucount == 0)
-                         {
-                            echo '<p style="width: 100%; text-align: center; font-size: 14px;   ">Brak użytkowników!</p>';
-                         }
-                         else
-                         {
-                            while($res = $sql_select_submit -> fetch())
-                            {
-                                //id
-                                echo "<div class='list_bracket'>"; 
-                                echo "<div class='id'><span class='list_bracket_desc'>Identyfikator</span>";
-                                echo $res['admin_id']."</div>";
-                                //email
-                                echo "<div class='user'><span class='list_bracket_desc'>Email</span>";
-                                echo $res['admin_email']."</div>";
-                                //name
-                                echo "<div class='user'><span class='list_bracket_desc'>Login</span>";
-                                echo $res['admin_login']."</div>";
-                                //data
-                                echo "<div class='date'><span class='list_bracket_desc'>Data Utworzenia</span>";
-                                echo $res['admin_create_time']."</div>";
-                                //button
-                                echo "<div class='empty' <div class='position_control'>";
-                                echo "<button class='control_button'>Edycja</button></div></div>"; 
-                            }
-                         }
-                       }
-                      else 
+                        $stmt = $conn->prepare("SELECT * FROM panel_admins WHERE admin_id != :id");
+                        $stmt->bindParam(":id", $_SESSION['admin_id']);
+                        try
                         {
-                         $sql_select_submit = $conn->query($sql_select);
-                         $ucount = $sql_select_submit->rowCount();
-                         if($ucount == 0)
-                         {
-                            echo '<p style="width: 100%; text-align: center; font-size: 14px;">Brak użytkowników!</p>';
-                         }
-                         else
-                         {
-                            while($res = $sql_select_submit -> fetch())
-                            {
-                                //id
-                                echo "<div class='list_bracket'>"; 
-                                echo "<div class='id'><span class='list_bracket_desc'>Identyfikator</span>";
-                                echo $res['user_id']."</div>";
-                                //email
-                                echo "<div class='user'><span class='list_bracket_desc'>Email</span>";
-                                echo $res['user_email']."</div>";
-                                //name
-                                echo "<div class='user'><span class='list_bracket_desc'>Imię</span>";
-                                echo $res['user_name']."</div>";
-                                //data
-                                echo "<div class='date'><span class='list_bracket_desc'>Data Utworzenia</span>";
-                                echo $res['user_create_time']."</div>";
-                                //button
-                                echo "<div class='empty' <div class='position_control'>";
-                                echo "<a><button class='control_button'>Edycja</button></a></div></div>";
-                            }
-                         }
+                            $stmt->execute();
                         }
-                               $conn = null;
-                         ?>
+                        catch(Exception $e)
+                        {
+                            echo '<p style="width: 100%; text-align: center; font-size: 14px;">Wystąpił błąd podczas ładowania użytkowników!</p>';
+                        }
+                        if($stmt->rowCount() == 0)
+                        {
+                            echo '<p style="width: 100%; text-align: center; font-size: 14px;">Brak użytkowników w bazie!</p>';
+                        }
+                        else
+                        {
+                            while($row = $stmt->fetch())
+                            {
+                                $rights = explode(",", $row['admin_permissions']);
+                                echo '<div id="order' . $row['admin_id'] . '" class="order_bracket">';
+                                    echo '<p class="order_info"><i>Identyfikator użytkownika</i><br><b>' . $row['admin_id'] . '</b></p>';
+                                    echo '<p class="order_info" style="width: 140px;"><i>Login admina</i><br><b>' . $row['admin_login'] . '</b></p>';
+                                    echo '<p class="order_info"><i>Data utworzenia</i><br><b>' . date("d-m-Y", strtotime($row['admin_create_time'])) . '</b></p>';
+                                    echo '<p class="order_info"><i>E-mail administratora</i><br><b>' . $row['admin_email'] . '</b></p>';
+                                    echo '<div class="order_collapse">';
+                                        echo '<button id="collapse_button' . $row['admin_id'] . '" onclick="collapse_order(' . $row['admin_id'] . ');" class="ordinary_button">Edycja</button>';
+                                        echo '<button id="hide_button' . $row['admin_id'] . '" onclick="hide_order(' . $row['admin_id'] . ');" class="ordinary_button" style="display: none;">Anuluj</button>';
+                                    echo '</div>';
+                                    echo '<div id="order_details' . $row['admin_id'] . '" class="order_details corr" style="display: none;">';
+                                    echo '<form action="php_scripts/users/change_admin.php?aid=' . $row['admin_id'] . '" method="post">';
+                                        echo '<table>';
+                                            echo '<tr>';
+                                                echo '<td class="right_desc">E-mail:</td><td><input type="text" name="email" value="' . $row['admin_email'] . '"></td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td class="right_desc">Uprawnienia do operacji na użytkownikach:</td><td><select name="user">';
+                                                if($rights[0] == 1)
+                                                {
+                                                    echo '<option value="1" selected>Tak</option>';
+                                                    echo '<option value="0">Nie</option>';
+                                                }
+                                                else
+                                                {
+                                                    echo '<option value="1">Tak</option>';
+                                                    echo '<option value="0" selected>Nie</option>';
+                                                }
+                                                echo '</select></td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td class="right_desc">Uprawnienia do operacji na produktach:</td><td><select name="product">';
+                                                if($rights[1] == 1)
+                                                {
+                                                    echo '<option value="1" selected>Tak</option>';
+                                                    echo '<option value="0">Nie</option>';
+                                                }
+                                                else
+                                                {
+                                                    echo '<option value="1">Tak</option>';
+                                                    echo '<option value="0" selected>Nie</option>';
+                                                }
+                                                echo '</select></td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td class="right_desc">Uprawnienia do operacji na witrynie:</td><td><select name="site">';
+                                                if($rights[2] == 1)
+                                                {
+                                                    echo '<option value="1" selected>Tak</option>';
+                                                    echo '<option value="0">Nie</option>';
+                                                }
+                                                else
+                                                {
+                                                    echo '<option value="1">Tak</option>';
+                                                    echo '<option value="0" selected>Nie</option>';
+                                                }
+                                                echo '</select></td>';
+                                            echo '</tr>';
+                                            echo '<tr>';
+                                                echo '<td class="right_desc">Uprawnienia do operacji na zamówieniach:</td><td><select name="orders">';
+                                                if($rights[3] == 1)
+                                                {
+                                                    echo '<option value="1" selected>Tak</option>';
+                                                    echo '<option value="0">Nie</option>';
+                                                }
+                                                else
+                                                {
+                                                    echo '<option value="1">Tak</option>';
+                                                    echo '<option value="0" selected>Nie</option>';
+                                                }
+                                                echo '</select></td>';
+                                            echo '</tr>';
+                                        echo '</table>';
+                                        echo '<div class="controls">';
+                                            echo '<input type="submit" value="Zapisz"><a href="php_scripts/users/delete_admin.php?aid=' . $row['admin_id'] . '"><button class="ordinary_button" type="button">Usuń</button></a>';
+                                        echo '</div>';
+                                        echo '</form>';
+                                    echo '</div>';
+                                echo '</div>';
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

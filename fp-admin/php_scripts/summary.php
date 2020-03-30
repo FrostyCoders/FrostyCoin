@@ -1,5 +1,4 @@
 <?php
-
 //NUMBER OF CATEGORIES
 
     $sum_cat = $conn->query("SELECT COUNT(*) as sum_cat FROM product_categories");
@@ -10,7 +9,7 @@
 
 //NUMBER OF ORDERS
 
-    $sum_order = $conn->query("SELECT COUNT(*) as sum_order FROM order_status WHERE status_name='active'");
+    $sum_order = $conn->query("SELECT COUNT(*) as sum_order FROM shop_orders WHERE order_status<4");
     foreach($sum_order as $row)
 
     $sum_order=$row['sum_order'];
