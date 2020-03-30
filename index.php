@@ -320,7 +320,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                     // IF PRODUCT ON HOME 1 IS NULL
                     if($cou1==0)
                     {
-                        $sql1_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_amount`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_status`>1 ORDER BY `product_from` DESC LIMIT 1;";
+                        $sql1_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_amount`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_status`>1 ORDER BY `product_from` ASC LIMIT 1;";
                         $res1_za = $conn->query($sql1_za);
                         $counter1 = $res1_za->rowCount();
                         // IF LATEST 1 PRODUCT NOT EXIST
@@ -431,7 +431,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                     // IF PRODUCT ON HOME 2 IS NULL
                     if($cou2==0)
                     {
-                        $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_amount`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_status`>1 ORDER BY `product_from` DESC LIMIT 1, 1;";
+                        $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_amount`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_status`>1 ORDER BY `product_from` ASC LIMIT 1, 1;";
                         $res2_za = $conn->query($sql2_za);
                         $counter2 = $res2_za->rowCount();
                         // IF LATEST 2 PRODUCT NOT EXIST
@@ -539,7 +539,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                     // IF PRODUCT ON HOME 3 IS NULL    
                     if($cou3==0)
                     {
-                        $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_amount`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_status`>1 ORDER BY `product_from` DESC LIMIT 2, 1;";
+                        $sql2_za = "SELECT `product_name`,`product_price`,`product_sale_price`,`product_sale`,`product_sale_from`,`product_sale_to`,`product_amount`,`product_image_path`,`product_on_home` FROM `products` WHERE `product_status`>1 ORDER BY `product_from` ASC LIMIT 2, 1;";
                         $res2_za = $conn->query($sql2_za);
                         $counter2 = $res2_za->rowCount();
                         // IF LATEST 3 PRODUCT NOT EXIST
