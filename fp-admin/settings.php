@@ -37,7 +37,6 @@
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
-            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
@@ -51,7 +50,6 @@
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
-            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
@@ -64,15 +62,17 @@
                 <div class="content-title">
                     Konfiguracja
                 </div>
+                <form action="php_scripts/update_email.php" method="post">
                 <div class="bracket">
-                    <div class="bracket_title">Cośtam1</div>
+                    <div class="bracket_title">E-mail administratora</div>
                     <div class="bracket_option">
-                        <label class="switch"><input type="checkbox" checked><span class="check"></span></label>
+                        <input type="text" name="email" value="<?php echo $_SESSION['admin_email']; ?>">
                     </div>
                 </div>
                 <div class="save_changes">
                     <input type="submit" value="Zapisz">
                 </div>
+                </form>
                 <div class="content-title">
                     Zmiana hasła
                 </div>
@@ -114,7 +114,6 @@
         }
     ?>
     <script src="js/scripts.js"></script>
-   
 </body>
 </html>
 

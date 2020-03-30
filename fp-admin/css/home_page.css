@@ -24,6 +24,10 @@
     text-align: right;
     position: relative;
 }
+.bracket_option input[type="password"]
+{
+    margin-top: 0;
+}
 .bracket_option label
 {
     right: 10px;

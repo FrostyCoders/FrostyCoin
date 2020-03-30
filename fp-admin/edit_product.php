@@ -51,7 +51,6 @@
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
-            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
@@ -65,7 +64,6 @@
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
-            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
@@ -81,11 +79,11 @@
                         <label class="bracket_desc">Zdjęcie produktu</label>
                         <img class="photo_preview" src="img-db/<?php echo $result['product_image_path'];?>">
                         <div class="bracket_control">
-                            <form action="php_scripts/change_photo.php?pid=<?php echo $result['product_id']?>" method="post" enctype="multipart/form-data">
+                            <form action="php_scripts/products/change_photo.php?pid=<?php echo $result['product_id']?>" method="post" enctype="multipart/form-data">
                                 <label id="file_input_label" for="file_input">Wybierz plik</label><input id="file_input" type="file" name="product_image">
                                 <input type="submit" value="Zmień zdjęcie"><br>
                             </form>
-                            <a href="php_scripts/delete_photo.php?pid=<?php echo $result['product_id'];?>&imgname=<?php echo $result['product_image_path'];?>"><button>Usuń zdjęcie</button></a>
+                            <a href="php_scripts/products/delete_photo.php?pid=<?php echo $result['product_id'];?>&imgname=<?php echo $result['product_image_path'];?>"><button>Usuń zdjęcie</button></a>
                             <script>
                             $(document).ready(function(){
                                 $("#file_input").on("change", function(){
@@ -96,7 +94,7 @@
                         </script>
                         </div>
                     </div>
-                    <form action="php_scripts/update_product.php?pid=<?php echo $result['product_id']; ?>" method="post">
+                    <form action="php_scripts/products/update_product.php?pid=<?php echo $result['product_id']; ?>" method="post">
                     <div id="bracket2" class="bracket">
                         <label class="bracket_desc">Nazwa, status i kategoria</label>
                         <input type="text" name="product_name" value="<?php echo $result['product_name'];?>">
@@ -149,11 +147,11 @@
                         <input type="number" name="product_sale_price" value="<?php echo $result['product_sale_price'];?>">
                     </div>
                     <div id="bracket7" class="bracket">
-                        <label class="bracket_desc">Promocja od:</label>
+                        <label class="bracket_desc">Promocja od: <?php echo $result['product_sale_from'];?></label>
                         <input type="datetime-local" name="product_sale_from" value="<?php echo $result['product_sale_from'];?>">
                     </div>
                     <div id="bracket8" class="bracket">
-                        <label class="bracket_desc">Promocja do:</label>
+                        <label class="bracket_desc">Promocja do: <?php echo $result['product_sale_to'];?></label>
                         <input type="datetime-local" name="product_sale_to" value="<?php echo $result['product_sale_to'];?>">
                     </div>
                     <div id="bracket9" class="bracket">

@@ -5,7 +5,6 @@
         header("Location: index.php");
         exit();
     }
-    error_reporting(0);
     require_once "connect.php";
 
     $setnames = "SET NAMES utf8";
@@ -161,7 +160,7 @@
     else
     {
         $yesc = 1;
-        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE (`product_status`>=1 OR :cat_name!=:cat_name) AND `products`.`product_sale`=0 ORDER BY `products`.`product_name` ASC LIMIT 20;";
+        $sql_select = "SELECT `products`.*, `product_categories`.`category_name` FROM `products` INNER JOIN `product_categories` ON `products`.`category_id`=`product_categories`.`category_id` WHERE `product_status`!=0 ORDER BY `products`.`product_name` ASC LIMIT 20;";
         $_SESSION['product_categories'] = 0;
         $_SESSION['product_sort'] = 0;
         $_SESSION['product_quantity'] = 1;
@@ -201,7 +200,6 @@
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
-            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element active">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
@@ -215,7 +213,6 @@
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
-            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element  active">Produkty</div></a>
             <a href="orders.php"><div class="menu-element">Zamówienia</div></a>
@@ -307,7 +304,7 @@
                     
                         if($count<1)
                         {
-                            echo "Brak produktów!";
+                            echo '<p style="font-size: 14px;">Brak produktów!</p>';
                         }
                         
                         else
@@ -345,7 +342,7 @@
                                 echo '<p class="price">Cena: '.$res['product_price'].' PLN</p>';
                             }
                             echo '<a href="edit_product.php?pid=' . $res['product_id'] . '"><button class="product_button" style="margin-right: 0.2rem;">Edytuj</button></a>';
-                            echo '<a href="php_scripts/delete_product.php?pid=' . $res['product_id'] . '"><button class="product_button_delete">Usuń</button></a>';
+                            echo '<a href="php_scripts/products/delete_product.php?pid=' . $res['product_id'] . '"><button class="product_button_delete">Usuń</button></a>';
                             echo '</div></div></div>';
                             
                         }
@@ -364,7 +361,7 @@
                 Dodaj produkt
             </div>
             <div class="popup_inputs">
-                <form action="php_scripts/add_product.php" method="post" enctype="multipart/form-data">
+                <form action="php_scripts/products/add_product.php" method="post" enctype="multipart/form-data">
                     <table>
                         <tr>
                             <td>Nazwa produktu*</td><td><input class="marked" type="text" name="product_name"></td>
@@ -373,7 +370,9 @@
                             <td>Kategoria produktu</td>
                             <td>
                                 <select name="category_id">
-                                    <?php require_once "php_scripts/select_categories.php";?>
+                                    <?php require_once "php_scripts/select_categories.php";
+                                        select_categories();
+                                    ?>
                                 </select>
                             </td>
                         </tr>

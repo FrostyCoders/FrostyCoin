@@ -4,11 +4,24 @@
     if(!isset($_SESSION['fp-online']))
     {
         header("Location: ../../index.php");
+<<<<<<< HEAD:fp-admin/php_scripts/statements/statements_save.php
         exit();
     }
 
     error_reporting(0);
 
+=======
+        exit();
+    }
+    
+    require_once  "../permissions/check.php";
+    if(check_site() == false)
+    {
+        header("Location: ../../statements.php");
+        exit();
+    }
+
+>>>>>>> 35305cb5ef46fde6a81546cbd00824678b5d4498:fp-admin/statements_save.php
     require_once "../../connect.php"; 
 
     $setnames = "SET NAMES utf8";

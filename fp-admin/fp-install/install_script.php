@@ -114,7 +114,7 @@
     }
     // CREATE NEW ADMIN
     $admin_password = password_hash($admin_password, PASSWORD_DEFAULT);
-    $create_admin = "INSERT INTO `fp-admins` (admin_id, login, password, email, creation_time) VALUES ('NULL', '$admin_name', '$admin_password', '$admin_email', NULL);";
+    $create_admin = "INSERT INTO `fp-admins` INSERT INTO `panel_admins`(`admin_id`, `admin_login`, `admin_password`, `admin_email`, `admin_permissions`, `admin_create_time`) VALUES ('NULL', '$admin_name', '$admin_password', '$admin_email', '1,1,1,1', NULL);";
     if(!$conn->query($create_admin))
     {
         fwrite($log, $date = date('d/m/Y h:i:s a', time())." : Create new admin as panel primary admin failed : ERROR\r\n");

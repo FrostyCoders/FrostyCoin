@@ -5,13 +5,8 @@
         header("Location: index.php");
         exit();
     }
-    error_reporting(0);
     require_once "connect.php";
-
-    $setnames = "SET NAMES utf8";
-    $conn->query($setnames);
-
-    if(isset($_GET['filter']))
+    if(isset($_GET['filter']) && $_GET['filter'] == 1)
     {
         $order_status = $_POST['order_status'];
         $order_status = htmlentities($order_status, ENT_QUOTES, "UTF-8");
@@ -28,7 +23,6 @@
         $order_to = htmlentities($order_to, ENT_QUOTES, "UTF-8");
         $ordertosec = strtotime($order_to);
         $sql1 = "SELECT `shop_orders`.*, `order_status`.`status_name`, `shop_users`.`user_login` FROM `shop_orders` INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` INNER JOIN `shop_users` ON `shop_orders`.`user_id`=`shop_users`.`user_id`";
-        
         switch($order_quantity)
         {
             case 1:
@@ -55,8 +49,13 @@
                 $_SESSION['order_quantity'] = 4;
                 break;
             }
+            default:
+            {
+                $sql2 = " LIMIT 20;";
+                $_SESSION['order_quantity'] = 1;
+                break;
+            }
         }
-        
         switch($order_status)
         {
             case 1:
@@ -88,9 +87,14 @@
                 $sql3 = "  WHERE `shop_orders`.`order_status`=4";
                 $_SESSION['order_status'] = 5;
                 break;
-            } 
+            }
+            default:
+            {
+                $sql3 = " WHERE `shop_orders`.`order_status`>0";
+                $_SESSION['order_status'] = 1;
+                break;
+            }
         }
-        
         switch($order_sort)
         {
             case 1:
@@ -123,9 +127,13 @@
                 $_SESSION['order_sort'] = 5;
                 break;
             }
-            
+            default:
+            {
+                $sql4 = " ORDER BY `shop_orders`.`order_id`";
+                $_SESSION['order_sort'] = 1;
+                break;
+            }
         }
-        
         switch($order_display)
         {
             case 1:
@@ -139,9 +147,14 @@
                 $sql5 = " DESC";
                 $_SESSION['order_display'] = 2;
                 break;
-            } 
+            }
+            default:
+            {
+                $sql5 = " ASC";
+                $_SESSION['order_display'] = 1;
+                break;
+            }
         }
-        
         if($ordertosec>$orderfromsec)
         {
             $sql6 = " AND `shop_orders`.`order_date` BETWEEN :order_from AND :order_to";
@@ -156,8 +169,6 @@
             $_SESSION['order_from'] = 0;
             $_SESSION['order_to'] = 0;
         }
-        
-        
         $sql_select = $sql1 . $sql3 . $sql6 . $sql4 . $sql5 . $sql2;
     }
     else
@@ -183,6 +194,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/other.css">
     <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="css/orders.css">
     <script src="js/jquery.js"></script>
 </head>
 <body>
@@ -202,7 +214,6 @@
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
-            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element  active">Zamówienia</div></a>
@@ -216,7 +227,6 @@
             <a href="home_page.php"><div class="menu-element">Strona Główna</div></a>
             <a href="menu_editor.php"><div class="menu-element">Menu główne</div></a>
             <a href="statements.php"><div class="menu-element">Komunikaty strony</div></a>
-            <a href="footer.php"><div class="menu-element">Stopka</div></a>
             <a href="product_categories.php"><div class="menu-element">Kategorie produktów</div></a>
             <a href="products.php"><div class="menu-element">Produkty</div></a>
             <a href="orders.php"><div class="menu-element  active">Zamówienia</div></a>
@@ -280,37 +290,119 @@
                 <div class="list_container">
                     <div class="list">
                         <?php
-                            if (!isset($order_from))
+                            $stmt = $conn->prepare("SELECT shop_orders.*, order_delivery.delivery_name, order_status.status_name, shop_users.user_login FROM shop_orders INNER JOIN order_delivery ON shop_orders.order_delivery = order_delivery.delivery_id INNER JOIN order_status ON shop_orders.order_status = order_status.status_id INNER JOIN shop_users ON shop_orders.user_id = shop_users.user_id ORDER BY shop_orders.order_date");
+                            try
                             {
-                                $order_from = 0;
+                                $conn->query("SET NAMES 'utf8'");
+                                $stmt->execute();
+                                if($stmt->rowCount() != 0)
+                                {
+                                    $order_exist = true;
+                                }
+                                else
+                                {
+                                    echo '<p style="width: 100%; text-align: center; font-size: 14px;">Brak zamówień!!</p>';
+                                    $order_exist = false;
+                                }
                             }
-                            if (!isset($order_to))
+                            catch(Exception $e)
                             {
-                                $order_to = 0;
+                                echo '<p style="width: 100%; text-align: center; font-size: 14px;">Wystąpił błąd podczas ładowania listy zamówień!</p>';
+                                $order_exist = false;
                             }
-                                
-                            $sql_all = $conn->prepare($sql_select, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                            $sql_alll = $sql_all->execute(array(':order_from' => $order_from, ':order_to' => $order_to));
-                        
-                            while($res = $sql_all -> fetch())
+                            if($order_exist == true)
                             {
-                                echo '<div class="list_bracket list_desc">';
-                                echo '<div class="id"><span class="list_bracket_desc">Identyfikator</span>'.$res['order_id'].'</div>';
-                                echo '<div class="user"><span class="list_bracket_desc">Login</span>'.$res['user_login'].'</div>';
-                                echo '<div class="date"><span class="list_bracket_desc">Data zamówienia</span>'.date('d-m-Y', strtotime($res['order_date'])).'</div>';
-                                echo '<div class="status"><span class="list_bracket_desc">Status</span>'.$res['status_name'].'</div>';
-                                echo '<div class="value"><span class="list_bracket_desc">Wartość</span>'.$res['order_value'].' PLN</div>';
-                                echo '<div class="empty">';
-                                echo '<div class="position_control" style="width: auto;">';
-                                echo '<button class="control_button">Podgląd</button>';
-                                echo '</div></div></div>';
-                            }  
+                                while($row = $stmt->fetch())
+                                {
+                                    echo '<div id="order' . $row['order_id'] . '" class="order_bracket">';
+                                        echo '<p class="order_info"><i>Identyfikator zamówienia</i><br><b>' . $row['order_id'] . '</b></p>';
+                                        echo '<p class="order_info"><i>Zamawiający</i><br><b>' . $row['user_login'] . '</b></p>';
+                                        echo '<p class="order_info"><i>Data zamówienia</i><br><b>' . date("d-m-Y", strtotime($row['order_date'])) . '</b></p>';
+                                        $prices = explode(",", $row['order_prices']);
+                                        $total_price = array_sum($prices);
+                                        echo '<p class="order_info"><i>Cena zamówienia</i><br><b>' . $total_price . ' PLN</b></p>';
+                                        echo '<p class="order_info"><i>Status zamówienia</i><br><b>' . $row['status_name'] . '</b></p>';
+                                        echo '<p class="order_info"><i>Sposób dostawy</i><br><b>' . $row['delivery_name'] . '</b></p>';
+                                        echo '<div class="order_collapse">';
+                                            echo '<button id="collapse_button' . $row['order_id'] . '" onclick="collapse_order(' . $row['order_id'] . ');" class="ordinary_button">Szczegóły</button>';
+                                            echo '<button id="hide_button' . $row['order_id'] . '" onclick="hide_order(' . $row['order_id'] . ');" class="ordinary_button" style="display: none; ">Schowaj</button>';
+                                            echo '<a href="php_scripts/orders/invoice.php?oid=' . $row['order_id'] . '" target="_blank"><button type="button" class="ordinary_button">Pobierz fakturę</button></a>';
+                                        echo '</div>';
+                                        echo '<div id="order_details' . $row['order_id'] . '" style="display: none;">';
+                                            echo '<div class="order_products">';
+                                                echo '<div class="product" style="border-bottom: 2px solid lightgray;"><p class="product_id"><b style="font-size: 12px;">Identyfikator</b></p><p class="product_name"><b style="font-size: 12px;">Nazwa</b></p><p class="product_price"><b style="font-size: 12px;">Cena</b></p></div>';
+                                                $product_list = explode(",", $row['order_products']);
+                                                $i = 0;
+                                                foreach($product_list as $product)
+                                                {
+                                                    $product_sql = $conn->prepare("SELECT product_name FROM products WHERE product_id = :product_id");
+                                                    $product_sql->bindParam(":product_id", $product);
+                                                    try
+                                                    {
+                                                        $product_sql->execute();
+                                                        $products_list2 = $product_sql->fetch();
+                                                        echo '<div class="product"><p class="product_id">' . $product . '</p><p class="product_name">' . $products_list2['product_name'] . '</p><p class="product_price">' . $prices[$i] . '</p></div>';
+                                                        $i++;
+                                                    }
+                                                    catch(Exception $e)
+                                                    {
+                                                        echo '<div class="product"><p class="product_id"></p><p class="product_name">Nie udało się załadować listy produktów!</p><p class="product_price"></p></div>';
+                                                    }
+                                                }
+                                            echo '</div>';
+                                            echo '<div class="status">
+                                                <b>Zmień status:</b>
+                                                <form action="php_scripts/orders/change_status.php?oid=' . $row['order_id'] . '" method="post">
+                                                <select name="status">';
+                                                    $status_display_sql = $conn->prepare("SELECT * FROM order_status");
+                                                    try
+                                                    {
+                                                        $status_display_sql->execute();
+                                                        while($status_display = $status_display_sql->fetch())
+                                                        {
+                                                            if($status_display['status_id'] == $row['order_status'])
+                                                            {
+                                                                echo '<option value="' . $status_display['status_id'] . '" selected>' . $status_display['status_name'] . '</option>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<option value="' . $status_display['status_id'] . '">' . $status_display['status_name'] . '</option>';
+                                                            }
+                                                        }
+                                                    }
+                                                    catch(Exception $e)
+                                                    {
+                                                        echo '<option value="1">Błąd!</option>';
+                                                    }
+                                                echo '</select>
+                                                <input type="submit" value="Zapisz">
+                                                </form>';
+                                            echo '</div>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                }
+                            }
                         ?>
                     </div>
                 </div>
             </div>
         </div>
     </main>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            if($_SESSION['result'] == "Uzupełnij wymagane pola!")
+            {
+                echo '<script>$("#add_product_form").show();</script>';
+            }
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <script src="js/scripts.js"></script>
 </body>
 </html>

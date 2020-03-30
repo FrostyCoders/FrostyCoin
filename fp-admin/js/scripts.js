@@ -22,7 +22,7 @@ $("#close_popup").click(function(){
 /** Edit category */
 function edit_cat(id, name, status)
 {
-    var form = '<form action="php_scripts/edit_category.php?id=' + id + '" method="post">';
+    var form = '<form action="php_scripts/categories/edit_category.php?id=' + id + '" method="post">';
     var form2 = '</form>';
     if(status==1)
     {
@@ -35,4 +35,20 @@ function edit_cat(id, name, status)
     var full = form + table + form2;
     document.getElementById("popup_inputs_edit_cat").innerHTML = full;
     $("#edit_cat").fadeIn();
+}
+// Orders
+function collapse_order(order)
+{
+    $("#order"+order).animate({height: '200px'});
+    $("#collapse_button"+order).hide();
+    $("#hide_button"+order).show();
+    $("#order_details"+order).show();
+    
+}
+function hide_order(order)
+{
+    $("#order"+order).animate({height: '46px'});
+    $("#hide_button"+order).hide();
+    $("#collapse_button"+order).show();
+    $("#order_details"+order).hide();
 }

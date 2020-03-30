@@ -22,37 +22,21 @@
      
     $sum_pro=$row['sum_pro'];
 
+//LAST ADDED
 
-//LAST ADDED FIRST
-
-    $pro_one = $conn->query("SELECT product_id, product_name, product_price FROM products ORDER BY product_from LIMIT 1");
-    
-foreach($pro_one as $row)
-      
-    $pro_one_1=$row['product_id'];
-    $pro_one_2=$row['product_name'];
-    $pro_one_3=$row['product_price'];
-
-//LAST ADDED SECOND
-
-    $pro_one = $conn->query("SELECT product_id, product_name, product_price FROM products ORDER BY product_from LIMIT 2");
-    
-foreach($pro_one as $row)
-     
-    $pro_two_1=$row['product_id'];
-    $pro_two_2=$row['product_name'];
-    $pro_two_3=$row['product_price'];
-
-//LAST ADDED THIRD
-
-    $pro_one = $conn->query("SELECT product_id, product_name, product_price FROM products ORDER BY product_from LIMIT 3");
-    
-foreach($pro_one as $row)
-      
-    $pro_three_1=$row['product_id'];
-    $pro_three_2=$row['product_name'];
-    $pro_three_3=$row['product_price'];
-
+    $last_added = $conn->query("SELECT product_id, product_name, product_price FROM products ORDER BY product_from LIMIT 3");
+    $count =$last_added -> rowCount();
+    $pro_one="";
+if($count==0)
+{
+    $pro_one="<td colspan='3'>Brak rekordów w bazie</td>";
+}
+else
+{    
+while($row = $last_added -> fetch()){
+$pro_one=$pro_one."<tr><td>".$row['product_id']."</td><td>".$row['product_name']."</td><td>".$row['product_price']." PLN"."</td></tr>";
+}
+}
 //DISK USAGE CHART
 
 $disc_space = round(disk_total_space("/")/1024/1024/1024);

@@ -86,19 +86,23 @@
         // INSERT DATA INTO DATABASE
         if($OK == true)
         {
-            require_once "../../connect.php";
-            $sql = "INSERT INTO `menu_subpositions`(`subposition_id`, `position_id`, `subposition_name`, `subposition_reference_to`, `subposition_cat_reference`, `subposition_icon_path`) VALUES (NULL, ?, ?, ?, ?, ?)";
-            $add = $conn->prepare($sql);
-            try
+            require_once  "../permissions/check.php";
+            if(check_site() == true)
             {
-                $add->execute([$position_id, $subposition_name, $subposition_ref, $subposition_ref_cat, $new_image_name]);
-                $_SESSION['result'] = "Dodano pomyślnie!";
-            }
-            catch(Exception $e)
-            {
-                $_SESSION['result'] = "Wystąpił błąd!";
-                echo "<br>".$e;
-                unlink("../../img-db/menu_icons/".$new_image_path);
+                require_once "../../connect.php";
+                $sql = "INSERT INTO `menu_subpositions`(`subposition_id`, `position_id`, `subposition_name`, `subposition_reference_to`, `subposition_cat_reference`, `subposition_icon_path`) VALUES (NULL, ?, ?, ?, ?, ?)";
+                $add = $conn->prepare($sql);
+                try
+                {
+                    $add->execute([$position_id, $subposition_name, $subposition_ref, $subposition_ref_cat, $new_image_name]);
+                    $_SESSION['result'] = "Dodano pomyślnie!";
+                }
+                catch(Exception $e)
+                {
+                    $_SESSION['result'] = "Wystąpił błąd!";
+                    echo "<br>".$e;
+                    unlink("../../img-db/menu_icons/".$new_image_path);
+                }
             }
         }
         $conn = null;
