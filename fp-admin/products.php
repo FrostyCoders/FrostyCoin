@@ -103,6 +103,12 @@
         }
         switch($product_discount)
         {
+            case 0:
+            {
+                $sql5 = "";
+                $_SESSION['product_discount'] = 0;
+                break;
+            }
             case 1:
             {
                 $sql5 = " AND `products`.`product_sale`=0";
@@ -273,6 +279,7 @@
                     <div class="filter_product_bracket">
                         Przecena <br>
                         <select name="discount" id="">
+                            <option value="0" <?php if ($_SESSION['product_discount'] == 0) echo 'selected' ; ?>>Wybierz</option>
                             <option value="1" <?php if ($_SESSION['product_discount'] == 1) echo 'selected' ; ?>>Nie</option>
                             <option value="2" <?php if ($_SESSION['product_discount'] == 2) echo 'selected' ; ?>>Tak</option>
                         </select>

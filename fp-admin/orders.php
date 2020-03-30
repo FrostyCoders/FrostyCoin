@@ -10,6 +10,8 @@
     {
         $order_status = $_POST['order_status'];
         $order_status = htmlentities($order_status, ENT_QUOTES, "UTF-8");
+        $order_delivery = $_POST['order_delivery'];
+        $order_delivery = htmlentities($order_delivery, ENT_QUOTES, "UTF-8");
         $order_quantity = $_POST['order_quantity'];
         $order_quantity = htmlentities($order_quantity, ENT_QUOTES, "UTF-8");
         $order_sort = $_POST['order_sort'];
@@ -21,8 +23,11 @@
         $orderfromsec = strtotime($order_from);
         $order_to = $_POST['order_to'];
         $order_to = htmlentities($order_to, ENT_QUOTES, "UTF-8");
+        $ordertosec_to = strtotime($order_to . '+1 day');
+        $ordertosec_to = date("Y-m-d", $ordertosec_to);
+        
         $ordertosec = strtotime($order_to);
-        $sql1 = "SELECT `shop_orders`.*, `order_status`.`status_name`, `shop_users`.`user_login` FROM `shop_orders` INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` INNER JOIN `shop_users` ON `shop_orders`.`user_id`=`shop_users`.`user_id`";
+        $sql1 = "SELECT `shop_orders`.*, order_delivery.delivery_name, `order_status`.`status_name`, `shop_users`.`user_login` FROM `shop_orders` INNER JOIN order_delivery ON shop_orders.order_delivery = order_delivery.delivery_id INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` INNER JOIN `shop_users` ON `shop_orders`.`user_id`=`shop_users`.`user_id`";
         switch($order_quantity)
         {
             case 1:
@@ -95,6 +100,27 @@
                 break;
             }
         }
+        switch($order_delivery)
+        {
+            case 1:
+            {
+                $sql7 = "";
+                $_SESSION['order_delivery'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql7 = " AND `shop_orders`.`order_delivery`=2";
+                $_SESSION['order_delivery'] = 2;
+                break;
+            }
+            case 3:
+            {
+                $sql7 = " AND `shop_orders`.`order_delivery`=1";
+                $_SESSION['order_delivery'] = 3;
+                break;
+            }
+        }
         switch($order_sort)
         {
             case 1:
@@ -157,7 +183,7 @@
         }
         if($ordertosec>$orderfromsec)
         {
-            $sql6 = " AND `shop_orders`.`order_date` BETWEEN :order_from AND :order_to";
+            $sql6 = " AND `shop_orders`.`order_date`>=:order_from AND `shop_orders`.`order_date`<=:order_to";
             $_SESSION['order_from'] = $order_from;
             $_SESSION['order_to'] = $order_to;
         }
@@ -169,17 +195,21 @@
             $_SESSION['order_from'] = 0;
             $_SESSION['order_to'] = 0;
         }
-        $sql_select = $sql1 . $sql3 . $sql6 . $sql4 . $sql5 . $sql2;
+        $sql_select = $sql1 . $sql3 . $sql7 . $sql6 . $sql4 . $sql5 . $sql2;
     }
     else
     {
-        $sql_select = "SELECT `shop_orders`.*, `order_status`.`status_name`, `shop_users`.`user_login` FROM `shop_orders` INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` INNER JOIN `shop_users` ON `shop_orders`.`user_id`=`shop_users`.`user_id` ORDER BY `shop_orders`.`order_id` LIMIT 20;";
+        $sql_select = "SELECT `shop_orders`.*, order_delivery.delivery_name, `order_status`.`status_name`, `shop_users`.`user_login` FROM `shop_orders` INNER JOIN order_delivery ON shop_orders.order_delivery = order_delivery.delivery_id INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` INNER JOIN `shop_users` ON `shop_orders`.`user_id`=`shop_users`.`user_id` ORDER BY `shop_orders`.`order_date` LIMIT 20;";
         $_SESSION['order_quantity'] = 1;
         $_SESSION['order_status'] = 1;
-        $_SESSION['order_sort'] = 1;
+        $_SESSION['order_delivery'] = 1;
+        $_SESSION['order_sort'] = 4;
         $_SESSION['order_display'] = 1;
         $_SESSION['order_from'] = 0;
         $_SESSION['order_to'] = 0;
+        $order_from = "";
+        $order_to = "";
+        $ordertosec_to = "";
     }
 ?>
 <!DOCTYPE html>
@@ -268,6 +298,12 @@
                             <option value="3" <?php if ($_SESSION['order_status'] == 3) echo 'selected' ; ?>>Przygotowano</option>
                             <option value="4" <?php if ($_SESSION['order_status'] == 4) echo 'selected' ; ?>>Wysłano</option>
                             <option value="5" <?php if ($_SESSION['order_status'] == 5) echo 'selected' ; ?>>Zakończono</option>
+                        </select><br>
+                        Dostawa <br>
+                        <select name="order_delivery" id="">
+                            <option value="1" <?php if ($_SESSION['order_delivery'] == 1) echo 'selected' ; ?>>Wybierz</option>
+                            <option value="2" <?php if ($_SESSION['order_delivery'] == 2) echo 'selected' ; ?>>Sklep</option>
+                            <option value="3" <?php if ($_SESSION['order_delivery'] == 3) echo 'selected' ; ?>>Osobisty</option>
                         </select>
                     </div>
                     <div class="filter_bracket">
@@ -290,18 +326,18 @@
                 <div class="list_container">
                     <div class="list">
                         <?php
-                            $stmt = $conn->prepare("SELECT shop_orders.*, order_delivery.delivery_name, order_status.status_name, shop_users.user_login FROM shop_orders INNER JOIN order_delivery ON shop_orders.order_delivery = order_delivery.delivery_id INNER JOIN order_status ON shop_orders.order_status = order_status.status_id INNER JOIN shop_users ON shop_orders.user_id = shop_users.user_id ORDER BY shop_orders.order_date");
+                            $stmt = $conn->prepare($sql_select, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
                             try
                             {
                                 $conn->query("SET NAMES 'utf8'");
-                                $stmt->execute();
+                                $stmt->execute(array(':order_from' => $order_from, ':order_to' => $ordertosec_to));
                                 if($stmt->rowCount() != 0)
                                 {
                                     $order_exist = true;
                                 }
                                 else
                                 {
-                                    echo '<p style="width: 100%; text-align: center; font-size: 14px;">Brak zamówień!!</p>';
+                                    echo '<p style="width: 100%; text-align: center; font-size: 14px;">Brak zamówień!</p>';
                                     $order_exist = false;
                                 }
                             }
