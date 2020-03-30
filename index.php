@@ -40,7 +40,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                     Komputery PC
                     <div class="nav-podkategorie nav-js-p">
                         <div class="nav-podkategoria">
-                        <a href="szablon.php?category_id=1">Zestawy PC</a> 
+                        <a style="text-decoration: none;" href="szablon.php?category_id=1">Zestawy PC</a> 
                         </div>
                         <div class="nav-podkategoria">
                         <a href="szablon.php?category_id=2">Monitory</a> 
@@ -222,7 +222,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                     <p>Kup cosik, bo braki mamy</p><!-- XDD zapisz co chcesz -->
                 </div>
                 <div class="header-icon"><img class="header-iconsize" src="img/icons/basket-icon.svg"></div>
-                <div class="header-icon-login"><img class="header-iconsize" src="img/icons/login-icon.svg"></div>
+                <div class="header-icon-login"><a href="login.php"><img class="header-iconsize" src="img/icons/login-icon.svg"></a></div>
             </div>
             <h1 class="header-h1">Frosty Coin</h1>
             <p class="header-p">U nas kupisz wszystko co potrzebne, aby wejść z przytupem w przyszłość!</p>

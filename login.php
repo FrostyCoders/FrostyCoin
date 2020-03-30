@@ -113,13 +113,13 @@
                }
                else
                {
-                throw new Exception(mysqli_connect_errno()); 
+                throw new Exception($conn->error); 
                }
-
+            
+                  }
+                  $conn->close();
+               }
             }
-            $conn->close();
-         }
-      }
       catch(Exception $e)
       {
          echo '<span style="color: red;"> Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</span>';
