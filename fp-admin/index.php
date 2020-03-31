@@ -38,7 +38,7 @@
                     ?>
                 </p>
             </form>
-            <p class="reg_p"><a href="../">◄ Wróć do sklepu</a></p>
+            <p class="reg_p"><a href="../">◄ Wróć do witryny</a></p>
         </div>
     </div>
     <div class="copy">Copyright &copy - Frosty Coders 2020</div>

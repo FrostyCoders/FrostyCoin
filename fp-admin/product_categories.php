@@ -77,6 +77,11 @@
                         {
                             while($row = $stmt->fetch())
                             {
+                                $cat_id = $row['category_id'];
+                                $sql = "SELECT COUNT(*) FROM products WHERE category_id = $cat_id && product_status != 0";
+                                $stmt2 = $conn->query($sql);
+                                $row2 = $stmt2->fetch();
+                                $product_count = $row2['COUNT(*)'];
                                 if($row["category_status"]==1)
                                 {
                                     $status = "on";
@@ -91,7 +96,7 @@
                                 echo '<div class="category_bracket">
                                     <div class="category_status ' . $status . '" title="' . $status_title . '"></div>
                                     <div class="category_name">' . $row['category_name'] . '</div>
-                                    <div class="category_info">Liczba produktów: 234</div>
+                                    <div class="category_info">Liczba produktów: ' . $product_count . '</div>
                                     <div class="category_settings">
                                         <button type="button" onclick="edit_cat(' . $row['category_id'] . ', ' . $addition . ', ' . $row['category_status'] . ');">Edytuj</button>
                                         <a href="php_scripts/categories/delete_cat.php?cat_id=' . $row['category_id'] . '"><button>Usuń</button></a>
