@@ -320,6 +320,7 @@
                         Do<br>
                         <input name="order_to" type="date" value="<?php if ($_SESSION['order_to'] != 0) echo $_SESSION['order_to'] ; ?>">
                     </div>
+                    <a href="orders.php"><button class="ordinary_button" style="margin-top: 60px; float: right; height: 30px;" type="button">Usuń filtry</button></a>
                     <input type="submit" class="accept_filters" style="margin-top: 60px;" value="Zastosuj filtry">
                 </form>
                 </div>

@@ -299,6 +299,7 @@
                             <option value="2" <?php if ($_SESSION['product_display'] == 2) echo 'selected' ; ?>>Malejąco</option>
                         </select>
                     </div>
+                    <a href="products.php"><button class="ordinary_button" style="margin-top: 10px; float: right; height: 30px;" type="button">Usuń filtry</button></a>
                     <input type="submit" class="accept_filters" value="Zastosuj filtry">
             </form>
                 </div>

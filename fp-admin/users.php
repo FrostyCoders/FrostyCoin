@@ -9,136 +9,211 @@
     if(isset($_GET['filter']))
     {
        
-       $search = $_POST['search'];
-       $search_enter = $_POST['search_enter'];
-       $search_user = $_POST['search_user'];
-       $search_role = $_POST['search_role'];
-       $search_sort_method = $_POST['search_sort_method'];
-       $search_sort = $_POST['search_sort'];
-       $search_from = $_POST['search_from'];
-       $search_to = $_POST['search_to'];
-       if($search_role=="Administrator")
-         {
-            $_SESSION['search_role'] = 1;
-            if($search==2)
-            {
-               $_SESSION['search'] = 2;
-               $sql1 = "SELECT * FROM panel_admins WHERE admin_email = '$search_enter' AND admin_create_time BETWEEN '$search_from' AND '$search_to' ORDER BY"; 
-               if($search_sort_method==1)
-               {
-                  $sql2 = " admin_login";
-                  $_SESSION['search_sort_method'] = 1;
-               }
-               else if ($search_sort_method==2)
-               {
-                  $sql2 = " admin_create_time";
-                   $_SESSION['search_sort_method'] = 2;
-               }
-               if($search_sort==1)
-               {
-                  $sql3 = " ASC;";
-                  $_SESSION['search_sort'] = 1;
-               }
-               else if($search_sort==2)
-               {
-                  $sql3 = " DESC;";
-                  $_SESSION['search_sort'] = 2;
-               }
-            
-            }
-            else if ($search==1)
-            {
-               $_SESSION['search'] = 1;
-               $sql1 = "SELECT * FROM panel_admins WHERE admin_login = '$search_enter' AND admin_create_time BETWEEN '$search_from' AND '$search_to' ORDER BY"; 
-               if($search_sort_method==1)
-               {
-                  $sql2 = " admin_login";
-                   $_SESSION['search_sort_method'] = 1;
-               }
-               else if ($search_sort_method==2)
-               {
-                  $sql2 = " admin_create_time";
-                   $_SESSION['search_sort_method'] = 2;
-               }
-               if($search_sort==1)
-               {
-                  $sql3 = " ASC;";
-                  $_SESSION['search_sort'] = 1;
-               }
-               else if($search_sort==2)
-               {
-                  $sql3 = " DESC;";
-                  $_SESSION['search_sort'] = 2;
-               } 
-           }
-        }
-         else if ($search_role=="Klient")
-         {
+        $search = filter_var($_POST['search'], FILTER_SANITIZE_STRING);
+        $search_enter = filter_var($_POST['search_enter'], FILTER_SANITIZE_STRING);
+        $search_role = filter_var($_POST['search_role'], FILTER_SANITIZE_STRING);
+        $search_sort_method = filter_var($_POST['search_sort_method'], FILTER_SANITIZE_STRING);
+        $search_sort = filter_var($_POST['search_sort'], FILTER_SANITIZE_STRING);
+        $search_from = filter_var($_POST['search_from'], FILTER_SANITIZE_STRING);
+        $search_to = filter_var($_POST['search_to'], FILTER_SANITIZE_STRING);
+        $limit = filter_var($_POST['limit'], FILTER_SANITIZE_STRING);
+        if($search_role == 2)
+        {
+            $sql_select = "SELECT * FROM shop_users";
             $_SESSION['search_role'] = 2;
-            if($search==2)
+            switch($search)
             {
-               $_SESSION['search'] = 2;
-               $sql1 = "SELECT * FROM shop_users WHERE user_email = '$search_enter' AND user_create_time BETWEEN '$search_from' AND '$search_to' ORDER BY"; 
-               if($search_sort_method==1)
-               {
-                  $sql2 = " user_name";
-                  $_SESSION['search_sort_method'] = 1;
-               }
-               else if ($search_sort_method==2)
-               {
-                  $sql2 = " user_create_time";
-                  $_SESSION['search_sort_method'] = 2;
-               }
-               if($search_sort==1)
-               {
-                  $sql3 = " ASC;";
-                  $_SESSION['search_sort'] = 1;
-               }
-               else if($search_sort==2)
-               {
-                  $sql3 = " DESC;";
-                  $_SESSION['search_sort'] = 2;
-               }
+                case 1:
+                {
+                    $sql1 = " WHERE user_login LIKE '%$search_enter%'";
+                    $_SESSION['search'] = 1;
+                    break;
+                }
+                case 2:
+                {
+                    $sql1 = " WHERE user_email LIKE '%$search_enter%'";
+                    $_SESSION['search'] = 2;
+                    break;
+                }
+                default:
+                {
+                    $sql1 = " WHERE user_name LIKE '%$search_enter%'";
+                    $_SESSION['search'] = 1;
+                    break;
+                }
             }
-            else if ($search==1)
+            $_SESSION['search_input'] = $search_enter;
+        }
+        else
+        {
+            $sql_select = "SELECT * FROM panel_admins WHERE admin_id != :id";
+            $_SESSION['search_role'] = 1;
+            switch($search)
             {
-               $_SESSION['search'] = 1;
-               $sql1 = "SELECT * FROM shop_users WHERE user_name = '$search_enter' AND user_create_time BETWEEN '$search_from' AND '$search_to' ORDER BY"; 
-               if($search_sort_method==1)
-               {
-                  $sql2 = " user_name";
-                   $_SESSION['search_sort_method'] = 1;
-               }
-               else if ($search_sort_method==2)
-               {
-                  $sql2 = " user_create_time";
-                   $_SESSION['search_sort_method'] = 2;
-               }
-               if($search_sort==1)
-               {
-                  $sql3 = " ASC;";
-                  $_SESSION['search_sort'] = 1;
-               }
-               else if($search_sort==2)
-               {
-                  $sql3 = " DESC;";
-                  $_SESSION['search_sort'] = 2;
-               }
+                case 1:
+                {
+                    $sql1 = " AND admin_login LIKE '%$search_enter%'";
+                    $_SESSION['search'] = 1;
+                    break;
+                }
+                case 2:
+                {
+                    $sql1 = " AND admin_email LIKE '%$search_enter%'";
+                    $_SESSION['search'] = 2;
+                    break;
+                }
+                default:
+                {
+                    $sql1 = " AND admin_login LIKE '%$search_enter%'";
+                    $_SESSION['search'] = 1;
+                    break;
+                }
             }
-         }
-       $sql_select = $sql1 . $sql2 . $sql3;
+            $_SESSION['search_input'] = $search_enter;
+        }
+        if(empty(strtotime($search_from)))
+        {
+            $search_from = "01-01-0001";
+        }
+        if(empty(strtotime($search_to)))
+        {
+            $search_to = "9999-01-01";
+        }
+        if($search_role == 2)
+        {
+            $sql2 = " AND user_create_time>='$search_from' AND user_create_time<='$search_to'";
+        }
+        else
+        {
+            $sql2 = " AND admin_create_time>='$search_from' AND admin_create_time<='$search_to'";
+        }
+        if($search_role == 2)
+        {
+            switch($search_sort)
+            {
+                case 1:
+                {
+                    $sql3 = " ORDER BY user_id";
+                    $_SESSION['search_sort'] = 1;
+                    break;
+                }
+                case 2:
+                {
+                    $sql3 = " ORDER BY user_name";
+                    $_SESSION['search_sort'] = 2;
+                    break;
+                }
+                case 3:
+                {
+                    $sql3 = " ORDER BY user_create_time";
+                    $_SESSION['search_sort'] = 3;
+                    break;
+                }
+                default:
+                {
+                    $sql3 = " ORDER BY user_id";
+                    $_SESSION['search_sort'] = 1;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            switch($search_sort)
+            {
+                case 1:
+                {
+                    $sql3 = " ORDER BY admin_id";
+                    $_SESSION['search_sort'] = 1;
+                    break;
+                }
+                case 2:
+                {
+                    $sql3 = " ORDER BY admin_login";
+                    $_SESSION['search_sort'] = 2;
+                    break;
+                }
+                case 3:
+                {
+                    $sql3 = " ORDER BY admin_create_time";
+                    $_SESSION['search_sort'] = 3;
+                    break;
+                }
+                default:
+                {
+                    $sql3 = "ORDER BY admin_id";
+                    $_SESSION['search_sort'] = 1;
+                    break;
+                }
+            }
+        }
+        switch($search_sort_method)
+        {
+            case 1:
+            {
+                $sql4 = " ASC";
+                $_SESSION['search_sort_method'] = 1;
+                break;
+            }
+            case 2:
+            {
+                $sql4 = " DESC";
+                $_SESSION['search_sort_method'] = 2;
+                break;
+            }
+            default:
+            {
+                $sql4 = " ASC";
+                $_SESSION['search_sort_method'] = 1;
+                break;
+            }
+        }
+        switch($limit)
+        {
+            case "20":
+            {
+                $sql5 = " LIMIT 20";
+                $_SESSION['limit'] = 1;
+                break;
+            }
+            case "50":
+            {
+                $sql5 = " LIMIT 50";
+                $_SESSION['limit'] = 2;
+                break;
+            }
+            case "100":
+            {   
+                $sql5 = " LIMIT 100";
+                $_SESSION['limit'] = 3;
+                break;
+            }
+            case "all":
+            {
+                $sql5 = "";
+                $_SESSION['limit'] = 4;
+                break;
+            }
+            default: 
+            {
+                $sql5 = " LIMIT 20";
+                $_SESSION['limit'] = 1;
+                break;
+            }
+        }
+       $sql_select = $sql_select . $sql1 . $sql2 . $sql3 . $sql4 . $sql5;
     }
-  else
-  {
-     $sql_select = "SELECT * FROM panel_admins;";
-     $_SESSION['search'] = 1;
-     $_SESSION['search_role'] = 1;
-     $_SESSION['search_sort'] = 1;
-     $_SESSION['search_sort_method'] = 1;
-     $_POST['search_enter'] = "";
-     $search_role = "Administrator";
-  }
-
+    else
+    {
+        $sql_select = "SELECT * FROM panel_admins WHERE admin_id != :id LIMIT 20";
+        $_SESSION['search'] = 1;
+        $_SESSION['search_role'] = 1;
+        $_SESSION['limit'] = 1;
+        $_SESSION['search_sort'] = 1;
+        $_SESSION['search_sort_method'] = 1;
+        $_POST['search_enter'] = "";
+        $search_role = 1;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -204,56 +279,61 @@
                    <form action="users.php?filter=1" method="post">
                     <div class="filter_bracket">
                         Szukaj po <br>
-                        <select name="search" id="">
+                        <select name="search">
                             <option value="1" <?php if($_SESSION['search'] == 1) echo 'selected' ; ?>>Imię</option>
                             <option value="2" <?php if($_SESSION['search'] == 2) echo 'selected' ; ?>>Email</option>
                         </select>
                         <br>
                         Wpisz <br>
-                        <input type="text" name="search_enter" value="">
-                        
+                        <input type="text" name="search_enter" value="<?php if(isset($_SESSION['search_input'])) echo $_SESSION['search_input'] ; ?>">
                     </div>
                     <div class="filter_bracket">
                         Użytkowników na stronie <br>
-                        <select name="search_user" id="">
-                            <option value="">20</option>
-                            <option value="">50</option>
-                            <option value="">100</option>
-                            <option value="">Wszyscy</option>
+                        <select name="limit">
+                            <option value="20" <?php if($_SESSION['limit'] == 1) echo 'selected' ; ?>>20</option>
+                            <option value="50" <?php if($_SESSION['limit'] == 2) echo 'selected' ; ?>>50</option>
+                            <option value="100" <?php if($_SESSION['limit'] == 3) echo 'selected' ; ?>>100</option>
+                            <option value="all" <?php if($_SESSION['limit'] == 4) echo 'selected' ; ?>>Wszyscy</option>
                         </select>
                     </div>
                     <div class="filter_bracket">
                         Rola <br>
-                        <select name="search_role" id="">
-                            <option value="Administrator" <?php if($_SESSION['search_role'] == 1) echo 'selected' ; ?>>Administrator</option>
-                            <option value="Klient" <?php if($_SESSION['search_role'] == 2) echo 'selected' ; ?>>Klient</option>
+                        <select name="search_role">
+                            <option value="1" <?php if($_SESSION['search_role'] == 1) echo 'selected'; ?>>Administrator</option>
+                            <option value="2" <?php if($_SESSION['search_role'] == 2) echo 'selected'; ?>>Klient</option>
                         </select>
                     </div>
                     <div class="filter_bracket">
                         Sortuj według <br>
-                        <select name="search_sort_method" id="">
-                            <option value="1" <?php if($_SESSION['search_sort'] == 1) echo 'selected' ; ?>>Nazwa</option>
-                            <option value="2" <?php if($_SESSION['search_sort'] == 2) echo 'selected' ; ?>>Data utworzenia</option>
+                        <select name="search_sort">
+                            <option value="1" <?php if($_SESSION['search_sort'] == 1) echo 'selected' ; ?>>Identyfikator</option>
+                            <option value="2" <?php if($_SESSION['search_sort'] == 2) echo 'selected' ; ?>>Nazwa</option>
+                            <option value="3" <?php if($_SESSION['search_sort'] == 3) echo 'selected' ; ?>>Data utworzenia</option>
                         </select><br><br>
-                        <select name="search_sort" id="">
+                        <select name="search_sort_method">
                             <option value="1" <?php if($_SESSION['search_sort_method'] == 1) echo 'selected' ; ?>>Rosnąco</option>
                             <option value="2" <?php if($_SESSION['search_sort_method'] == 2) echo 'selected' ; ?>>Malejąco</option>
                         </select>
                     </div>
                     <div class="filter_bracket  filter_bracket_date">
                         Data rejestracji od<br>
-                        <input type="date" name="search_from" value="0001-01-01"> <br>
+                        <input type="date" name="search_from"> <br>
                         Do<br>
-                         <input type="date" name="search_to" value="9999-09-09">
+                         <input type="date" name="search_to">
                     </div>
-                      <input type="submit" class="accept_filters" style="margin-top: 60px;" value="Zastosuj filtry">
+                        <a href="users.php"><button class="ordinary_button" style="margin-top: 60px; float: right; height: 30px;" type="button">Usuń filtry</button></a>
+                        <input type="submit" class="accept_filters" style="margin-top: 60px;" value="Zastosuj filtry">
                     </form>
                 </div>
                 <div class="list_container">
                     <div class="list">
                         <?php
-                        $stmt = $conn->prepare("SELECT * FROM panel_admins WHERE admin_id != :id");
-                        $stmt->bindParam(":id", $_SESSION['admin_id']);
+                        $stmt = $conn->prepare($sql_select);
+                        $conn->query("SET NAMES 'utf8'");
+                        if($search_role == 1)
+                        {
+                            $stmt->bindParam(":id", $_SESSION['admin_id']);
+                        }
                         try
                         {
                             $stmt->execute();
@@ -270,85 +350,125 @@
                         {
                             while($row = $stmt->fetch())
                             {
-                                $rights = explode(",", $row['admin_permissions']);
-                                echo '<div id="order' . $row['admin_id'] . '" class="order_bracket">';
-                                    echo '<p class="order_info"><i>Identyfikator użytkownika</i><br><b>' . $row['admin_id'] . '</b></p>';
-                                    echo '<p class="order_info" style="width: 140px;"><i>Login admina</i><br><b>' . $row['admin_login'] . '</b></p>';
-                                    echo '<p class="order_info"><i>Data utworzenia</i><br><b>' . date("d-m-Y", strtotime($row['admin_create_time'])) . '</b></p>';
-                                    echo '<p class="order_info"><i>E-mail administratora</i><br><b>' . $row['admin_email'] . '</b></p>';
-                                    echo '<div class="order_collapse">';
-                                        echo '<button id="collapse_button' . $row['admin_id'] . '" onclick="collapse_order(' . $row['admin_id'] . ');" class="ordinary_button">Edycja</button>';
-                                        echo '<button id="hide_button' . $row['admin_id'] . '" onclick="hide_order(' . $row['admin_id'] . ');" class="ordinary_button" style="display: none;">Anuluj</button>';
-                                    echo '</div>';
-                                    echo '<div id="order_details' . $row['admin_id'] . '" class="order_details corr" style="display: none;">';
-                                    echo '<form action="php_scripts/users/change_admin.php?aid=' . $row['admin_id'] . '" method="post">';
-                                        echo '<table>';
-                                            echo '<tr>';
-                                                echo '<td class="right_desc">E-mail:</td><td><input type="text" name="email" value="' . $row['admin_email'] . '"></td>';
-                                            echo '</tr>';
-                                            echo '<tr>';
-                                                echo '<td class="right_desc">Uprawnienia do operacji na użytkownikach:</td><td><select name="user">';
-                                                if($rights[0] == 1)
-                                                {
-                                                    echo '<option value="1" selected>Tak</option>';
-                                                    echo '<option value="0">Nie</option>';
-                                                }
-                                                else
-                                                {
-                                                    echo '<option value="1">Tak</option>';
-                                                    echo '<option value="0" selected>Nie</option>';
-                                                }
-                                                echo '</select></td>';
-                                            echo '</tr>';
-                                            echo '<tr>';
-                                                echo '<td class="right_desc">Uprawnienia do operacji na produktach:</td><td><select name="product">';
-                                                if($rights[1] == 1)
-                                                {
-                                                    echo '<option value="1" selected>Tak</option>';
-                                                    echo '<option value="0">Nie</option>';
-                                                }
-                                                else
-                                                {
-                                                    echo '<option value="1">Tak</option>';
-                                                    echo '<option value="0" selected>Nie</option>';
-                                                }
-                                                echo '</select></td>';
-                                            echo '</tr>';
-                                            echo '<tr>';
-                                                echo '<td class="right_desc">Uprawnienia do operacji na witrynie:</td><td><select name="site">';
-                                                if($rights[2] == 1)
-                                                {
-                                                    echo '<option value="1" selected>Tak</option>';
-                                                    echo '<option value="0">Nie</option>';
-                                                }
-                                                else
-                                                {
-                                                    echo '<option value="1">Tak</option>';
-                                                    echo '<option value="0" selected>Nie</option>';
-                                                }
-                                                echo '</select></td>';
-                                            echo '</tr>';
-                                            echo '<tr>';
-                                                echo '<td class="right_desc">Uprawnienia do operacji na zamówieniach:</td><td><select name="orders">';
-                                                if($rights[3] == 1)
-                                                {
-                                                    echo '<option value="1" selected>Tak</option>';
-                                                    echo '<option value="0">Nie</option>';
-                                                }
-                                                else
-                                                {
-                                                    echo '<option value="1">Tak</option>';
-                                                    echo '<option value="0" selected>Nie</option>';
-                                                }
-                                                echo '</select></td>';
-                                            echo '</tr>';
-                                        echo '</table>';
-                                        echo '<div class="controls">';
-                                            echo '<input type="submit" value="Zapisz"><a href="php_scripts/users/delete_admin.php?aid=' . $row['admin_id'] . '"><button class="ordinary_button" type="button">Usuń</button></a>';
+                                if($search_role == 1)
+                                {
+                                    $rights = explode(",", $row['admin_permissions']);
+                                    echo '<div id="order' . $row['admin_id'] . '" class="order_bracket">';
+                                        echo '<p class="order_info"><i>Identyfikator użytkownika</i><br><b>' . $row['admin_id'] . '</b></p>';
+                                        echo '<p class="order_info" style="width: 140px;"><i>Login admina</i><br><b>' . $row['admin_login'] . '</b></p>';
+                                        echo '<p class="order_info"><i>Data utworzenia</i><br><b>' . date("d-m-Y", strtotime($row['admin_create_time'])) . '</b></p>';
+                                        echo '<p class="order_info"><i>E-mail administratora</i><br><b>' . $row['admin_email'] . '</b></p>';
+                                        echo '<div class="order_collapse">';
+                                            echo '<button id="collapse_button' . $row['admin_id'] . '" onclick="collapse_order(' . $row['admin_id'] . ');" class="ordinary_button">Edycja</button>';
+                                            echo '<button id="hide_button' . $row['admin_id'] . '" onclick="hide_order(' . $row['admin_id'] . ');" class="ordinary_button" style="display: none;">Anuluj</button>';
                                         echo '</div>';
-                                        echo '</form>';
+                                        echo '<div id="order_details' . $row['admin_id'] . '" class="order_details corr" style="display: none;">';
+                                        echo '<form action="php_scripts/users/change_admin.php?aid=' . $row['admin_id'] . '" method="post">';
+                                            echo '<table>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">E-mail:</td><td><input type="text" name="email" value="' . $row['admin_email'] . '"></td>';
+                                                echo '</tr>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">Uprawnienia do operacji na użytkownikach:</td><td><select name="user">';
+                                                    if($rights[0] == 1)
+                                                    {
+                                                        echo '<option value="1" selected>Tak</option>';
+                                                        echo '<option value="0">Nie</option>';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '<option value="1">Tak</option>';
+                                                        echo '<option value="0" selected>Nie</option>';
+                                                    }
+                                                    echo '</select></td>';
+                                                echo '</tr>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">Uprawnienia do operacji na produktach:</td><td><select name="product">';
+                                                    if($rights[1] == 1)
+                                                    {
+                                                        echo '<option value="1" selected>Tak</option>';
+                                                        echo '<option value="0">Nie</option>';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '<option value="1">Tak</option>';
+                                                        echo '<option value="0" selected>Nie</option>';
+                                                    }
+                                                    echo '</select></td>';
+                                                echo '</tr>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">Uprawnienia do operacji na witrynie:</td><td><select name="site">';
+                                                    if($rights[2] == 1)
+                                                    {
+                                                        echo '<option value="1" selected>Tak</option>';
+                                                        echo '<option value="0">Nie</option>';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '<option value="1">Tak</option>';
+                                                        echo '<option value="0" selected>Nie</option>';
+                                                    }
+                                                    echo '</select></td>';
+                                                echo '</tr>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">Uprawnienia do operacji na zamówieniach:</td><td><select name="orders">';
+                                                    if($rights[3] == 1)
+                                                    {
+                                                        echo '<option value="1" selected>Tak</option>';
+                                                        echo '<option value="0">Nie</option>';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '<option value="1">Tak</option>';
+                                                        echo '<option value="0" selected>Nie</option>';
+                                                    }
+                                                    echo '</select></td>';
+                                                echo '</tr>';
+                                            echo '</table>';
+                                            echo '<div class="controls">';
+                                                echo '<input type="submit" value="Zapisz"><a href="php_scripts/users/delete_admin.php?aid=' . $row['admin_id'] . '"><button class="ordinary_button" type="button">Usuń</button></a>';
+                                            echo '</div>';
+                                            echo '</form>';
+                                        echo '</div>';
                                     echo '</div>';
-                                echo '</div>';
+                                }
+                                else
+                                {
+                                    echo '<div id="order' . $row['user_id'] . '" class="order_bracket">';
+                                        echo '<p class="order_info"><i>Identyfikator użytkownika</i><br><b>' . $row['user_id'] . '</b></p>';
+                                        echo '<p class="order_info" style="width: 140px;"><i>Login admina</i><br><b>' . $row['user_login'] . '</b></p>';
+                                        echo '<p class="order_info"><i>Data utworzenia</i><br><b>' . date("d-m-Y", strtotime($row['user_create_time'])) . '</b></p>';
+                                        echo '<p class="order_info"><i>E-mail administratora</i><br><b>' . $row['user_email'] . '</b></p>';
+                                        echo '<div class="order_collapse">';
+                                            echo '<button id="collapse_button' . $row['user_id'] . '" onclick="collapse_order(' . $row['user_id'] . ');" class="ordinary_button">Edycja</button>';
+                                            echo '<button id="hide_button' . $row['user_id'] . '" onclick="hide_order(' . $row['user_id'] . ');" class="ordinary_button" style="display: none;">Anuluj</button>';
+                                        echo '</div>';
+                                        echo '<div id="order_details' . $row['user_id'] . '" class="order_details corr" style="display: none;">';
+                                        echo '<form action="php_scripts/users/change_user.php?uid=' . $row['user_id'] . '" method="post">';
+                                            echo '<table>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">E-mail:</td><td><input type="text" name="email" value="' . $row['user_email'] . '"></td>';
+                                                echo '</tr>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">Imię i nazwisko: <b>' . $row['user_name'] . ' ' . $row['user_surname'] . '</b></td><td class="right_desc">Numer telefonu: <b>' . $row['user_phone_number'] . '</b></td>';
+                                                echo '</tr>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">Adres zamieszkania: <b>' . $row['user_street'] . ' ' . $row['user_house_no'] . '</b></td';
+                                                echo '</tr>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">Miejscowość: <b>' . $row['user_postcode'] . ' ' . $row['user_city'] . '</b></td>';
+                                                echo '</tr>';
+                                                echo '<tr>';
+                                                    echo '<td class="right_desc">Data urodzenia: <b>' . $row['user_birth_day'] . '</b></td>';
+                                                echo '</tr>';
+                                            echo '</table>';
+                                            echo '<div class="controls" style="bottom: -35px;">';
+                                                echo '<input type="submit" value="Zapisz"></a>';
+                                            echo '</div>';
+                                            echo '</form>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                }
                             }
                         }
                         ?>
