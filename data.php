@@ -31,10 +31,10 @@
     <!-- PASEK NAWIGACYJNY -->
     <nav>
         <div class="nav-pasek">
-            <div class="nav-logo"><a href="index.html"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
+            <div class="nav-logo"><a href="index.php"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
             <div class="nav-zawartosc nav-js">
                 <div class="nav-zakladka">
-                    Zamówienia
+                    <a href="data.php">Cooming Soon</a>
                 </div>
                 <div class="nav-ikona">
                     <img class="nav-iconsize" src="img/icons/cart-icon.svg">
@@ -42,7 +42,7 @@
             </div>
             <div class="nav-zawartosc nav-js">
                 <div class="nav-zakladka">
-                    Zmiana danych
+                    <a href="data.php">Zmiana danych</a>
                 </div>
                 <div class="nav-ikona">
                     <img class="nav-iconsize" src="img/icons/account-icon.svg">
@@ -56,12 +56,10 @@
     <header>
         <div class="log-header-tlo">
             <div class="header-beam">
+               <div class="header-icon-content"><p>Przejdź do konta.</p></div>
+               <div class="header-icon"><a href="data.php"><img class="header-iconsize" src="img/icons/account-icon.svg"></a></div>
                 <div class="header-icon-content">
-                    <input type="search" class="input-search" placeholder="Wyszukaj..."/>
-                </div>
-                <div class="header-icon"><img class="header-iconsize" src="img/icons/search-icon.svg"></div>
-                <div class="header-icon-content">
-                    <p>Kup cosik, bo braki mamy</p><!-- XDD zapisz co chcesz -->
+                    <p>Coming Soon</p><!-- XDD zapisz co chcesz -->
                 </div>
                 <div class="header-icon"><img class="header-iconsize" src="img/icons/basket-icon.svg"></div>
                 <div class="header-icon-login"><a href="logout.php" ><img class="header-iconsize" src="img/icons/login-icon.svg"></a></div>
@@ -72,7 +70,7 @@
     </header>
     
     <!-- ZAWARTOŚĆ -->
-    <?php
+    <?php   
     if(isset($_GET['change']))
     {
        $id = $_SESSION['id'];

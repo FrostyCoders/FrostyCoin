@@ -3,6 +3,9 @@ if (!isset($_COOKIE['stmt_cookie']))
     {
         setcookie('stmt_cookie', 1, time() + (24*3600), "/");
     }
+session_start();
+echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oceny, jest tylko nie działającym szablonem i imituje sklep! Za wszelkie niedogodności i pomyłki wynikające z użytkowania strony nie odpowiadamy!');</script>";
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,194 +35,21 @@ if (!isset($_COOKIE['stmt_cookie']))
     <nav>
         <div class="nav-pasek">
             <div class="nav-logo"><a href="index.php"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
-            <div class="nav-zawartosc nav-js">
-                <div class="nav-zakladka">
-                    Komputery PC
-                    <div class="nav-podkategorie nav-js-p">
-                        <div class="nav-podkategoria">
-                         Zestawy PC
-                        </div>
-                        <div class="nav-podkategoria">
-                        Monitory
-                        </div>
-                        <div class="nav-podkategoria">
-                        Akcesoria komputerowe
-                        </div>
-                    </div>
-                </div>
-                <div class="nav-ikona">
-                    <img class="nav-iconsize" src="img/icons/cube-icon.svg">
-                </div>
+            <?php require_once "menu.php";?>
             </div>
-            <div class="nav-zawartosc nav-js">
-                <div class="nav-zakladka">
-                    Telefony
-                    <div class="nav-podkategorie nav-js-p">
-                        <div class="nav-podkategoria">
-                        Smartfony i telefony
-                        </div>
-                        <div class="nav-podkategoria">
-                        Smartwatche
-                        </div>
-                        <div class="nav-podkategoria">
-                        Nawigacje
-                        </div>
-                        <div class="nav-podkategoria">
-                        Akcesoria
-                        </div>
-                    </div>
-                </div>
-                <div class="nav-ikona">
-                    <img class="nav-iconsize" src="img/icons/phone-icon.svg">
-                </div>
-            </div>
-            <div class="nav-zawartosc nav-js">
-                <div class="nav-zakladka">
-                    Laptopy i tablety
-                    <div class="nav-podkategorie nav-js-p">
-                        <div class="nav-podkategoria">
-                        Laptopy
-                        </div>
-                        <div class="nav-podkategoria">
-                        Tablety
-                        </div>
-                        <div class="nav-podkategoria">
-                        E-booki
-                        </div>
-                        <div class="nav-podkategoria">
-                        Akcesoria
-                        </div>
-                    </div>
-                </div>
-                <div class="nav-ikona">
-                    <img class="nav-iconsize" src="img/icons/laptop-icon.svg">
-                </div>
-            </div>
-            <div class="nav-zawartosc nav-js">
-                <div class="nav-zakladka">
-                    Podzespoły
-                    <div class="nav-podkategorie nav-js-p">
-                        <div class="nav-podkategoria">
-                        Dyski SSD i HDD
-                        </div>
-                        <div class="nav-podkategoria">
-                        Procesory
-                        </div>
-                        <div class="nav-podkategoria">
-                        Karty graficzne
-                        </div>
-                        <div class="nav-podkategoria">
-                        Kości RAM
-                        </div>
-                        <div class="nav-podkategoria">
-                        Płyty Główne
-                        </div>
-                        <div class="nav-podkategoria">
-                        Obudowy
-                        </div>
-                        <div class="nav-podkategoria">
-                        Zasilacze
-                        </div>
-                        <div class="nav-podkategoria">
-                        Chłodzenia
-                        </div>
-                        <div class="nav-podkategoria">
-                        Akcesoria
-                        </div>
-                    </div>
-                </div>
-                <div class="nav-ikona">
-                    <img class="nav-iconsize" src="img/icons/podz-icon.svg">
-                </div>
-            </div>
-            <div class="nav-zawartosc nav-js">
-                <div class="nav-zakladka">
-                    Peryferia
-                    <div class="nav-podkategorie nav-js-p">
-                        <div class="nav-podkategoria">
-                        Drukarki
-                        </div>
-                        <div class="nav-podkategoria">
-                        Urządzenia sieciowe
-                        </div>
-                        <div class="nav-podkategoria">
-                        Myszki
-                        </div>
-                        <div class="nav-podkategoria">
-                        Klawiatury
-                        </div>
-                        <div class="nav-podkategoria">
-                        Słuchawki
-                        </div>
-                        <div class="nav-podkategoria">
-                        Głośniki
-                        </div>
-                    </div>
-                </div>
-                <div class="nav-ikona">
-                    <img class="nav-iconsize" src="img/icons/printer-icon.svg">
-                </div>
-            </div>
-            <div class="nav-zawartosc nav-js">
-                <div class="nav-zakladka">
-                    Telewizory i Audio
-                    <div class="nav-podkategorie nav-js-p">
-                        <div class="nav-podkategoria">
-                        TV
-                        </div>
-                        <div class="nav-podkategoria">
-                        Projektory
-                        </div>
-                        <div class="nav-podkategoria">
-                        Audio Domowe
-                        </div>
-                    </div>
-                </div>
-                <div class="nav-ikona">
-                    <img class="nav-iconsize" src="img/icons/tv-icon.svg">
-                </div>
-            </div>
-            <div class="nav-zawartosc nav-js">
-                <div class="nav-zakladka">
-                    Oprogramowanie
-                    <div class="nav-podkategorie nav-js-p">
-                        <div class="nav-podkategoria">
-                        Systemy Operacyjne
-                        </div>
-                        <div class="nav-podkategoria">
-                        Oprogramowanie Antywirusowe
-                        </div>
-                        <div class="nav-podkategoria">
-                        Oprogramowanie Biurowe
-                        </div>
-                        <div class="nav-podkategoria">
-                        Oprogramowanie Graficzne
-                        </div>
-                        <div class="nav-podkategoria">
-                        Systemy Sprzedaży
-                        </div>
-                    </div>
-                </div>
-                <div class="nav-ikona">
-                    <img class="nav-iconsize" src="img/icons/disc-icon.svg">
-                </div>
-            </div>
-        </div>
     </nav>
     
     <!-- NAGŁÓWEK -->
     <header id="header">
         <div class="header-tlo">
             <div class="header-beam">
+               <div class="header-icon-content"><p>Przejdź do konta.</p></div>
+               <div class="header-icon"><a href="data.php"><img class="header-iconsize" src="img/icons/account-icon.svg"></a></div>
                 <div class="header-icon-content">
-                    <input type="search" class="input-search" placeholder="Wyszukaj..."/>
-                </div>
-                <div class="header-icon"><img class="header-iconsize" src="img/icons/search-icon.svg"></div>
-                <div class="header-icon-content">
-                    <p>Kup cosik, bo braki mamy</p><!-- XDD zapisz co chcesz -->
+                    <p>Coming Soon</p><!-- XDD zapisz co chcesz -->
                 </div>
                 <div class="header-icon"><img class="header-iconsize" src="img/icons/basket-icon.svg"></div>
-                <div class="header-icon-login"><a href="login.php"><img class="header-iconsize" src="img/icons/login-icon.svg"></a></div>
+                <div class="header-icon-login"><a href="logout.php" ><img class="header-iconsize" src="img/icons/login-icon.svg"></a></div>
             </div>
             <h1 class="header-h1">Frosty Coin</h1>
             <p class="header-p">U nas kupisz wszystko co potrzebne, aby wejść z przytupem w przyszłość!</p>
@@ -640,6 +470,7 @@ if (!isset($_COOKIE['stmt_cookie']))
                                 echo '<div class="promo-description"><span class="promo-small-desc">'.$row['product_name'].'</span></div>';
                                 echo '<div class="promo-price"><span class="promo-small-price"><b style="color: red;">'.$row['product_price'].' PLN!</b></span></div>';
                                 echo '</div>';
+               
                             }
                         }
                     }

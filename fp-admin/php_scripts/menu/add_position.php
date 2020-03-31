@@ -16,15 +16,15 @@
         {
             $OK = false;
         }
-        if(empty($position_ref) && $position_ref != "0")
+        if(empty($position_ref))
         {
             $OK = false;
         }
-        if(!file_exists("../../../$position_ref") && $position_ref != "0")
+        if(!file_exists("../../../$position_ref") && $position_ref != "no")
         {
             $OK = false;
         }
-        if(empty($position_ref_cat) && $position_ref_cat != "0")
+        if(empty($position_ref_cat))
         {
             $OK = false;
         }

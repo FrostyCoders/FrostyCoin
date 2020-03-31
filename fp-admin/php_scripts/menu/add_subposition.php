@@ -13,19 +13,19 @@
         $subposition_ref_cat = $_POST['subposition_ref_cat'];
         $subposition_icon = $_FILES['subposition_icon'];
         $OK = true;
-        if(strlen($subposition_name) < 3 || strlen($subposition_name) > 20 || empty($subposition_name))
+        if(strlen($subposition_name) < 3 || strlen($subposition_name) > 30 || empty($subposition_name))
         {
             $OK = false;
         }
-        if(empty($subposition_ref) && $subposition_ref != "0")
+        if(empty($subposition_ref))
         {
             $OK = false;
         }
-        if(!file_exists("../../../$subposition_ref") && $subposition_ref != "0")
+        if(!file_exists("../../../$subposition_ref") && $subposition_ref != "no")
         {
             $OK = false;
         }
-        if(empty($subposition_ref_cat) && $subposition_ref_cat != "0")
+        if(empty($subposition_ref_cat))
         {
             $OK = false;
         }
