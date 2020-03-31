@@ -17,7 +17,7 @@
             $position_ref_cat = $_POST['position_ref_cat'];
             $position_id = $_GET['pid'];
             $OK = true;
-            if(strlen($position_name) < 3 || strlen($position_name) > 20 || empty($position_name))
+            if(strlen($position_name) < 3 || strlen($position_name) > 30 || empty($position_name))
             {
                 $OK = false;
             }

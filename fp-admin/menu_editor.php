@@ -168,6 +168,7 @@
                                 try
                                 {
                                     $stmt2->bindParam(":pid", $row['position_id']);
+                                    $conn->query("SET NAMES 'utf8'");
                                     $stmt2->execute();
                                     $scount = $stmt2->rowCount();
                                 }

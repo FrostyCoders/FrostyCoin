@@ -39,15 +39,14 @@ function edit_cat(id, name, status)
 // Orders
 function collapse_order(order)
 {
-    $("#order"+order).animate({height: '200px'});
+    $("#order"+order).animate({height: '200px'}).css("border-color", "var(--color-theme)");
     $("#collapse_button"+order).hide();
     $("#hide_button"+order).show();
     $("#order_details"+order).show();
-    
 }
 function hide_order(order)
 {
-    $("#order"+order).animate({height: '46px'});
+    $("#order"+order).animate({height: '46px'}).css("border-color", "lightgray");
     $("#hide_button"+order).hide();
     $("#collapse_button"+order).show();
     $("#order_details"+order).hide();
