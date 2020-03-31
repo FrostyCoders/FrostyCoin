@@ -45,4 +45,21 @@ $disc_used = $disc_space-$disc_free;
 $disc_precent = round(($disc_used /$disc_space)*100,2);
 $chart = $disc_precent*3.6;    
 
+//NOTIFIKATIONS
+
+$noti_sql = $conn->query("SELECT * FROM `statements` ORDER BY `statement_id` DESC LIMIT 1;");
+$noti = $noti_sql -> fetch();
+if($noti!=NULL)
+{
+    $noti_title = $noti['statement_title'];
+    $noti_desc = $noti['statement_desc'];
+    $noti_status = $noti['statement_status'];
+    $noti_from = $noti['statement_from'];
+    $noti_fromsec = strtotime($noti_from);
+    $noti_to = $noti['statement_to'];
+    $noti_tosec = strtotime($noti_to);
+    $noti_date = new DateTime();
+    $noti_currentdate = $noti_date->getTimestamp();
+}
+
 ?>

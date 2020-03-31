@@ -1,106 +1,14 @@
-// POJAWIENIE SIE PODKATEGORII
-
-var nav = document.getElementsByClassName("nav-js");
-var navp = document.getElementsByClassName("nav-js-p");
-var navicon = document.getElementsByClassName("nav-iconsize");
-
-
-// FUNKCJE DLA KAZDEJ Z BELKI SHOW
-function shownavp0()
+// FUNKCJE I EVENTY DLA MENU
+function collapse_navp(id)
 {
-    navp[0].style.display = "block";
-    navicon[0].style.filter = "invert(1)";
+    $("#navp-js"+id).show();
+    $("#icon-navp-js"+id).css("filter", "invert(1)");
 }
-
-function shownavp1()
+function hide_navp(id)
 {
-    navp[1].style.display = "block";
-    navicon[1].style.filter = "invert(1)";
+    $("#navp-js"+id).hide();
+    $("#icon-navp-js"+id).css("filter", "invert(0)");
 }
-
-function shownavp2()
-{
-    navp[2].style.display = "block";
-    navicon[2].style.filter = "invert(1)";
-}
-
-function shownavp3()
-{
-    navp[3].style.display = "block";
-    navicon[3].style.filter = "invert(1)";
-}
-
-function shownavp4()
-{
-    navp[4].style.display = "block";
-    navicon[4].style.filter = "invert(1)";
-}
-
-function shownavp5()
-{
-    navp[5].style.display = "block";
-    navicon[5].style.filter = "invert(1)";
-}
-
-function shownavp6()
-{
-    navp[6].style.display = "block";
-    navicon[6].style.filter = "invert(1)";
-}
-
-
-// FUNKCJE DLA KAZDEJ Z BELKI HIDE
-function hidenavp0()
-{
-    navp[0].style.display = "none";
-    navicon[0].style.filter = "invert(0)";
-}
-
-function hidenavp1()
-{
-    navp[1].style.display = "none";
-    navicon[1].style.filter = "invert(0)";
-}
-
-function hidenavp2()
-{
-    navp[2].style.display = "none";
-    navicon[2].style.filter = "invert(0)";
-}
-
-function hidenavp3()
-{
-    navp[3].style.display = "none";
-    navicon[3].style.filter = "invert(0)";
-}
-
-function hidenavp4()
-{
-    navp[4].style.display = "none";
-    navicon[4].style.filter = "invert(0)";
-}
-
-function hidenavp5()
-{
-    navp[5].style.display = "none";
-    navicon[5].style.filter = "invert(0)";
-}
-
-function hidenavp6()
-{
-    navp[6].style.display = "none";
-    navicon[6].style.filter = "invert(0)";
-}
-
-
-// EVENTY DLA BELEK
-nav[0].addEventListener('mouseenter', shownavp0, false);
-nav[0].addEventListener('mouseleave', hidenavp0, false);
-
-nav[1].addEventListener('mouseenter', shownavp1, false);
-nav[1].addEventListener('mouseleave', hidenavp1, false);
-
-
 
 // FUNKCJE I EVENTY DLA IKONEK PO PRAWEJ
 var hicon = document.getElementsByClassName("header-icon");

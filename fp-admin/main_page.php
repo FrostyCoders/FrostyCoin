@@ -102,7 +102,18 @@
                     </div>
                     <div class="content-title">Powiadomienia</div>
                     <div class="comunicate">
-                        <p>Brak powiadomień.</p>
+                        <?php
+                            if($noti!=NULL && ($noti_status == 1 && $noti_fromsec <= $noti_currentdate && $noti_tosec >= $noti_currentdate))
+                            {
+                                echo '<h4 class="noti">'.$noti_title.'</h4>';
+                                echo '<p class="noti">'.$noti_desc.'</p>';
+                            }
+                            
+                            else
+                            {
+                                echo '<p>Brak powiadomień.</p>';
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

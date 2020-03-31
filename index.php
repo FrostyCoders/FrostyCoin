@@ -24,7 +24,6 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
     <!-- SKRYPTY -->
     <script src="js/jquery-3.4.1.min.js"> </script>
     <script src="js/smoothscroll.js"> </script>
-     <script src="js/footer.js"> </script>
     
     <!-- STYLE I CZCIONKI -->
     <link rel="stylesheet" type="text/css" href="css/animate.css" />
@@ -487,7 +486,7 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
     <!-- STOPKA -->
     <footer>
             <div class="footer-beam">
-                <div class="copyright" ><span><object class="data" data="fp-admin/footer.txt" type="text/html"></object></span><br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
+                <div class="copyright" >Copyright &copy<br/>Frosty Coders 2020<br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
                 <div class="newsletter">
                   <p><b>Newsletter!</b> Nie przegap nadchodzących promocji!</p>
                    <form>
@@ -501,9 +500,6 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
     
     <!-- SKRYPTY -->
     <script src="js/nav.js"></script>
-    <script src="js/nav_addition.js"></script>
-    <script src="js/scripts.js"></script>
-    <script src="js/footer.js"></script>
     <script src="js/statement_close.js"></script>
     
 </body>
