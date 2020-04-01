@@ -510,7 +510,7 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
     <!-- STOPKA -->
     <footer>
             <div class="footer-beam">
-                <div class="copyright" >Copyright &copy<br/>Frosty Coders 2020<br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
+                <div class="copyright" >Copyright &copy 2020<br/>Frosty Coders<br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
                 <div class="newsletter">
                   <p><b>Newsletter!</b> Nie przegap nadchodzących promocji!</p>
                    <form>

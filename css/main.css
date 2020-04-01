@@ -105,7 +105,7 @@ body
     z-index: 2;
     left: 9.5rem;
     width: 30rem;
-    min-height: 5rem;
+    min-height: 2rem;
     background-color: lightsteelblue;
     color: var(--main-dark-color);
     border-radius: 1rem;
@@ -114,8 +114,13 @@ body
 
 .nav-podkategoria
 {
-    border-bottom: 1px solid var(--main-dark-color);
     transition-duration: 0.35s;
+    border-radius: 0rem;
+    cursor: pointer;
+    border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
     line-height: 1.8;    /* TO ZMIENIA WIELKOŚĆ KAFELEK W PODKATEGORIACH */
 }
 
@@ -124,17 +129,10 @@ body
     background-color: var(--extra-color);
 }
 
-.nav-podkategoria:first-child
+.nav-podkategorie a
 {
-    border-top-right-radius: 1rem;
-    border-top-left-radius: 1rem;
-}
-
-.nav-podkategoria:last-child
-{
-    border: 0;
-    border-bottom-right-radius: 1rem;
-    border-bottom-left-radius: 1rem;
+    text-decoration: none;
+    color: var(--main-dark-color);
 }
 
 .nav-ikona 

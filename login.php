@@ -291,7 +291,7 @@
     <!-- STOPKA -->
     <footer>
             <div class="footer-beam">
-                <div class="copyright"><span>FROSTY CODERS © 2020</span><br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
+                <div class="copyright">Copyright &copy 2020<br/>Frosty Coders<br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
                 <div class="up-arrow"><a href="#header"><img src="img/icons/arrow-up.svg"></a></div>
                 <div class="newsletter">
                   <p><b>Newsletter!</b> Nie przegap nadchodzących promocji!</p>

@@ -13,9 +13,22 @@
       $sql1_submit = $conn->query($sql1);
       while($row1 = $sql1_submit->fetch())
        {
-         echo "<div class='nav-podkategoria'>";
-         echo '<a href="'.$row1['subposition_reference_to'].'?category_id='.$row1['subposition_cat_reference'].'">' . $row1['subposition_name'] . '</a>';
-         echo "</div>";
+         if($row1['subposition_reference_to']=="no" && $row1['subposition_cat_reference']=="no")
+         {
+             echo '<a href=""><div class="nav-podkategoria">' . $row1['subposition_name'] . '</div></a>';
+         }
+         else if($row1['subposition_reference_to']!="no" && $row1['subposition_cat_reference']=="no")
+         {
+             echo '<a href="'.$row1['subposition_reference_to'].'"><div class="nav-podkategoria">' . $row1['subposition_name'] . '</div></a>';
+         }
+         else if($row1['subposition_reference_to']=="no" && $row1['subposition_cat_reference']!="no")
+         {
+             echo '<a href=""><div class="nav-podkategoria">' . $row1['subposition_name'] . '</div></a>';
+         }
+         else
+         {
+             echo '<a href="'.$row1['subposition_reference_to'].'?category_id='.$row1['subposition_cat_reference'].'"><div class="nav-podkategoria">' . $row1['subposition_name'] . '</div></a>';
+         }
       }
       echo "</div>";
       echo "</div>";

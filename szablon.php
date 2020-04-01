@@ -99,7 +99,7 @@ $sql_categories = "Select * FROM product_categories WHERE category_id = '$produc
                     echo "<div class='sz-produkt-name'>".$res1['product_name']."</div>";
                     echo "<div class='sz-produkt-cena'>".$res1['product_price']." pln</div>";
                     echo "<div class='sz-produkt-opis'>".$res1['product_desc']."</div>";
-                    echo "<button class='sz-produkt-dokoszyka' onclick=''>Cooming Soon</button></div>";
+                    echo '<a href="add_to_basket.php?category_id='.$res1['category_id'].'&product_id='.$res1['product_id'].'"><button class="sz-produkt-dokoszyka">Do koszyka</button></a></div>';
                     echo "</div>";
                   }
                }
@@ -111,7 +111,7 @@ $sql_categories = "Select * FROM product_categories WHERE category_id = '$produc
     <!-- STOPKA -->
     <footer>
             <div class="footer-beam">
-                <div class="copyright"><span>FROSTY CODERS © 2020</span><br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
+                <div class="copyright">Copyright &copy 2020<br/>Frosty Coders<br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
                 <div class="up-arrow"><a href="#header"><img src="img/icons/arrow-up.svg"></a></div>
                 <div class="newsletter">
                   <p><b>Newsletter!</b> Nie przegap nadchodzących promocji!</p>
