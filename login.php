@@ -89,8 +89,7 @@
       try
       {
       $conn = new mysqli($host, $db_user, $db_password, $db_name); 
-      $setnames = "SET NAMES utf8";
-      $conn->query($setnames);
+          
          if ($conn->connect_errno!=0)
          {
             throw new Exception(mysqli_connect_errno());
