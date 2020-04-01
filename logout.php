@@ -2,8 +2,15 @@
 
   session_start();
 
-  session_unset();
-  $_SESSION['result']="Wylogowano pomyślnie!";
-  header('Location: index.php');
+  if($_SESSION['logged']==true)
+    {
+       session_unset();
+       header('Location: index.php?logout');
+    }
+  else
+  {
+       session_unset();
+       header('Location: index.php');
+  }
 
 ?>

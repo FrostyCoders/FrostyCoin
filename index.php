@@ -31,6 +31,11 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
 </head>
 <body>
     <?php
+        if(isset($_GET['logout']))
+        {
+            $_SESSION['result']="Wylogowano pomyślnie!";
+        }
+    
         if(isset($_SESSION['result']))
         {
             echo '<div class="result">' . $_SESSION['result'] . '</div>';
