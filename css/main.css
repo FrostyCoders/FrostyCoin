@@ -97,6 +97,12 @@ body
     line-height: 5rem;
     float: left;
 }
+
+.nav-zakladka a
+{
+    text-decoration: none;
+    color: var(--main-color);
+}
     
 .nav-podkategorie
 {
@@ -105,7 +111,7 @@ body
     z-index: 2;
     left: 9.5rem;
     width: 30rem;
-    min-height: 2rem;
+    min-height: 0rem;
     background-color: lightsteelblue;
     color: var(--main-dark-color);
     border-radius: 1rem;
