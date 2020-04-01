@@ -1,3 +1,24 @@
+// RESULT COMMUNICATE
+$(document).ready(function(){
+    $(".result").animate({top: '50px', opacity: '1'}).delay(2000).fadeOut();
+});
+
+// KOSZYK
+function collapse_basket()
+{
+    $("#basket-btn-sz").hide();
+    $("#basket-btn-del").show();
+    $("#basket-products").show();
+    $("#basket-hr").show();
+}
+function hide_basket()
+{
+    $("#basket-btn-sz").show();
+    $("#basket-btn-del").hide();
+    $("#basket-products").hide();
+    $("#basket-hr").hide();
+}
+
 // FUNKCJE I EVENTY DLA MENU
 function collapse_navp(id)
 {
@@ -30,7 +51,6 @@ function showhiconcont1()
 {
     hiconcont[1].style.display = "block";
     hiconcont[1].style.right = "17rem";
-    hiconcont[1].style.height = "10rem";
     hicon[1].style.backgroundColor = "var(--main-dark-color)";
     hicon[1].style.marginTop = "0";
     hiconsize[1].style.filter = "invert(1)";

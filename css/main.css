@@ -318,13 +318,13 @@ body
     z-index: 99;
     right: 24rem;
     min-width: 30rem;
-    height: 5rem;
+    min-height: 5rem;
     text-align: center;
     background-color: var(--main-dark-color);
     color: var(--main-color);
     border-bottom-left-radius: 1rem;
     border-top-left-radius: 1rem;
-    border-top-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
 }
 
 .input-search
@@ -377,6 +377,80 @@ body
     filter: invert(0);
 }
 
+/* KOSZYK */
+
+.basket-price
+{
+    font-weight: bold;
+    color: var(--extra-color);
+}
+
+#basket-btn-sz
+{
+    border: none;
+    color: var(--main-color);
+    opacity: 0.7;
+    background-color: var(--main-dark-color);
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+#basket-btn-del
+{
+    border: none;
+    color: var(--main-color);
+    opacity: 0.7;
+    background-color: var(--main-dark-color);
+    cursor: pointer;
+    margin-bottom: 1rem;
+    display: none;
+}
+
+#basket-products
+{
+    margin: 2rem;
+    line-height: 2.5rem;
+    display: none;
+}
+
+.basket-product > a
+{
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--main-color);
+}
+
+#basket-hr
+{
+    border: 0;
+    height: 0.1rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--main-color);
+    display: none;
+}
+
+#basket-order
+{
+    font-size: 110%;
+    margin-top: 2rem;
+    border: 2px solid var(--extra-color);
+    color: var(--main-color);
+    background-color: var(--main-dark-color);
+    cursor: pointer;
+    margin-bottom: 1rem;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    transition-duration: 0.35s;
+}
+
+#basket-order:hover
+{
+    color: var(--extra-color);
+    background-color: rgb(0, 0, 0, 0.5);
+}
+
 /* MAIN */
 
 img 
@@ -390,4 +464,27 @@ img
     width: 96%;
     min-height: 1rem;
     text-align: center;
+}
+
+.result 
+{
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    padding: 10px;
+    z-index: 1000;
+    background-color: white;
+    font-size: 14px;
+    border: 2px solid var(--main-color);
+    padding-left: 20px;
+    padding-right: 20px;
+    opacity: 0.85;
+    font-weight: bold;
+    background-color: var(--main-color);
+    color: var(--main-dark-color);
+    border-radius: 1rem;
+    box-shadow: 5px 5px 25px 0px rgba(0,0,0,0.5);
 }

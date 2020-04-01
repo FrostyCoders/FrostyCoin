@@ -56,7 +56,8 @@
                    unset($_SESSION['error']);
 
                    $result->free_result();
-                   header('Location: data.php');
+                   $_SESSION['result']="Zalogowano pomyślnie!";
+                   header('Location: index.php');
              
              }
              else

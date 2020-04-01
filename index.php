@@ -30,6 +30,17 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <!-- PASEK NAWIGACYJNY -->
     <nav>
         <div class="nav-pasek">
@@ -45,7 +56,20 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
                <div class="header-icon-content"><p>Przejdź do konta.</p></div>
                <div class="header-icon"><a href="data.php"><img class="header-iconsize" src="img/icons/account-icon.svg"></a></div>
                 <div class="header-icon-content">
-                    <p>Coming Soon</p><!-- XDD zapisz co chcesz -->
+                    <h4>Twoje zakupy:</h4>
+                    <p>15 produktów == <span class="basket-price">1234.90 PLN</span></p>
+                    <div id="basket-hr"></div>
+                    <div id="basket-products">
+                    <div class="basket-product"><a href="#">Maxiek</a> == <span class="basket-price">12.90 PLN</span></div>
+                    <div class="basket-product"><a href="#">Takie</a> == <span class="basket-price">342.90 PLN</span></div>
+                    <div class="basket-product"><a href="#">Brokuly</a> == <span class="basket-price">1332.90 PLN</span></div>
+                    <div class="basket-product"><a href="#">Test</a> == <span class="basket-price">122.90 PLN</span></div>
+                    <div class="basket-product"><a href="#">Marykasy</a> == <span class="basket-price">112.90 PLN</span></div>
+                    <button id="basket-order">Zamów!</button>
+                    </div>
+                    <!-- TUTAJ KOD WYŚWIETLANIA PRODUKTÓW -->
+                    <button id="basket-btn-sz" onclick="collapse_basket();">▼ Rozwiń ▼</button>
+                    <button id="basket-btn-del" onclick="hide_basket();">▲ Zwiń ▲</button>
                 </div>
                 <div class="header-icon"><img class="header-iconsize" src="img/icons/basket-icon.svg"></div>
                 <div class="header-icon-login"><a href="logout.php" ><img class="header-iconsize" src="img/icons/login-icon.svg"></a></div>
@@ -501,7 +525,6 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
     <!-- SKRYPTY -->
     <script src="js/nav.js"></script>
     <script src="js/statement_close.js"></script>
-    
 </body>
 </html>
 <?php

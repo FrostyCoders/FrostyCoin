@@ -34,6 +34,17 @@ $sql_categories = "Select * FROM product_categories WHERE category_id = '$produc
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 </head>
 <body>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <!-- PASEK NAWIGACYJNY -->
    <nav>
         <div class="nav-pasek">

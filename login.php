@@ -109,6 +109,7 @@
             {
                if($conn->query("INSERT INTO shop_users (user_id, user_login, user_password, user_email, user_name, user_surname) VALUES (NULL, '$surname', '$pass_hash', '$email', '$name', '$surname')"))
                {
+                $_SESSION['result']="Zarejestrowano pomyślnie!";
                 $_SESSION['success1']="Udało Ci się zarejestrować! Możesz się zalogować!";
                }
                else
@@ -132,10 +133,6 @@
 
 
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -162,6 +159,17 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <!-- PASEK NAWIGACYJNY -->
     <nav>
            <div class="nav-pasek">
