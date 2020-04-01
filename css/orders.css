@@ -46,10 +46,18 @@
    box-sizing: border-box;
    text-align: center;
    font-size: 2rem;
-   border: 1px solid gray;
+   box-shadow: 0rem 0rem 2rem 0.5rem rgba(0,0,0,0.7);
+   background-color: rgb(255, 255, 255, 0.55);
    border-radius: 1rem;
-   
+   line-height: 3.5rem;
+   transition-duration: 0.35s;
 }
+
+.order-item:hover
+{
+    box-shadow: 0 0 0 4pt black;
+}
+
 .droga
 {
     margin-left:10%;

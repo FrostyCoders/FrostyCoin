@@ -26,35 +26,36 @@
     <link rel="stylesheet" type="text/css" href="css/data.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     
+    <script src="js/jquery-3.4.1.min.js"> </script>
+    <script src="js/smoothscroll.js"> </script>
 </head>
 <body>
     <!-- PASEK NAWIGACYJNY -->
     <nav>
         <div class="nav-pasek">
             <div class="nav-logo"><a href="index.php"><img src="img/Logo.png" alt="Logo - obraz zmrożonej monety" /></a></div>
-            <div class="nav-zawartosc nav-js">
+            <div class="nav-zawartosc" onmouseenter="collapse_navp(1);" onmouseleave="hide_navp(1);">
                 <div class="nav-zakladka">
-                    <a href="data.php">Cooming Soon</a>
+                    <a href="order.php">Zamówienia</a>
                 </div>
                 <div class="nav-ikona">
-                    <img class="nav-iconsize" src="img/icons/cart-icon.svg">
+                    <img class="nav-iconsize" id="icon-navp-js1" src="img/icons/cart-icon.svg">
                 </div>
             </div>
-            <div class="nav-zawartosc nav-js">
+            <div class="nav-zawartosc" onmouseenter="collapse_navp(2);" onmouseleave="hide_navp(2);">
                 <div class="nav-zakladka">
                     <a href="data.php">Zmiana danych</a>
                 </div>
                 <div class="nav-ikona">
-                    <img class="nav-iconsize" src="img/icons/account-icon.svg">
+                    <img class="nav-iconsize" id="icon-navp-js2" src="img/icons/account-icon.svg">
                 </div>
             </div>
-            
         </div>
     </nav>
     
     <!-- NAGŁÓWEK -->
     <header>
-        <div class="log-header-tlo">
+        <div class="log-header-tlo" id="header">
             <div class="header-beam">
                <div class="header-icon-content"><p>Przejdź do konta.</p></div>
                <div class="header-icon"><a href="data.php"><img class="header-iconsize" src="img/icons/account-icon.svg"></a></div>

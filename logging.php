@@ -9,6 +9,9 @@
     
 	require_once "connect.php";
 
+    $setnames = "SET NAMES utf8";
+    $conn->query($setnames);
+
 	$conn = new mysqli($host, $db_user, $db_password, $db_name);
 	
 	if ($conn->connect_errno!=0)
