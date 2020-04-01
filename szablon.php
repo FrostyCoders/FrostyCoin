@@ -1,6 +1,6 @@
 <?php
-
-if (!isset($_COOKIE['stmt_cookie']))
+    session_start();
+    if (!isset($_COOKIE['stmt_cookie']))
     {
         setcookie('stmt_cookie', 1, time() + (24*3600), "/");
     }

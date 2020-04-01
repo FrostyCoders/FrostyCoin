@@ -3,6 +3,7 @@ if (!isset($_COOKIE['stmt_cookie']))
     {
         setcookie('stmt_cookie', 1, time() + (24*3600), "/");
     }
+require_once "basket.php";
 session_start();
 echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oceny, jest tylko nie działającym szablonem i imituje sklep! Za wszelkie niedogodności i pomyłki wynikające z użytkowania strony nie odpowiadamy!');</script>";
 
@@ -60,11 +61,38 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
                     <p>15 produktów == <span class="basket-price">1234.90 PLN</span></p>
                     <div id="basket-hr"></div>
                     <div id="basket-products">
-                    <div class="basket-product"><a href="#">Maxiek</a> == <span class="basket-price">12.90 PLN</span></div>
+                    <!--div class="basket-product"><a href="#">Maxiek</a> == <span class="basket-price">12.90 PLN</span></div>
                     <div class="basket-product"><a href="#">Takie</a> == <span class="basket-price">342.90 PLN</span></div>
                     <div class="basket-product"><a href="#">Brokuly</a> == <span class="basket-price">1332.90 PLN</span></div>
                     <div class="basket-product"><a href="#">Test</a> == <span class="basket-price">122.90 PLN</span></div>
-                    <div class="basket-product"><a href="#">Marykasy</a> == <span class="basket-price">112.90 PLN</span></div>
+                    <div class="basket-product"><a href="#">Marykasy</a> == <span class="basket-price">112.90 PLN</span></div-->
+                    <?php
+                        if(isset($_SESSION['basket']))
+                        {
+                            echo '<table>';
+                                echo '<tr>';
+                                   echo '<th>Nazwa</th>';
+                                   echo '<th>Cena</th>';
+                                   echo '<th>Ilość</th>';
+                                   echo '<th>Wartość</th>';
+                                echo '</tr>';
+                            foreach($_SESSION['basket'] as $item)
+                            {
+                                echo '<tr>';
+                                   echo '<td>' . $item->product_name . '</td>';
+                                   echo '<td>' . $item->price . '</td>';
+                                   echo '<td>' . $item->amount . '</td>';
+                                   $value = $item->amount * $item->price;
+                                   echo '<td>' . $value . '</td>';
+                                echo '</tr>';
+                            }
+                            echo '</table>';
+                        }
+                        else
+                        {
+                            echo '<div class="basket-product">Koszyk jest pusty!</div>';
+                        }
+                    ?>
                     <button id="basket-order">Zamów!</button>
                     </div>
                     <!-- TUTAJ KOD WYŚWIETLANIA PRODUKTÓW -->
