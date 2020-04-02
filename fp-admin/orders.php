@@ -417,7 +417,20 @@
                                                         echo '<option value="1">Błąd!</option>';
                                                     }
                                                 echo '</select>
-                                                <input type="submit" value="Zapisz">
+                                                <b>Opłacono:</b>';
+                                                echo '<select name="payed">';
+                                                    if($row['order_payed'] == "1")
+                                                    {
+                                                        echo '<option value="1" selected>Tak</option>';
+                                                        echo '<option value="0">Nie</option>';
+                                                    }
+                                                    else
+                                                    {
+                                                        echo '<option value="1">Tak</option>';
+                                                        echo '<option value="0" selected>Nie</option>';
+                                                    }
+                                                echo '</select>';
+                                                echo '<input type="submit" value="Zapisz">
                                                 </form>';
                                             echo '</div>';
                                         echo '</div>';

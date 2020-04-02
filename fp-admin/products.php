@@ -397,7 +397,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Cena w PLN*</td><td><input class="marked" type="number" name="product_price"></td>
+                            <td>Cena w PLN*</td><td><input class="marked" type="number" name="product_price" step="0.01"></td>
                         </tr>
                         <tr>
                             <td>Promocja i cena**</td>
@@ -407,7 +407,7 @@
                                     <option value="0" selected>Nieaktywna</option>
                                 </select>
                             </td>
-                            <td><input class="marked2" type="number" name="product_sale_price"></td>
+                            <td><input class="marked2" type="number" name="product_sale_price" step="0.01"></td>
                         </tr>
                         <tr>
                             <td>Data promocji</td>
@@ -417,7 +417,7 @@
                             <td>Do:<br> <input type="datetime-local" name="product_sale_to"></td>
                         </tr>
                         <tr>
-                            <td>Ilość na magazynie</td><td><input type="number" name="product_amount"></td>
+                            <td>Ilość na magazynie</td><td><input type="number" name="product_amount" step="0.01></td>
                         </tr>
                         <tr>
                             <td>Zdjęcie produktu</td><td><label id="file_input_label" for="file_input">Wybierz plik</label><input id="file_input" type="file" name="product_image"></td>
