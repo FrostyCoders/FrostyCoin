@@ -1,2 +1,2 @@
 # FrostyCoin
-Website for mr.frog
+It's cold in here...
