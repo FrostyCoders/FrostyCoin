@@ -365,7 +365,7 @@ require_once "basket.php";
                 <div class="copyright" >Copyright &copy 2020<br/>Frosty Coders<br/><span class="allrights">Wszelkie prawa zastrzeżone!</span></div>
                 <div class="newsletter">
                   <p><b>Newsletter!</b> Nie przegap nadchodzących promocji!</p>
-                   <form style="width: 32.8rem;">
+                   <form>
                        <input name="email" class="news-text" placeholder="Twój e-mail">
                        <input class="news-button" type="submit">
                    </form>

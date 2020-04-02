@@ -7,11 +7,6 @@ require_once "basket.php";
 session_start();
 echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oceny, jest tylko nie działającym szablonem i imituje sklep! Za wszelkie niedogodności i pomyłki wynikające z użytkowania strony nie odpowiadamy!');</script>";
 
-if (isset($_POST['basket-reset'])) 
-{
-    unset($_SESSION['basket']);
-} 
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -103,10 +98,8 @@ if (isset($_POST['basket-reset']))
                             echo '<input type="hidden" name="basket-confirm" value="1">';
                             echo '<input type="submit" id="basket-confirm" value="Zamów!">';
                             echo '</form>';
-                            echo '<form action="" method="post">';
-                            echo '<input type="hidden" name="basket-reset" value="1">';
-                            echo '<input type="submit" id="basket-reset" value="Wyczyść!">';
-                            echo '</form>';
+                            $filename = basename(__FILE__);
+                            echo '<a href="delete_basket.php?filename='.$filename.'"><input type="button" id="basket-reset" value="Wyczyść!"></a>';
                             echo '</div>';
                         }
                         else

@@ -223,11 +223,11 @@
                             echo '<tr class="basket-value-all"><td style="text-align: right;" colspan="3">Łącznie:</td><td>'.$value_all.' PLN</td>';
                             echo '</table>';
                             echo '<div class="basket-btn">';
-                            echo '<form action="" method="post">';
+                            echo '<form action="" method="get">';
                             echo '<input type="hidden" name="basket-confirm" value="1">';
                             echo '<input type="submit" id="basket-confirm" value="Zamów!">';
                             echo '</form>';
-                            echo '<form action="" method="post">';
+                            echo '<form action="" method="get">';
                             echo '<input type="hidden" name="basket-reset" value="1">';
                             echo '<input type="submit" id="basket-reset" value="Wyczyść!">';
                             echo '</form>';

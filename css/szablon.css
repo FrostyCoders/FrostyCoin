@@ -67,7 +67,7 @@
     position: relative;
     float: left;
     width: 70%;
-    height: 100%;
+    min-height: 100%;
     transition-duration: 0.1s;
 }
 .sz-produkt-name
@@ -82,9 +82,11 @@
 .sz-produkt-cena
 {
     position: absolute;
-    font-size: 110%;
+    font-size: 150%;
     top: 2rem;
-    left: 31rem;
+    right: 3rem;
+    font-weight: bold;
+    color: var(--extra-color);
     transition-duration: 0.1s;
 }
 .sz-produkt-opis

@@ -146,13 +146,6 @@ require_once "basket.php";
                         $setnames = "SET NAMES utf8";
                         $conn->query($setnames);
                      
-                        if (isset($_POST['order-cancel'])) 
-                        {
-                            $sql_cancel = "UPDATE `shop_orders` SET `order_status`=5 WHERE `order_id`=".$_POST['order-cancel']." AND `user_id`=".$_SESSION['id'].";";
-                            $res_cancel = $conn -> query($sql_cancel);
-                            $_SESSION['result']="Anulowano pomyślnie!";
-                        }
-                     
                         $sql1 = "SELECT `shop_orders`.*, `order_delivery`.`delivery_name`, `order_status`.`status_name` FROM `shop_orders` INNER JOIN `order_delivery` ON `shop_orders`.`order_delivery`=`order_delivery`.`delivery_id` INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` WHERE `shop_orders`.`user_id`=".$_SESSION['id']." ORDER BY `shop_orders`.`order_date` DESC;";
                      
                         $res1 = $conn -> query($sql1);
@@ -202,10 +195,7 @@ require_once "basket.php";
                                 
                                 if($row['order_status']!=5 && $row['order_status']!=4)
                                 {
-                                    echo '<form action="" method="post">';
-                                    echo '<input type="hidden" name="order-cancel" value="'.$row['order_id'].'">';
-                                    echo '<input type="submit" id="order-cancel" value="Anuluj">';
-                                    echo '</form>';
+                                    echo '<a href="order_cancel.php?id='.$row['order_id'].'"><input type="button" id="order-cancel" value="Anuluj"></a>';
                                 }
                                     echo '</div>';              
                             }
