@@ -356,7 +356,12 @@
                                         echo '<p class="order_info"><i>Zamawiający</i><br><b>' . $row['user_login'] . '</b></p>';
                                         echo '<p class="order_info"><i>Data zamówienia</i><br><b>' . date("d-m-Y", strtotime($row['order_date'])) . '</b></p>';
                                         $prices = explode(",", $row['order_prices']);
-                                        $total_price = array_sum($prices);
+                                        $products_amount = explode(",", $row['order_amounts']);
+                                        $total_price = 0;
+                                        for($j = 0; $j<count($prices); $j++)
+                                        {
+                                            $total_price += $prices[$j]*$products_amount[$j];
+                                        }
                                         echo '<p class="order_info"><i>Cena zamówienia</i><br><b>' . $total_price . ' PLN</b></p>';
                                         echo '<p class="order_info"><i>Status zamówienia</i><br><b>' . $row['status_name'] . '</b></p>';
                                         echo '<p class="order_info"><i>Sposób dostawy</i><br><b>' . $row['delivery_name'] . '</b></p>';
@@ -369,7 +374,6 @@
                                             echo '<div class="order_products">';
                                                 echo '<div class="product" style="border-bottom: 2px solid lightgray;"><p class="product_id"><b style="font-size: 12px;">Identyfikator</b></p><p class="product_name"><b style="font-size: 12px;">Nazwa</b></p><p class="product_value"><b style="font-size: 12px;">Wartość</b></p><p class="product_amount"><b style="font-size: 12px;">Ilość</b></p><p class="product_price"><b style="font-size: 12px;">Cena</b></p></div>';
                                                 $product_list = explode(",", $row['order_products']);
-                                                $products_amount = explode(",", $row['order_amounts']);
                                                 $i = 0;
                                                 foreach($product_list as $product)
                                                 {

@@ -40,6 +40,7 @@
 
 
                    $_SESSION['id'] = $row['user_id'];
+                   $_SESSION['user_login'] = $row['user_login'];
                    $_SESSION['user_email'] = $row['user_email'];
                    $_SESSION['user_pass'] = $row['user_password'];
 

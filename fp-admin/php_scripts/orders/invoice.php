@@ -98,6 +98,7 @@
         
         $sql_product = $conn->prepare("SELECT product_name FROM products WHERE product_id = :pid");
         $i = 0;
+        $value = 0;
         foreach($products as $products)
         {
             $sql_product->bindParam(":pid", $products);
@@ -115,6 +116,7 @@
             $pdf->Cell(110	,5,$name['product_name'],1,0);
             $pdf->Cell(35	,5,number_format($prices[$i], 2)." PLN",1,0);
             $pdf->Cell(14	,5,$amounts[$i],1,0);
+            $value += $prices[$i]*$amounts[$i];
             $pdf->Cell(30	,5,number_format($prices[$i]*$amounts[$i], 2)." PLN",1,1,'R');//end of line
             $i++;
         }
@@ -122,7 +124,7 @@
         //summary
         $pdf->Cell(146	,5,'',0,0);
         $pdf->Cell(13	,5,'Suma',0,0);
-        $pdf->Cell(30	,5,number_format(array_sum($prices), 2)." PLN",1,1,'R');//end of line
+        $pdf->Cell(30	,5,number_format($value, 2)." PLN",1,1,'R');//end of line
 
         $pdf->Output("", "faktura".$order['order_id']);
     }

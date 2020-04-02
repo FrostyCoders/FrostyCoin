@@ -96,14 +96,18 @@ require_once "basket.php";
                             $value_all = 0;
                             foreach($_SESSION['basket'] as $item)
                             {
-                                echo '<tr>';
-                                   echo '<td>' . $item->product_name . '</td>';
-                                   echo '<td>' . $item->price . ' PLN</td>';
-                                   echo '<td>' . $item->amount . '</td>';
-                                   $value = $item->amount * $item->price;
-                                   echo '<td><b>' . $value . ' PLN</b></td>';
-                                echo '</tr>';
-                                $value_all+=$value;
+                                if($item->amount > 0)
+                                {
+                                    echo '<tr>';
+                                        echo '<td>' . $item->product_name . '</td>';
+                                        echo '<td>' . $item->price . ' PLN</td>';
+                                        echo '<td>' . $item->amount . '</td>';
+                                        $value = $item->amount * $item->price;
+                                        echo '<td><b>' . $value . ' PLN</b></td>';
+                                    echo '</tr>';
+                                    $value_all+=$value;
+                                }
+                                
                             }
                             echo '<tr class="basket-value-all"><td style="text-align: right;" colspan="3">Łącznie:</td><td>'.$value_all.' PLN</td>';
                             echo '</table>';
@@ -156,7 +160,6 @@ require_once "basket.php";
                         {
                             echo '<p style="font-size: 200%;">Brak zamówień!</p>';
                         }
-                        
                         else
                         {
                             while($row = $res1 -> fetch())
