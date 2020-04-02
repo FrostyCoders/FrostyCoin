@@ -9,6 +9,12 @@
     margin: 10%;
     border-radius: 1rem;
 }
+
+.promotion a
+{
+    color: black;
+}
+
 .forlittlepromo
 {
    float: left;
@@ -161,6 +167,7 @@
     text-align: center;
     
 }
+
 
 @keyframes move 
 {
