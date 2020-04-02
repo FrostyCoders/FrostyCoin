@@ -22,7 +22,7 @@ $sql_categories = "Select * FROM product_categories WHERE category_id = '$produc
     <!-- META -->
     <meta charset="utf-8">
     <meta name="author" content="FrostCoders">
-    <meta name="description" content="Taaa jest">
+    <meta name="description" content="Szablon sklepu internetowego">
     <meta name="keywords" content="frosty, coin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FROSTY COIN</title>

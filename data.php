@@ -19,13 +19,13 @@ require_once "basket.php";
     <!-- META -->
     <meta charset="utf-8">
     <meta name="author" content="FrostCoders">
-    <meta name="description" content="Taaa jest">
+    <meta name="description" content="Szablon sklepu internetowego">
     <meta name="keywords" content="frosty, coin">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FROSTY COIN</title>
     
     <!-- FAVICON -->
-    <link rel="shortcut icon" href="#" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon" />
     
     <!-- STYLE I CZCIONKI -->
     <link rel="stylesheet" type="text/css" href="css/animate.css" />
