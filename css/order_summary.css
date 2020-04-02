@@ -1,5 +1,75 @@
+
 .sz-lista
 {
     padding: 30px;
     padding-left: 50px;
+}
+/* panel buttons */
+.order_confirm , .basket_confirm,.order_delivery,.order_select
+{
+    font-size: 110%;
+    margin-top: 2rem;
+    border: 2px solid var(--extra-color);
+    color: var(--main-color);
+    background-color: var(--main-dark-color);
+    cursor: pointer;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    transition-duration: 0.35s;
+}
+.order_confirm
+{
+    
+    margin-left: 50%;
+    transform:translate(-50%,0);
+}
+
+
+
+.order_confirm:active , .basket_confirm:active,.basket_delivery:active
+{
+    color: var(--extra-color);
+    background-color: rgb(0, 0, 0, 0.5);
+}
+
+#basket-reset:hover
+{
+    color: tomato;
+    background-color: rgb(0, 0, 0, 0.5);
+}
+.order_up
+{
+    width: 33%;
+    transform:translate(25%,0);
+    float: left;
+}
+input[type="radio"],input[type="checkbox"]
+{
+   margin-top: 1rem; 
+}
+.divider
+{
+    margin: auto;
+    margin-bottom: 2rem;
+    border: 0.5px solid var(--main-dark-color);
+    width:95%   ;
+    text-align: center;
+    
+}
+.sz-main-container
+{
+    min-height: 25rem;
+}
+.basket
+{
+    min-height: 5rem;
+    width: 100%;
+    background-color: rgb(255, 255, 255, 0.5);
+    margin: auto;
+    margin-top: 1rem;
+    padding: 1rem 0 1rem 0;
+    border-radius: 1rem;
+    
 }

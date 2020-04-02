@@ -26,10 +26,12 @@
     <script src="js/smoothscroll.js"> </script>
     
     <!-- STYLE I CZCIONKI -->
+    <link rel="stylesheet" type="text/css" href="css/order_summary.css">
     <link rel="stylesheet" type="text/css" href="css/animate.css">
     <link rel="stylesheet" type="text/css" href="css/szablon.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/order_summary.css">
+    
 </head>
 <body>
    
@@ -49,7 +51,7 @@
                 <div class="header-icon-content">
                     <p>Coming Soon</p>
                 </div>
-                <div class="header-icon"><img class="header-iconsize" src="img/icons/basket-icon.svg"></div>
+                
                 <div class="header-icon-login"><img class="header-iconsize" src="img/icons/login-icon.svg"></div>
             </div>
             <h1 class="sz-header-h1">Frosty Coin</h1>
@@ -63,19 +65,31 @@
        <div class="droga">Podsumowanie zamówienia</div><!--traceroute-->
         <div class="sz-main-container">
             <div class="sz-lista">
-                 Sposób dostawy: <select id="delivery" name="delivery" from="">  
-                    <option value="kurier">Kurier</option>
-                    <option value="inpost">Inpost</option>
-                    </select> <br /><br />
+                zawartość koszyka:
+                <br />
+                <div class="basket"></div>
+                <br />
+                <button type="button"  class="basket_confirm" onclick="">Zapisz koszyk</button>
+                <br /><br />
+                <div class="divider"></div>
+                <div class="order_up">
+                 Sposób dostawy:<br />
+                    <select id="delivery" class="order_delivery" name="delivery" from="">  
+                    <option class="order_select" value="kurier">Kurier</option>
+                    <option class="order_select" value="inpost">Inpost</option>
+                    </select>
+                    </div><div class="order_up"> 
                         Sposób zapłaty:<br />
                         <input type="radio" id="cash" name="pay" value="cash">Za pobraniem przy odbiorze<br />
-                        <input type="radio" id="card" name="pay" value="card">Kartą kredytową<br /><br />
+                        <input type="radio" id="card" name="pay" value="card">Kartą kredytową
+                    </div><div class="order_up">
                     Zgody Formalne:<br />
                     <input type="checkbox" id="statut" name="statut" value="statut">  Akceptuję regulamin sklepu*<br/>
                     <input type="checkbox" id="prom_info" name="prom_info" value="prom_info">
                      Chcę otrzymywać informacje o promocjach <br />
-                       
-                    <div style="color:red;">pola wymagane*</div>   
+                     <div style="color:red;">pola wymagane*</div>
+                     </div>  
+                     <button type="button"  class="order_confirm" onclick="order">Zamów</button>
             </div>
     </main>
     
