@@ -99,10 +99,7 @@ if (isset($_POST['basket-reset']))
                             echo '<tr class="basket-value-all"><td style="text-align: right;" colspan="3">Łącznie:</td><td>'.$value_all.' PLN</td>';
                             echo '</table>';
                             echo '<div class="basket-btn">';
-                            echo '<form action="" method="post">';
-                            echo '<input type="hidden" name="basket-confirm" value="1">';
-                            echo '<input type="submit" id="basket-confirm" value="Zamów!">';
-                            echo '</form>';
+                            echo '<a href="order_summary.php"><button id="basket-confirm">Zamów</button></a>';
                             echo '<form action="" method="post">';
                             echo '<input type="hidden" name="basket-reset" value="1">';
                             echo '<input type="submit" id="basket-reset" value="Wyczyść!">';
