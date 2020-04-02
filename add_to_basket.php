@@ -1,9 +1,16 @@
 <?php
     require_once "basket.php";
     session_start();
-    if(!isset($_SESSION['logged']) || !isset($_GET['category_id']) || !isset($_GET['product_id']))
+    if(!isset($_SESSION['logged']))
     {
         header("Location: index.php");
+        $_SESSION['result'] = "Nie jesteś zalogowany!";
+        exit();
+    }
+    if(!isset($_GET['category_id']) || !isset($_GET['product_id']))
+    {
+        header("Location: index.php");
+        $_SESSION['result'] = "Wystąpił błąd!";
         exit();
     }
     else

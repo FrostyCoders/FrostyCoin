@@ -367,8 +367,9 @@
                                         echo '</div>';
                                         echo '<div id="order_details' . $row['order_id'] . '" style="display: none;">';
                                             echo '<div class="order_products">';
-                                                echo '<div class="product" style="border-bottom: 2px solid lightgray;"><p class="product_id"><b style="font-size: 12px;">Identyfikator</b></p><p class="product_name"><b style="font-size: 12px;">Nazwa</b></p><p class="product_price"><b style="font-size: 12px;">Cena</b></p></div>';
+                                                echo '<div class="product" style="border-bottom: 2px solid lightgray;"><p class="product_id"><b style="font-size: 12px;">Identyfikator</b></p><p class="product_name"><b style="font-size: 12px;">Nazwa</b></p><p class="product_value"><b style="font-size: 12px;">Wartość</b></p><p class="product_amount"><b style="font-size: 12px;">Ilość</b></p><p class="product_price"><b style="font-size: 12px;">Cena</b></p></div>';
                                                 $product_list = explode(",", $row['order_products']);
+                                                $products_amount = explode(",", $row['order_amounts']);
                                                 $i = 0;
                                                 foreach($product_list as $product)
                                                 {
@@ -378,7 +379,7 @@
                                                     {
                                                         $product_sql->execute();
                                                         $products_list2 = $product_sql->fetch();
-                                                        echo '<div class="product"><p class="product_id">' . $product . '</p><p class="product_name">' . $products_list2['product_name'] . '</p><p class="product_price">' . $prices[$i] . '</p></div>';
+                                                        echo '<div class="product"><p class="product_id">' . $product . '</p><p class="product_name">' . $products_list2['product_name'] . '</p><p class="product_value">' . $products_amount[$i] * $prices[$i] . ' PLN</p><p class="product_amount">' . $products_amount[$i] . '</p><p class="product_price">' . $prices[$i] . ' PLN</p></div>';
                                                         $i++;
                                                     }
                                                     catch(Exception $e)

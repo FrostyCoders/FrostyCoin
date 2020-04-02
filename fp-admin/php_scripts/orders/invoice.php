@@ -83,16 +83,19 @@
         //invoice contents
         $pdf->SetFont('Arial','B',12);
 
-        $pdf->Cell(155	,5,'Opis',1,0);
-        $pdf->Cell(34	,5,'Cena',1,1);//end of line
+        $pdf->Cell(110	,5,'Opis',1,0);
+        $pdf->Cell(35	,5,'Cena',1,0);
+        $pdf->Cell(14	,5,'Ilosc',1,0);
+        $pdf->Cell(30	,5,'Wartosc',1,1);//end of line
 
-        $pdf->SetFont('Arial','',12);
+        $pdf->SetFont('Arial','',10);
 
         //Numbers are right-aligned so we give 'R' after new line parameter
 
         $products = explode(",", $order['order_products']);
         $prices = explode(",", $order['order_prices']);
-
+        $amounts = explode(",", $order['order_amounts']);
+        
         $sql_product = $conn->prepare("SELECT product_name FROM products WHERE product_id = :pid");
         $i = 0;
         foreach($products as $products)
@@ -109,15 +112,17 @@
                 exit();
             }
             $name = $sql_product->fetch();
-            $pdf->Cell(155	,5,$name['product_name'],1,0);
-            $pdf->Cell(34	,5,$prices[$i]." PLN",1,1,'R');//end of line
+            $pdf->Cell(110	,5,$name['product_name'],1,0);
+            $pdf->Cell(35	,5,number_format($prices[$i], 2)." PLN",1,0);
+            $pdf->Cell(14	,5,$amounts[$i],1,0);
+            $pdf->Cell(30	,5,number_format($prices[$i]*$amounts[$i], 2)." PLN",1,1,'R');//end of line
             $i++;
         }
 
         //summary
-        $pdf->Cell(140	,5,'',0,0);
-        $pdf->Cell(15	,5,'Suma',0,0);
-        $pdf->Cell(34	,5,array_sum($prices)." PLN",1,1,'R');//end of line
+        $pdf->Cell(146	,5,'',0,0);
+        $pdf->Cell(13	,5,'Suma',0,0);
+        $pdf->Cell(30	,5,number_format(array_sum($prices), 2)." PLN",1,1,'R');//end of line
 
         $pdf->Output("", "faktura".$order['order_id']);
     }

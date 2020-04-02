@@ -58,10 +58,25 @@
 }
 .product_price
 {
-    width: 120px;
+    width: 100px;
     margin: 0;
     float: right;
     padding-right: 30px;
+}
+.product_amount
+{
+    width: 100px;
+    margin: 0;
+    float: right;
+    padding-right: 0;
+}
+.product_value
+{
+    width: 120px;
+    margin: 0;
+    float: right;
+    padding-right: 10px;
+    text-align: left;
 }
 .status b
 {
