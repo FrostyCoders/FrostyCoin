@@ -61,22 +61,39 @@
     
     <!-- ZAWARTOŚĆ -->
     <main>
-      
+      <form action="uptade_basket.php" method="post" >
        <div class="droga">Podsumowanie zamówienia</div><!--traceroute-->
         <div class="sz-main-container">
             <div class="sz-lista">
                 zawartość koszyka:
                 <br />
-                <div class="basket"></div>
+                <div class="basket">
+                     <?php
+                    if(isset($_SESSION['basket'])){
+                      foreach($_SESSION['basket'] as $item)
+                            {
+                                echo '<tr>';
+                                   echo '<td>' . $item->product_name . '</td>';
+                                   echo '<td>' . $item->price . ' PLN</td>';
+                                   echo '<td>' .'<input type="text" value="'.$item->amount.'">' . '</td>';
+                                   $value = $item->amount * $item->price;
+                                   echo '<td><b>' . $value . ' PLN</b></td>';
+                                echo '</tr>';
+                                $value_all+=$value;
+                            }}
+                    else{echo"<b>Koszyk jest pusty</b>";}
+                    ?>
+                </div>
                 <br />
-                <button type="button"  class="basket_confirm" onclick="">Zapisz koszyk</button>
-                <br /><br />
+                <button type="submit"  class="basket_confirm" onclick="">Zapisz koszyk</button>
+                </form><br /><br />
                 <div class="divider"></div>
+                <form action="save_order.php" method="post" >
                 <div class="order_up">
                  Sposób dostawy:<br />
                     <select id="delivery" class="order_delivery" name="delivery" from="">  
-                    <option class="order_select" value="kurier">Kurier</option>
-                    <option class="order_select" value="inpost">Inpost</option>
+                    <option class="order_select" value="1">Kurier</option>
+                    <option class="order_select" value="2">Inpost</option>
                     </select>
                     </div><div class="order_up"> 
                         Sposób zapłaty:<br />
@@ -84,13 +101,16 @@
                         <input type="radio" id="card" name="pay" value="card">Kartą kredytową
                     </div><div class="order_up">
                     Zgody Formalne:<br />
-                    <input type="checkbox" id="statut" name="statut" value="statut">  Akceptuję regulamin sklepu*<br/>
+                    <input type="checkbox" id="statut" name="statut" value="statut" required>  Akceptuję regulamin sklepu*<br/>
                     <input type="checkbox" id="prom_info" name="prom_info" value="prom_info">
                      Chcę otrzymywać informacje o promocjach <br />
                      <div style="color:red;">pola wymagane*</div>
                      </div>  
-                     <button type="button"  class="order_confirm" onclick="order">Zamów</button>
+                     <button type="submit"  class="order_confirm" onclick="order">Zamów</button>
             </div>
+          
+          </div>
+        </form>
     </main>
     
     <!-- STOPKA -->
