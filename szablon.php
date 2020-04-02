@@ -149,7 +149,7 @@ $sql_categories = "Select * FROM product_categories WHERE category_id = '$produc
                     echo "<div class='promo-photo'><img src='fp-admin/img-db/".$res1['product_image_path']."'onerror='this.src='img/package.png';'></div>";
                     echo "</div>";
                     echo "<div class='sz-produkt-content'>";
-                    echo "<div class='sz-produkt-name'>".$res1['product_name']."</div>";
+                    echo "<div class='sz-produkt-name'>".substr($res1['product_name'], 0, 50)."</div>";
                     echo "<div class='sz-produkt-cena'>".$res1['product_price']." pln</div>";
                     echo "<div class='sz-produkt-opis'>".$res1['product_desc']."</div>";
                     echo '<a href="add_to_basket.php?category_id='.$res1['category_id'].'&product_id='.$res1['product_id'].'"><button class="sz-produkt-dokoszyka">Do koszyka</button></a></div>';
