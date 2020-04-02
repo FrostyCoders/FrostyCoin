@@ -69,7 +69,8 @@
                 <br />
                 <div class="basket">
                      <?php
-                    if(isset($_SESSION['basket'])){
+                     $value_all =0;
+                    if(isset($_SESSION['basket'])){echo "<table>";
                       foreach($_SESSION['basket'] as $item)
                             {
                                 echo '<tr>';
@@ -79,8 +80,10 @@
                                    $value = $item->amount * $item->price;
                                    echo '<td><b>' . $value . ' PLN</b></td>';
                                 echo '</tr>';
-                                $value_all+=$value;
-                            }}
+                                $value_all += $value;
+                            }
+                                    echo "</table>";
+                                    echo "<div id='value_all'>"."Suma łączna produktów: ".$value_all." PLN"."</div>";}
                     else{echo"<b>Koszyk jest pusty</b>";}
                     ?>
                 </div>

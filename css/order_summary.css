@@ -48,7 +48,16 @@
 }
 input[type="radio"],input[type="checkbox"]
 {
-   margin-top: 1rem; 
+   margin-top: 5rem; 
+}
+input[type="text"]
+{
+    width: 4rem;
+     border: 2px solid var(--extra-color);
+    color: var(--main-color);
+    background-color: var(--main-dark-color);
+    text-align: center
+    
 }
 .divider
 {
@@ -62,6 +71,7 @@ input[type="radio"],input[type="checkbox"]
 .sz-main-container
 {
     min-height: 25rem;
+    
 }
 .basket
 {
@@ -73,5 +83,28 @@ input[type="radio"],input[type="checkbox"]
     padding: 1rem 0 1rem 0;
     border-radius: 1rem;
     text-align: center;
+    position:relative;
+    
+}
+#value_all
+{
+   font-weight: bold;
+font-size: 120%;    
+        
+}
+table
+{
+    width: 100%;
+}
+tr
+{
+   
+    
+}
+td
+{
+    width: 25%;   
+    text-align: center;
+    box-sizing: border-box;
     
 }
