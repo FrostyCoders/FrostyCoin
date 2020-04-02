@@ -61,7 +61,7 @@
     
     <!-- ZAWARTOŚĆ -->
     <main>
-      <form action="uptade_basket.php" method="post" >
+      <form action="update_basket.php" method="post" >
        <div class="droga">Podsumowanie zamówienia</div><!--traceroute-->
         <div class="sz-main-container">
             <div class="sz-lista">
@@ -76,7 +76,7 @@
                                 echo '<tr>';
                                    echo '<td>' . $item->product_name . '</td>';
                                    echo '<td>' . $item->price . ' PLN</td>';
-                                   echo '<td>' .'<input type="text" value="'.$item->amount.'">' . '</td>';
+                                   echo '<td>' .'<input type="text" name="' . $item->product_id . '" value="'.$item->amount.'">' . '</td>';
                                    $value = $item->amount * $item->price;
                                    echo '<td><b>' . $value . ' PLN</b></td>';
                                 echo '</tr>';
@@ -88,7 +88,7 @@
                     ?>
                 </div>
                 <br />
-                <button type="submit"  class="basket_confirm" onclick="">Zapisz koszyk</button>
+                <input type="submit"  class="basket_confirm" value="Zapisz koszyk">
                 </form><br /><br />
                 <div class="divider"></div>
                 <form action="save_order.php" method="post" >
