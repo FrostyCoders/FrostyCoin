@@ -1,4 +1,5 @@
 <?php
+require_once "basket.php";
  session_start();
 
  if (!isset($_SESSION['logged']))
@@ -6,6 +7,10 @@
        header('Location: login.php');
        exit();
     }
+ if (isset($_POST['basket-reset'])) 
+    {
+        unset($_SESSION['basket']);
+    } 
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,6 +35,17 @@
     <script src="js/smoothscroll.js"> </script>
 </head>
 <body>
+    <?php
+        if(isset($_SESSION['result']))
+        {
+            echo '<div class="result">' . $_SESSION['result'] . '</div>';
+            unset($_SESSION['result']);
+        }
+        else
+        {
+            echo '<div class="result" style="display: none;"></div>';
+        }
+    ?>
     <!-- PASEK NAWIGACYJNY -->
     <nav>
         <div class="nav-pasek">
@@ -60,7 +76,54 @@
                 <div class="header-icon-content"><p>Przejdź do konta.</p></div>
                 <div class="header-icon"><a href="data.php"><img class="header-iconsize" src="img/icons/account-icon.svg"></a></div>
                 <div class="header-icon-content">
-                    <p>Kup cosik, bo braki mamy</p><!-- XDD zapisz co chcesz -->
+                    <h4>Twoje zakupy:</h4>
+                    <div class="basket-hr"></div>
+                    <div id="basket-products">
+                    <?php
+                        if(!isset($_SESSION['logged']))
+                        {
+                            echo '<div class="basket-product">Aby skorzystać z koszyka,<br/>musisz się najpierw <a href="login.php"><b>zalogować</b></a>!</div>';
+                        }
+                        else if(isset($_SESSION['basket']))
+                        {
+                            echo '<table class="basket-table">';
+                                echo '<tr>';
+                                   echo '<th>Nazwa</th>';
+                                   echo '<th>Cena</th>';
+                                   echo '<th>Ilość</th>';
+                                   echo '<th>Wartość</th>';
+                                echo '</tr>';
+                            $value_all = 0;
+                            foreach($_SESSION['basket'] as $item)
+                            {
+                                echo '<tr>';
+                                   echo '<td>' . $item->product_name . '</td>';
+                                   echo '<td>' . $item->price . ' PLN</td>';
+                                   echo '<td>' . $item->amount . '</td>';
+                                   $value = $item->amount * $item->price;
+                                   echo '<td><b>' . $value . ' PLN</b></td>';
+                                echo '</tr>';
+                                $value_all+=$value;
+                            }
+                            echo '<tr class="basket-value-all"><td style="text-align: right;" colspan="3">Łącznie:</td><td>'.$value_all.' PLN</td>';
+                            echo '</table>';
+                            echo '<div class="basket-btn">';
+                            echo '<form action="" method="post">';
+                            echo '<input type="hidden" name="basket-confirm" value="1">';
+                            echo '<input type="submit" id="basket-confirm" value="Zamów!">';
+                            echo '</form>';
+                            echo '<form action="" method="post">';
+                            echo '<input type="hidden" name="basket-reset" value="1">';
+                            echo '<input type="submit" id="basket-reset" value="Wyczyść!">';
+                            echo '</form>';
+                            echo '</div>';
+                        }
+                        else
+                        {
+                            echo '<div class="basket-product">Koszyk jest pusty!</div>';
+                        }
+                    ?>
+                    </div>
                 </div>
                 <div class="header-icon"><img class="header-iconsize" src="img/icons/basket-icon.svg"></div>
                 <div class="header-icon-login"><img class="header-iconsize" src="img/icons/login-icon.svg"></div>
@@ -82,6 +145,13 @@
 
                         $setnames = "SET NAMES utf8";
                         $conn->query($setnames);
+                     
+                        if (isset($_POST['order-cancel'])) 
+                        {
+                            $sql_cancel = "UPDATE `shop_orders` SET `order_status`=5 WHERE `order_id`=".$_POST['order-cancel']." AND `user_id`=".$_SESSION['id'].";";
+                            $res_cancel = $conn -> query($sql_cancel);
+                            $_SESSION['result']="Anulowano pomyślnie!";
+                        }
                      
                         $sql1 = "SELECT `shop_orders`.*, `order_delivery`.`delivery_name`, `order_status`.`status_name` FROM `shop_orders` INNER JOIN `order_delivery` ON `shop_orders`.`order_delivery`=`order_delivery`.`delivery_id` INNER JOIN `order_status` ON `shop_orders`.`order_status`=`order_status`.`status_id` WHERE `shop_orders`.`user_id`=".$_SESSION['id']." ORDER BY `shop_orders`.`order_date` DESC;";
                      
@@ -116,12 +186,12 @@
                                         
                                         if($count_pro==0)
                                         {
-                                            echo $products_list2['product_name'];
+                                            echo substr($products_list2['product_name'], 0, 35);
                                         }
                                         
                                         else
                                         {
-                                            echo $products_list2['product_name'].", ";
+                                            echo substr($products_list2['product_name'], 0, 35).", ";
                                         } 
                                     }
                                 
@@ -129,6 +199,14 @@
                                     echo '<span><b>Status: </b>'.$row['status_name'].'</span><br>';
                                     echo '<span><b>Dostawa: </b>'.$row['delivery_name'].'</span><br>';
                                     echo '<span><b>Wartość: </b>'.$total_price.' PLN</span><br>';
+                                
+                                if($row['order_status']!=5 && $row['order_status']!=4)
+                                {
+                                    echo '<form action="" method="post">';
+                                    echo '<input type="hidden" name="order-cancel" value="'.$row['order_id'].'">';
+                                    echo '<input type="submit" id="order-cancel" value="Anuluj">';
+                                    echo '</form>';
+                                }
                                     echo '</div>';              
                             }
                         }

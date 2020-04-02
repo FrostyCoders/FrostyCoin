@@ -50,12 +50,35 @@
    background-color: rgb(255, 255, 255, 0.55);
    border-radius: 1rem;
    line-height: 3.5rem;
+   padding: 1rem;
    transition-duration: 0.35s;
 }
 
 .order-item:hover
 {
     box-shadow: 0 0 0 4pt black;
+}
+
+#order-cancel
+{
+    font-size: 110%;
+    margin-top: 2rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--main-dark-color);
+    border-radius: 0.5rem;
+    color: var(--main-dark-color);
+    text-align: center;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+    transition-duration: 0.35s;
+}
+
+#order-cancel:hover
+{
+    color: var(--main-color);
+    border: 2px solid tomato;
+    background-color: rgb(0, 0, 0, 0.5);
 }
 
 .droga

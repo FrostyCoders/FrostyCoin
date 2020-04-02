@@ -383,38 +383,11 @@ body
 
 /* KOSZYK */
 
-.basket-price
-{
-    font-weight: bold;
-    color: var(--extra-color);
-}
-
-#basket-btn-sz
-{
-    border: none;
-    color: var(--main-color);
-    opacity: 0.7;
-    background-color: var(--main-dark-color);
-    cursor: pointer;
-    margin-bottom: 1rem;
-}
-
-#basket-btn-del
-{
-    border: none;
-    color: var(--main-color);
-    opacity: 0.7;
-    background-color: var(--main-dark-color);
-    cursor: pointer;
-    margin-bottom: 1rem;
-    display: none;
-}
-
 #basket-products
 {
     margin: 2rem;
+    margin-bottom: 1rem;
     line-height: 2.5rem;
-    display: none;
 }
 
 .basket-product > a
@@ -424,7 +397,7 @@ body
     color: var(--main-color);
 }
 
-#basket-hr
+.basket-hr
 {
     border: 0;
     height: 0.1rem;
@@ -432,10 +405,15 @@ body
     margin-left: auto;
     margin-right: auto;
     background-color: var(--main-color);
-    display: none;
 }
 
-#basket-order
+.basket-btn
+{
+    display: flex;
+    justify-content: center;
+}
+
+#basket-confirm
 {
     font-size: 110%;
     margin-top: 2rem;
@@ -443,16 +421,66 @@ body
     color: var(--main-color);
     background-color: var(--main-dark-color);
     cursor: pointer;
-    margin-bottom: 1rem;
     border-radius: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     transition-duration: 0.35s;
 }
 
-#basket-order:hover
+#basket-reset
+{
+    font-size: 110%;
+    margin-top: 2rem;
+    border: 2px solid tomato;
+    color: var(--main-color);
+    background-color: var(--main-dark-color);
+    cursor: pointer;
+    border-radius: 1rem;
+    margin-left: 2rem;
+    padding: 0.5rem;
+    transition-duration: 0.35s;
+}
+
+#basket-confirm:hover
 {
     color: var(--extra-color);
     background-color: rgb(0, 0, 0, 0.5);
+}
+
+#basket-reset:hover
+{
+    color: tomato;
+    background-color: rgb(0, 0, 0, 0.5);
+}
+
+.basket-table
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.basket-table th
+{
+    font-weight: bold;
+    color: var(--extra-color);
+    padding: 0.5rem;
+}
+
+.basket-table td
+{
+    color: var(--main-color);
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.basket-table td:first-child
+{
+    text-align: left;
+}
+
+.basket-value-all td
+{
+    font-weight: bold;
+    color: var(--extra-color) !important;
 }
 
 /* MAIN */

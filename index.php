@@ -7,6 +7,11 @@ require_once "basket.php";
 session_start();
 echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oceny, jest tylko nie działającym szablonem i imituje sklep! Za wszelkie niedogodności i pomyłki wynikające z użytkowania strony nie odpowiadamy!');</script>";
 
+if (isset($_POST['basket-reset'])) 
+{
+    unset($_SESSION['basket']);
+} 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -63,46 +68,53 @@ echo "<script>alert('Niniejsza strona jest projektem stworzonym na zaliczenie oc
                <div class="header-icon"><a href="data.php"><img class="header-iconsize" src="img/icons/account-icon.svg"></a></div>
                 <div class="header-icon-content">
                     <h4>Twoje zakupy:</h4>
-                    <p>15 produktów == <span class="basket-price">1234.90 PLN</span></p>
-                    <div id="basket-hr"></div>
+                    <div class="basket-hr"></div>
                     <div id="basket-products">
-                    <!--div class="basket-product"><a href="#">Maxiek</a> == <span class="basket-price">12.90 PLN</span></div>
-                    <div class="basket-product"><a href="#">Takie</a> == <span class="basket-price">342.90 PLN</span></div>
-                    <div class="basket-product"><a href="#">Brokuly</a> == <span class="basket-price">1332.90 PLN</span></div>
-                    <div class="basket-product"><a href="#">Test</a> == <span class="basket-price">122.90 PLN</span></div>
-                    <div class="basket-product"><a href="#">Marykasy</a> == <span class="basket-price">112.90 PLN</span></div-->
                     <?php
-                        if(isset($_SESSION['basket']))
+                        if(!isset($_SESSION['logged']))
                         {
-                            echo '<table>';
+                            echo '<div class="basket-product">Aby skorzystać z koszyka,<br/>musisz się najpierw <a href="login.php"><b>zalogować</b></a>!</div>';
+                        }
+                        else if(isset($_SESSION['basket']))
+                        {
+                            echo '<table class="basket-table">';
                                 echo '<tr>';
                                    echo '<th>Nazwa</th>';
                                    echo '<th>Cena</th>';
                                    echo '<th>Ilość</th>';
                                    echo '<th>Wartość</th>';
                                 echo '</tr>';
+                            $value_all = 0;
                             foreach($_SESSION['basket'] as $item)
                             {
                                 echo '<tr>';
                                    echo '<td>' . $item->product_name . '</td>';
-                                   echo '<td>' . $item->price . '</td>';
+                                   echo '<td>' . $item->price . ' PLN</td>';
                                    echo '<td>' . $item->amount . '</td>';
                                    $value = $item->amount * $item->price;
-                                   echo '<td>' . $value . '</td>';
+                                   echo '<td><b>' . $value . ' PLN</b></td>';
                                 echo '</tr>';
+                                $value_all+=$value;
                             }
+                            echo '<tr class="basket-value-all"><td style="text-align: right;" colspan="3">Łącznie:</td><td>'.$value_all.' PLN</td>';
                             echo '</table>';
+                            echo '<div class="basket-btn">';
+                            echo '<form action="" method="post">';
+                            echo '<input type="hidden" name="basket-confirm" value="1">';
+                            echo '<input type="submit" id="basket-confirm" value="Zamów!">';
+                            echo '</form>';
+                            echo '<form action="" method="post">';
+                            echo '<input type="hidden" name="basket-reset" value="1">';
+                            echo '<input type="submit" id="basket-reset" value="Wyczyść!">';
+                            echo '</form>';
+                            echo '</div>';
                         }
                         else
                         {
                             echo '<div class="basket-product">Koszyk jest pusty!</div>';
                         }
                     ?>
-                    <button id="basket-order">Zamów!</button>
                     </div>
-                    <!-- TUTAJ KOD WYŚWIETLANIA PRODUKTÓW -->
-                    <button id="basket-btn-sz" onclick="collapse_basket();">▼ Rozwiń ▼</button>
-                    <button id="basket-btn-del" onclick="hide_basket();">▲ Zwiń ▲</button>
                 </div>
                 <div class="header-icon"><img class="header-iconsize" src="img/icons/basket-icon.svg"></div>
                 <div class="header-icon-login"><a href="logout.php" ><img class="header-iconsize" src="img/icons/login-icon.svg"></a></div>

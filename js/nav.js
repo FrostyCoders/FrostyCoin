@@ -3,22 +3,6 @@ $(document).ready(function(){
     $(".result").animate({top: '50px', opacity: '1'}).delay(2000).fadeOut();
 });
 
-// KOSZYK
-function collapse_basket()
-{
-    $("#basket-btn-sz").hide();
-    $("#basket-btn-del").show();
-    $("#basket-products").show();
-    $("#basket-hr").show();
-}
-function hide_basket()
-{
-    $("#basket-btn-sz").show();
-    $("#basket-btn-del").hide();
-    $("#basket-products").hide();
-    $("#basket-hr").hide();
-}
-
 // FUNKCJE I EVENTY DLA MENU
 function collapse_navp(id)
 {

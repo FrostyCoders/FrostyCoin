@@ -322,7 +322,7 @@
                             echo '<div class="product_bracket">';
                             echo '<img style="opacity: 0.5;" src="img-db/' . $res['product_image_path'] . '" alt="">';
                             echo '<div class="product_desc">';
-                            echo '<h5>'.$res['product_name'].'</h5>';
+                            echo '<h5>'.substr($res['product_name'], 0, 35).'</h5>';
                             echo '<div class="desc">';
                             if($res['product_status']==1) 
                             {
